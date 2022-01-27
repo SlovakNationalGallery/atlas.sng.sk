@@ -3,6 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Resources\CodeResource;
+use App\Models\Code;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +17,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::get('/verify/{code}', function ($code) {
+    return new CodeResource(Code::where('code', $code)->firstOrFail());
 });

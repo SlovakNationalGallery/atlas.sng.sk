@@ -9,7 +9,6 @@ class Code extends Model
 {
     use HasFactory;
 
-
     const ROWS = 3;
     const COLS = 3;
 
