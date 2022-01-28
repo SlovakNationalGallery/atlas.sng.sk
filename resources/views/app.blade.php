@@ -8,9 +8,7 @@
         <title>Záložky SNG</title>
     </head>
     <body>
-        <h1 class="text-3xl font-bold underline">
-            Záložky SNG
-        </h1>
+        <div id="app"></div>
         <script src="{{ mix('/js/app.js') }}"></script>
     </body>
 </html>
