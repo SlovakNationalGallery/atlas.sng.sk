@@ -5,7 +5,7 @@
     <div>
         <div class="max-w-screen-lg mx-auto p-4">
           <div class="grid grid-cols-3 gap-0 mt-12 border-collapse border border-black">
-            <CircleButton v-for="index in 9" :key="index"></CircleButton>
+            <CircleButton v-for="position in code.length" :is-checked="code[position - 1] == '1' ? true : false" @click="modifyCode(position)"></CircleButton>
             <div class="w-full border border-black">
                 <RectangleButton>
                     <svg class="mx-auto" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -17,7 +17,7 @@
                 </RectangleButton>
             </div>
             <div class="w-full border border-black">
-                <RectangleButton>Check</RectangleButton>
+                <RectangleButton @click="verifyCode">Check</RectangleButton>
             </div>
             <div class="w-full border border-black">
                 <RectangleButton>
@@ -38,6 +38,21 @@
     import RectangleButton from './components/RectangleButton.vue'
 
     export default {
-        components: { CircleButton, RectangleButton }
+        components: { CircleButton, RectangleButton },
+        data(){
+            return {
+                code: "000000000"
+            }
+        },
+        methods: {
+            verifyCode(event) {
+                const digit = parseInt(this.code, 2)
+                alert('Code is ' + this.code + ' (' + digit + ')')
+            },
+            modifyCode(pos) {
+                const bit = (this.code[pos - 1] == '1') ? '0' : '1';
+                this.code = this.code.substring(0,pos - 1) + bit + this.code.substring(pos);
+            }
+        }
     }
 </script>
