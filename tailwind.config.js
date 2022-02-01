@@ -10,6 +10,13 @@ module.exports = {
         full: '100%',
       },
     },
+    fontFamily: {
+      sans: ['GTWalsheim', 'sans-serif']
+    },
+    fontWeight: {
+      normal: '400',
+      bold: '700'
+    }
   },
   plugins: [],
 }

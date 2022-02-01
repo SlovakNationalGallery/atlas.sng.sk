@@ -1,10 +1,10 @@
 <template>
     <div class="w-100 border-top-black">
-        <h1 class="p-5 font-bold text-lg">Záložky SNG</h1>
+        <h1 class="p-5 text-xl">Záložky SNG</h1>
     </div>
     <div>
         <div class="max-w-screen-lg mx-auto p-4">
-          <div class="grid grid-cols-3 gap-0 mt-12 border-collapse border border-black">
+          <div class="grid grid-cols-3 gap-0 mt-12 border-collapse border border-black content-center">
             <CircleButton v-for="position in code.length" :is-checked="code[position - 1] == '1' ? true : false" @click="modifyCode(position)"></CircleButton>
             <div class="w-full border border-black">
                 <RectangleButton>
@@ -17,7 +17,7 @@
                 </RectangleButton>
             </div>
             <div class="w-full border border-black">
-                <RectangleButton @click="verifyCode">Check</RectangleButton>
+                <RectangleButton class="font-bold flex" @click="verifyCode"><div class="m-auto">Check</div></RectangleButton>
             </div>
             <div class="w-full border border-black">
                 <RectangleButton>
