@@ -17,7 +17,12 @@
                 </RectangleButton>
             </div>
             <div class="w-full border border-black">
-                <RectangleButton class="font-bold flex" @click="verifyCode"><div class="m-auto">Check</div></RectangleButton>
+                <RectangleButton class="font-bold flex bg-red-500 text-white" @click="resetCode" v-if="isWrong">
+                    <div class="m-auto">Try again :)</div>
+                </RectangleButton>
+                <RectangleButton class="font-bold flex" :class="{'bg-red-500 text-white': isWrong}" @click="verifyCode" v-else>
+                    <div class="m-auto">Check</div>
+                </RectangleButton>
             </div>
             <div class="w-full border border-black">
                 <RectangleButton>
@@ -41,17 +46,29 @@
         components: { CircleButton, RectangleButton },
         data(){
             return {
-                code: "000000000"
+                code: "000000000",
+                isWrong: false,
             }
         },
         methods: {
             verifyCode(event) {
                 const digit = parseInt(this.code, 2)
-                alert('Code is ' + this.code + ' (' + digit + ')')
+                console.log('Code is ' + this.code + ' (' + digit + ')');
+                axios.get('/api/verify/'+digit)
+                    .then((response) => {
+                        alert('Artwork is ' + response.data.data.item_id)
+                    })
+                    .catch( resonse => {
+                        this.isWrong = true
+                    })
             },
             modifyCode(pos) {
                 const bit = (this.code[pos - 1] == '1') ? '0' : '1';
                 this.code = this.code.substring(0,pos - 1) + bit + this.code.substring(pos);
+            },
+            resetCode() {
+                this.code = "000000000"
+                this.isWrong = false
             }
         }
     }
