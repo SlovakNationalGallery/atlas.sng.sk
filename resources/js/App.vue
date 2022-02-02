@@ -1,10 +1,16 @@
 <template>
-    <div class="w-100 border-top-black">
-        <h1 class="p-5 font-bold text-lg">Záložky SNG</h1>
+    <div class="border-black border-t-2">
+        <h1 class="p-5 text-2xl">Záložky SNG</h1>
+    </div>
+    <div class="bg-black text-white h-full">
+        <div class="p-5">
+            <div class="text-xl mb-4">Zbieraj diela počas návštevy</div>
+            <div>Vráť sa k nim neskôr a dozveď sa viac</div>
+        </div>
     </div>
     <div>
-        <div class="max-w-screen-lg mx-auto p-4">
-          <div class="grid grid-cols-3 gap-0 mt-12 border-collapse border border-black">
+        <div class="max-w-screen-lg mx-auto">
+          <div class="grid grid-cols-3 gap-0 border-collapse border border-black content-center">
             <CircleButton v-for="position in code.length" :is-checked="code[position - 1] == '1' ? true : false" @click="modifyCode(position)"></CircleButton>
             <div class="w-full border border-black">
                 <RectangleButton>
@@ -17,7 +23,12 @@
                 </RectangleButton>
             </div>
             <div class="w-full border border-black">
-                <RectangleButton @click="verifyCode">Check</RectangleButton>
+                <RectangleButton class="font-bold text-lg flex bg-red-500 text-white" @click="resetCode" v-if="isWrong">
+                    <div class="m-auto">Try again</div>
+                </RectangleButton>
+                <RectangleButton class="font-bold text-lg flex" :class="{'text-gray-400': !isActive}" @click="verifyCode" v-else>
+                    <div class="m-auto">Check</div>
+                </RectangleButton>
             </div>
             <div class="w-full border border-black">
                 <RectangleButton>
@@ -41,17 +52,35 @@
         components: { CircleButton, RectangleButton },
         data(){
             return {
-                code: "000000000"
+                code: "000000000",
+                isWrong: false,
+            }
+        },
+        computed: {
+            isActive() {
+                return this.code != "000000000"
             }
         },
         methods: {
             verifyCode(event) {
+                if (!this.isActive) return
                 const digit = parseInt(this.code, 2)
-                alert('Code is ' + this.code + ' (' + digit + ')')
+                console.log('Code is ' + this.code + ' (' + digit + ')');
+                axios.get('/api/verify/'+digit)
+                    .then((response) => {
+                        alert('Artwork is ' + response.data.data.item_id)
+                    })
+                    .catch( resonse => {
+                        this.isWrong = true
+                    })
             },
             modifyCode(pos) {
                 const bit = (this.code[pos - 1] == '1') ? '0' : '1';
                 this.code = this.code.substring(0,pos - 1) + bit + this.code.substring(pos);
+            },
+            resetCode() {
+                this.code = "000000000"
+                this.isWrong = false
             }
         }
     }
