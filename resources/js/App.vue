@@ -20,7 +20,7 @@
                 <RectangleButton class="font-bold flex bg-red-500 text-white" @click="resetCode" v-if="isWrong">
                     <div class="m-auto">Try again :)</div>
                 </RectangleButton>
-                <RectangleButton class="font-bold flex" :class="{'bg-red-500 text-white': isWrong}" @click="verifyCode" v-else>
+                <RectangleButton class="font-bold flex" :class="{'text-gray-400': !isActive}" @click="verifyCode" v-else>
                     <div class="m-auto">Check</div>
                 </RectangleButton>
             </div>
@@ -50,8 +50,14 @@
                 isWrong: false,
             }
         },
+        computed: {
+            isActive() {
+                return this.code != "000000000"
+            }
+        },
         methods: {
             verifyCode(event) {
+                if (!this.isActive) return
                 const digit = parseInt(this.code, 2)
                 console.log('Code is ' + this.code + ' (' + digit + ')');
                 axios.get('/api/verify/'+digit)
