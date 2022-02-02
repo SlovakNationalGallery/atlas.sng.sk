@@ -1,10 +1,16 @@
 <template>
-    <div class="w-100 border-top-black">
-        <h1 class="p-5 text-xl">Záložky SNG</h1>
+    <div class="border-black border-t-2">
+        <h1 class="p-5 text-2xl">Záložky SNG</h1>
+    </div>
+    <div class="bg-black text-white h-full">
+        <div class="p-5">
+            <div class="text-xl mb-4">Zbieraj diela počas návštevy</div>
+            <div>Vráť sa k nim neskôr a dozveď sa viac</div>
+        </div>
     </div>
     <div>
-        <div class="max-w-screen-lg mx-auto p-4">
-          <div class="grid grid-cols-3 gap-0 mt-12 border-collapse border border-black content-center">
+        <div class="max-w-screen-lg mx-auto">
+          <div class="grid grid-cols-3 gap-0 border-collapse border border-black content-center">
             <CircleButton v-for="position in code.length" :is-checked="code[position - 1] == '1' ? true : false" @click="modifyCode(position)"></CircleButton>
             <div class="w-full border border-black">
                 <RectangleButton>
@@ -17,10 +23,10 @@
                 </RectangleButton>
             </div>
             <div class="w-full border border-black">
-                <RectangleButton class="font-bold flex bg-red-500 text-white" @click="resetCode" v-if="isWrong">
+                <RectangleButton class="font-bold text-lg flex bg-red-500 text-white" @click="resetCode" v-if="isWrong">
                     <div class="m-auto">Try again :)</div>
                 </RectangleButton>
-                <RectangleButton class="font-bold flex" :class="{'text-gray-400': !isActive}" @click="verifyCode" v-else>
+                <RectangleButton class="font-bold text-lg flex" :class="{'text-gray-400': !isActive}" @click="verifyCode" v-else>
                     <div class="m-auto">Check</div>
                 </RectangleButton>
             </div>
