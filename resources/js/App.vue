@@ -24,7 +24,7 @@
             </div>
             <div class="w-full border border-black">
                 <RectangleButton class="font-bold text-lg flex bg-red-500 text-white" @click="resetCode" v-if="isWrong">
-                    <div class="m-auto">Try again :)</div>
+                    <div class="m-auto">Try again</div>
                 </RectangleButton>
                 <RectangleButton class="font-bold text-lg flex" :class="{'text-gray-400': !isActive}" @click="verifyCode" v-else>
                     <div class="m-auto">Check</div>
