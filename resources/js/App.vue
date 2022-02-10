@@ -1,11 +1,11 @@
 <template>
     <div class="border-black border-t-2">
-        <h1 class="p-5 text-2xl">Záložky SNG</h1>
+        <h1 class="p-5 text-2xl">{{ $t('SNG Bookmarks') }}</h1>
     </div>
     <div class="bg-black text-white h-full">
         <div class="p-5">
-            <div class="text-xl mb-4">Zbieraj diela počas návštevy</div>
-            <div>Vráť sa k nim neskôr a dozveď sa viac</div>
+            <div class="text-xl mb-4">{{ $t('Collect artworks on your visit') }}</div>
+            <div>{{ $t('View them later from home. Enter code') }}</div>
         </div>
     </div>
     <div>
@@ -14,20 +14,20 @@
             <CircleButton v-for="position in code.length" :is-checked="code[position - 1] == '1' ? true : false" @click="modifyCode(position)"></CircleButton>
             <div class="w-full border border-black">
                 <RectangleButton @click="switchLanguage()">
-                    <div class="m-auto">SK/EN</div>
+                    SK/EN
                 </RectangleButton>
             </div>
             <div class="w-full border border-black">
                 <RectangleButton class="font-bold bg-red-500 text-white" @click="resetCode" v-if="isWrong">
-                    <div class="m-auto">Try again</div>
+                    {{ $t('Try again') }}
                 </RectangleButton>
                 <RectangleButton class="font-bold" :class="{'text-gray-400': !isActive}" @click="verifyCode" v-else>
-                    <div class="m-auto">{{ $t('Overiť') }}</div>
+                    {{ $t('Verify') }}
                 </RectangleButton>
             </div>
             <div class="w-full border border-black">
                 <RectangleButton>
-                    <div class="m-auto">{{ $t('Pomoc') }}</div>
+                    {{ $t('Help') }}
                 </RectangleButton>
             </div>
           </div>
@@ -38,8 +38,7 @@
 <script>
     import CircleButton from './components/CircleButton.vue'
     import RectangleButton from './components/RectangleButton.vue'
-    import { getActiveLanguage } from 'laravel-vue-i18n';
-    import { loadLanguageAsync } from 'laravel-vue-i18n';
+    import { getActiveLanguage, loadLanguageAsync } from 'laravel-vue-i18n';
 
     export default {
         components: { CircleButton, RectangleButton },
