@@ -1,0 +1,20 @@
+name: Deploy "master" branch
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
+      - uses: deployphp/action@v1
+        with:
+            private-key: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
+            deployer-version: '7.0.0-beta.38'
+            dep: deploy
