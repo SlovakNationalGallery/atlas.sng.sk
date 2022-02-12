@@ -18,20 +18,34 @@
         <h1 class="p-3">{{ $t('SNG Bookmarks') }}</h1>
     </div>
     <div class="bg-gray-200 h-48 border-black border-t-2">
+        <img class="h-full object-cover w-full" :src="getImage(item, 800)" v-if="item">
         <!-- preview image -->
     </div>
-    <div class="h-full border-black border-t-2 p-4">
-        <h2 class="text-xl font-bold">Zimná Bratislava</h2>
-        <h3 class="">Miloš Alexander Bazovský · 1942</h3>
-        <div class="py-4 text-sm">
-            In the works of Gibson, a predominant concept is the concept of material consciousness. It could be said that Sartre uses the term ‘the subculturalparadigm of discourse’ to denote a self-referential paradox...
-            {{ $route.params.id }}
-        </div>
+    <div class="h-full border-black border-t-2 p-4" v-if="item">
+        <h2 class="text-xl font-bold">{{ item.title }}</h2>
+        <h3 class="">{{ formatName(item.author[0]) }} · {{ item.dating }}</h3>
+        <div class="py-4 text-sm" v-html="item.description"></div>
     </div>
 </template>
 
 <script>
     export default {
-
+        data(){
+            return {
+                item: null
+            }
+        },
+        async mounted() {
+            const { data } = await axios.get(`${process.env.MIX_WEBUMENIA_API}/items/${this.$route.params.id}`)
+            this.item = data.document.content
+        },
+        methods: {
+            getImage(item, size) {
+                return `${process.env.MIX_WEBUMENIA_URL}/dielo/nahlad/${item.id}/${size}`
+            },
+            formatName(name) {
+                return name.replace(/^([^,]*),\s*(.*)$/, '$2 $1')
+            }
+        }
     }
 </script>
