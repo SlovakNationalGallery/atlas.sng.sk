@@ -23,7 +23,7 @@
                 </RectangleButton>
             </div>
             <div class="w-full border border-black">
-                <RectangleButton class="font-bold bg-red-500 text-white" @click="resetCode" v-if="isWrong">
+                <RectangleButton class="font-bold bg-red text-white" @click="resetCode" v-if="isWrong">
                     {{ $t('Try again') }}
                 </RectangleButton>
                 <RectangleButton class="font-bold" :class="{'text-gray-400': !isActive}" @click="verifyCode" v-else>
