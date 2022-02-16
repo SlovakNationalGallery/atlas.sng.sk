@@ -58,6 +58,7 @@
 
 <script>
     import ConfirmButton from '../components/ConfirmButton.vue'
+    import { getActiveLanguage } from 'laravel-vue-i18n';
 
     export default {
         components: { ConfirmButton },
@@ -67,7 +68,7 @@
             }
         },
         async mounted() {
-            const { data } = await axios.get(`${process.env.MIX_WEBUMENIA_API}/items/${this.$route.params.id}`)
+            const { data } = await axios.get(`${process.env.MIX_WEBUMENIA_API}/items/${this.$route.params.id}?locale=${getActiveLanguage()}`)
             this.item = data.document.content
         },
         methods: {
