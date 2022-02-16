@@ -10,6 +10,15 @@ module.exports = {
         full: '100%',
       },
     },
+    colors: {
+      black: '#000',
+      white: '#fff',
+      red: '#f44336',
+      gray: {
+        100: '#eeeff1',
+        400: '#b9bbc6'
+      }
+    },
     fontFamily: {
       sans: ['GTWalsheim', 'sans-serif']
     },
