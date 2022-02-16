@@ -22,4 +22,15 @@ class Code extends Model
     {
         $this->attributes['code'] = bindec($value);
     }
+
+    public static function randomCode()
+    {
+        $code = str_repeat('0', self::ROWS * self::COLS);
+        $dots_count = rand(2,4);
+        for ($i=0; $i < $dots_count; $i++) {
+            $randomPos = rand(0, (self::ROWS * self::COLS) - 1);
+            $code[$randomPos] = '1';
+        }
+        return $code;
+    }
 }
