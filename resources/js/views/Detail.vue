@@ -28,7 +28,7 @@
         </div>
     </div>
     <div class="bg-gray-100 h-48 border-black border-t-2 border-b-2">
-        <img class="h-full object-cover w-full" :src="getImage(item, 800)" v-if="item">
+        <img class="h-full object-cover w-full" :src="getImageSrc(800)" v-if="item">
     </div>
     <div class="h-full border-black p-4" v-if="item">
         <h2 class="text-xl font-bold">{{ item.title }}</h2>
@@ -71,8 +71,8 @@
             this.item = data.document.content
         },
         methods: {
-            getImage(item, size) {
-                return `${process.env.MIX_WEBUMENIA_URL}/dielo/nahlad/${item.id}/${size}`
+            getImageSrc(size) {
+                return `${process.env.MIX_WEBUMENIA_URL}/dielo/nahlad/${this.item.id}/${size}`
             },
             formatName(name) {
                 return name.replace(/^([^,]*),\s*(.*)$/, '$2 $1')
