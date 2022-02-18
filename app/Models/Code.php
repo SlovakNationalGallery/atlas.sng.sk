@@ -26,10 +26,19 @@ class Code extends Model
     public static function randomCode()
     {
         $code = str_repeat('0', self::ROWS * self::COLS);
-        $dots_count = rand(2,4);
+        $dots_count = rand(2,3);
         for ($i=0; $i < $dots_count; $i++) {
             $randomPos = rand(0, (self::ROWS * self::COLS) - 1);
             $code[$randomPos] = '1';
+        }
+        return $code;
+    }
+
+    public static function randomUniqueCode()
+    {
+        $code = self::randomCode();
+        if (self::where('code', bindec($code))->exists()) {
+           return self::randomUniqueCode();
         }
         return $code;
     }
