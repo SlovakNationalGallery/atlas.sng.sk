@@ -33,7 +33,7 @@
     <div class="h-full border-black p-4" v-if="item">
         <h2 class="text-xl font-bold">{{ item.title }}</h2>
         <h3 class="">{{ formatName(item.author[0]) }} · {{ item.dating }}</h3>
-        <div class="py-4 text-sm" v-html="item.description"></div>
+        <div class="py-4 text-sm pb-48" v-html="item.description"></div>
     </div>
     <div class="bg-gray-100 w-full h-48 fixed bottom-0">
         <div class="p-4">
