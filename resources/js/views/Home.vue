@@ -15,7 +15,7 @@
     </div>
     <div>
         <div class="max-w-screen-lg mx-auto">
-          <div class="grid grid-cols-3 gap-0 border-collapse border border-black content-center">
+          <div class="grid grid-cols-3 gap-0 border border-black content-center">
             <CircleButton v-for="position in code.length" :is-checked="code[position - 1] == '1' ? true : false" @click="modifyCode(position)"></CircleButton>
             <div class="w-full border border-black">
                 <RectangleButton @click="switchLanguage()">
