@@ -23,10 +23,10 @@
                 </RectangleButton>
             </div>
             <div class="w-full border border-black">
-                <RectangleButton class="font-bold bg-red text-white" @click="resetCode" v-if="isWrong">
+                <RectangleButton class="font-bold bg-red text-white" v-if="isWrong" @click="verifyCode">
                     {{ $t('Try again') }}
                 </RectangleButton>
-                <RectangleButton class="font-bold" :class="{'text-gray-400': !isActive}" @click="verifyCode" v-else>
+                <RectangleButton class="font-bold" :class="isActive ? 'bg-black text-white active:bg-white active:text-black' : 'text-gray-400'" @click="verifyCode" v-else>
                     {{ $t('Verify') }}
                 </RectangleButton>
             </div>
@@ -77,12 +77,11 @@
                     })
             },
             modifyCode(pos) {
+                if (this.isWrong) {
+                    this.isWrong = false
+                }
                 const bit = (this.code[pos - 1] == '1') ? '0' : '1';
                 this.code = this.code.substring(0,pos - 1) + bit + this.code.substring(pos);
-            },
-            resetCode() {
-                this.code = "000000000"
-                this.isWrong = false
             },
             switchLanguage() {
                 this.locale = (this.locale == 'sk') ? 'en' : 'sk'
