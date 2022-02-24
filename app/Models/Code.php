@@ -4,13 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
 
 class Code extends Model
 {
     use HasFactory;
+    use HasTranslations;
 
     const ROWS = 3;
     const COLS = 3;
+
+    public $translatable = ['description'];
 
     // codes are stored in DB in decimal value, e.g. 000101010 -> 42
     public function getCodeAttribute($value)
