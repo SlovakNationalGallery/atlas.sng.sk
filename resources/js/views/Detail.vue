@@ -69,7 +69,9 @@
             }
         },
         async mounted() {
-            const response = await axios.get(`/api/items/${this.$route.params.id}?locale=${getActiveLanguage()}`)
+            const response = await axios.get(`/api/items/${this.$route.params.id}`, {headers: {
+                'X-locale': getActiveLanguage()
+            }})
             this.item = response.data.data
         }
     }

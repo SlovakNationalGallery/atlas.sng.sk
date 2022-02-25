@@ -6,6 +6,8 @@ import App from './App.vue'
 import Home from './views/Home.vue'
 import Detail from './views/Detail.vue'
 
+require('./bootstrap');
+
 const routes = [
     { path: '/', component: Home },
     { path: '/detail/:id', component: Detail },
@@ -23,4 +25,3 @@ app.use(i18nVue, {
     })
 app.mount('#app')
 
-require('./bootstrap');
