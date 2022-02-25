@@ -17,7 +17,9 @@ class ItemResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'author' => $this->author[0],
+            'author' => collect($this->author)->map(function ($name) {
+                return preg_replace('/^([^,]*),\s*(.*)$/', '$2 $1', $name);
+            })->join(', '),
             'dating' => $this->dating,
             'description' => $this->description,
             'image' => config('services.webumenia.url') . '/dielo/nahlad/' . $this->id . '/' . 600,
