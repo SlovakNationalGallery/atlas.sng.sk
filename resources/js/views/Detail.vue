@@ -29,11 +29,11 @@
         </div>
     </div>
     <div class="bg-gray-100 h-48 border-black border-t-2 border-b-2">
-        <img class="h-full object-cover w-full" :src="getImageSrc(800)" v-if="item">
+        <img class="h-full object-cover w-full" :src="item.image" v-if="item">
     </div>
     <div class="h-full border-black p-4" v-if="item">
         <h2 class="text-xl font-bold">{{ item.title }}</h2>
-        <h3 class="">{{ formatName(item.author[0]) }} · {{ item.dating }}</h3>
+        <h3 class="">{{ item.author }} · {{ item.dating }}</h3>
         <div class="py-4 text-sm pb-48" v-html="item.description"></div>
     </div>
     <div class="bg-gray-100 w-full h-48 fixed bottom-0">
@@ -69,16 +69,10 @@
             }
         },
         async mounted() {
-            const { data } = await axios.get(`${process.env.MIX_WEBUMENIA_API}/items/${this.$route.params.id}?locale=${getActiveLanguage()}`)
-            this.item = data.document.content
-        },
-        methods: {
-            getImageSrc(size) {
-                return `${process.env.MIX_WEBUMENIA_URL}/dielo/nahlad/${this.item.id}/${size}`
-            },
-            formatName(name) {
-                return name.replace(/^([^,]*),\s*(.*)$/, '$2 $1')
-            }
+            const response = await axios.get(`/api/items/${this.$route.params.id}`, {headers: {
+                'X-locale': getActiveLanguage()
+            }})
+            this.item = response.data.data
         }
     }
 </script>

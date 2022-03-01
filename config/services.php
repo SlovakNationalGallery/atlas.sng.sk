@@ -14,6 +14,11 @@ return [
     |
     */
 
+    'webumenia' => [
+        'url' => env('WEBUMENIA_URL', 'https://www.webumenia.sk'),
+        'api' => env('WEBUMENIA_API', 'https://openapi.webumenia.sk'),
+    ],
+
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),
