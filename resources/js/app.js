@@ -1,3 +1,5 @@
+require('./bootstrap');
+
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { i18nVue } from 'laravel-vue-i18n'
@@ -5,8 +7,6 @@ import { i18nVue } from 'laravel-vue-i18n'
 import App from './App.vue'
 import Home from './views/Home.vue'
 import Detail from './views/Detail.vue'
-
-require('./bootstrap');
 
 const routes = [
     { path: '/', component: Home },

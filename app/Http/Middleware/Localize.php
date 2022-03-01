@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Carbon\Carbon;
 
 class Localize
 {
@@ -16,8 +17,9 @@ class Localize
      */
     public function handle($request, Closure $next)
     {
-        $locale = ($request->hasHeader('X-locale')) ? $request->header('X-locale') : app()->config->get('app.locale');
-        app()->setLocale($locale);
+        if ($request->hasHeader('X-locale')) {
+            app()->setLocale($request->header('X-locale'));
+        }
         return $next($request);
    }
 }
