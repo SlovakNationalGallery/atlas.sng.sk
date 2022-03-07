@@ -16,6 +16,10 @@ class Code extends Model
 
     public $translatable = ['description'];
 
+    protected $fillable = [
+        'item_id',
+    ];
+
     // codes are stored in DB in decimal value, e.g. 000101010 -> 42
     public function getCodeAttribute($value)
     {
