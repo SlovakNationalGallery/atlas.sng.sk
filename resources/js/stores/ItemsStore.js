@@ -5,8 +5,7 @@ export const useItemsStore = defineStore('ItemsStore', {
     items: []
   }),
   getters: {
-    postsCount() {
-      console.log(this.items)
+    itemsCount() {
       return this.items.length
     },
   },
