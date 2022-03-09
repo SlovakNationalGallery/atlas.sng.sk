@@ -22,8 +22,8 @@ const router = createRouter({
 const app = createApp(App)
 app.use(router)
 app.use(i18nVue, {
-        resolve: lang => import(`../lang/${lang}.json`),
-    })
+    resolve: lang => import(`../lang/${lang}.json`),
+})
 app.use(createPinia())
 app.mount('#app')
 

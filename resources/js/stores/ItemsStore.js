@@ -1,15 +1,22 @@
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
 
 export const useItemsStore = defineStore('ItemsStore', {
-  state: () => ({
-    items: []
-  }),
-  getters: {
-    itemsCount() {
-      return this.items.length
+    state: () => ({
+        items: [],
+    }),
+    getters: {
+        itemsCount() {
+            return this.items.length;
+        },
     },
-  },
-  actions: {
-    // @todo addItem()
-  },
-})
+    actions: {
+        add(item) {
+            if (!this.items.includes(item)) {
+                this.items.push(item);
+            }
+        },
+        remove(item) {
+            this.items = this.items.filter((i) => i !== item);
+        },
+    },
+});
