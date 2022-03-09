@@ -60,19 +60,23 @@
 <script>
     import ConfirmButton from '../components/ConfirmButton.vue'
     import { getActiveLanguage } from 'laravel-vue-i18n';
+    import {ref, onMounted} from 'vue'
+    import { useRoute } from 'vue-router'
 
     export default {
         components: { ConfirmButton },
-        data(){
-            return {
-                item: null
-            }
-        },
-        async mounted() {
-            const response = await axios.get(`/api/items/${this.$route.params.id}`, {headers: {
-                'X-locale': getActiveLanguage()
-            }})
-            this.item = response.data.data
+        setup() {
+            const item = ref(null)
+            const route = useRoute()
+
+            onMounted(async () => {
+                 const response = await axios.get(`/api/items/${route.params.id}`, {headers: {
+                     'X-locale': getActiveLanguage()
+                 }})
+                 item.value = response.data.data
+            })
+
+            return { item }
         }
     }
 </script>
