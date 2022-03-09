@@ -1,5 +1,5 @@
 <template>
-    <Header>{{ $t('Artwork detail') }}</Header>
+    <Header :code="1">{{ $t('Artwork detail') }}</Header>
     <div class="bg-gray-100 h-48 border-black border-t-2 border-b-2">
         <img class="h-full object-cover w-full" :src="item.image" v-if="item">
     </div>
