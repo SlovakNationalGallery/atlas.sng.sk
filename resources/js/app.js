@@ -8,10 +8,12 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import Home from './views/Home.vue'
 import Detail from './views/Detail.vue'
+import Collection from './views/Collection.vue'
 
 const routes = [
     { path: '/', component: Home },
     { path: '/detail/:id', component: Detail },
+    { path: '/collection', component: Collection },
 ]
 
 const router = createRouter({
