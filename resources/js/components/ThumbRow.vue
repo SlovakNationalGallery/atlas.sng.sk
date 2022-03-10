@@ -1,18 +1,27 @@
 <template>
     <router-link :to="'/detail/' + itemId">
         <div class="flex my-4">
-            <div class="h-24 w-24 border-black border-2 flex items-center justify-center">
-                <svg class="w-9 h-9" fill="none" xmlns="http://www.w3.org/2000/svg"></svg>
+            <div class="h-24 w-24 border-black border-2 flex items-center justify-center bg-gray-softest">
+                <img class="h-full object-cover w-full" :src="item.image" v-if="item">
             </div>
-            <div class="py-2 px-4">
-                <h2 class="text-base pb-1">{{ itemId }}</h2>
-                <div class="text-sm text-gray-dark">Miloš Alexander Bazovský  a ...</div>
+            <div class="py-2 px-4" v-if="item">
+                <h2 class="text-base pb-1">{{ item.title }}</h2>
+                <div class="text-sm text-gray-dark">{{ item.author }} · {{ item.dating }}</div>
             </div>
         </div>
     </router-link>
 </template>
 
 <script setup>
-    import { computed, ref } from "vue"
+    import { onMounted, ref } from "vue"
+    import { getActiveLanguage } from 'laravel-vue-i18n';
     const props = defineProps( [ 'itemId' ] )
+    const item = ref(null)
+
+    onMounted(async () => {
+         const response = await axios.get(`/api/items/${props.itemId}`, {headers: {
+             'X-locale': getActiveLanguage()
+         }})
+         item.value = response.data.data
+    })
 </script>
