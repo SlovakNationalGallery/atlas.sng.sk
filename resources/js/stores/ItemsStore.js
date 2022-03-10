@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia';
+import { useStorage } from '@vueuse/core'
 
 export const useItemsStore = defineStore('ItemsStore', {
     state: () => ({
-        items: [],
+        items: useStorage('items', [])
     }),
     getters: {
         itemsCount() {
