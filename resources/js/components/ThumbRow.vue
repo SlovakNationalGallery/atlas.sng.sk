@@ -1,10 +1,10 @@
 <template>
     <router-link :to="'/detail/' + itemId">
         <div class="flex my-4">
-            <div class="h-24 w-24 border-black border-2 flex items-center justify-center bg-gray-softest">
+            <div class="h-24 w-24 flex-none border-black border-2 flex items-center justify-center bg-gray-softest">
                 <img class="h-full object-cover w-full" :src="item.image" v-if="item">
             </div>
-            <div class="py-2 px-4" v-if="item">
+            <div class="py-2 px-4 shrink" v-if="item">
                 <h2 class="text-base pb-1">{{ item.title }}</h2>
                 <div class="text-sm text-gray-dark">{{ item.author }} · {{ item.dating }}</div>
             </div>
