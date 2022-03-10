@@ -8,15 +8,18 @@ export const useItemsStore = defineStore('ItemsStore', {
         itemsCount() {
             return this.items.length;
         },
+        exists: (state) => {
+            return (itemId) => state.items.includes(itemId)
+        },
     },
     actions: {
-        add(item) {
-            if (!this.items.includes(item)) {
-                this.items.push(item);
+        add(itemId) {
+            if (!this.items.includes(itemId)) {
+                this.items.push(itemId);
             }
         },
-        remove(item) {
-            this.items = this.items.filter((i) => i !== item);
+        remove(itemId) {
+            this.items = this.items.filter((item) => item !== itemId);
         },
     },
 });

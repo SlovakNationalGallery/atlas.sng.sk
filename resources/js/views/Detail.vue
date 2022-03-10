@@ -1,15 +1,41 @@
 <template>
     <Header :code="1">{{ $t('Artwork detail') }}</Header>
-    <div class="bg-gray-100 h-48 border-black border-t-2 border-b-2">
+    <div class="bg-gray-softest h-48 border-black border-t-2 border-b-2 relative">
         <img class="h-full object-cover w-full" :src="item.image" v-if="item">
+        <svg class="absolute bottom-3 left-3 w-8" fill="none" viewBox="0 0 32 35" xmlns="http://www.w3.org/2000/svg">
+            <g filter="url(#a)" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+            <path d="m21 6h5v5"/>
+            <path d="m19 13 7-7"/>
+            <path d="M11 26H6V21"/>
+            <path d="m13 19-7 7"/>
+            <path d="m26 21v5h-5"/>
+            <path d="m19 19 7 7"/>
+            <path d="m6 11v-5h5"/>
+            <path d="m13 13-7-7"/>
+            </g>
+            <defs>
+            <filter id="a" x="-4" y="0" width="40" height="40" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" result="hardAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+            <feOffset dy="4"/>
+            <feGaussianBlur stdDeviation="2"/>
+            <feComposite in2="hardAlpha" operator="out"/>
+            <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+            <feBlend in2="BackgroundImageFix" result="effect1_dropShadow_2433_18536"/>
+            <feBlend in="SourceGraphic" in2="effect1_dropShadow_2433_18536" result="shape"/>
+            </filter>
+            </defs>
+        </svg>
+
     </div>
     <div class="h-full border-black p-4" v-if="item">
         <h2 class="text-xl font-bold">{{ item.title }}</h2>
-        <h3 class="">{{ item.author }} · {{ item.dating }}</h3>
-        <div class="py-4 text-sm pb-48" v-html="item.description"></div>
+        <h3 class="text-gray-dark">{{ item.author }} · {{ item.dating }}</h3>
+        <div class="py-4 text-sm pb-24" v-html="item.description"></div>
     </div>
-    <div class="bg-gray-100 w-full h-48 fixed bottom-0">
+    <div class="w-full h-24 fixed bottom-0">
         <div class="p-4">
+            <!--
             <div class="flex items-center">
                 <svg class="" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -21,9 +47,12 @@
             <div class="py-4 text-sm">
                 {{ $t('You’ll see more details when you share the collection and view it from another device. Keep collecting!') }}
             </div>
+             -->
             <div class="flex space-x-4">
-                <ConfirmButton class="bg-white"><router-link to="/">{{ $t('Don’t add') }}</router-link></ConfirmButton>
-                <ConfirmButton class="bg-black text-white" @click="itemsStore.add(item.id)">{{ $t('Add new') }}</ConfirmButton>
+                <ConfirmButton class="bg-white"><router-link to="/">{{ $t('Find another') }}</router-link></ConfirmButton>
+                <ConfirmButton v-if="item && itemsStore.exists(item.id)" class="bg-white text-red border-red" @click="itemsStore.remove(item.id)">{{ $t('Remove') }}</ConfirmButton>
+                <ConfirmButton v-else class="bg-black text-white" @click="itemsStore.add(item.id)">{{ $t('Save') }}</ConfirmButton>
+
             </div>
         </div>
     </div>

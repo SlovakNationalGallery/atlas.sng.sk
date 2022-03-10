@@ -16,8 +16,10 @@ module.exports = {
       red: '#f44336',
       green: '#0DF043',
       gray: {
-        100: '#eeeff1',
-        400: '#b9bbc6'
+        softest: '#DDDEE3',
+        soft: '#B9BBC6',
+        medium: '#A0A1B1',
+        dark: '#6D6E7D'
       }
     },
     fontFamily: {

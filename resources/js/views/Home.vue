@@ -19,7 +19,7 @@
                 <RectangleButton class="font-bold bg-red text-white" v-if="isWrong" @click="verifyCode">
                     {{ $t('Try again') }}
                 </RectangleButton>
-                <RectangleButton class="font-bold" :class="isActive ? 'bg-black text-white active:bg-white active:text-black' : 'text-gray-400'" @click="verifyCode" v-else>
+                <RectangleButton class="font-bold" :class="isActive ? 'bg-black text-white active:bg-white active:text-black' : 'text-gray-soft'" @click="verifyCode" v-else>
                     {{ $t('Verify') }}
                 </RectangleButton>
             </div>
