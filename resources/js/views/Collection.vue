@@ -32,9 +32,6 @@
 </template>
 
 <script setup>
-    import {ref, onMounted} from 'vue'
-    import { useRoute } from 'vue-router'
-    import { getActiveLanguage } from 'laravel-vue-i18n';
     import { useItemsStore } from '../stores/ItemsStore'
     import ConfirmButton from '../components/ConfirmButton.vue'
     import Header from '../components/Header.vue'
