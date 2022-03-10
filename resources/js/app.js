@@ -3,6 +3,7 @@ require('./bootstrap');
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { i18nVue } from 'laravel-vue-i18n'
+import { createPinia } from 'pinia'
 
 import App from './App.vue'
 import Home from './views/Home.vue'
@@ -21,7 +22,8 @@ const router = createRouter({
 const app = createApp(App)
 app.use(router)
 app.use(i18nVue, {
-        resolve: lang => import(`../lang/${lang}.json`),
-    })
+    resolve: lang => import(`../lang/${lang}.json`),
+})
+app.use(createPinia())
 app.mount('#app')
 

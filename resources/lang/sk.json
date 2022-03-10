@@ -1,8 +1,12 @@
 {
-    "SNG Bookmarks": "Záložky SNG",
+    "Bookmarks": "Bookmarks",
+    "Artwork detail": "Detail diela",
     "Collect artworks on your visit": "Zbieraj diela počas návštevy",
     "View them later from home. Enter code": "Vráť sa k nim neskôr a dozveď sa viac",
     "Verify": "Overiť",
     "Help": "Pomoc",
-    "Try again": "Skús znova"
+    "Try again": "Skús znova",
+    "Find another": "Nájsť iné",
+    "Save": "Uložiť",
+    "Remove": "Odstrániť"
 }

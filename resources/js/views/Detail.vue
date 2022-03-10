@@ -1,43 +1,41 @@
 <template>
-    <div class="border-black border-t-2 flex items-center">
-        <router-link to="/">
-            <div class="bg-black p-2" >
-                <svg class="h-9 w-9" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="4" cy="4" r="3.30435" stroke="white" stroke-width="1.3913"/>
-                    <circle cx="4" cy="16" r="3.30435" stroke="white" stroke-width="1.3913"/>
-                    <circle cx="4" cy="28" r="4" fill="white"/>
-                    <circle cx="16" cy="4" r="4" fill="white"/>
-                    <circle cx="16" cy="16" r="4" fill="white"/>
-                    <circle cx="16" cy="28" r="4" fill="white"/>
-                    <circle cx="28" cy="4" r="4" fill="white"/>
-                    <circle cx="28" cy="16" r="3.30435" stroke="white" stroke-width="1.3913"/>
-                    <circle cx="28" cy="28" r="3.30435" stroke="white" stroke-width="1.3913"/>
-                </svg>
-            </div>
-        </router-link>
-        <h1 class="p-3 grow">{{ $t('SNG Bookmarks') }}</h1>
-        <div class="flex pr-4">
-            <!--
-            <div class="font-bold text-xl px-2">1</div>
-            <svg class="h-9 w-9" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M26 5H6C5.44772 5 5 5.44772 5 6V26C5 26.5523 5.44772 27 6 27H26C26.5523 27 27 26.5523 27 26V6C27 5.44772 26.5523 5 26 5Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M27 19.9998L21.7071 14.707C21.5196 14.5194 21.2652 14.4141 21 14.4141C20.7348 14.4141 20.4804 14.5194 20.2929 14.707L14.7071 20.2927C14.5196 20.4803 14.2652 20.5856 14 20.5856C13.7348 20.5856 13.4804 20.4803 13.2929 20.2927L10.7071 17.707C10.5196 17.5194 10.2652 17.4141 10 17.4141C9.73478 17.4141 9.48043 17.5194 9.29289 17.707L5 21.9999" fill="black"/>
-                <path d="M27 19.9998L21.7071 14.707C21.5196 14.5194 21.2652 14.4141 21 14.4141C20.7348 14.4141 20.4804 14.5194 20.2929 14.707L14.7071 20.2927C14.5196 20.4803 14.2652 20.5856 14 20.5856C13.7348 20.5856 13.4804 20.4803 13.2929 20.2927L10.7071 17.707C10.5196 17.5194 10.2652 17.4141 10 17.4141C9.73478 17.4141 9.48043 17.5194 9.29289 17.707L5 21.9999V26.5H27V19.9998Z" fill="black"/>
-                <path d="M12.5 13C13.3284 13 14 12.3284 14 11.5C14 10.6716 13.3284 10 12.5 10C11.6716 10 11 10.6716 11 11.5C11 12.3284 11.6716 13 12.5 13Z" fill="black"/>
-            </svg>
-             -->
-        </div>
-    </div>
-    <div class="bg-gray-100 h-48 border-black border-t-2 border-b-2">
+    <Header :code="1">{{ $t('Artwork detail') }}</Header>
+    <div class="bg-gray-softest h-48 border-black border-t-2 border-b-2 relative">
         <img class="h-full object-cover w-full" :src="item.image" v-if="item">
+        <svg class="absolute bottom-3 left-3 w-8" fill="none" viewBox="0 0 32 35" xmlns="http://www.w3.org/2000/svg">
+            <g filter="url(#a)" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+            <path d="m21 6h5v5"/>
+            <path d="m19 13 7-7"/>
+            <path d="M11 26H6V21"/>
+            <path d="m13 19-7 7"/>
+            <path d="m26 21v5h-5"/>
+            <path d="m19 19 7 7"/>
+            <path d="m6 11v-5h5"/>
+            <path d="m13 13-7-7"/>
+            </g>
+            <defs>
+            <filter id="a" x="-4" y="0" width="40" height="40" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" result="hardAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+            <feOffset dy="4"/>
+            <feGaussianBlur stdDeviation="2"/>
+            <feComposite in2="hardAlpha" operator="out"/>
+            <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+            <feBlend in2="BackgroundImageFix" result="effect1_dropShadow_2433_18536"/>
+            <feBlend in="SourceGraphic" in2="effect1_dropShadow_2433_18536" result="shape"/>
+            </filter>
+            </defs>
+        </svg>
+
     </div>
     <div class="h-full border-black p-4" v-if="item">
         <h2 class="text-xl font-bold">{{ item.title }}</h2>
-        <h3 class="">{{ item.author }} · {{ item.dating }}</h3>
-        <div class="py-4 text-sm pb-48" v-html="item.description"></div>
+        <h3 class="text-gray-dark">{{ item.author }} · {{ item.dating }}</h3>
+        <div class="py-4 text-sm pb-24" v-html="item.description"></div>
     </div>
-    <div class="bg-gray-100 w-full h-48 fixed bottom-0">
+    <div class="w-full h-24 fixed bottom-0">
         <div class="p-4">
+            <!--
             <div class="flex items-center">
                 <svg class="" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -49,30 +47,40 @@
             <div class="py-4 text-sm">
                 {{ $t('You’ll see more details when you share the collection and view it from another device. Keep collecting!') }}
             </div>
+             -->
             <div class="flex space-x-4">
-                <ConfirmButton class="bg-white"><router-link to="/">{{ $t('Don’t add') }}</router-link></ConfirmButton>
-                <ConfirmButton class="bg-black text-white">{{ $t('Add new') }}</ConfirmButton>
+                <ConfirmButton class="bg-white"><router-link to="/">{{ $t('Find another') }}</router-link></ConfirmButton>
+                <ConfirmButton v-if="item && itemsStore.exists(item.id)" class="bg-white text-red border-red" @click="itemsStore.remove(item.id)">{{ $t('Remove') }}</ConfirmButton>
+                <ConfirmButton v-else class="bg-black text-white" @click="itemsStore.add(item.id)">{{ $t('Save') }}</ConfirmButton>
+
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import ConfirmButton from '../components/ConfirmButton.vue'
+    import {ref, onMounted} from 'vue'
+    import { useRoute } from 'vue-router'
     import { getActiveLanguage } from 'laravel-vue-i18n';
+    import { useItemsStore } from '../stores/ItemsStore'
+    import ConfirmButton from '../components/ConfirmButton.vue'
+    import Header from '../components/Header.vue'
 
     export default {
-        components: { ConfirmButton },
-        data(){
-            return {
-                item: null
-            }
-        },
-        async mounted() {
-            const response = await axios.get(`/api/items/${this.$route.params.id}`, {headers: {
-                'X-locale': getActiveLanguage()
-            }})
-            this.item = response.data.data
+        components: { ConfirmButton, Header },
+        setup() {
+            const item = ref(null)
+            const route = useRoute()
+            const itemsStore = useItemsStore()
+
+            onMounted(async () => {
+                 const response = await axios.get(`/api/items/${route.params.id}`, {headers: {
+                     'X-locale': getActiveLanguage()
+                 }})
+                 item.value = response.data.data
+            })
+
+            return { item, itemsStore }
         }
     }
 </script>
