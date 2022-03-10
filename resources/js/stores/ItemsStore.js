@@ -6,7 +6,7 @@ export const useItemsStore = defineStore('ItemsStore', {
         items: useStorage('items', [])
     }),
     getters: {
-        itemsCount() {
+        count() {
             return this.items.length;
         },
         exists: (state) => {

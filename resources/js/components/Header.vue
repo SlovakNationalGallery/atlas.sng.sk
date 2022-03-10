@@ -2,6 +2,7 @@
     <div class="border-black border-t-2 flex items-center">
         <router-link to="/">
             <div class="bg-black p-2">
+                <!-- @TODO: fill circles according the code -->
                 <svg v-if="code" class="h-9 w-9" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="4" cy="4" r="3.30435" stroke="white" stroke-width="1.3913"/>
                     <circle cx="4" cy="16" r="3.30435" stroke="white" stroke-width="1.3913"/>
@@ -36,7 +37,7 @@
     import { useItemsStore } from '../stores/ItemsStore'
 
     const itemsStore = useItemsStore()
-    const count = computed(() => itemsStore.itemsCount)
+    const count = computed(() => itemsStore.count)
     const isActive = ref(false)
 
     const props = defineProps({
