@@ -23,6 +23,7 @@ class ItemResource extends JsonResource
             'dating' => $this->dating,
             'description' => $this->description,
             'image' => config('services.webumenia.url') . '/dielo/nahlad/' . $this->id . '/' . 600,
+            'webumenia_url' => config('services.webumenia.url') . '/dielo/' . $this->id
         ];
     }
 }
