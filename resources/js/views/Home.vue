@@ -1,21 +1,24 @@
 <template>
     <Header class="mb-0.5">{{ $t('Bookmarks') }}</Header>
-    <div class="bg-black text-white h-full">
-        <div class="p-5">
-            <div class="text-xl mb-4">{{ $t('Collect artworks on your visit') }}</div>
-            <div>{{ $t('View them later from home. Enter code') }}</div>
+    <div class="bg-black text-white h-32 flex">
+        <div class="p-4 pr-0 flex flex-col grow">
+            <div class="text-xl mb-2">{{ $t('Enter artwork code to start') }}</div>
+            <div class="flex-1 text-base">{{ $t('Collect your favorite artworks and find more info about them') }}</div>
+        </div>
+        <div class="w-8 h-32">
+                <svg class="w-full h-full" fill="none" viewBox="0 0 20 111" preserveAspectRatio="none"><path d="M0.500001 55.5L19.25 0.0743716L19.25 110.926L0.500001 55.5Z" fill="white"/></svg>
         </div>
     </div>
     <div>
         <div class="max-w-screen-lg mx-auto">
           <div class="grid grid-cols-3 gap-0 border border-black content-center">
             <CircleButton v-for="position in code.length" :is-checked="code[position - 1] == '1' ? true : false" @click="modifyCode(position)"></CircleButton>
-            <div class="w-full border border-black">
+            <div class="w-full border border-black h-20">
                 <RectangleButton @click="switchLanguage()">
                     SK/EN
                 </RectangleButton>
             </div>
-            <div class="w-full border border-black">
+            <div class="w-full border border-black h-20">
                 <RectangleButton class="font-bold bg-red text-white" v-if="isWrong" @click="verifyCode">
                     {{ $t('Try again') }}
                 </RectangleButton>
@@ -23,7 +26,7 @@
                     {{ $t('Verify') }}
                 </RectangleButton>
             </div>
-            <div class="w-full border border-black">
+            <div class="w-full border border-black h-20">
                 <RectangleButton>
                     {{ $t('Help') }}
                 </RectangleButton>
