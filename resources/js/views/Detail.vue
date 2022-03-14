@@ -33,26 +33,12 @@
         <h3 class="text-gray-dark text-base">{{ item.author }} · {{ item.dating }}</h3>
         <div class="py-4 pb-24" v-html="item.description"></div>
     </div>
-    <div class="w-full h-24 fixed bottom-0">
+    <div class="w-full h-24 fixed bottom-0 bg-white">
         <div class="p-4">
-            <!--
-            <div class="flex items-center">
-                <svg class="" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M11.25 11.25H12V16.5H12.75" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M11.8125 9C12.4338 9 12.9375 8.49632 12.9375 7.875C12.9375 7.25368 12.4338 6.75 11.8125 6.75C11.1912 6.75 10.6875 7.25368 10.6875 7.875C10.6875 8.49632 11.1912 9 11.8125 9Z" fill="black"/>
-                </svg>
-                <div class="pl-2 font-bold">{{ $t('More info later. Keep collecting!')}}</div>
-            </div>
-            <div class="py-4 text-sm">
-                {{ $t('You’ll see more details when you share the collection and view it from another device. Keep collecting!') }}
-            </div>
-             -->
             <div class="flex space-x-4">
                 <ConfirmButton class="bg-white"><router-link to="/">{{ $t('Find another') }}</router-link></ConfirmButton>
                 <ConfirmButton v-if="item && itemsStore.exists(item.id)" class="bg-white text-red border-red" @click="itemsStore.remove(item.id)">{{ $t('Remove') }}</ConfirmButton>
                 <ConfirmButton v-else class="bg-black text-white" @click="itemsStore.add(item.id)">{{ $t('Save') }}</ConfirmButton>
-
             </div>
         </div>
     </div>
