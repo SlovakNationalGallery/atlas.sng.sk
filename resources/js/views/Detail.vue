@@ -30,8 +30,8 @@
     </div>
     <div class="h-full border-black p-4" v-if="item">
         <h2 class="text-xl font-bold">{{ item.title }}</h2>
-        <h3 class="text-gray-dark">{{ item.author }} · {{ item.dating }}</h3>
-        <div class="py-4 text-sm pb-24" v-html="item.description"></div>
+        <h3 class="text-gray-dark text-base">{{ item.author }} · {{ item.dating }}</h3>
+        <div class="py-4 pb-24" v-html="item.description"></div>
     </div>
     <div class="w-full h-24 fixed bottom-0">
         <div class="p-4">
