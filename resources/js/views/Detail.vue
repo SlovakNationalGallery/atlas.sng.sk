@@ -1,7 +1,7 @@
 <template>
     <Header :code="1">{{ $t('Artwork detail') }}</Header>
     <div class="bg-gray-softest h-48 border-black border-t-2 border-b-2 relative">
-        <ItemImage v-if="item" :item="item"></ItemImage>
+        <ItemImageLightbox v-if="item" :item="item"></ItemImageLightbox>
         <svg class="absolute bottom-3 left-3 w-8" fill="none" viewBox="0 0 32 35" xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#a)" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
             <path d="m21 6h5v5"/>
@@ -58,10 +58,10 @@
     import { useItemsStore } from '../stores/ItemsStore'
     import ConfirmButton from '../components/ConfirmButton.vue'
     import Header from '../components/Header.vue'
-    import ItemImage from '../components/ItemImage.vue'
+    import ItemImageLightbox from '../components/ItemImageLightbox.vue'
 
     export default {
-        components: { ConfirmButton, Header , ItemImage },
+        components: { ConfirmButton, Header , ItemImageLightbox },
         setup() {
             const item = ref(null)
             const route = useRoute()
