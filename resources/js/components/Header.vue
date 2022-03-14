@@ -21,14 +21,16 @@
             </div>
         </router-link>
         <h1 class="pl-3 grow text-xl"><slot></slot></h1>
-        <div class="flex px-4 py-2 h-full border-black" :class="{ 'border-l-2 bg-green': isActive }" v-if="count">
-            <div class="font-bold text-xl pr-2">{{ count }}</div>
-            <svg class="h-9 w-9" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 22L16 29L28 22" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M4 16L16 23L28 16" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M4 10L16 17L28 10L16 3L4 10Z" fill="black" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </div>
+        <router-link to="/collection">
+            <div class="flex px-4 py-2 h-full border-black" :class="{ 'border-l-2 bg-green': isActive }" v-if="count">
+                <div class="font-bold text-xl pr-2">{{ count }}</div>
+                <svg class="h-9 w-9" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 22L16 29L28 22" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M4 16L16 23L28 16" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M4 10L16 17L28 10L16 3L4 10Z" fill="black" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </router-link>
     </div>
 </template>
 
