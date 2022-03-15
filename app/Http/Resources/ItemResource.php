@@ -16,6 +16,7 @@ class ItemResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'code' => $this->code,
             'title' => $this->title,
             'author' => collect($this->author)->map(function ($name) {
                 return preg_replace('/^([^,]*),\s*(.*)$/', '$2 $1', $name);
@@ -26,7 +27,7 @@ class ItemResource extends JsonResource
             'image_srcset' => collect([220, 300, 600, 800])
                 ->map(fn ($width) => $this->getImageRoute($width) . " ${width}w")
                 ->join(', '),
-            'webumenia_url' => config('services.webumenia.url') . '/dielo/' . $this->id
+            'webumenia_url' => config('services.webumenia.url') . '/dielo/' . $this->id,
         ];
     }
 

@@ -1,5 +1,5 @@
 <template>
-    <Header :code="1">{{ $t('Artwork detail') }}</Header>
+    <Header :code="(item!==null) ? item.code : '000000000'">{{ $t('Artwork detail') }}</Header>
     <div class="bg-gray-softest h-48 border-black border-t-2 border-b-2 relative">
         <ItemImageLightbox v-if="item" :item="item"></ItemImageLightbox>
         <svg class="absolute bottom-3 left-3 w-8" fill="none" viewBox="0 0 32 35" xmlns="http://www.w3.org/2000/svg">

@@ -1,5 +1,5 @@
 <template>
-    <Header :code="1">{{ $t('My collection') }}</Header>
+    <Header :code="'111111111'">{{ $t('My collection') }}</Header>
 
     <div class="h-full border-black p-4 border-t-2">
         <div v-for="(item, index) in itemsStore.items">

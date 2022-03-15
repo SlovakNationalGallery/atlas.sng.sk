@@ -5,7 +5,7 @@
                 <!-- @TODO: fill circles according the code -->
                 <svg v-if="code" class="h-9 w-9" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <template v-for="indexY in 3">
-                        <circle v-for="indexX in 3" :cx="4 + ((indexX-1)*12)" :cy="4 + ((indexY-1)*12)" r="3.30435" stroke="white" stroke-width="1.3913" fill="white"/>
+                        <circle v-for="indexX in 3" :cx="4 + ((indexX-1)*12)" :cy="4 + ((indexY-1)*12)" r="3.30435" stroke="white" stroke-width="1.3913" :fill="(code[(indexY-1)*3 + (indexX-1)] == '1') ? 'white' : 'none'"/>
                     </template>
                 </svg>
                 <svg v-else class="h-9 w-9" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -37,7 +37,7 @@
     const isActive = ref(false)
 
     const props = defineProps({
-        code: Number
+        code: String
     })
 
     itemsStore.$subscribe((mutation, state) => {

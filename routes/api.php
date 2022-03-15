@@ -23,14 +23,15 @@ Route::get('/verify/{code}', function ($code) {
 });
 
 Route::get('/items/{id}', function ($id) {
-    $description = Code::where('item_id', $id)->firstOrFail()->description;
+    $code = Code::where('item_id', $id)->firstOrFail();
 
     $response = Http::get(config('services.webumenia.api') . '/items/' . $id, [
         'locale' =>  app()->getLocale()
     ]);
     $item = $response->object()->document->content;
     if (!empty($description)) {
-        $item->description = $description;
+        $item->description = $code->description;
     }
+    $item->code = $code->code;
     return new ItemResource($item);
 });
