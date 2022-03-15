@@ -13,7 +13,7 @@
                 </div>
                 <div class="py-2 px-4">
                     <h2 class="text-base pb-1">{{ $t('Add new artwork') }}</h2>
-                    <div class="text-sm text-gray-dark">{{ $t('Tap and enter a new artwork code') }}</div>
+                    <div class="text-sm text-gray-dark">{{ $t('Enter a new artwork code') }}</div>
                 </div>
             </div>
         </router-link>
