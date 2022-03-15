@@ -4,11 +4,7 @@
             <div
                 class="h-24 w-24 flex-none border-black border-2 flex items-center justify-center bg-gray-softest"
             >
-                <img
-                    class="h-full object-cover w-full"
-                    :src="item.image"
-                    v-if="item"
-                />
+                <ItemImage v-if="item" :item="item"></ItemImage>
             </div>
             <div class="py-2 px-4 shrink" v-if="item">
                 <h2 class="text-base pb-1">{{ item.title }}</h2>
@@ -23,6 +19,7 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import { getActiveLanguage } from "laravel-vue-i18n";
+import ItemImage from './ItemImage.vue'
 const props = defineProps(["itemId"]);
 const item = ref(null);
 

@@ -22,7 +22,7 @@
             {{ $t('Clear collection') }}
         </button>
     </div>
-    <div class="w-full h-24 fixed bottom-0">
+    <div class="w-full h-24 fixed bottom-0 bg-white">
         <div class="p-4">
             <div class="flex space-x-4">
                 <ConfirmButton class="bg-black text-white">{{ $t('Share collection link') }}</ConfirmButton>

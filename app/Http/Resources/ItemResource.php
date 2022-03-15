@@ -22,7 +22,18 @@ class ItemResource extends JsonResource
             })->join(', '),
             'dating' => $this->dating,
             'description' => $this->description,
-            'image' => config('services.webumenia.url') . '/dielo/nahlad/' . $this->id . '/' . 600,
+            'image_src' => $this->getImageRoute(),
+            'image_srcset' => collect([220, 300, 600, 800])
+                ->map(fn ($width) => $this->getImageRoute($width) . " ${width}w")
+                ->join(', '),
+            'webumenia_url' => config('services.webumenia.url') . '/dielo/' . $this->id
         ];
     }
+
+    private function getImageRoute($width=600)
+    {
+        return config('services.webumenia.url') . '/dielo/nahlad/' . $this->id . '/' . $width;
+    }
+
+
 }

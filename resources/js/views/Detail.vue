@@ -1,7 +1,7 @@
 <template>
     <Header :code="1">{{ $t('Artwork detail') }}</Header>
     <div class="bg-gray-softest h-48 border-black border-t-2 border-b-2 relative">
-        <img class="h-full object-cover w-full" :src="item.image" v-if="item">
+        <ItemImageLightbox v-if="item" :item="item"></ItemImageLightbox>
         <svg class="absolute bottom-3 left-3 w-8" fill="none" viewBox="0 0 32 35" xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#a)" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
             <path d="m21 6h5v5"/>
@@ -28,31 +28,24 @@
         </svg>
 
     </div>
-    <div class="h-full border-black p-4" v-if="item">
+    <div class="h-full border-black p-4 pb-24" v-if="item">
         <h2 class="text-xl font-bold">{{ item.title }}</h2>
-        <h3 class="text-gray-dark">{{ item.author }} · {{ item.dating }}</h3>
-        <div class="py-4 text-sm pb-24" v-html="item.description"></div>
+        <h3 class="text-gray-dark text-base">{{ item.author }} · {{ item.dating }}</h3>
+        <div class="py-4" v-html="item.description"></div>
+        <a :href="item.webumenia_url" target="_blank" class="flex items-center py-2 px-3 mb-4 text-[#32B964] bg-[#E4FAE7] hover:bg-[#caf5d0] active:bg-[#caf5d0] rounded-xl">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.59917 5.02012L9.99136 3.62793C10.5808 3.09069 11.3546 2.80122 12.1519 2.81968C12.9492 2.83814 13.7088 3.1631 14.2727 3.72705C14.8367 4.29099 15.1616 5.05054 15.1801 5.84786C15.1985 6.64518 14.9091 7.41896 14.3718 8.0084L12.382 9.99121C12.0952 10.2791 11.7544 10.5075 11.3792 10.6633C11.0039 10.8192 10.6016 10.8994 10.1953 10.8994C9.78894 10.8994 9.38661 10.8192 9.01136 10.6633C8.63611 10.5075 8.29532 10.2791 8.00854 9.99121" stroke="#32B964" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M9.40083 12.9798L8.00864 14.372C7.41921 14.9093 6.64543 15.1987 5.84811 15.1803C5.05078 15.1618 4.29123 14.8369 3.72729 14.2729C3.16335 13.709 2.83838 12.9494 2.81992 12.1521C2.80146 11.3548 3.09093 10.581 3.62817 9.99156L5.61802 8.00875C5.90479 7.7209 6.24558 7.4925 6.62083 7.33665C6.99608 7.18081 7.39841 7.10059 7.80474 7.10059C8.21106 7.10059 8.61339 7.18081 8.98864 7.33665C9.36389 7.4925 9.70468 7.7209 9.99146 8.00875" stroke="#32B964" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="pl-2 font-bold">{{ $t('Learn more on Web umenia') }}</span>
+        </a>
     </div>
-    <div class="w-full h-24 fixed bottom-0">
+    <div class="w-full h-24 fixed bottom-0 bg-white">
         <div class="p-4">
-            <!--
-            <div class="flex items-center">
-                <svg class="" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M11.25 11.25H12V16.5H12.75" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M11.8125 9C12.4338 9 12.9375 8.49632 12.9375 7.875C12.9375 7.25368 12.4338 6.75 11.8125 6.75C11.1912 6.75 10.6875 7.25368 10.6875 7.875C10.6875 8.49632 11.1912 9 11.8125 9Z" fill="black"/>
-                </svg>
-                <div class="pl-2 font-bold">{{ $t('More info later. Keep collecting!')}}</div>
-            </div>
-            <div class="py-4 text-sm">
-                {{ $t('You’ll see more details when you share the collection and view it from another device. Keep collecting!') }}
-            </div>
-             -->
             <div class="flex space-x-4">
                 <ConfirmButton class="bg-white"><router-link to="/">{{ $t('Find another') }}</router-link></ConfirmButton>
                 <ConfirmButton v-if="item && itemsStore.exists(item.id)" class="bg-white text-red border-red" @click="itemsStore.remove(item.id)">{{ $t('Remove') }}</ConfirmButton>
                 <ConfirmButton v-else class="bg-black text-white" @click="itemsStore.add(item.id)">{{ $t('Save') }}</ConfirmButton>
-
             </div>
         </div>
     </div>
@@ -65,9 +58,10 @@
     import { useItemsStore } from '../stores/ItemsStore'
     import ConfirmButton from '../components/ConfirmButton.vue'
     import Header from '../components/Header.vue'
+    import ItemImageLightbox from '../components/ItemImageLightbox.vue'
 
     export default {
-        components: { ConfirmButton, Header },
+        components: { ConfirmButton, Header , ItemImageLightbox },
         setup() {
             const item = ref(null)
             const route = useRoute()
