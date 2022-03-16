@@ -30,7 +30,7 @@ module.exports = {
       base: ['18px'],
       lg: ['20px'],
       xl: ['22px'],
-      '2xl': ['28px']
+      '2xl': ['24px']
     },
     fontWeight: {
       normal: '400',

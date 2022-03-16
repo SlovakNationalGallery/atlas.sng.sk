@@ -1,7 +1,7 @@
 <template>
     <Header :code="'111111111'">{{ $t('My collection') }}</Header>
 
-    <div class="h-full border-black p-4 border-t-2">
+    <div class="h-full border-black p-4 pb-24 border-t-2">
         <div v-for="(item, index) in itemsStore.items">
             <ThumbRow :item-id="item"></ThumbRow>
         </div>
@@ -18,25 +18,32 @@
             </div>
         </router-link>
         <hr class="h-0.5 bg-gray-soft border-0 mt-6 mb-2">
-        <button class="py-4 w-full active:text-gray-dark">
+        <button class="py-4 w-full active:text-gray-dark" @click="toggleModal">
             {{ $t('Clear collection') }}
         </button>
     </div>
     <div class="w-full h-24 fixed bottom-0 bg-white">
         <div class="p-4">
             <div class="flex space-x-4">
-                <ConfirmButton class="bg-black text-white">{{ $t('Share collection link') }}</ConfirmButton>
+                <ConfirmButton class="bg-black text-white" @click="toggleModal">{{ $t('Share collection link') }}</ConfirmButton>
             </div>
         </div>
     </div>
+    <CardModal @close="toggleModal" :visible="modalActive"></CardModal>
 </template>
 
 <script setup>
-    import { useItemsStore } from '../stores/ItemsStore'
-    import ConfirmButton from '../components/ConfirmButton.vue'
-    import Header from '../components/Header.vue'
-    import ThumbRow from '../components/ThumbRow.vue'
+import { ref } from "vue"
+import { useItemsStore } from '../stores/ItemsStore'
+import ConfirmButton from '../components/ConfirmButton.vue'
+import Header from '../components/Header.vue'
+import ThumbRow from '../components/ThumbRow.vue'
+import CardModal from '../components/CardModal.vue'
 
-    const itemsStore = useItemsStore()
+const itemsStore = useItemsStore()
+const modalActive = ref(false)
+const toggleModal = () => {
+    modalActive.value = !modalActive.value;
+};
 
 </script>
