@@ -2,7 +2,7 @@
     <Header class="mb-0.5">{{ $t('Bookmarks') }} <span class="text-gray-soft">beta</span></Header>
     <div class="bg-black text-white h-32 flex">
         <div class="p-4 pr-0 flex flex-col grow">
-            <div class="text-xl mb-2">{{ $t('Enter a new artwork code') }}</div>
+            <div class="text-lg mb-2">{{ $t('Enter a new artwork code') }}</div>
             <div class="flex-1 text-base">{{ $t('Collect your favorite artworks and find more info about them') }}</div>
         </div>
         <div class="w-8 h-32">
@@ -27,9 +27,10 @@
                 </RectangleButton>
             </div>
             <div class="w-full border border-black h-20">
-                <RectangleButton>
+                <RectangleButton @click="toggleModal">
                     {{ $t('Help') }}
                 </RectangleButton>
+                <CardModal @close="toggleModal" :visible="modalActive"></CardModal>
             </div>
           </div>
         </div>
@@ -40,15 +41,17 @@
     import Header from '../components/Header.vue'
     import CircleButton from '../components/CircleButton.vue'
     import RectangleButton from '../components/RectangleButton.vue'
+    import CardModal from '../components/CardModal.vue'
     import { getActiveLanguage, loadLanguageAsync } from 'laravel-vue-i18n'
 
     export default {
-        components: { Header, CircleButton, RectangleButton },
+        components: { Header, CircleButton, RectangleButton , CardModal },
         data(){
             return {
                 code: "000000000",
                 isWrong: false,
-                locale: 'sk'
+                locale: 'sk',
+                modalActive: false
             }
         },
         computed: {
@@ -83,6 +86,9 @@
             switchLanguage() {
                 this.locale = (this.locale == 'sk') ? 'en' : 'sk'
                 loadLanguageAsync(this.locale)
+            },
+            toggleModal() {
+                this.modalActive = !this.modalActive;
             }
         }
     }
