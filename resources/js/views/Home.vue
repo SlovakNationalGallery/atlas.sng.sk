@@ -2,7 +2,7 @@
     <Header class="mb-0.5">{{ $t('Bookmarks') }} <span class="text-gray-soft">beta</span></Header>
     <div class="bg-black text-white h-32 flex">
         <div class="p-4 pr-0 flex flex-col grow">
-            <div class="text-lg mb-2">{{ $t('Enter a new artwork code') }}</div>
+            <div class="text-xl mb-2">{{ $t('Enter artwork code to start') }}</div>
             <div class="flex-1 text-base">{{ $t('Collect your favorite artworks and find more info about them') }}</div>
         </div>
         <div class="w-8 h-32">
