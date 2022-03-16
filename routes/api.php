@@ -29,7 +29,7 @@ Route::get('/items/{id}', function ($id) {
         'locale' =>  app()->getLocale()
     ]);
     $item = $response->object()->document->content;
-    if (!empty($description)) {
+    if (!empty($code->description)) {
         $item->description = $code->description;
     }
     $item->code = $code->code;
