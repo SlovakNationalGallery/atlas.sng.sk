@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="md:bg-gray-softest md:h-screen">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="md:bg-gray-softest min-h-screen">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,8 +22,8 @@
              {{-- /GA --}}
         @endif
     </head>
-    <body class="md:h-screen">
-        <div id="app" class="md:max-w-lg md:mx-auto md:my-auto bg-white md:h-screen md:flex md:flex-col"></div>
+    <body class="min-h-screen">
+        <div id="app" class="md:max-w-lg md:mx-auto md:my-auto bg-white min-h-screen flex flex-col"></div>
         <script src="{{ mix('/js/app.js') }}"></script>
     </body>
 </html>
