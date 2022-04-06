@@ -23,7 +23,7 @@
         @endif
     </head>
     <body class="md:h-screen">
-        <div id="app" class="md:max-w-lg md:mx-auto md:my-auto bg-white md:h-screen"></div>
+        <div id="app" class="md:max-w-lg md:mx-auto md:my-auto bg-white md:h-screen md:flex md:flex-col"></div>
         <script src="{{ mix('/js/app.js') }}"></script>
     </body>
 </html>
