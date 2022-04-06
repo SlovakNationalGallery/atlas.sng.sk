@@ -15,7 +15,7 @@
             <span class="pl-2 font-bold">{{ $t('Learn more on webumenia.sk') }}</span>
         </a>
     </div>
-    <div class="w-full h-24 fixed bottom-0 bg-white">
+    <div class="w-full md:max-w-lg h-24 fixed bottom-0 bg-white">
         <div class="p-4">
             <div class="flex space-x-4">
                 <ConfirmButton class="bg-white"><router-link to="/">{{ $t('Find another') }}</router-link></ConfirmButton>
