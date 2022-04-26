@@ -56,6 +56,10 @@ class ImportAirtable extends Command
                 'en' => $record['fields']['app text preklad'] ?? ''
             ];
             $code->save();
+            // update code in airtable
+            if (empty($record['fields']['code']) || $record['fields']['code'] != $code->code) {
+                Airtable::table('default')->patch($record['id'], [ 'code' => $code->code]);
+            }
         });
 
         $bar->finish();
