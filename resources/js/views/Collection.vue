@@ -22,7 +22,7 @@
             {{ $t('Clear collection') }}
         </button>
     </div>
-    <div class="w-full h-24 fixed bottom-0 bg-white">
+    <div class="w-full md:max-w-lg h-24 fixed bottom-0 bg-white">
         <div class="p-4">
             <div class="flex space-x-4">
                 <ConfirmButton class="bg-black text-white" @click="toggleModal">{{ $t('Share collection link') }}</ConfirmButton>
