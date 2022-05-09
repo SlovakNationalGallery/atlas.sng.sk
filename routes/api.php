@@ -1,11 +1,13 @@
 <?php
 
+use App\Models\Code;
+use App\Models\Collection;
+use Illuminate\Http\Request;
 use App\Http\Resources\CodeResource;
 use App\Http\Resources\ItemResource;
-use App\Models\Code;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Validator;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,4 +36,20 @@ Route::get('/items/{id}', function ($id) {
     }
     $item->code = $code->code;
     return new ItemResource($item);
+});
+
+Route::post('/share', function (Request $request) {
+    $validator = Validator::make($request->all(), [
+        'items' => 'required|array|distinct',
+    ]);
+    
+    if ($validator->fails()) {
+        return response()->json(['success' => false, 'error_message' => $validator->errors()->first()], 422);
+    }
+    
+    $collection = Collection::create($validator->validated());
+    return response()->json([
+        'success' => true,
+        'id' => $collection->id
+    ]);
 });

@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { useStorage } from '@vueuse/core'
+import axios from "axios";
 
 export const useItemsStore = defineStore('ItemsStore', {
     state: () => ({
@@ -21,6 +22,11 @@ export const useItemsStore = defineStore('ItemsStore', {
         },
         remove(itemId) {
             this.items = this.items.filter((item) => item !== itemId);
+        },
+        async fetch(hashCode) {
+            this.items = (await axios.get("api/")).data;
+      
+            this.loggedIn = true;
         },
     },
 });
