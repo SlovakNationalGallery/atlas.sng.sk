@@ -13,7 +13,7 @@ import Collection from './views/Collection.vue'
 const routes = [
     { path: '/', component: Home },
     { path: '/detail/:id', component: Detail },
-    { path: '/collection', component: Collection },
+    { path: '/collection/:id?', component: Collection },
 ]
 
 const router = createRouter({

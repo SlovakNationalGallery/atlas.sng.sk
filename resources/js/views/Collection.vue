@@ -33,17 +33,25 @@
 </template>
 
 <script setup>
-import { ref } from "vue"
+import {ref, onMounted} from 'vue'
+import { useRoute } from 'vue-router'
 import { useItemsStore } from '../stores/ItemsStore'
 import ConfirmButton from '../components/ConfirmButton.vue'
 import Header from '../components/Header.vue'
 import ThumbRow from '../components/ThumbRow.vue'
 import CardModal from '../components/CardModal.vue'
 
+const route = useRoute()
 const itemsStore = useItemsStore()
 const modalActive = ref(false)
 const toggleModal = () => {
     modalActive.value = !modalActive.value;
 };
+
+onMounted(async () => {
+    if (route.params.id) {
+        itemsStore.fetch(route.params.id)
+    }
+})
 
 </script>

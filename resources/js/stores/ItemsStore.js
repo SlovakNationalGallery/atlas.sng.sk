@@ -23,10 +23,8 @@ export const useItemsStore = defineStore('ItemsStore', {
         remove(itemId) {
             this.items = this.items.filter((item) => item !== itemId);
         },
-        async fetch(hashCode) {
-            this.items = (await axios.get("api/")).data;
-      
-            this.loggedIn = true;
+        async fetch(collectionId) {
+            this.items = (await axios.get(`/api/collections/${collectionId}`)).data;
         },
     },
 });

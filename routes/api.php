@@ -38,7 +38,7 @@ Route::get('/items/{id}', function ($id) {
     return new ItemResource($item);
 });
 
-Route::post('/share', function (Request $request) {
+Route::post('/collections', function (Request $request) {
     $validator = Validator::make($request->all(), [
         'items' => 'required|array|distinct',
     ]);
@@ -46,10 +46,15 @@ Route::post('/share', function (Request $request) {
     if ($validator->fails()) {
         return response()->json(['success' => false, 'error_message' => $validator->errors()->first()], 422);
     }
-    
+
     $collection = Collection::create($validator->validated());
     return response()->json([
         'success' => true,
         'id' => $collection->id
     ]);
+});
+
+Route::get('/collections/{id}', function ($id) {
+    $collection = Collection::where('id', $id)->firstOrFail();
+    return $collection->items;
 });
