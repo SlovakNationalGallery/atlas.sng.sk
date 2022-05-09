@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
         <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-        <title>{{ trans('Záložky SNG') }}</title>
+        <title>{{ trans('Codes SNG') }}</title>
         @if (App::environment('production'))
             {{-- Clarity --}}
             <script type="text/javascript"> (function(c,l,a,r,i,t,y){ c[a]=c[a]||function()
