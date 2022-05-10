@@ -50,7 +50,7 @@ Route::post('/collections', function (Request $request) {
     $collection = Collection::create($validator->validated());
     return response()->json([
         'success' => true,
-        'hashid' => $collection->hashid(),
+        'url' => url('/', $collection->hashid()),
     ]);
 });
 

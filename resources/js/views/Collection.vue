@@ -25,7 +25,10 @@
     <div class="w-full md:max-w-lg h-24 fixed bottom-0 bg-white">
         <div class="p-4">
             <div class="flex space-x-4">
-                <ConfirmButton class="bg-black text-white" @click="toggleModal">{{ $t('Share collection link') }}</ConfirmButton>
+                <ConfirmButton class="bg-black text-white" @click="shareCollection" :disabled="loading">
+                    <span v-if="loading">{{ $t('Loading...') }}</span>
+                    <span v-else>{{ $t('Share collection link') }}</span>
+                </ConfirmButton>
             </div>
         </div>
     </div>
@@ -44,8 +47,25 @@ import CardModal from '../components/CardModal.vue'
 const route = useRoute()
 const itemsStore = useItemsStore()
 const modalActive = ref(false)
+const loading = ref(false)
 const toggleModal = () => {
     modalActive.value = !modalActive.value;
+};
+
+const shareCollection = () => {
+    loading.value = true
+    axios.post('/api/collections', {
+        'items': itemsStore.items
+      })
+      .then((res) => {
+        // todo
+        console.log("podarilo sa! url je: " + res.data.url)
+      })
+      .catch((err) => {
+        console.log(err)
+      }).finally(() => {
+        loading.value = false
+      })
 };
 
 onMounted(async () => {
