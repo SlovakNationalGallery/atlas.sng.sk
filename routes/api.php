@@ -50,11 +50,11 @@ Route::post('/collections', function (Request $request) {
     $collection = Collection::create($validator->validated());
     return response()->json([
         'success' => true,
-        'id' => $collection->id
+        'hashid' => $collection->hashid(),
     ]);
 });
 
-Route::get('/collections/{id}', function ($id) {
-    $collection = Collection::where('id', $id)->firstOrFail();
+Route::get('/collections/{hashid}', function ($hashid) {
+    $collection = Collection::findByHashidOrFail($hashid);
     return $collection->items;
 });
