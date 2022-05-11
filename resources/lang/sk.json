@@ -26,7 +26,15 @@
     "How did you like your experience with the app? Did it match your expectations?": "Splnila aplikácia tvoje očakávania?",
     "Let us know in the brief online survey.": "Vyplň krátky online prieskum a vyhraj tlačenú reprodukciu diela zo zbierok SNG!",
     "Give feedback": "Spustiť prieskum",
-    "Collect art": "Zbieraj umenie ",
+    "Next": "Ďalej",
+    "Start collecting": "Ďalej",
+    "Collect art": "Začni zbierať",
     "Save interesting artworks from the exhibition to your mobile device.": "Ukladaj si zaujímavé diela z výstavy do mobilu.",
-    "Insert the code located by the artwork into the grid. Press save in the artwork profile to collect it.": "Kód nalepený pri diele zadaj do mriežky v aplikácii. Nájdené dielo si zapamätáš pomocou tlačidla uložiť."
+    "Insert the code located by the artwork into the grid. Press save in the artwork profile to collect it.": "Kód nalepený pri diele zadaj do mriežky v aplikácii. Nájdené dielo si zapamätáš pomocou tlačidla uložiť.",
+    "Create a collection": "Vytvor si vlastnú kolekciu",
+    "Saved artworks are added into your collection. Return to them later to find out more.": "Uložené diela nájdeš vo svojej kolekcii. Keď sa k nim neskôr vrátiš, objavíš ďalšie zaujímavosti.",
+    "The collection will persist even after you close the application.": "Kolekcia ostane zachovaná aj po vypnutí aplikácie.",
+    "Share the collection": "Zdieľaj kolekciu",
+    "Tap the Share button in your Collection, and send the link to your e-mail or share it with friends.": "Odkaz na kolekciu si môžeš poslať na svoj mail, alebo ju zdieľať na sociálnych sieťach.",
+    "The shared link never expires.": "Odkaz na kolekciu nikdy nevyprší."
 }
