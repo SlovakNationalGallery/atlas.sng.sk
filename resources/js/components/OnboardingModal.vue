@@ -5,7 +5,7 @@
     >
         <div
             class="bg-black opacity-70 absolute inset-0 cursor-zoom-out"
-            @click="emit('close')"
+            @click="reset(); emit('close')"
         />
 
         <OnboardingStep v-if="step == 0">
@@ -26,7 +26,7 @@
             <h3 class="font-bold text-2xl my-4">{{ $t('Share the collection') }}</h3>
             <div class="text-base mb-4">{{ $t('Tap the Share button in your Collection, and send the link to your e-mail or share it with friends.') }}</div>
             <div class="text-base">{{ $t('The shared link never expires.') }}</div>
-            <ConfirmButton class="bg-black text-white my-4" @click="emit('close')">{{ $t('Start collecting') }}</ConfirmButton>
+            <ConfirmButton class="bg-black text-white my-4" @click="reset(); emit('close')">{{ $t('Start collecting') }}</ConfirmButton>
         </OnboardingStep>
     </div>
 </template>
@@ -46,5 +46,8 @@ const emit = defineEmits(['close'])
 
 const next = () => {
     step.value++
+}
+const reset = () => {
+    step.value = 0
 }
 </script>
