@@ -38,6 +38,7 @@
 <script setup>
 import {ref, computed, onMounted} from 'vue'
 import { useRouter } from 'vue-router'
+import { useOnboardingStore } from '../stores/OnboardingStore'
 import Header from '../components/Header.vue'
 import CircleButton from '../components/CircleButton.vue'
 import RectangleButton from '../components/RectangleButton.vue'
@@ -45,6 +46,7 @@ import OnboardingModal from '../components/OnboardingModal.vue'
 import { getActiveLanguage, loadLanguageAsync } from 'laravel-vue-i18n'
 
 const router = useRouter()
+const onboardingStore = useOnboardingStore()
 const code = ref("000000000")
 const isWrong = ref(false)
 const locale = ref('sk')
@@ -54,6 +56,11 @@ const isActive = computed(() => { return code.value != "000000000" })
 
 onMounted(async () => {
     locale.value = getActiveLanguage()
+
+    if (!onboardingStore.isDone) {
+        onboardingActive.value = true
+        onboardingStore.done()
+    }
 })
 
 const verifyCode = (event) => {
