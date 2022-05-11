@@ -58,8 +58,16 @@ const shareCollection = () => {
         'items': itemsStore.items
       })
       .then((res) => {
-        // todo
         console.log("podarilo sa! url je: " + res.data.url)
+        if (navigator.share) {
+            navigator.share({
+                title: 'Moja kolekcia · ' + document.title,
+                // text: res.data.url,
+                url: res.data.url,
+            })
+        } else {
+            // @todo fallback... modal?
+        }
       })
       .catch((err) => {
         console.log(err)
