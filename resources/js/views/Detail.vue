@@ -18,7 +18,7 @@
     <div class="w-full md:max-w-lg h-24 fixed bottom-0 bg-white">
         <div class="p-4">
             <div class="flex space-x-4">
-                <ConfirmButton class="bg-white"><router-link to="/">{{ $t('Find another') }}</router-link></ConfirmButton>
+                <ConfirmButton class="bg-white" @click="returnHome">{{ $t('Find another') }}</ConfirmButton>
                 <ConfirmButton v-if="item && itemsStore.exists(item.id)" class="bg-white text-red border-red" @click="itemsStore.remove(item.id)">{{ $t('Remove') }}</ConfirmButton>
                 <ConfirmButton v-else class="bg-black text-white" @click="itemsStore.add(item.id)">{{ $t('Save') }}</ConfirmButton>
             </div>
@@ -26,30 +26,30 @@
     </div>
 </template>
 
-<script>
-    import {ref, onMounted} from 'vue'
-    import { useRoute } from 'vue-router'
-    import { getActiveLanguage } from 'laravel-vue-i18n';
-    import { useItemsStore } from '../stores/ItemsStore'
-    import ConfirmButton from '../components/ConfirmButton.vue'
-    import Header from '../components/Header.vue'
-    import ItemImageLightbox from '../components/ItemImageLightbox.vue'
+<script setup>
+import {ref, onMounted} from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import { getActiveLanguage } from 'laravel-vue-i18n';
+import { useItemsStore } from '../stores/ItemsStore'
+import ConfirmButton from '../components/ConfirmButton.vue'
+import Header from '../components/Header.vue'
+import ItemImageLightbox from '../components/ItemImageLightbox.vue'
 
-    export default {
-        components: { ConfirmButton, Header , ItemImageLightbox },
-        setup() {
-            const item = ref(null)
-            const route = useRoute()
-            const itemsStore = useItemsStore()
+const item = ref(null)
+const router = useRouter()
+const route = useRoute()
+const itemsStore = useItemsStore()
 
-            onMounted(async () => {
-                 const response = await axios.get(`/api/items/${route.params.id}`, {headers: {
-                     'X-locale': getActiveLanguage()
-                 }})
-                 item.value = response.data.data
-            })
+onMounted(async () => {
+    const response = await axios.get(`/api/items/${route.params.id}`, {headers: {
+        'X-locale': getActiveLanguage()
+    }})
+    item.value = response.data.data
+})
 
-            return { item, itemsStore }
-        }
-    }
+const returnHome = () => {
+    router.push('/')
+}
+
+
 </script>
