@@ -39,7 +39,7 @@ return [
 
         'main' => [
             'salt' => 'qr kod je nuda',
-            'length' => 4,
+            'length' => 3,
             // 'alphabet' => 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
         ],
     ],
