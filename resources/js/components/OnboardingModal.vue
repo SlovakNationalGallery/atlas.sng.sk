@@ -25,7 +25,7 @@
         <OnboardingStep v-if="step == 2">
             <h3 class="font-bold text-2xl my-4">{{ $t('Share the collection') }}</h3>
             <div class="text-base mb-4">{{ $t('Tap the Share button in your Collection, and send the link to your e-mail or share it with friends.') }}</div>
-            <div class="text-base">{{ $t('The shared link never expires.') }}</div>
+            <div class="text-base font-bold">{{ $t('The shared link never expires.') }}</div>
             <ConfirmButton class="bg-black text-white my-4" @click="reset(); emit('close')">{{ $t('Start collecting') }}</ConfirmButton>
         </OnboardingStep>
     </div>
