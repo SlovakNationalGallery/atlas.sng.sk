@@ -27,10 +27,10 @@
             </RectangleButton>
         </div>
         <div class="w-full border border-black border-t-0">
-            <RectangleButton @click="toggleModal">
+            <RectangleButton @click="toggleOnboarding">
                 {{ $t('Help') }}
             </RectangleButton>
-            <CardModal @close="toggleModal" :visible="modalActive"></CardModal>
+            <OnboardingModal @close="toggleOnboarding" :visible="onboardingActive"></OnboardingModal>
         </div>
     </div>
 </template>
@@ -38,22 +38,29 @@
 <script setup>
 import {ref, computed, onMounted} from 'vue'
 import { useRouter } from 'vue-router'
+import { useOnboardingStore } from '../stores/OnboardingStore'
 import Header from '../components/Header.vue'
 import CircleButton from '../components/CircleButton.vue'
 import RectangleButton from '../components/RectangleButton.vue'
-import CardModal from '../components/CardModal.vue'
+import OnboardingModal from '../components/OnboardingModal.vue'
 import { getActiveLanguage, loadLanguageAsync } from 'laravel-vue-i18n'
 
 const router = useRouter()
+const onboardingStore = useOnboardingStore()
 const code = ref("000000000")
 const isWrong = ref(false)
 const locale = ref('sk')
-const modalActive = ref(false)
+const onboardingActive = ref(false)
 
 const isActive = computed(() => { return code.value != "000000000" })
 
 onMounted(async () => {
     locale.value = getActiveLanguage()
+
+    if (!onboardingStore.isDone) {
+        onboardingActive.value = true
+        onboardingStore.done()
+    }
 })
 
 const verifyCode = (event) => {
@@ -81,8 +88,8 @@ const switchLanguage = () => {
     loadLanguageAsync(locale.value)
 }
 
-const toggleModal = () => {
-    modalActive.value = !modalActive.value;
+const toggleOnboarding = () => {
+    onboardingActive.value = !onboardingActive.value;
 }
 
 </script>
