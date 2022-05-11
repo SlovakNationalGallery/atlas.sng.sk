@@ -94,8 +94,8 @@ const shareUrlDialog = (openLink = false) => {
     if (navigator.share) {
         navigator.share({
             title: 'Moja kolekcia · ' + document.title,
-            // text: shareUrl,
-            url: shareUrl,
+            // text: shareUrl.value,
+            url: shareUrl.value,
         })
     } else if (openLink) {
         window.open(shareUrl.value, '_blank').focus();
