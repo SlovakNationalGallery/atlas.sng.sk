@@ -22,22 +22,29 @@
             {{ $t('Clear collection') }}
         </button>
     </div>
-    <div class="w-full md:max-w-lg h-24 fixed bottom-0 bg-white">
+    <div class="w-full md:max-w-lg bg-green">
         <div class="p-4">
-            <div class="flex space-x-4">
-                <div class="w-full" v-if="shareUrl">
-                    {{ $t('Find your collection on: ') }}
-                    <a :href="shareUrl" target="_blank" class="flex items-center py-2 px-3 mb-4 text-[#32B964] bg-[#E4FAE7] hover:bg-[#caf5d0] active:bg-[#caf5d0] rounded-xl">
-                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8.59917 5.02012L9.99136 3.62793C10.5808 3.09069 11.3546 2.80122 12.1519 2.81968C12.9492 2.83814 13.7088 3.1631 14.2727 3.72705C14.8367 4.29099 15.1616 5.05054 15.1801 5.84786C15.1985 6.64518 14.9091 7.41896 14.3718 8.0084L12.382 9.99121C12.0952 10.2791 11.7544 10.5075 11.3792 10.6633C11.0039 10.8192 10.6016 10.8994 10.1953 10.8994C9.78894 10.8994 9.38661 10.8192 9.01136 10.6633C8.63611 10.5075 8.29532 10.2791 8.00854 9.99121" stroke="#32B964" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M9.40083 12.9798L8.00864 14.372C7.41921 14.9093 6.64543 15.1987 5.84811 15.1803C5.05078 15.1618 4.29123 14.8369 3.72729 14.2729C3.16335 13.709 2.83838 12.9494 2.81992 12.1521C2.80146 11.3548 3.09093 10.581 3.62817 9.99156L5.61802 8.00875C5.90479 7.7209 6.24558 7.4925 6.62083 7.33665C6.99608 7.18081 7.39841 7.10059 7.80474 7.10059C8.21106 7.10059 8.61339 7.18081 8.98864 7.33665C9.36389 7.4925 9.70468 7.7209 9.99146 8.00875" stroke="#32B964" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        <span class="pl-2 font-bold">{{ shareUrl }}</span>
-                    </a>
-                </div>
-                <ConfirmButton v-else class="bg-black text-white" @click="shareCollection" :disabled="loading">
+            <div class="flex flex-col">
+                <h3 class="text-base font-bold mb-4">{{ $t('Your collection will stay here even after you close the app. Get back to it later.') }}</h3>
+                <ul class="list-disc list-outside mb-4 ml-4">
+                    <li>{{ $t('Send the link to your e-mail or share it with friends.') }}</li>
+                    <li>{{ $t('The link never expires.') }}</li>
+                </ul>
+                <ConfirmButton v-if="!shareUrl"  class="bg-black text-white" @click="shareCollection" :disabled="loading">
                     <span v-if="loading">{{ $t('Loading...') }}</span>
                     <span v-else>{{ $t('Share collection link') }}</span>
+                </ConfirmButton>
+                <ConfirmButton v-else class="bg-black text-white" @click="shareUrlDialog(true)">
+                    <div class="flex justify-center items-center">
+                        <svg class="mr-2" width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6.5 15C8.15685 15 9.5 13.6569 9.5 12C9.5 10.3431 8.15685 9 6.5 9C4.84315 9 3.5 10.3431 3.5 12C3.5 13.6569 4.84315 15 6.5 15Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M17 21.75C18.6569 21.75 20 20.4069 20 18.75C20 17.0931 18.6569 15.75 17 15.75C15.3431 15.75 14 17.0931 14 18.75C14 20.4069 15.3431 21.75 17 21.75Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M17 8.25C18.6569 8.25 20 6.90685 20 5.25C20 3.59315 18.6569 2.25 17 2.25C15.3431 2.25 14 3.59315 14 5.25C14 6.90685 15.3431 8.25 17 8.25Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M14.4782 6.87189L9.02197 10.3781" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M9.02197 13.6219L14.4782 17.1281" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <div>{{ shareUrl }}</div>
+                    </div>
                 </ConfirmButton>
             </div>
         </div>
@@ -58,7 +65,7 @@ const route = useRoute()
 const itemsStore = useItemsStore()
 const modalActive = ref(false)
 const loading = ref(false)
-const shareUrl = ref('')
+const shareUrl = ref('https://kod.sng.local/yBG')
 const toggleModal = () => {
     modalActive.value = !modalActive.value;
 };
@@ -71,22 +78,26 @@ const shareCollection = () => {
       .then((res) => {
         console.log("podarilo sa! url je: " + res.data.url)
         shareUrl.value = res.data.url
-        if (navigator.share) {
-            navigator.share({
-                title: 'Moja kolekcia · ' + document.title,
-                // text: res.data.url,
-                url: res.data.url,
-            })
-        } else {
-            // @todo fallback... modal?
-        }
+        shareUrlDialog()
       })
       .catch((err) => {
         console.log(err)
       }).finally(() => {
         loading.value = false
       })
-};
+}
+
+const shareUrlDialog = (openLink = false) => {
+    if (navigator.share) {
+        navigator.share({
+            title: 'Moja kolekcia · ' + document.title,
+            // text: shareUrl,
+            url: shareUrl,
+        })
+    } else if (openLink) {
+        window.open(shareUrl.value, '_blank').focus();
+    }
+}
 
 onMounted(async () => {
     if (route.params.id) {

@@ -17,5 +17,9 @@
     "Share collection link": "Zdieľať odkaz na kolekciu",
     "We are still working on this feature": "Na tejto funkcionalite ešte pracujeme.",
     "Check back again soon.": "Čoskoro bude k dispozícii.",
-    "Close": "Zavrieť"
+    "Close": "Zavrieť",
+    "Loading...": "Načítavam...",
+    "Your collection will stay here even after you close the app. Get back to it later.": "Tvoja kolekcia sa nikdy nestratí. Vráť sa k nej neskôr alebo ju pošli dalej!",
+    "Send the link to your e-mail or share it with friends.": "Odkaz môžeš poslať na svoj e-mail alebo zdieľať na sociálnych sieťach",
+    "The link never expires.": "Odkaz nikdy nevyprší"
 }
