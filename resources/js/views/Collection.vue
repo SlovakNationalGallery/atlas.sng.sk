@@ -1,7 +1,7 @@
 <template>
     <Header :code="'111111111'">{{ $t('My collection') }}</Header>
 
-    <div class="h-full border-black p-4 pb-24 border-t-2">
+    <div class="border-black p-4 border-t-2">
         <div v-for="(item, index) in itemsStore.items">
             <ThumbRow :item-id="item"></ThumbRow>
         </div>
@@ -17,15 +17,18 @@
                 </div>
             </div>
         </router-link>
+        <!-- hide "clear collection" for now -->
+        <!-- 
         <hr class="h-0.5 bg-gray-soft border-0 mt-6 mb-2">
         <button class="py-4 w-full active:text-gray-dark" @click="toggleModal">
             {{ $t('Clear collection') }}
         </button>
+         -->
     </div>
-    <div class="w-full md:max-w-lg bg-green">
+    <div class="mt-auto w-full md:max-w-lg bg-green border-black border-t-2">
         <div class="p-4">
             <div class="flex flex-col">
-                <h3 class="text-base font-bold mb-4">{{ $t('Your collection will stay here even after you close the app. Get back to it later.') }}</h3>
+                <h3 class="text-base font-bold mb-4" v-html="$t('Your collection will stay here even after you close the app. Get back to it later.')"></h3>
                 <ul class="list-disc list-outside mb-4 ml-4">
                     <li>{{ $t('Send the link to your e-mail or share it with friends.') }}</li>
                     <li>{{ $t('The link never expires.') }}</li>
@@ -65,7 +68,7 @@ const route = useRoute()
 const itemsStore = useItemsStore()
 const modalActive = ref(false)
 const loading = ref(false)
-const shareUrl = ref('https://kod.sng.local/yBG')
+const shareUrl = ref('')
 const toggleModal = () => {
     modalActive.value = !modalActive.value;
 };
