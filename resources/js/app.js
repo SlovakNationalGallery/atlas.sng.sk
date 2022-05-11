@@ -14,6 +14,7 @@ const routes = [
     { path: '/', component: Home },
     { path: '/detail/:id', component: Detail },
     { path: '/collection', component: Collection },
+    { path: '/:id?', component: Collection },
 ]
 
 const router = createRouter({
