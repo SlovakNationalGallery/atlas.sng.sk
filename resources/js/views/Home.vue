@@ -35,59 +35,54 @@
     </div>
 </template>
 
-<script>
-    import Header from '../components/Header.vue'
-    import CircleButton from '../components/CircleButton.vue'
-    import RectangleButton from '../components/RectangleButton.vue'
-    import CardModal from '../components/CardModal.vue'
-    import { getActiveLanguage, loadLanguageAsync } from 'laravel-vue-i18n'
+<script setup>
+import {ref, computed, onMounted} from 'vue'
+import { useRouter } from 'vue-router'
+import Header from '../components/Header.vue'
+import CircleButton from '../components/CircleButton.vue'
+import RectangleButton from '../components/RectangleButton.vue'
+import CardModal from '../components/CardModal.vue'
+import { getActiveLanguage, loadLanguageAsync } from 'laravel-vue-i18n'
 
-    export default {
-        components: { Header, CircleButton, RectangleButton , CardModal },
-        data(){
-            return {
-                code: "000000000",
-                isWrong: false,
-                locale: 'sk',
-                modalActive: false
-            }
-        },
-        computed: {
-            isActive() {
-                return this.code != "000000000"
-            }
-        },
-        created() {
-            this.locale = getActiveLanguage()
-        },
-        methods: {
-            verifyCode(event) {
-                if (!this.isActive) return
-                const digit = parseInt(this.code, 2)
-                // console.log('Code is ' + this.code + ' (' + digit + ')');
-                axios.get('/api/verify/'+digit)
-                    .then((response) => {
-                        // console.log('Artwork is ' + response.data.data.item_id)
-                        this.$router.push('/detail/' + response.data.data.item_id)
-                    })
-                    .catch( resonse => {
-                        this.isWrong = true
-                    })
-            },
-            modifyCode(pos) {
-                if (this.isWrong) {
-                    this.isWrong = false
-                }
-                const bit = (this.code[pos - 1] == '1') ? '0' : '1';
-                this.code = this.code.substring(0,pos - 1) + bit + this.code.substring(pos);
-            },
-            switchLanguage() {
-                this.locale = (this.locale == 'sk') ? 'en' : 'sk'
-                loadLanguageAsync(this.locale)
-            },
-            toggleModal() {
-                this.modalActive = !this.modalActive;
-            }
-        }
+const router = useRouter()
+const code = ref("000000000")
+const isWrong = ref(false)
+const locale = ref('sk')
+const modalActive = ref(false)
+
+const isActive = computed(() => { return code.value != "000000000" })
+
+onMounted(async () => {
+    locale.value = getActiveLanguage()
+})
+
+const verifyCode = (event) => {
+    if (!isActive.value) return
+    const digit = parseInt(code.value, 2)
+    axios.get('/api/verify/'+digit)
+        .then((response) => {
+            router.push('/detail/' + response.data.data.item_id)
+        })
+        .catch( resonse => {
+            isWrong.value = true
+        })
+} 
+
+const modifyCode = (pos) => {
+    if (isWrong.value) {
+        isWrong.value = false
     }
+    const bit = (code.value[pos - 1] == '1') ? '0' : '1';
+    code.value = code.value.substring(0,pos - 1) + bit + code.value.substring(pos);
+}
+
+const switchLanguage = () => {
+    locale.value = (locale.value == 'sk') ? 'en' : 'sk'
+    loadLanguageAsync(locale.value)
+}
+
+const toggleModal = () => {
+    modalActive.value = !modalActive.value;
+}
+
 </script>
