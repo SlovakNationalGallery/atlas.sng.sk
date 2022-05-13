@@ -1,5 +1,5 @@
 <template>
-    <Header class="mb-0.5">{{ $t('Codes SNG') }} <span class="text-gray-soft">beta</span></Header>
+    <Header class="mb-0.5">{{ $t('SNG Codes') }} <span class="text-gray-soft">beta</span></Header>
     <div class="bg-black text-white h-32 flex">
         <div class="p-4 pr-0 flex flex-col grow">
             <div class="text-xl mb-2">{{ $t('Enter artwork code to start') }}</div>
