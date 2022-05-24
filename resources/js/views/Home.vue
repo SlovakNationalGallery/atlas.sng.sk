@@ -33,6 +33,7 @@
             <OnboardingModal @close="toggleOnboarding" :visible="onboardingActive"></OnboardingModal>
         </div>
     </div>
+    <TeaserModal @close="toggleTeaser" :visible="teaserActive"></TeaserModal>
 </template>
 
 <script setup>
@@ -43,6 +44,7 @@ import Header from '../components/Header.vue'
 import CircleButton from '../components/CircleButton.vue'
 import RectangleButton from '../components/RectangleButton.vue'
 import OnboardingModal from '../components/OnboardingModal.vue'
+import TeaserModal from '../components/TeaserModal.vue'
 import { getActiveLanguage, loadLanguageAsync } from 'laravel-vue-i18n'
 
 const router = useRouter()
@@ -51,6 +53,7 @@ const code = ref("000000000")
 const isWrong = ref(false)
 const locale = ref('sk')
 const onboardingActive = ref(false)
+const teaserActive = ref(true)
 
 const isActive = computed(() => { return code.value != "000000000" })
 
@@ -90,6 +93,10 @@ const switchLanguage = () => {
 
 const toggleOnboarding = () => {
     onboardingActive.value = !onboardingActive.value;
+}
+
+const toggleTeaser = () => {
+    teaserActive.value = !teaserActive.value;
 }
 
 </script>
