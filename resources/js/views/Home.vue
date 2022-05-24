@@ -39,7 +39,7 @@
 <script setup>
 import {ref, computed, onMounted} from 'vue'
 import { useRouter } from 'vue-router'
-import { useOnboardingStore } from '../stores/OnboardingStore'
+import { useTeaserStore } from '../stores/TeaserStore'
 import Header from '../components/Header.vue'
 import CircleButton from '../components/CircleButton.vue'
 import RectangleButton from '../components/RectangleButton.vue'
@@ -48,21 +48,21 @@ import TeaserModal from '../components/TeaserModal.vue'
 import { getActiveLanguage, loadLanguageAsync } from 'laravel-vue-i18n'
 
 const router = useRouter()
-const onboardingStore = useOnboardingStore()
+const teaserStore = useTeaserStore()
 const code = ref("000000000")
 const isWrong = ref(false)
 const locale = ref('sk')
 const onboardingActive = ref(false)
-const teaserActive = ref(true)
+const teaserActive = ref(false)
 
 const isActive = computed(() => { return code.value != "000000000" })
 
 onMounted(async () => {
     locale.value = getActiveLanguage()
 
-    if (!onboardingStore.isDone) {
-        onboardingActive.value = true
-        onboardingStore.done()
+    if (!teaserStore.isDone) {
+        teaserActive.value = true
+        teaserStore.done()
     }
 })
 
