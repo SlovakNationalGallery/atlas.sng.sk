@@ -24,6 +24,10 @@
                     <path d="M4 10L16 17L28 10L16 3L4 10Z" fill="black" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </div>
+            <div v-if="isActive" class="tooltip absolute right-4 top-[54px] z-50 shadow-lg bg-black border-black border-2">
+                <div class="absolute w-3 h-3 top-0 right-[10px] -mt-2 rotate-45 bg-black z-0"></div>
+                <div class="w-full h-full bg-green relative p-2">{{ $t("Saved! Tap this icon to view your collection.") }}</div>
+            </div>
         </router-link>
     </div>
 </template>
