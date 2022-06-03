@@ -1,7 +1,11 @@
-# Welcome
+# kod.sng.sk
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Allow SNG visitors to collect bookmarks during their on-site experience and return to them afterward to keep exploring/learning.
+
+![app screenshots](/resources/img/screenshots.jpg?raw=true)
+
+![photo from the exhibition](/resources/img/exhibition.jpg?raw=true)
 
 ## Maintainer
 
