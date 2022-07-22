@@ -24,7 +24,7 @@ Route::get('/img/{code}.svg', function (Request $request, $code) {
     return response()->view('code-svg', compact('code', 'color'))
         ->header('Content-Type', 'image/svg+xml')
         ->header('Cache-Control', 'max-age=15552000');
-});
+})->where('code', '[0-1]{9}');
 
 Route::get('/{any}', function () {
     return view('app');
