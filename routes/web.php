@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/img/{code}.svg', function (Request $request, $code) {
+    // @todo: in bin or decimal?
+    $color = $request->get('color', 'white');
+    return response()->view('code-svg', compact('code', 'color'))->header('Content-Type', 'image/svg+xml');
+});
+
 Route::get('/{any}', function () {
     return view('app');
 })->where('any', '.*');
+
