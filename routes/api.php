@@ -25,7 +25,7 @@ Route::get('/verify/{code}', function ($code) {
 });
 
 Route::get('/items/{id}', function ($id) {
-    $code = Code::where('item_id', $id)->firstOrFail();
+    $code = Code::where('item_id', $id)->first();
 
     $response = Http::get(config('services.webumenia.api') . '/items/' . $id, [
         'locale' =>  app()->getLocale()
@@ -34,7 +34,7 @@ Route::get('/items/{id}', function ($id) {
     if (!empty($code->description)) {
         $item->description = $code->description;
     }
-    $item->code = $code->code;
+    $item->code = $code->code ?? null;
     return new ItemResource($item);
 });
 
