@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,11 @@ Route::get('/img/{code}.svg', function (Request $request, $code) {
         ->header('Content-Type', 'image/svg+xml')
         ->header('Cache-Control', 'max-age=15552000');
 })->where('code', '[0-1]{9}');
+
+Route::get('/import', function () {
+    Artisan::call('import:airtable');
+    return '<pre>' . Artisan::output() . '</pre>';
+});
 
 Route::get('/{any}', function () {
     return view('app');
