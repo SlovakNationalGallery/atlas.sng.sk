@@ -32,7 +32,7 @@ Route::get('/items/{id}', function ($id) {
     ]);
     $item = $response->object()->document->content;
     if (!empty($code->description)) {
-        $item->description = $code->description;
+        $item->description = nl2br($code->description);
     }
     $item->code = $code->code ?? null;
     return new ItemResource($item);
