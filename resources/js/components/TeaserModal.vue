@@ -2,7 +2,7 @@
     <div class="fixed inset-0 z-50 flex justify-center items-center" v-if="visible">
         <div class="bg-black opacity-70 absolute inset-0 cursor-zoom-out" @click="emit('close')" />
         <div class="relative mx-4 bg-white w-full max-w-2xl bg-white rounded-xl">
-            <img src="/images/dusan-vyklad-orez.jpg" srcset="/images/dusan-vyklad-1.jpg 2x" alt="Výklad kurátora Dušana Burana" class="w-full rounded-t-xl" />
+            <img src="/images/dusan-vyklad.jpg" alt="Výklad kurátora Dušana Burana" class="w-full rounded-t-xl" />
             <div class="px-4 py-6">
                 <h3 class="font-bold text-lg mb-2">{{ $t('What does Július Koller see?') }}</h3>
                 <div class="">
