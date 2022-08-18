@@ -1,2 +1,2 @@
-export const SURVEY_SK = 'https://docs.google.com/forms/d/e/1FAIpQLSeFVuzgfnIqCFXMcJOUVU_lbRrpscRRreS1RI3DvmPIUfkxcg/viewform'
-export const SURVEY_ENG = 'https://docs.google.com/forms/d/e/1FAIpQLSezt-hFLpiehbBgu6G6riJWffrjUnAu5RPa7q0UWeu33UvrfQ/viewform'
+export const SURVEY_SK = process.env.MIX_SURVEY_SK
+export const SURVEY_ENG = process.env.MIX_SURVEY_EN

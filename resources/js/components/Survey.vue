@@ -21,7 +21,6 @@ import { ref } from 'vue'
 import { SURVEY_SK, SURVEY_ENG } from '../consts'
 import ConfirmButton from '../components/ConfirmButton.vue'
 
-const teaserActive = ref(false)
 const surveyStore = useSurveyStore()
 
 const getFeedback = () => {
