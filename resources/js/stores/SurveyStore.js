@@ -3,7 +3,7 @@ import { useStorage } from '@vueuse/core'
 
 export const useSurveyStore = defineStore('SurveyStore', {
     state: () => ({
-        isDone: useStorage('isDone', false)
+        isDone: useStorage('isSurveyDone', false)
     }),
     actions: {
         done() {
