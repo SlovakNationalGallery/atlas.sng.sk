@@ -129,6 +129,7 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useItemsStore } from '../stores/ItemsStore'
+import { SURVEY_SK, SURVEY_ENG } from '../consts'
 import ConfirmButton from '../components/ConfirmButton.vue'
 import Header from '../components/Header.vue'
 import ThumbRow from '../components/ThumbRow.vue'
@@ -176,9 +177,9 @@ const shareUrlDialog = (openLink = false) => {
 
 const getFeedback = () => {
     if (getActiveLanguage() == 'sk') {
-        window.open('https://602v7jq58zi.typeform.com/to/OGgCJT8e', '_blank').focus()
+        window.open(SURVEY_SK, '_blank').focus()
     } else {
-        window.open('https://602v7jq58zi.typeform.com/to/VKGfiUpz', '_blank').focus()
+        window.open(SURVEY_ENG, '_blank').focus()
     }
 }
 
