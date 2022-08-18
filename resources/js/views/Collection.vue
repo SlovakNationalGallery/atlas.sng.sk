@@ -122,10 +122,10 @@
         </div>
     </div>
     <CardModal @close="toggleModal" :visible="modalActive">
-        <h3 class="font-bold text-2xl my-4">{{ $t('Delete the collection ?') }}</h3>
-        <div class="text-base">{{ $t('Saved artwork will be lost') }}</div>
+        <h3 class="font-bold text-2xl my-4">{{ $t('Remove all artworks?') }}</h3>
+        <div class="text-base">{{ $t('This cannot be undone') }}</div>
         <div class="flex space-x-3">
-            <ConfirmButton class="bg-black text-white my-4" @click="removeCollection">{{ $t('Delete') }}</ConfirmButton>
+            <ConfirmButton class="bg-black text-white my-4" @click="removeCollection">{{ $t('Remove') }}</ConfirmButton>
             <ConfirmButton class="my-4" @click="toggleModal">{{ $t('Close') }}</ConfirmButton>
         </div>
     </CardModal>
