@@ -1,19 +1,6 @@
 <template>
     <Header :code="'111111111'">{{ $t('My collection') }}</Header>
-
-    <div class="border-black p-4 border-t-2">
-        <h3 class="text-lg font-bold mb-3">
-            {{ $t('Help us make the app better') }}
-        </h3>
-        <div class="mb-4">
-            {{ $t('How did you like your experience with the app? Did it match your expectations?') }}
-            <br />
-            {{ $t('Let us know in the brief online survey.') }}
-        </div>
-        <ConfirmButton @click="getFeedback" class="bg-black text-white">
-            {{ $t('Give feedback') }}
-        </ConfirmButton>
-    </div>
+    <Survey />
     <div class="border-black p-4 border-t-2">
         <div v-for="(item, index) in itemsStore.items">
             <ThumbRow :item-id="item"></ThumbRow>
@@ -129,12 +116,11 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useItemsStore } from '../stores/ItemsStore'
-import { SURVEY_SK, SURVEY_ENG } from '../consts'
 import ConfirmButton from '../components/ConfirmButton.vue'
 import Header from '../components/Header.vue'
 import ThumbRow from '../components/ThumbRow.vue'
 import CardModal from '../components/CardModal.vue'
-import { getActiveLanguage } from 'laravel-vue-i18n'
+import Survey from '../components/Survey.vue'
 
 const route = useRoute()
 const itemsStore = useItemsStore()
@@ -172,14 +158,6 @@ const shareUrlDialog = (openLink = false) => {
         })
     } else if (openLink) {
         window.open(shareUrl.value, '_blank').focus()
-    }
-}
-
-const getFeedback = () => {
-    if (getActiveLanguage() == 'sk') {
-        window.open(SURVEY_SK, '_blank').focus()
-    } else {
-        window.open(SURVEY_ENG, '_blank').focus()
     }
 }
 
