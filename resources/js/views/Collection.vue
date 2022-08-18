@@ -2,7 +2,7 @@
     <Header :code="'111111111'">{{ $t('My collection') }}</Header>
     <Survey />
     <div class="border-black p-4 border-t-2">
-        <div v-for="(item, index) in itemsStore.items">
+        <div v-for="item in itemsStore.items" :key="item">
             <ThumbRow :item-id="item"></ThumbRow>
         </div>
 
