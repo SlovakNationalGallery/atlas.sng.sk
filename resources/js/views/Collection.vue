@@ -1,21 +1,8 @@
 <template>
     <Header :code="'111111111'">{{ $t('My collection') }}</Header>
-
+    <Survey />
     <div class="border-black p-4 border-t-2">
-        <h3 class="text-lg font-bold mb-3">
-            {{ $t('Help us make the app better') }}
-        </h3>
-        <div class="mb-4">
-            {{ $t('How did you like your experience with the app? Did it match your expectations?') }}
-            <br />
-            {{ $t('Let us know in the brief online survey.') }}
-        </div>
-        <ConfirmButton @click="getFeedback" class="bg-black text-white">
-            {{ $t('Give feedback') }}
-        </ConfirmButton>
-    </div>
-    <div class="border-black p-4 border-t-2">
-        <div v-for="(item, index) in itemsStore.items">
+        <div v-for="item in itemsStore.items" :key="item">
             <ThumbRow :item-id="item"></ThumbRow>
         </div>
 
@@ -139,7 +126,7 @@ import ConfirmButton from '../components/ConfirmButton.vue'
 import Header from '../components/Header.vue'
 import ThumbRow from '../components/ThumbRow.vue'
 import CardModal from '../components/CardModal.vue'
-import { getActiveLanguage } from 'laravel-vue-i18n'
+import Survey from '../components/Survey.vue'
 
 const route = useRoute()
 const itemsStore = useItemsStore()
@@ -183,14 +170,6 @@ const shareUrlDialog = (openLink = false) => {
         })
     } else if (openLink) {
         window.open(shareUrl.value, '_blank').focus()
-    }
-}
-
-const getFeedback = () => {
-    if (getActiveLanguage() == 'sk') {
-        window.open('https://602v7jq58zi.typeform.com/to/OGgCJT8e', '_blank').focus()
-    } else {
-        window.open('https://602v7jq58zi.typeform.com/to/VKGfiUpz', '_blank').focus()
     }
 }
 

@@ -10,7 +10,7 @@
         </div>
     </div>
     <div class="grid grid-cols-3 gap-0 border border-black content-center">
-        <CircleButton v-for="position in code.length" :is-checked="code[position - 1] == '1' ? true : false" @click="modifyCode(position)"></CircleButton>
+        <CircleButton v-for="position in code.length" :is-checked="code[position - 1] == '1' ? true : false" @click="modifyCode(position)" :key="position"/>
     </div>
     <div class="border border-black content-center border-t-0 grow flex">
         <div class="w-full border border-black border-t-0">
