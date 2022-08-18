@@ -40,13 +40,12 @@
                 </div>
             </div>
         </router-link>
-        <!-- hide "clear collection" for now -->
-        <!-- 
-        <hr class="h-0.5 bg-gray-soft border-0 mt-6 mb-2">
-        <button class="py-4 w-full active:text-gray-dark" @click="toggleModal">
-            {{ $t('Clear collection') }}
-        </button>
-         -->
+        <div v-if="itemsStore.items.length !== 0">
+            <hr class="h-0.5 bg-gray-soft border-0 mt-6 mb-2" />
+            <button class="py-4 w-full active:text-gray-dark" @click="toggleModal">
+                {{ $t('Clear collection') }}
+            </button>
+        </div>
     </div>
     <div class="mt-auto w-full md:max-w-lg bg-green border-black border-t-2">
         <div class="p-4">
@@ -122,7 +121,14 @@
             </div>
         </div>
     </div>
-    <CardModal @close="toggleModal" :visible="modalActive"></CardModal>
+    <CardModal @close="toggleModal" :visible="modalActive">
+        <h3 class="font-bold text-2xl my-4">{{ $t('Remove all artworks?') }}</h3>
+        <div class="text-base">{{ $t('This cannot be undone') }}</div>
+        <div class="flex space-x-3">
+            <ConfirmButton class="bg-black text-white my-4" @click="removeCollection">{{ $t('Remove') }}</ConfirmButton>
+            <ConfirmButton class="my-4" @click="toggleModal">{{ $t('Close') }}</ConfirmButton>
+        </div>
+    </CardModal>
 </template>
 
 <script setup>
@@ -140,8 +146,14 @@ const itemsStore = useItemsStore()
 const modalActive = ref(false)
 const loading = ref(false)
 const shareUrl = ref('')
+
 const toggleModal = () => {
     modalActive.value = !modalActive.value
+}
+
+const removeCollection = () => {
+    toggleModal()
+    itemsStore.removeAll()
 }
 
 const shareCollection = () => {

@@ -39,7 +39,7 @@
         code: String
     })
 
-    itemsStore.$subscribe((mutation, state) => {
-        isActive.value = true
+itemsStore.$subscribe((mutation, state) => {
+    state.items.length ? isActive.value = true : isActive.value = false
     })
 </script>
