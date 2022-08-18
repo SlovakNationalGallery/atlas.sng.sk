@@ -17,7 +17,7 @@
     import { ref } from "vue";
 
     const props = defineProps(['item']);
-    const isMoving = ref(false);``
+    const isMoving = ref(false);
     const startPosY = ref(0);
     const offsetTop = ref(0);
 
