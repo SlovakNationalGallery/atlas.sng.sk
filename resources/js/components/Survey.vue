@@ -17,7 +17,6 @@
 <script setup>
 import { useSurveyStore } from '../stores/SurveyStore'
 import { getActiveLanguage } from 'laravel-vue-i18n'
-import { ref } from 'vue'
 import { SURVEY_SK, SURVEY_ENG } from '../consts'
 import ConfirmButton from '../components/ConfirmButton.vue'
 
