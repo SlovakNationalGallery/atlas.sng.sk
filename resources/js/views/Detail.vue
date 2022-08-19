@@ -1,6 +1,6 @@
 <template>
     <Header :code="item !== null ? item.code : '000000000'">{{ $t('Artwork detail') }}</Header>
-    <div class="bg-gray-softest h-48 border-black border-t-2 border-b-2"  v-if="item">
+    <div class="bg-gray-softest h-48 border-black border-t-2 border-b-2 relative"  v-if="item">
             <ItemImageMovable v-if="$route.meta.edit" :item="item"></ItemImageMovable>
             <ItemImageLightbox v-else :item="item"></ItemImageLightbox>
     </div>

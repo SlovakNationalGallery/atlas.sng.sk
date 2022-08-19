@@ -7,6 +7,9 @@
         @mousedown.stop.prevent="moveStart"
         draggable="false"
     ></ItemImage>
+    <div class="absolute bottom-0 right-0 bg-white border-1 border-black px-2 py-1 w-12 text-right">
+        {{ offsetTop }}
+    </div>
 </template>
 
 <script setup>
