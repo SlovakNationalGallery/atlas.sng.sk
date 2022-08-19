@@ -13,6 +13,7 @@ import Collection from './views/Collection.vue'
 const routes = [
     { path: '/', component: Home },
     { path: '/detail/:id', component: Detail },
+    { path: '/edit/:id', component: Detail, meta: {'edit' : true} },
     { path: '/collection', component: Collection },
     { path: '/:id?', component: Collection },
 ]
