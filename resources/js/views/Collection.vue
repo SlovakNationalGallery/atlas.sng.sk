@@ -147,7 +147,7 @@ const shareCollection = () => {
     loading.value = true
     axios
         .post('/api/collections', {
-            items: itemsStore.items,
+            items: itemsStore.itemsIds,
         })
         .then((res) => {
             shareUrl.value = res.data.url

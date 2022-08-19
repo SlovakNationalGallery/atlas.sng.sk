@@ -52,7 +52,8 @@ export const useItemsStore = defineStore('ItemsStore', {
             this.items = {};
         },
         async fetch(collectionId) {
-            this.items = (await axios.get(`/api/collections/${collectionId}`)).data;
+            this.items = {};
+            this.itemsIds = (await axios.get(`/api/collections/${collectionId}`)).data;
         },
     },
 });
