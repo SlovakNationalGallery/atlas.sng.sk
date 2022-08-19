@@ -39,7 +39,14 @@
         code: String
     })
 
-itemsStore.$subscribe((mutation, state) => {
-    state.items.length ? isActive.value = true : isActive.value = false
+itemsStore.$onAction(
+    ({
+        name: actionName,
+    }) => {
+        if (actionName === 'add') {
+            isActive.value = true
+        } else {
+            isActive.value = false
+        }
     })
 </script>
