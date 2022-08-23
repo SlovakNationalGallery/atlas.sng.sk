@@ -25,7 +25,6 @@ const offsetTop = ref(0)
 const move = (event) => {
     if (isMoving.value) {
         offsetTop.value = startOffsetTop.value + (event.pageY - startPosY.value)
-        console.log('offsetTop: ' + offsetTop.value)
     }
 }
 
