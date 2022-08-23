@@ -55,6 +55,7 @@ class ImportAirtable extends Command
                 'sk' => $record['fields']['app text'] ?? '',
                 'en' => $record['fields']['app text preklad'] ?? ''
             ];
+            $code->offset_top = $record['fields']['offsetTop'] ?? 0;
             $code->save();
             // update code in airtable
             if (empty($record['fields']['code']) || $record['fields']['code'] != $code->code) {

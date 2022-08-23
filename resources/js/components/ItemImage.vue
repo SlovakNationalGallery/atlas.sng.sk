@@ -1,6 +1,7 @@
 <template>
     <img
-        class="h-full object-cover w-full"
+        class="h-full object-cover w-full object-top"
+        :style="{ objectPosition: 'center ' + offsetTop + 'px' }"
         :alt="`${ item.author }: ${ item.title }`"
         :src="item.image_src"
         :srcset="item.image_srcset"
@@ -10,5 +11,5 @@
 </template>
 
 <script setup>
-    const props = defineProps(['item']);
+    const props = defineProps(['item', 'offsetTop']);
 </script>

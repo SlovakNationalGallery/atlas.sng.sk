@@ -28,6 +28,7 @@ class ItemResource extends JsonResource
                 ->map(fn ($width) => $this->getImageRoute($width) . " ${width}w")
                 ->join(', '),
             'webumenia_url' => config('services.webumenia.url') . '/dielo/' . $this->id,
+            'offset_top' => $this->offset_top,
         ];
     }
 
