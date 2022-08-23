@@ -34,6 +34,9 @@ export const useItemsStore = defineStore('ItemsStore', {
                 return itemData
             }        
         },
+        clearCollectionLink() {
+            this.collectionLink = null
+        },
         add(item) {
             const { id } = item
             if (!this.itemsIds.includes(id)) {
