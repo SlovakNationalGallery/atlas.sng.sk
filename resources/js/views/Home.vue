@@ -46,6 +46,7 @@ import RectangleButton from '../components/RectangleButton.vue'
 import OnboardingModal from '../components/OnboardingModal.vue'
 import TeaserModal from '../components/TeaserModal.vue'
 import { getActiveLanguage, loadLanguageAsync } from 'laravel-vue-i18n'
+import { useItemsStore } from '../stores/ItemsStore'
 
 const router = useRouter()
 const teaserStore = useTeaserStore()
@@ -54,6 +55,7 @@ const isWrong = ref(false)
 const locale = ref('sk')
 const onboardingActive = ref(false)
 const teaserActive = ref(false)
+const itemsStore = useItemsStore()
 
 const isActive = computed(() => { return code.value != "000000000" })
 
@@ -89,6 +91,7 @@ const modifyCode = (pos) => {
 const switchLanguage = () => {
     locale.value = (locale.value == 'sk') ? 'en' : 'sk'
     loadLanguageAsync(locale.value)
+    itemsStore.clearItemsFromState()
 }
 
 const toggleOnboarding = () => {

@@ -42,7 +42,7 @@
                     @click="itemsStore.remove(item.id)"
                     >{{ $t('Remove') }}</ConfirmButton
                 >
-                <ConfirmButton v-else class="bg-black text-white" @click="itemsStore.add(item.id)">{{
+                <ConfirmButton v-else class="bg-black text-white" @click="itemsStore.add(item)">{{
                     $t('Save')
                 }}</ConfirmButton>
             </div>

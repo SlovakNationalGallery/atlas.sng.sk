@@ -2,8 +2,8 @@
     <Header :code="'111111111'">{{ $t('My collection') }}</Header>
     <Survey />
     <div class="border-black p-4 border-t-2">
-        <div v-for="item in itemsStore.items" :key="item">
-            <ThumbRow :item-id="item"></ThumbRow>
+        <div v-for="item in itemsStore.itemsIds" :key="item">
+            <ThumbRow :item-id="item" />
         </div>
 
         <router-link to="/">
@@ -147,7 +147,7 @@ const shareCollection = () => {
     loading.value = true
     axios
         .post('/api/collections', {
-            items: itemsStore.items,
+            items: itemsStore.itemsIds,
         })
         .then((res) => {
             shareUrl.value = res.data.url
