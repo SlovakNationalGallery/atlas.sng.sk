@@ -143,22 +143,12 @@ const removeCollection = () => {
     itemsStore.removeAll()
 }
 
-const shareCollection = () => {
+const shareCollection = async () => {
     loading.value = true
-    axios
-        .post('/api/collections', {
-            items: itemsStore.itemsIds,
-        })
-        .then((res) => {
-            shareUrl.value = res.data.url
-            shareUrlDialog()
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-        .finally(() => {
-            loading.value = false
-        })
+    const value = await itemsStore.getCollectionLink()
+    shareUrl.value = value
+    shareUrlDialog()
+    loading.value = false
 }
 
 const shareUrlDialog = (openLink = false) => {
