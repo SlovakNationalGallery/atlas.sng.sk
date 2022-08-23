@@ -44,7 +44,7 @@ export const useItemsStore = defineStore('ItemsStore', {
             this.itemsIds = this.itemsIds.filter((item) => item !== itemId);
             delete this.items[itemId];
         },
-        clearItems() {
+        clearItemsFromState() {
             this.items = {}
         },
         removeAll() {

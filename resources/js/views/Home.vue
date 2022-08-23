@@ -91,7 +91,7 @@ const modifyCode = (pos) => {
 const switchLanguage = () => {
     locale.value = (locale.value == 'sk') ? 'en' : 'sk'
     loadLanguageAsync(locale.value)
-    itemsStore.clearItems()
+    itemsStore.clearItemsFromState()
 }
 
 const toggleOnboarding = () => {
