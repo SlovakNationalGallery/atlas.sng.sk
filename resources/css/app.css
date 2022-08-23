@@ -1,11 +1,11 @@
-@import "typography.css";
+@import 'typography.css';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  html {
-    -webkit-tap-highlight-color: transparent;
-  }
+    html {
+        -webkit-tap-highlight-color: transparent;
+    }
 }

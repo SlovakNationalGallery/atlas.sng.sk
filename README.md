@@ -1,4 +1,5 @@
 # kod.sng.sk
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Allow SNG visitors to collect bookmarks during their on-site experience and return to them afterward to keep exploring/learning.
@@ -12,19 +13,23 @@ Allow SNG visitors to collect bookmarks during their on-site experience and retu
 This software is built with the [Laravel framework](http://laravel.com/).
 
 It requires
-1. PHP >= 7.4.x 
+
+1. PHP >= 7.4.x
 1. MySQL >= 5.7
 
 **Set up** with
+
 1. copy `.env.example` to `.env` and customize
 1. `composer install`
 1. `npm install`
 
 **Start** with
+
 1. `npm run watch`
 1. `php artisan serve`
 
 **Test** with
+
 1. `php artisan test --env=testing`
 
 ## Maintainer

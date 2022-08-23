@@ -2,9 +2,9 @@
     font-family: 'GTWalsheim';
     src: url('../fonts/GT-Walsheim/GT-Walsheim-Regular.eot');
     src: url('../fonts/GT-Walsheim/GT-Walsheim-Regular.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/GT-Walsheim/GT-Walsheim-Regular.woff2') format('woff2'),
-         url('../fonts/GT-Walsheim/GT-Walsheim-Regular.woff') format('woff'),
-         url('../fonts/GT-Walsheim/GT-Walsheim-Regular.ttf') format('truetype');
+        url('../fonts/GT-Walsheim/GT-Walsheim-Regular.woff2') format('woff2'),
+        url('../fonts/GT-Walsheim/GT-Walsheim-Regular.woff') format('woff'),
+        url('../fonts/GT-Walsheim/GT-Walsheim-Regular.ttf') format('truetype');
     font-weight: 400;
     font-style: normal;
 }
@@ -13,9 +13,9 @@
     font-family: 'GTWalsheim';
     src: url('../fonts/GT-Walsheim/GT-Walsheim-Bold.eot');
     src: url('../fonts/GT-Walsheim/GT-Walsheim-Bold.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/GT-Walsheim/GT-Walsheim-Bold.woff2') format('woff2'),
-         url('../fonts/GT-Walsheim/GT-Walsheim-Bold.woff') format('woff'),
-         url('../fonts/GT-Walsheim/GT-Walsheim-Bold.ttf') format('truetype');
+        url('../fonts/GT-Walsheim/GT-Walsheim-Bold.woff2') format('woff2'),
+        url('../fonts/GT-Walsheim/GT-Walsheim-Bold.woff') format('woff'),
+        url('../fonts/GT-Walsheim/GT-Walsheim-Bold.ttf') format('truetype');
     font-weight: 700;
     font-style: normal;
 }

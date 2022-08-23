@@ -1,4 +1,4 @@
-require('./bootstrap');
+require('./bootstrap')
 
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
@@ -13,7 +13,7 @@ import Collection from './views/Collection.vue'
 const routes = [
     { path: '/', component: Home },
     { path: '/detail/:id', component: Detail },
-    { path: '/edit/:id', component: Detail, meta: {'edit' : true} },
+    { path: '/edit/:id', component: Detail, meta: { edit: true } },
     { path: '/collection', component: Collection },
     { path: '/:id?', component: Collection },
 ]
@@ -24,25 +24,21 @@ const router = createRouter({
 })
 
 const getBrowserLocale = () => {
-  const navigatorLocale =
-    navigator.languages !== undefined
-      ? navigator.languages[0]
-      : navigator.language
+    const navigatorLocale = navigator.languages !== undefined ? navigator.languages[0] : navigator.language
 
-  if (!navigatorLocale) {
-    return undefined
-  }
+    if (!navigatorLocale) {
+        return undefined
+    }
 
-  const trimmedLocale = navigatorLocale.trim().split(/-|_/)[0]
-  return trimmedLocale
+    const trimmedLocale = navigatorLocale.trim().split(/-|_/)[0]
+    return trimmedLocale
 }
-
 
 const app = createApp(App)
 app.use(router)
 app.use(i18nVue, {
     lang: getBrowserLocale(),
-    resolve: lang => import(`../lang/${lang}.json`),
+    resolve: (lang) => import(`../lang/${lang}.json`),
 })
 app.use(createPinia())
 app.mount('#app')

@@ -1,7 +1,7 @@
-import { defineStore } from 'pinia';
+import { defineStore } from 'pinia'
 import { useStorage } from '@vueuse/core'
-import axios from "axios";
-import { getActiveLanguage } from 'laravel-vue-i18n';
+import axios from 'axios'
+import { getActiveLanguage } from 'laravel-vue-i18n'
 
 export const useItemsStore = defineStore('ItemsStore', {
     state: () => ({
@@ -11,7 +11,7 @@ export const useItemsStore = defineStore('ItemsStore', {
     }),
     getters: {
         count() {
-            return this.itemsIds.length;
+            return this.itemsIds.length
         },
         exists: (state) => {
             return (itemId) => state.itemsIds.includes(itemId)
@@ -24,57 +24,57 @@ export const useItemsStore = defineStore('ItemsStore', {
             } else {
                 const response = await axios.get(`/api/items/${itemId}`, {
                     headers: {
-                        "X-locale": getActiveLanguage(),
+                        'X-locale': getActiveLanguage(),
                     },
-                });
+                })
 
                 const itemData = response.data.data
 
                 this.items[itemId] = itemData
                 return itemData
-            }        
+            }
         },
         add(item) {
             const { id } = item
             if (!this.itemsIds.includes(id)) {
                 this.items[id] = item
                 this.itemsIds.push(id)
-                this.clearCollectionLink();
+                this.clearCollectionLink()
             }
         },
         remove(itemId) {
-            this.itemsIds = this.itemsIds.filter((item) => item !== itemId);
-            delete this.items[itemId];
-            this.clearCollectionLink();
+            this.itemsIds = this.itemsIds.filter((item) => item !== itemId)
+            delete this.items[itemId]
+            this.clearCollectionLink()
         },
         clearItemsFromState() {
             this.items = {}
         },
         removeAll() {
-            this.itemsIds = [];
-            this.items = {};
-            this.clearCollectionLink();
+            this.itemsIds = []
+            this.items = {}
+            this.clearCollectionLink()
         },
         async getCollectionLink() {
             if (this.collectionLink) {
-                 return this.collectionLink
-              } else {
-                 const response = await axios
-                 .post('/api/collections', {
-                     items: this.items,
-                 })
-                 .catch((err) => {
-                     console.log(err)
-                 })
-                 const collectionLink = response.data.url
-                 this.collectionLink = collectionLink
-                 return collectionLink
-             }
-         }, 
+                return this.collectionLink
+            } else {
+                const response = await axios
+                    .post('/api/collections', {
+                        items: this.items,
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    })
+                const collectionLink = response.data.url
+                this.collectionLink = collectionLink
+                return collectionLink
+            }
+        },
         async fetch(collectionId) {
-            this.clearCollectionLink();
-            this.items = {};
-            this.itemsIds = (await axios.get(`/api/collections/${collectionId}`)).data;
+            this.clearCollectionLink()
+            this.items = {}
+            this.itemsIds = (await axios.get(`/api/collections/${collectionId}`)).data
         },
     },
-});
+})
