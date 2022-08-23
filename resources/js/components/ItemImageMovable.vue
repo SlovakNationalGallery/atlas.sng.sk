@@ -19,11 +19,12 @@ import ItemImage from './ItemImage.vue'
 const props = defineProps(['item'])
 const isMoving = ref(false)
 const startPosY = ref(0)
+const startOffsetTop = ref(0)
 const offsetTop = ref(0)
 
 const move = (event) => {
     if (isMoving.value) {
-        offsetTop.value = event.pageY - startPosY.value
+        offsetTop.value = startOffsetTop.value + (event.pageY - startPosY.value)
         console.log('offsetTop: ' + offsetTop.value)
     }
 }
@@ -35,10 +36,12 @@ const moveStart = (event) => {
 
 const moveEnd = (event) => {
     isMoving.value = false
+    startOffsetTop.value = offsetTop.value
 }
 
 onMounted(async () => {
     offsetTop.value = props.item.offset_top
+    startOffsetTop.value = props.item.offset_top
 })
 
 window.addEventListener('mouseup', moveEnd)
