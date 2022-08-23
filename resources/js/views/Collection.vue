@@ -145,8 +145,7 @@ const removeCollection = () => {
 
 const shareCollection = async () => {
     loading.value = true
-    const value = await itemsStore.getCollectionLink()
-    shareUrl.value = value
+    shareUrl.value = await itemsStore.getCollectionLink()
     shareUrlDialog()
     loading.value = false
 }

@@ -39,13 +39,13 @@ export const useItemsStore = defineStore('ItemsStore', {
             if (!this.itemsIds.includes(id)) {
                 this.items[id] = item
                 this.itemsIds.push(id)
-                this.collectionLink = null;
+                this.clearCollectionLink();
             }
         },
         remove(itemId) {
             this.itemsIds = this.itemsIds.filter((item) => item !== itemId);
             delete this.items[itemId];
-            this.collectionLink = null;
+            this.clearCollectionLink();
         },
         clearItemsFromState() {
             this.items = {}
@@ -53,7 +53,7 @@ export const useItemsStore = defineStore('ItemsStore', {
         removeAll() {
             this.itemsIds = [];
             this.items = {};
-            this.collectionLink = null;
+            this.clearCollectionLink();
         },
         async getCollectionLink() {
             if (this.collectionLink) {
@@ -72,7 +72,7 @@ export const useItemsStore = defineStore('ItemsStore', {
              }
          }, 
         async fetch(collectionId) {
-            this.collectionLink = null;
+            this.clearCollectionLink();
             this.items = {};
             this.itemsIds = (await axios.get(`/api/collections/${collectionId}`)).data;
         },
