@@ -35,6 +35,7 @@ Route::get('/items/{id}', function ($id) {
         $item->description = $code->description;
     }
     $item->code = $code->code ?? null;
+    $item->offset_top = $code->offset_top ?? 0;
     return new ItemResource($item);
 });
 
