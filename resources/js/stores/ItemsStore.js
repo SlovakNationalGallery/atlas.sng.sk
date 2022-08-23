@@ -7,6 +7,7 @@ export const useItemsStore = defineStore('ItemsStore', {
     state: () => ({
         itemsIds: useStorage('itemIds', []),
         items: {},
+        collectionLink: useStorage('collectionLink', null),
     }),
     getters: {
         count() {
@@ -38,11 +39,13 @@ export const useItemsStore = defineStore('ItemsStore', {
             if (!this.itemsIds.includes(id)) {
                 this.items[id] = item
                 this.itemsIds.push(id)
+                this.clearCollectionLink();
             }
         },
         remove(itemId) {
             this.itemsIds = this.itemsIds.filter((item) => item !== itemId);
             delete this.items[itemId];
+            this.clearCollectionLink();
         },
         clearItemsFromState() {
             this.items = {}
@@ -50,8 +53,26 @@ export const useItemsStore = defineStore('ItemsStore', {
         removeAll() {
             this.itemsIds = [];
             this.items = {};
+            this.clearCollectionLink();
         },
+        async getCollectionLink() {
+            if (this.collectionLink) {
+                 return this.collectionLink
+              } else {
+                 const response = await axios
+                 .post('/api/collections', {
+                     items: this.items,
+                 })
+                 .catch((err) => {
+                     console.log(err)
+                 })
+                 const collectionLink = response.data.url
+                 this.collectionLink = collectionLink
+                 return collectionLink
+             }
+         }, 
         async fetch(collectionId) {
+            this.clearCollectionLink();
             this.items = {};
             this.itemsIds = (await axios.get(`/api/collections/${collectionId}`)).data;
         },
