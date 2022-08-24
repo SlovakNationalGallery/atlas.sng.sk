@@ -3,18 +3,18 @@
 </template>
 
 <script type="text/javascript">
-    export default {
-      methods: {
-        setViewHeight: function() {
-          let vh = window.innerHeight * 0.01
-          document.documentElement.style.setProperty('--vh', `${vh}px`)
+export default {
+    methods: {
+        setViewHeight: function () {
+            let vh = window.innerHeight * 0.01
+            document.documentElement.style.setProperty('--vh', `${vh}px`)
         },
-      },
-      mounted: function() {
+    },
+    mounted: function () {
         this.setViewHeight()
         window.addEventListener('resize', () => {
-          this.setViewHeight()
+            this.setViewHeight()
         })
-      },
-    }
+    },
+}
 </script>
