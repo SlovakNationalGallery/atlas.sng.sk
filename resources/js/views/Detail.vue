@@ -1,5 +1,4 @@
 <template>
-    <Header :code="item !== null ? item.code : '000000000'">{{ $t('Artwork detail') }}</Header>
     <div class="bg-gray-softest h-48 border-black border-t-2 border-b-2 relative" v-if="item">
         <ItemImageMovable v-if="$route.meta.edit" :item="item"></ItemImageMovable>
         <ItemImageLightbox v-else :item="item"></ItemImageLightbox>
@@ -51,27 +50,22 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { getActiveLanguage } from 'laravel-vue-i18n'
 import { useItemsStore } from '../stores/ItemsStore'
 import ConfirmButton from '../components/ConfirmButton.vue'
-import Header from '../components/Header.vue'
 import ItemImageLightbox from '../components/ItemImageLightbox.vue'
 import ItemImageMovable from '../components/ItemImageMovable.vue'
+import { useDetailStore } from '../stores/DetailStore'
 
-const item = ref(null)
 const router = useRouter()
 const route = useRoute()
 const itemsStore = useItemsStore()
+const detailStore = useDetailStore()
+const item = ref(null)
 
 onMounted(async () => {
-    const response = await axios.get(`/api/items/${route.params.id}`, {
-        headers: {
-            'X-locale': getActiveLanguage(),
-        },
-    })
-    item.value = response.data.data
+    item.value = await detailStore.addItem(route.params.id)
 })
 
 const returnHome = () => {
