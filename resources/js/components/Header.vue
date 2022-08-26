@@ -15,7 +15,11 @@
         </router-link>
         <h1 class="pl-3 grow text-xl"><slot></slot></h1>
         <router-link to="/collection" class="relative">
-            <div class="flex px-4 py-2 h-full border-black" :class="{ 'border-l-2 bg-green': isActive }" v-if="count">
+            <div
+                class="flex px-4 py-2 h-full border-black border-l-2 border-l-transparent transition-colors"
+                :class="{ 'border-l-black bg-green': isActive }"
+                v-if="count"
+            >
                 <div class="font-bold text-xl pr-2">{{ count }}</div>
                 <svg class="h-9 w-9" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -42,15 +46,21 @@
                     />
                 </svg>
             </div>
-            <div
-                v-if="isActive"
-                class="tooltip absolute right-4 top-[52px] z-50 shadow-lg bg-black border-black border-2"
+            <Transition
+                enter-active-class="transition-all bg-green"
+                enter-from-class="opacity-0 translate-y-2 scale-x-90"
+                enter-to-class="opacity-100 translate-y-0 scale-x-100"
             >
-                <div class="absolute w-3 h-3 top-0 right-[10px] -mt-2 rotate-45 bg-black z-0"></div>
-                <div class="w-full h-full bg-green relative p-2 whitespace-nowrap">
-                    {{ $t('Saved! Tap this icon to view your collection.') }}
+                <div
+                    v-if="isActive"
+                    class="tooltip absolute right-4 top-[52px] z-50 shadow-lg bg-black border-black border-2"
+                >
+                    <div class="absolute w-3 h-3 top-0 right-[10px] -mt-2 rotate-45 bg-black z-0"></div>
+                    <div class="w-full h-full bg-green relative p-2 whitespace-nowrap">
+                        {{ $t('Saved! Tap this icon to view your collection.') }}
+                    </div>
                 </div>
-            </div>
+            </Transition>
         </router-link>
     </div>
 </template>
@@ -67,11 +77,16 @@ const props = defineProps({
     code: String,
 })
 
+const displayTooltip = () => {
+    isActive.value = true
+    setTimeout(() => {
+        isActive.value = false
+    }, 3000)
+}
+
 itemsStore.$onAction(({ name: actionName }) => {
     if (actionName === 'add') {
-        isActive.value = true
-    } else {
-        isActive.value = false
+        displayTooltip()
     }
 })
 </script>
