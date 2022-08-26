@@ -1,48 +1,52 @@
 <template>
-    <div class="bg-black text-white h-32 flex">
-        <div class="p-4 pr-0 flex flex-col grow">
-            <div class="text-xl mb-2">{{ $t('Enter artwork code to start') }}</div>
-            <div class="flex-1 text-base">{{ $t('Collect your favorite artworks and find more info about them') }}</div>
+    <ScreenWrapper>
+        <div class="bg-black text-white h-32 flex">
+            <div class="p-4 pr-0 flex flex-col grow">
+                <div class="text-xl mb-2">{{ $t('Enter artwork code to start') }}</div>
+                <div class="flex-1 text-base">
+                    {{ $t('Collect your favorite artworks and find more info about them') }}
+                </div>
+            </div>
+            <div class="w-8 h-32">
+                <svg class="w-full h-full" fill="none" viewBox="0 0 20 111" preserveAspectRatio="none">
+                    <path d="M0.500001 55.5L19.25 0.0743716L19.25 110.926L0.500001 55.5Z" fill="white" />
+                </svg>
+            </div>
         </div>
-        <div class="w-8 h-32">
-            <svg class="w-full h-full" fill="none" viewBox="0 0 20 111" preserveAspectRatio="none">
-                <path d="M0.500001 55.5L19.25 0.0743716L19.25 110.926L0.500001 55.5Z" fill="white" />
-            </svg>
+        <div class="grid grid-cols-3 gap-0 border border-black content-center">
+            <CircleButton
+                v-for="position in code.length"
+                :is-checked="code[position - 1] == '1' ? true : false"
+                @click="modifyCode(position)"
+                :key="position"
+            />
         </div>
-    </div>
-    <div class="grid grid-cols-3 gap-0 border border-black content-center">
-        <CircleButton
-            v-for="position in code.length"
-            :is-checked="code[position - 1] == '1' ? true : false"
-            @click="modifyCode(position)"
-            :key="position"
-        />
-    </div>
-    <div class="border border-black content-center border-t-0 grow flex">
-        <div class="w-full border border-black border-t-0">
-            <RectangleButton @click="switchLanguage()"> SK/EN </RectangleButton>
+        <div class="border border-black content-center border-t-0 grow flex">
+            <div class="w-full border border-black border-t-0">
+                <RectangleButton @click="switchLanguage()"> SK/EN </RectangleButton>
+            </div>
+            <div class="w-full border border-black border-t-0">
+                <RectangleButton class="font-bold bg-red text-white" v-if="isWrong" @click="verifyCode">
+                    {{ $t('Try again') }}
+                </RectangleButton>
+                <RectangleButton
+                    class="font-bold"
+                    :class="isActive ? 'bg-black text-white active:bg-white active:text-black' : 'text-gray-soft'"
+                    @click="verifyCode"
+                    v-else
+                >
+                    {{ $t('Verify') }}
+                </RectangleButton>
+            </div>
+            <div class="w-full border border-black border-t-0">
+                <RectangleButton @click="toggleOnboarding">
+                    {{ $t('Help') }}
+                </RectangleButton>
+                <OnboardingModal @close="toggleOnboarding" :visible="onboardingActive"></OnboardingModal>
+            </div>
         </div>
-        <div class="w-full border border-black border-t-0">
-            <RectangleButton class="font-bold bg-red text-white" v-if="isWrong" @click="verifyCode">
-                {{ $t('Try again') }}
-            </RectangleButton>
-            <RectangleButton
-                class="font-bold"
-                :class="isActive ? 'bg-black text-white active:bg-white active:text-black' : 'text-gray-soft'"
-                @click="verifyCode"
-                v-else
-            >
-                {{ $t('Verify') }}
-            </RectangleButton>
-        </div>
-        <div class="w-full border border-black border-t-0">
-            <RectangleButton @click="toggleOnboarding">
-                {{ $t('Help') }}
-            </RectangleButton>
-            <OnboardingModal @close="toggleOnboarding" :visible="onboardingActive"></OnboardingModal>
-        </div>
-    </div>
-    <TeaserModal @close="toggleTeaser" :visible="teaserActive"></TeaserModal>
+        <TeaserModal @close="toggleTeaser" :visible="teaserActive"></TeaserModal>
+    </ScreenWrapper>
 </template>
 
 <script setup>
@@ -55,6 +59,7 @@ import OnboardingModal from '../components/OnboardingModal.vue'
 import TeaserModal from '../components/TeaserModal.vue'
 import { getActiveLanguage, loadLanguageAsync } from 'laravel-vue-i18n'
 import { useItemsStore } from '../stores/ItemsStore'
+import ScreenWrapper from '../components/ScreenWrapper.vue'
 
 const router = useRouter()
 const teaserStore = useTeaserStore()
