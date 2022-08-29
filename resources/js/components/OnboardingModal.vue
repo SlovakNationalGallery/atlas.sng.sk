@@ -1,7 +1,7 @@
 <template>
     <div class="md:max-w-lg md:mx-auto fixed inset-0 z-50 flex justify-center items-center" v-if="visible">
         <div class="bg-black opacity-70 absolute inset-0 cursor-zoom-out" @click="close" />
-        <Carousel :items-to-show="2.1" :wrap-around="true" class="min-w-[calc(175%)]" ref="myCarousel">
+        <Carousel :items-to-show="2.1" :wrap-around="true" class="min-w-[calc(190%)]" ref="myCarousel">
             <Slide :key="0">
                 <OnboardingStep
                     :btnFn="next"
@@ -12,7 +12,7 @@
                     :active-step="1"
                 />
             </Slide>
-            <Slide :key="1" class="w-screen">
+            <Slide :key="1">
                 <OnboardingStep
                     :btnFn="next"
                     :title="'Create a collection'"
