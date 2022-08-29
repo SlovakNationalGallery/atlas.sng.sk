@@ -15,7 +15,7 @@
             <Slide :key="1" class="w-screen">
                 <OnboardingStep
                     :btnFn="next"
-                    :title="$t('Create a collection')"
+                    :title="'Create a collection'"
                     :body1="'Saved artworks are added into your collection. Return to them later to find out more.'"
                     :body2="'The collection will persist even after you close the application.'"
                     :btnText="'Next'"
