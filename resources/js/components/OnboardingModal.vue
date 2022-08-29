@@ -6,8 +6,8 @@
                 <OnboardingStep
                     :btnFn="next"
                     :title="'Collect art'"
-                    :body1="'Collect art'"
-                    :body2="'Save interesting artworks from the exhibition to your mobile device.'"
+                    :body1="'Save interesting artworks from the exhibition to your mobile device.'"
+                    :body2="'Insert the code located by the artwork into the grid. Press save in the artwork profile to collect it.'"
                     :btnText="'Next'"
                     :active-step="1"
                 />
