@@ -12,39 +12,47 @@ import Collection from './views/Collection.vue'
 import { HEADER_CODES } from './consts'
 
 const routes = [
-  {
-    path: '/', component: Home, meta: {
-      code: HEADER_CODES.FULL,
-      title: 'My collection'
-    }
-  },
-  {
-    path: '/detail/:id', component: Detail, meta: {
-      code: HEADER_CODES.ITEM,
-      title: 'Artwork detail'
-    }
-  },
     {
-      path: '/edit/:id',
-      component: Detail,
-      meta: {
-        'edit' : true,
-        'code': HEADER_CODES.NONE,
-        title: 'Artwork detail'
+        path: '/',
+        component: Home,
+        meta: {
+            code: HEADER_CODES.NONE,
+            title: 'SNG Codes',
+        },
     },
-  },
-  {
-    path: '/collection', component: Collection, meta: {
-      code: HEADER_CODES.NONE,
-      title: 'SNG Codes'
-    }
-  },
-  {
-    path: '/:id?', component: Collection, meta: {
-      code: HEADER_CODES.NONE,
-      title: 'SNG Codes'
-    }
-  },
+    {
+        path: '/detail/:id',
+        component: Detail,
+        meta: {
+            code: HEADER_CODES.ITEM,
+            title: 'Artwork detail',
+        },
+    },
+    {
+        path: '/edit/:id',
+        component: Detail,
+        meta: {
+            edit: true,
+            code: HEADER_CODES.NONE,
+            title: 'Artwork detail',
+        },
+    },
+    {
+        path: '/collection',
+        component: Collection,
+        meta: {
+            code: HEADER_CODES.FULL,
+            title: 'My collection',
+        },
+    },
+    {
+        path: '/:id?',
+        component: Collection,
+        meta: {
+            code: HEADER_CODES.FULL,
+            title: 'My collection',
+        },
+    },
 ]
 
 const router = createRouter({
