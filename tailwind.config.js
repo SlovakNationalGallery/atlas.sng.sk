@@ -17,6 +17,7 @@ module.exports = {
                 medium: '#A0A1B1',
                 dark: '#6D6E7D',
             },
+            transparent: 'transparent',
         },
         fontFamily: {
             sans: ['GTWalsheim', 'sans-serif'],
