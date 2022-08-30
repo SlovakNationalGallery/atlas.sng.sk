@@ -1,5 +1,4 @@
 <template>
-    <ScreenWrapper>
         <div class="bg-black text-white h-32 flex">
             <div class="p-4 pr-0 flex flex-col grow">
                 <div class="text-xl mb-2">{{ $t('Enter artwork code to start') }}</div>
@@ -46,7 +45,6 @@
             </div>
         </div>
         <TeaserModal @close="toggleTeaser" :visible="teaserActive"></TeaserModal>
-    </ScreenWrapper>
 </template>
 
 <script setup>
