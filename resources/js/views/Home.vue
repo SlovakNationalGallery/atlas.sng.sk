@@ -1,5 +1,4 @@
 <template>
-    <Header class="mb-0.5">{{ $t('SNG Codes') }} <span class="text-gray-soft">beta</span></Header>
     <div class="bg-black text-white h-32 flex">
         <div class="p-4 pr-0 flex flex-col grow">
             <div class="text-xl mb-2">{{ $t('Enter artwork code to start') }}</div>
@@ -50,7 +49,6 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useTeaserStore } from '../stores/TeaserStore'
-import Header from '../components/Header.vue'
 import CircleButton from '../components/CircleButton.vue'
 import RectangleButton from '../components/RectangleButton.vue'
 import OnboardingModal from '../components/OnboardingModal.vue'

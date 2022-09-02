@@ -1,5 +1,4 @@
 <template>
-    <Header :code="'111111111'">{{ $t('My collection') }}</Header>
     <Survey />
     <div class="border-black p-4 border-t-2">
         <div v-for="item in itemsStore.itemsIds" :key="item">
@@ -123,7 +122,6 @@ import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useItemsStore } from '../stores/ItemsStore'
 import ConfirmButton from '../components/ConfirmButton.vue'
-import Header from '../components/Header.vue'
 import ThumbRow from '../components/ThumbRow.vue'
 import CardModal from '../components/CardModal.vue'
 import Survey from '../components/Survey.vue'

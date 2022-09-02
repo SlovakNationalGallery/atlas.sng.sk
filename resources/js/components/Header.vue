@@ -13,7 +13,9 @@
                 </svg>
             </div>
         </router-link>
-        <h1 class="pl-3 grow text-xl"><slot></slot></h1>
+        <h1 class="pl-3 grow text-xl">
+            {{ $t($route.meta.title) }}
+        </h1>
         <router-link to="/collection" class="relative">
             <div
                 class="flex px-4 py-2 h-full border-black border-l-2 border-l-transparent transition-colors"
@@ -68,13 +70,31 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { useItemsStore } from '../stores/ItemsStore'
+import { useRouter } from 'vue-router'
+import { HEADER_CODES } from '../consts'
+import { useDetailStore } from '../stores/DetailStore'
 
+const router = useRouter()
 const itemsStore = useItemsStore()
+const detailStore = useDetailStore()
+
 const count = computed(() => itemsStore.count)
 const isActive = ref(false)
 
-const props = defineProps({
-    code: String,
+const code = computed(() => {
+    const code = router.currentRoute.value.meta?.code
+    if (code === HEADER_CODES.FULL) {
+        return '111111111'
+    }
+    if (code === HEADER_CODES.NONE) {
+        return null
+    }
+
+    if (code === HEADER_CODES.ITEM) {
+        return detailStore.item?.code
+    }
+
+    return null
 })
 
 const displayTooltip = () => {
