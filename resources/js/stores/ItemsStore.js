@@ -77,7 +77,7 @@ export const useItemsStore = defineStore('ItemsStore', {
         async fetch(collectionId) {
             this.clearCollectionLink()
             this.items = {}
-            this.itemsIds = (await axios.get(`/api/collections/${collectionId}`)).data
+            this.itemsIds = Object.keys((await axios.get(`/api/collections/${collectionId}`)).data)
         },
     },
 })
