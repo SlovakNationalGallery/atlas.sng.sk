@@ -7,6 +7,36 @@
         <h2 class="text-xl font-bold">{{ item.title }}</h2>
         <h3 class="text-gray-dark text-base">{{ item.author }} · {{ item.dating }}</h3>
         <div class="py-4" v-html="item.description"></div>
+        <article class="mb-4 bg-blue-soft rounded-xl p-4">
+            <div class="flex mb-1.5 items-center">
+                <div class="h-7 w-7 flex-none flex items-center justify-center mr-1.5">
+                    <img
+                        class="rounded-full h-full object-cover w-full object-top"
+                        :src="authorBlock.authorImg"
+                        :alt="authorBlock.authorName"
+                    />
+                </div>
+                <h4 class="font-bold text-base text-blue-medium">{{ authorBlock.authorName }}</h4>
+            </div>
+            <p class="mb-1.5 font-bold">{{ authorBlock.date }}</p>
+            <p class="mb-2">{{ authorBlock.text }}</p>
+            <div class="py-2">
+                <p class="mb-1.5 font-bold">{{ $t('Similar artworks') }}</p>
+                <carousel :items-to-show="2.5">
+                    <slide v-for="slide in 10" :key="slide">
+                        <div class="p-2 min-w-full">
+                            <img class="rounded-xl h-16 w-full" :src="authorBlock.carousel.img" />
+                            <div>
+                                <h5 class="font-bold text-ssm">
+                                    {{ authorBlock.carousel.title }}
+                                </h5>
+                            </div>
+                            <h6 class="text-blue-medium text-ssm">{{ authorBlock.carousel.date }}</h6>
+                        </div>
+                    </slide>
+                </carousel>
+            </div>
+        </article>
         <a
             :href="item.webumenia_url"
             target="_blank"
@@ -57,6 +87,9 @@ import ConfirmButton from '../components/ConfirmButton.vue'
 import ItemImageLightbox from '../components/ItemImageLightbox.vue'
 import ItemImageMovable from '../components/ItemImageMovable.vue'
 import { useDetailStore } from '../stores/DetailStore'
+import 'vue3-carousel/dist/carousel.css'
+import { Carousel, Slide } from 'vue3-carousel'
+import { authorBlock } from './mock'
 
 const router = useRouter()
 const route = useRoute()

@@ -11,6 +11,10 @@ module.exports = {
             white: '#fff',
             red: '#f44336',
             green: '#0DF043',
+            blue: {
+                soft: '#D1F0FF',
+                medium: '#03A9F4',
+            },
             gray: {
                 softest: '#DDDEE3',
                 soft: '#B9BBC6',
@@ -23,6 +27,7 @@ module.exports = {
             sans: ['GTWalsheim', 'sans-serif'],
         },
         fontSize: {
+            ssm: ['12px'],
             sm: ['14px'],
             base: ['18px'],
             lg: ['20px'],
