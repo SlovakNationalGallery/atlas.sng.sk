@@ -64,7 +64,7 @@ export const useItemsStore = defineStore('ItemsStore', {
             } else {
                 const response = await axios
                     .post('/api/collections', {
-                        items: this.items,
+                        items: this.itemsIds,
                     })
                     .catch((err) => {
                         console.log(err)
