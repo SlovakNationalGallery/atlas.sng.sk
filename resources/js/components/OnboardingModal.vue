@@ -8,9 +8,9 @@
             <Slide :key="0">
                 <OnboardingStep
                     :btnFn="next"
-                    :title="'Collect art'"
-                    :body1="'Save interesting artworks from the exhibition to your mobile device.'"
-                    :body2="'Insert the code located by the artwork into the grid. Press save in the artwork profile to collect it.'"
+                    :title="'Delve deeper into the Gothic art'"
+                    :body1="'Find simple codes near artworks in the Gothic Art exhibition.'"
+                    :body2="'Insert the code into the grid on the main screen of the app and press Verify. You will discover more about the artwork\'s story, function or technique.'"
                     :btnText="'Next'"
                     :active-step="1"
                 />
@@ -18,8 +18,8 @@
             <Slide :key="1">
                 <OnboardingStep
                     :btnFn="next"
-                    :title="'Create a collection'"
-                    :body1="'Saved artworks are added into your collection. Return to them later to find out more.'"
+                    :title="'Read anywhere'"
+                    :body1="'Press the Save button to collect the artwork. You can find all saved artworks in your collection.'"
                     :body2="'The collection will persist even after you close the application.'"
                     :btnText="'Next'"
                     :active-step="2"
@@ -28,7 +28,7 @@
             <Slide :key="3">
                 <OnboardingStep
                     :btnFn="close"
-                    :title="'Share the collection'"
+                    :title="'Share the knowledge'"
                     :body1="'Tap the Share button in your collection, and send the link to your e-mail or share it with friends.'"
                     :body2="'The shared link never expires.'"
                     :btnText="'Start collecting'"
