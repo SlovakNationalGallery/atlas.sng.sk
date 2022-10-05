@@ -10,7 +10,7 @@
                     :btnFn="next"
                     :title="'Delve deeper into the Gothic art'"
                     :body1="'Find simple codes near artworks in the Gothic Art exhibition.'"
-                    :body2="'Insert the code into the grid on the main screen of the app and press Verify. You will discover more about the artwork's story, function or technique.'"
+                    :body2="'Insert the code into the grid on the main screen of the app and press Verify. You will discover more about the artwork\'s story, function or technique.'"
                     :btnText="'Next'"
                     :active-step="1"
                 />

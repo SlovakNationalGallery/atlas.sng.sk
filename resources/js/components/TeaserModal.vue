@@ -4,7 +4,7 @@
         <div class="relative mx-4 bg-white w-full max-w-2xl bg-white rounded-xl">
             <img src="/images/dusan-vyklad.jpg" alt="Výklad kurátora Dušana Burana" class="w-full rounded-t-xl" />
             <div class="px-4 py-6">
-                <h3 class="font-bold text-lg mb-2">{{ $t('Curator's insight in your pocket') }}</h3>
+                <h3 class="font-bold text-lg mb-2">{{ $t('Curator\'s insight in your pocket') }}</h3>
                 <div class="">
                     {{ $t('How does the Gothic altar work? Why are some statues missing their hands? What is the purpose of gilding?') }}
                 </div>
