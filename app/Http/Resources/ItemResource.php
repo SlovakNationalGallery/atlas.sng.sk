@@ -29,6 +29,7 @@ class ItemResource extends JsonResource
                 ->join(', '),
             'webumenia_url' => config('services.webumenia.url') . '/dielo/' . $this->id,
             'offset_top' => $this->offset_top,
+            'author_description' => $this->author_description,
         ];
     }
 

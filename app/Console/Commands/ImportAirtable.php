@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Airtable;
 use App\Models\Code;
 use Illuminate\Console\Command;
+use Illuminate\Support\Arr;
 
 class ImportAirtable extends Command
 {
@@ -39,32 +40,42 @@ class ImportAirtable extends Command
      */
     public function handle()
     {
-        $records = Airtable::table('default')->where('ID', '!=', '')->get();
+        $records = Airtable::table('default')
+            ->where('ID', '!=', '')
+            ->get();
         $bar = $this->output->createProgressBar(count($records));
         $bar->start();
         $records->each(function ($record) use (&$bar) {
             $bar->advance();
             $item_id = $record['fields']['ID'];
             $code = Code::firstOrNew([
-                'item_id' => $item_id
+                'item_id' => $item_id,
             ]);
             if (!$code->exists) {
                 $code->code = Code::randomUniqueCode();
             }
+
             $code->description = [
-                'sk' => $record['fields']['app text'] ?? '',
-                'en' => $record['fields']['app text preklad'] ?? ''
+                'sk' => Arr::get($record, 'fields.app text'),
+                'en' => Arr::get($record, 'fields.app text preklad'),
             ];
-            $code->offset_top = $record['fields']['offsetTop'] ?? 0;
+
+            $code->author_description = [
+                'sk' => Arr::get($record, 'fields.Autor text SK'),
+                'en' => Arr::get($record, 'fields.Autor text EN'),
+            ];
+
+            $code->offset_top = Arr::get($record, 'fields.offsetTop', 0);
+
             $code->save();
             // update code in airtable
             if (empty($record['fields']['code']) || $record['fields']['code'] != $code->code) {
-                Airtable::table('default')->patch($record['id'], [ 'code' => $code->code]);
+                Airtable::table('default')->patch($record['id'], ['code' => $code->code]);
             }
         });
 
         $bar->finish();
         $this->newLine();
-        $this->info("Done 🎉");
+        $this->info('Done 🎉');
     }
 }
