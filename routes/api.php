@@ -24,18 +24,15 @@ Route::get('/verify/{code}', function ($code) {
     return new CodeResource(Code::where('code', $code)->firstOrFail());
 });
 
-Route::get('/items/{id}', function ($id) {
+Route::get('/items/{id}', function (string $id) {
     $code = Code::where('item_id', $id)->first();
-
-    $response = Http::get(config('services.webumenia.api') . '/items/' . $id, [
-        'locale' => app()->getLocale(),
-    ]);
-    $item = $response->object()->document->content;
+    $response = Http::webumenia()->get("/v2/items/$id");
+    $item = $response->object()->data;
     if (!empty($code->description)) {
         $item->description = nl2br($code->description);
     }
-    $item->code = $code->code ?? null;
-    $item->offset_top = $code->offset_top ?? 0;
+    $item->code = $code->code;
+    $item->offset_top = $code->offset_top;
     $item->author_description = $code->author_description;
     return new ItemResource($item);
 });
