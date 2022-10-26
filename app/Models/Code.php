@@ -14,7 +14,7 @@ class Code extends Model
     const ROWS = 3;
     const COLS = 3;
 
-    public $translatable = ['description'];
+    public $translatable = ['description', 'author_name'];
 
     protected $fillable = [
         'item_id',
