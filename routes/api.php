@@ -25,7 +25,7 @@ Route::get('/verify/{code}', function ($code) {
 });
 
 Route::get('/items/{id}', function (string $id) {
-    $code = Code::where('item_id', $id)->first();
+    $code = Code::where('item_id', $id)->first() ?: Code::factory()->make();
     $response = Http::webumenia()->get("/v2/items/$id");
     $item = $response->object()->data;
     if (!empty($code->description)) {
