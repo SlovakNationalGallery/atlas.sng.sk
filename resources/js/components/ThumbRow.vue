@@ -6,7 +6,7 @@
             </div>
             <div class="py-2 px-4 shrink" v-if="item">
                 <h2 class="text-base pb-1">{{ item.title }}</h2>
-                <div class="text-sm text-gray-dark">{{ item.author }} · {{ item.dating }}</div>
+                <div class="text-sm text-gray-dark">{{ helpers.formatAuthors(item.authors) }} · {{ item.dating }}</div>
             </div>
         </div>
     </router-link>
@@ -14,8 +14,9 @@
 
 <script setup>
 import { onMounted, ref } from 'vue'
-import ItemImage from './ItemImage.vue'
 import { useItemsStore } from '../stores/ItemsStore'
+import ItemImage from './ItemImage.vue'
+import helpers from '../helpers'
 
 const props = defineProps(['itemId'])
 const item = ref(null)

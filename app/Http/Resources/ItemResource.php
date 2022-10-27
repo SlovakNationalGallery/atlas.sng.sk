@@ -18,14 +18,10 @@ class ItemResource extends JsonResource
             'id' => $this->id,
             'code' => $this->code,
             'title' => $this->title,
-            'author' => collect($this->authors)
-                ->map(function (string $name) {
-                    return preg_replace('/^([^,]*),\s*(.*)$/', '$2 $1', $name);
-                })
-                ->join(', '),
+            'authors' => $this->authors,
             'dating' => $this->dating,
             'description' => $this->description,
-            'authorities' => $this->authorities,
+            'authorities' => AuthorityResource::collection($this->authorities),
             'image_src' => $this->getImageRoute(),
             'image_srcset' => collect([220, 300, 600, 800])
                 ->map(fn($width) => $this->getImageRoute($width) . " ${width}w")
