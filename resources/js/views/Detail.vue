@@ -3,7 +3,10 @@
         <ItemImageMovable v-if="$route.meta.edit" :item="item"></ItemImageMovable>
         <ItemImageLightbox v-else :item="item"></ItemImageLightbox>
     </div>
-    <div class="h-full border-black p-4 pb-24" v-if="item">
+    <div class="h-full border-black px-4 pb-24 pt-8 relative" v-if="item">
+        <div class="bg-black rounded-md p-1.5 inline-block -top-8 z-index-0 absolute" v-if="item.code">
+            <img class="h-9 w-9" :src="`/img/${item.code}.svg`" :alt="item.code" />
+        </div>
         <h2 class="text-xl font-bold">{{ item.title }}</h2>
         <h3 class="text-gray-dark text-base">{{ item.author }} · {{ item.dating }}</h3>
         <div class="py-4" v-html="item.description"></div>
