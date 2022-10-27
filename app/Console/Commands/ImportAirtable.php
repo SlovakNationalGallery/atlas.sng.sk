@@ -59,7 +59,6 @@ class ImportAirtable extends Command
                 'sk' => Arr::get($record, 'fields.app text'),
                 'en' => Arr::get($record, 'fields.app text preklad'),
             ];
-            $code->offset_top = $record['fields']['offsetTop'] ?? 0;
 
             $code->author_name = [
                 'sk' => Arr::get($record, 'fields.Autor/ka'),
