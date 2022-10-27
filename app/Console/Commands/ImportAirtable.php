@@ -60,6 +60,11 @@ class ImportAirtable extends Command
                 'en' => Arr::get($record, 'fields.app text preklad'),
             ];
 
+            $code->author_name = [
+                'sk' => Arr::get($record, 'fields.Autor/ka'),
+                'en' => Arr::get($record, 'fields.Autor/ka EN'),
+            ];
+
             $code->author_description = [
                 'sk' => Arr::get($record, 'fields.Autor text SK'),
                 'en' => Arr::get($record, 'fields.Autor text EN'),

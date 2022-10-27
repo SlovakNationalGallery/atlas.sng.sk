@@ -33,6 +33,9 @@ Route::get('/items/{id}', function (string $id) {
     }
     $item->code = $code->code;
     $item->offset_top = $code->offset_top;
+    if (!empty($code->author_name)) {
+        $item->authors = $code->author_name;
+    }
     $item->author_description = $code->author_description;
     return new ItemResource($item);
 });
