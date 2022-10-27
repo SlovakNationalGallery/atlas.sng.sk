@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-gray-softest h-48 border-black border-t-2 border-b-2 relative" v-if="item">
+    <div class="bg-gray-softest aspect-w-4 aspect-h-3 border-black border-t-2 border-b-2 relative" v-if="item">
         <ItemImageMovable v-if="$route.meta.edit" :item="item"></ItemImageMovable>
         <ItemImageLightbox v-else :item="item"></ItemImageLightbox>
     </div>

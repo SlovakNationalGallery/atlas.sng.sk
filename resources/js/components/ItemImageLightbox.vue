@@ -1,5 +1,5 @@
 <template>
-    <a href="#" class="block h-full w-full relative" @click.prevent="visible = true">
+    <a href="#" @click.prevent="visible = true">
         <ItemImage :item="item" :offset-top="item.offset_top"></ItemImage>
         <svg class="absolute bottom-3 left-3 w-8" fill="none" viewBox="0 0 32 35" xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#a)" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
