@@ -1,42 +1,19 @@
 <template>
     <a href="#" @click.prevent="visible = true">
         <ItemImage :item="item" :offset-top="item.offset_top"></ItemImage>
-        <svg class="absolute bottom-3 left-3 w-8" fill="none" viewBox="0 0 32 35" xmlns="http://www.w3.org/2000/svg">
-            <g filter="url(#a)" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                <path d="m21 6h5v5" />
-                <path d="m19 13 7-7" />
-                <path d="M11 26H6V21" />
-                <path d="m13 19-7 7" />
-                <path d="m26 21v5h-5" />
-                <path d="m19 19 7 7" />
-                <path d="m6 11v-5h5" />
-                <path d="m13 13-7-7" />
-            </g>
-            <defs>
-                <filter
-                    id="a"
-                    x="-4"
-                    y="0"
-                    width="40"
-                    height="40"
-                    color-interpolation-filters="sRGB"
-                    filterUnits="userSpaceOnUse"
-                >
-                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                    <feColorMatrix
-                        in="SourceAlpha"
-                        result="hardAlpha"
-                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                    />
-                    <feOffset dy="4" />
-                    <feGaussianBlur stdDeviation="2" />
-                    <feComposite in2="hardAlpha" operator="out" />
-                    <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
-                    <feBlend in2="BackgroundImageFix" result="effect1_dropShadow_2433_18536" />
-                    <feBlend in="SourceGraphic" in2="effect1_dropShadow_2433_18536" result="shape" />
-                </filter>
-            </defs>
-        </svg>
+        <button class="rounded-xl bg-black/70 py-1 px-2 absolute bottom-3 right-3 text-white text-sm flex items-center">
+            <svg class="mr-2" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15.75 4.5H19.5V8.25" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M14.25 9.75L19.5 4.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M8.25 19.5H4.5V15.75" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M9.75 14.25L4.5 19.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M19.5 15.75V19.5H15.75" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M14.25 14.25L19.5 19.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M4.5 8.25V4.5H8.25" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M9.75 9.75L4.5 4.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <span>{{ $t('Enlarge') }}</span>
+        </button>
     </a>
     <div class="fixed inset-0 z-50 flex justify-center items-center" v-if="visible" @click="visible = false">
         <div class="bg-black opacity-70 absolute inset-0 cursor-zoom-out" @click="visible = false" />
