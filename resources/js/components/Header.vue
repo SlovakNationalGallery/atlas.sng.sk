@@ -1,8 +1,10 @@
 <template>
     <div class="border-black border-t-2 flex items-center">
         <router-link to="/">
-            <div class="bg-black p-2">
-                <img v-if="code" class="h-9 w-9" :src="`/img/${code}.svg`" :alt="code" />
+            <div class="p-2">
+                <svg v-if="code" class="h-4 w-auto ml-2" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 16.5L1.5 9L9 1.5" stroke="#1E1E1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
                 <svg v-else class="h-9 w-9" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         fill-rule="evenodd"
@@ -13,39 +15,19 @@
                 </svg>
             </div>
         </router-link>
-        <h1 class="pl-3 grow text-xl">
+        <h1 class="pl-3 grow text-xl text-center">
             {{ $t($route.meta.title) }}
         </h1>
         <router-link to="/collection" class="relative">
             <div
                 class="flex px-4 py-2 h-full border-black border-l-2 border-l-transparent transition-colors"
-                :class="{ 'border-l-black bg-green': isActive }"
-                v-if="count"
+                :class="[{ 'border-l-black bg-green': isActive }, {'opacity-40' : !count}]"
             >
-                <div class="font-bold text-xl pr-2">{{ count }}</div>
-                <svg class="h-9 w-9" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <div class="font-bold text-base pr-2">{{ count }}</div>
+                <svg viewBox="0 0 29 25" class="stroke-black stroke-2 h-6 w-auto" :class="[count ? 'fill-green' : 'fill-white']" xmlns="http://www.w3.org/2000/svg">
                     <path
-                        d="M4 22L16 29L28 22"
-                        stroke="black"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    />
-                    <path
-                        d="M4 16L16 23L28 16"
-                        stroke="black"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    />
-                    <path
-                        d="M4 10L16 17L28 10L16 3L4 10Z"
-                        fill="black"
-                        stroke="black"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    />
+                        d="M15.7127 23.4877L25.8377 13.3627C28.3252 10.8627 28.6877 6.77517 26.3377 4.16267C25.7483 3.50431 25.0309 2.97302 24.2293 2.60128C23.4277 2.22953 22.5587 2.02513 21.6754 2.00056C20.7921 1.97599 19.9131 2.13177 19.0921 2.45839C18.271 2.785 17.5252 3.27559 16.9002 3.90017L15.0002 5.81267L13.3627 4.16267C10.8627 1.67517 6.77517 1.31267 4.16267 3.66267C3.50431 4.25203 2.97302 4.96943 2.60128 5.77105C2.22953 6.57266 2.02513 7.44166 2.00056 8.32493C1.97599 9.20821 2.13177 10.0872 2.45839 10.9083C2.785 11.7293 3.27559 12.4751 3.90017 13.1002L14.2877 23.4877C14.4773 23.6755 14.7333 23.7808 15.0002 23.7808C15.267 23.7808 15.5231 23.6755 15.7127 23.4877Z"
+                        stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
             </div>
             <Transition
