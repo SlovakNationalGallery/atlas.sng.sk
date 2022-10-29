@@ -74,7 +74,7 @@ class ImportAirtable extends Command
 
             $code->save();
             // update code in airtable
-            if (empty($record['fields']['code']) || $record['fields']['code'] != $code->code) {
+            if (\App::environment('production') && (empty($record['fields']['code']) || $record['fields']['code'] != $code->code)) {
                 Airtable::table('default')->patch($record['id'], ['code' => $code->code]);
             }
         });
