@@ -5,14 +5,14 @@
     </div>
     <div class="h-full border-black p-4 pb-24" v-if="item">
         <h2 class="text-xl font-bold">{{ item.title }}</h2>
-        <h3 class="text-gray-dark text-base">{{ helpers.formatAuthors(item.authors) }} · {{ item.dating }}</h3>
+        <h3 class="text-gray-dark text-base">{{ item.author }} · {{ item.dating }}</h3>
         <div class="py-4" v-html="item.description"></div>
         <Collapsible :open="i === 0" v-for="(authority, i) in item.authorities" :key="authority.id">
             <template v-slot:summary>
                 <AuthoritySummary :authority="authority" />
             </template>
-            <template v-slot:content v-if="authority.biography">
-                <AuthorityDetails :authority="authority" />
+            <template v-slot:content v-if="item.author_description || authority.biography">
+                <AuthorityDetails :authority="authority" :item="item" />
             </template>
         </Collapsible>
         <a
@@ -68,7 +68,6 @@ import Collapsible from '../components/Collapsible.vue'
 import ConfirmButton from '../components/ConfirmButton.vue'
 import ItemImageLightbox from '../components/ItemImageLightbox.vue'
 import ItemImageMovable from '../components/ItemImageMovable.vue'
-import helpers from '../helpers'
 
 const router = useRouter()
 const route = useRoute()

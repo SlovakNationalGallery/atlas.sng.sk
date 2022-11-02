@@ -11,7 +11,7 @@ class AuthorityResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
+            'name' => formatName($this->name),
             'has_image' => $this->has_image,
             'biography' => $this->formatBiography($this->biography),
             'birth_place' => $this->birth_place,

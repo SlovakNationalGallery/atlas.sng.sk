@@ -2,7 +2,7 @@
     <img
         class="h-full object-cover w-full object-top"
         :style="{ objectPosition: 'center ' + offsetTop + 'px' }"
-        :alt="`${helpers.formatAuthors(item.authors)}: ${item.title}`"
+        :alt="`${item.author}: ${item.title}`"
         :src="item.image_src"
         :srcset="item.image_srcset"
         sizes="1px"
@@ -11,7 +11,5 @@
 </template>
 
 <script setup>
-import helpers from '../helpers'
-
 const props = defineProps(['item', 'offsetTop'])
 </script>
