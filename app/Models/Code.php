@@ -18,6 +18,10 @@ class Code extends Model
 
     protected $fillable = ['item_id'];
 
+    protected $attributes = [
+        'offset_top' => 0,
+    ];
+
     // codes are stored in DB in decimal value, e.g. 000101010 -> 42
     public function getCodeAttribute($value)
     {

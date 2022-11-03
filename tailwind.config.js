@@ -5,8 +5,12 @@ module.exports = {
             padding: {
                 full: '100%',
             },
+            strokeWidth: {
+                2: '2px',
+            },
         },
         colors: {
+            none: 'none',
             black: '#000',
             white: '#fff',
             red: '#f44336',
