@@ -10,6 +10,14 @@
         <h2 class="text-xl font-bold">{{ item.title }}</h2>
         <h3 class="text-gray-dark text-base">{{ item.author }} · {{ item.dating }}</h3>
         <div class="py-4" v-html="item.description"></div>
+        <Collapsible :open="i === 0" v-for="(authority, i) in item.authorities" :key="authority.id" class="mb-4">
+            <template v-slot:summary>
+                <AuthoritySummary :authority="authority" />
+            </template>
+            <template v-slot:content v-if="item.author_description || authority.biography">
+                <AuthorityDetails :authority="authority" :item="item" />
+            </template>
+        </Collapsible>
         <a :href="item.webumenia_url" target="_blank"
             class="flex items-center py-2 px-3 mb-4 text-[#32B964] bg-[#E4FAE7] hover:bg-[#caf5d0] active:bg-[#caf5d0] rounded-xl">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -46,11 +54,14 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { useDetailStore } from '../stores/DetailStore'
 import { useItemsStore } from '../stores/ItemsStore'
+import AuthorityDetails from '../components/AuthorityDetails.vue'
+import AuthoritySummary from '../components/AuthoritySummary.vue'
+import Collapsible from '../components/Collapsible.vue'
 import ConfirmButton from '../components/ConfirmButton.vue'
 import ItemImageLightbox from '../components/ItemImageLightbox.vue'
 import ItemImageMovable from '../components/ItemImageMovable.vue'
-import { useDetailStore } from '../stores/DetailStore'
 
 const router = useRouter()
 const route = useRoute()

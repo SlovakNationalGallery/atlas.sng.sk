@@ -16,28 +16,44 @@ class ItemResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'code' => $this->code,
             'title' => $this->title,
-            'author' => collect($this->authors)
-                ->map(function (string $name) {
-                    return preg_replace('/^([^,]*),\s*(.*)$/', '$2 $1', $name);
-                })
-                ->join(', '),
+            'author' => $this->getAuthor(),
             'dating' => $this->dating,
-            'description' => $this->description,
-            'authorities' => $this->authorities,
+            'description' => $this->getDescription(),
+            'authorities' => AuthorityResource::collection($this->authorities),
             'image_src' => $this->getImageRoute(),
             'image_srcset' => collect([220, 300, 600, 800])
                 ->map(fn($width) => $this->getImageRoute($width) . " ${width}w")
                 ->join(', '),
             'webumenia_url' => config('services.webumenia.url') . '/dielo/' . $this->id,
-            'offset_top' => $this->offset_top,
-            'author_description' => $this->author_description,
+            'code' => $this->code->code,
+            'offset_top' => $this->code->offset_top,
+            'author_description' => $this->code->author_description,
         ];
     }
 
     private function getImageRoute($width = 600)
     {
         return config('services.webumenia.url') . '/dielo/nahlad/' . $this->id . '/' . $width;
+    }
+
+    private function getDescription()
+    {
+        if ($this->code->description) {
+            return nl2br($this->code->description);
+        }
+
+        return $this->description;
+    }
+
+    private function getAuthor()
+    {
+        if ($this->code->author_name) {
+            return $this->code->author_name;
+        }
+
+        return collect($this->authors)
+            ->map(fn(string $author) => formatName($author))
+            ->join(', ');
     }
 }

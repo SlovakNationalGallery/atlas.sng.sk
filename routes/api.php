@@ -25,15 +25,10 @@ Route::get('/verify/{code}', function ($code) {
 });
 
 Route::get('/items/{id}', function (string $id) {
-    $code = Code::where('item_id', $id)->first() ?: Code::factory()->make();
+    $code = Code::where('item_id', $id)->first() ?: new Code();
     $response = Http::webumenia()->get("/v2/items/$id");
     $item = $response->object()->data;
-    if (!empty($code->description)) {
-        $item->description = nl2br($code->description);
-    }
-    $item->code = $code->code;
-    $item->offset_top = $code->offset_top;
-    $item->author_description = $code->author_description;
+    $item->code = $code;
     return new ItemResource($item);
 });
 
