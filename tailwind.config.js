@@ -11,7 +11,7 @@ module.exports = {
         },
         colors: {
             none: 'none',
-            black: '#000',
+            black: '#1e1e1e',
             white: '#fff',
             red: '#f44336',
             green: '#0DF043',
@@ -50,5 +50,8 @@ module.exports = {
             screen: 'calc(var(--vh) * 100)',
         }),
     },
-    plugins: [],
+    corePlugins: {
+        aspectRatio: false,
+    },
+    plugins: [require('@tailwindcss/aspect-ratio')],
 }
