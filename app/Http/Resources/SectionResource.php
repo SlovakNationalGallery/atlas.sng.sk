@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CodeResource extends JsonResource
+class SectionResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,8 +15,10 @@ class CodeResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->codeable_type === 'item' ? $this->codeable->webumenia_id : $this->codeable_id,
-            'type' => $this->codeable_type,
+            'id' => $this->id,
+            'title' => $this->title,
+            'description' => $this->description,
+            'code' => $this->code->code,
         ];
     }
 }

@@ -26,9 +26,9 @@ class ItemResource extends JsonResource
                 ->map(fn($width) => $this->getImageRoute($width) . " ${width}w")
                 ->join(', '),
             'webumenia_url' => config('services.webumenia.url') . '/dielo/' . $this->id,
-            'code' => $this->code->code,
-            'offset_top' => $this->code->offset_top,
-            'author_description' => $this->code->author_description,
+            'code' => $this->item->code?->code,
+            'offset_top' => $this->item->offset_top,
+            'author_description' => $this->item->author_description,
         ];
     }
 
@@ -39,8 +39,8 @@ class ItemResource extends JsonResource
 
     private function getDescription()
     {
-        if ($this->code->description) {
-            return nl2br($this->code->description);
+        if ($this->item->description) {
+            return nl2br($this->item->description);
         }
 
         return $this->description;
@@ -48,8 +48,8 @@ class ItemResource extends JsonResource
 
     private function getAuthor()
     {
-        if ($this->code->author_name) {
-            return $this->code->author_name;
+        if ($this->item->author_name) {
+            return $this->item->author_name;
         }
 
         return collect($this->authors)

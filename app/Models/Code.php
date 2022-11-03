@@ -4,23 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Translatable\HasTranslations;
 
 class Code extends Model
 {
-    use HasFactory;
-    use HasTranslations;
-
     const ROWS = 3;
     const COLS = 3;
 
-    public $translatable = ['description', 'author_name', 'author_description'];
-
-    protected $fillable = ['item_id'];
-
-    protected $attributes = [
-        'offset_top' => 0,
-    ];
+    public function codeable()
+    {
+        return $this->morphTo();
+    }
 
     // codes are stored in DB in decimal value, e.g. 000101010 -> 42
     public function getCodeAttribute($value)
@@ -51,5 +44,12 @@ class Code extends Model
             return self::randomUniqueCode();
         }
         return $code;
+    }
+
+    protected static function booted()
+    {
+        static::creating(function (self $code) {
+            $code->code = Code::randomUniqueCode();
+        });
     }
 }
