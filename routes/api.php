@@ -29,7 +29,7 @@ Route::get('/verify/{code}', function ($code) {
 });
 
 Route::get('/items/{id}', function (string $id) {
-    $item = Item::firstWhere('webumenia_id', $id) ?: new Item();
+    $item = Item::find($id) ?: new Item();
     $response = Http::webumenia()->get("/v2/items/$id");
 
     if (!isset($response->object()->data)) {

@@ -15,7 +15,7 @@ class CreateItemsTable extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->string('id')->primary();
-            $table->string('webumenia_id')->unique();
+            $table->string('airtable_id')->unique();
             $table->integer('offset_top')->default(0);
             $table->json('description')->nullable();
             $table->json('author_name')->nullable();

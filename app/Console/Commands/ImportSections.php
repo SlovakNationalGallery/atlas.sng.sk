@@ -66,7 +66,7 @@ class ImportSections extends Command
             $itemIds = Arr::get($record, 'fields.Diela sekcie', []);
             $section->save();
 
-            $items = Item::whereIn('id', $itemIds)->get();
+            $items = Item::whereIn('airtable_id', $itemIds)->get();
             $section->items()->sync($items);
 
             if (

@@ -15,14 +15,14 @@ class MoveCodesDataToItemsTable extends Migration
     public function up()
     {
         DB::statement(
-            'INSERT INTO `items` (`id`, `webumenia_id`, `offset_top`, `description`, `author_name`, `author_description`) ' .
-                'SELECT `airtable_id`, `item_id`, `offset_top`, `description`, `author_name`, `author_description` FROM `codes`'
+            'INSERT INTO `items` (`id`, `airtable_id`, `offset_top`, `description`, `author_name`, `author_description`) ' .
+                'SELECT `item_id`, `airtable_id`, `offset_top`, `description`, `author_name`, `author_description` FROM `codes`'
         );
 
         Schema::table('codes', function (Blueprint $table) {
             $table->string('codeable_type');
-            $table->renameColumn('airtable_id', 'codeable_id');
-            $table->dropColumn(['item_id', 'offset_top', 'description', 'author_name', 'author_description']);
+            $table->renameColumn('item_id', 'codeable_id');
+            $table->dropColumn(['airtable_id', 'offset_top', 'description', 'author_name', 'author_description']);
         });
 
         DB::table('codes')->update(['codeable_type' => 'item']);
@@ -48,7 +48,7 @@ class MoveCodesDataToItemsTable extends Migration
         DB::table('codes', 'c')
             ->join('items as i', 'c.codeable_id', '=', 'i.id')
             ->update([
-                'c.item_id' => DB::raw('i.webumenia_id'),
+                'c.airtable_id' => DB::raw('i.airtable_id'),
                 'c.offset_top' => DB::raw('i.offset_top'),
                 'c.description' => DB::raw('i.description'),
                 'c.author_name' => DB::raw('i.author_name'),

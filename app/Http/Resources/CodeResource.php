@@ -15,8 +15,8 @@ class CodeResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->codeable_type === 'item' ? $this->codeable->webumenia_id : $this->codeable_id,
-            'type' => $this->codeable_type,
+            'codeable_id' => $this->codeable_id,
+            'codeable_type' => $this->codeable_type,
         ];
     }
 }

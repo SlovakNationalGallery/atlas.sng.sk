@@ -49,11 +49,11 @@ class ImportItems extends Command
             $bar->advance();
             $item = Item::unguarded(
                 fn() => Item::firstOrNew([
-                    'id' => $record['id'],
+                    'id' => $record['fields']['ID'],
                 ])
             );
 
-            $item->webumenia_id = Arr::get($record, 'fields.ID');
+            $item->airtable_id = $record['id'];
 
             $item->description = [
                 'sk' => Arr::get($record, 'fields.app text'),
