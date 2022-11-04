@@ -1,5 +1,5 @@
 <template>
-    <div class="flex">
+    <div class="flex items-center">
         <div class="shrink-0">
             <img class="rounded-full w-16" :src="authority.image_url" />
         </div>
