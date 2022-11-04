@@ -55,6 +55,8 @@ class ImportAirtable extends Command
                 $code->code = Code::randomUniqueCode();
             }
 
+            $code->airtable_id = $record['id'];
+
             $code->description = [
                 'sk' => Arr::get($record, 'fields.app text'),
                 'en' => Arr::get($record, 'fields.app text preklad'),
