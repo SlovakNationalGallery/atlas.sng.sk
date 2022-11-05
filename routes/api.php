@@ -8,6 +8,8 @@ use App\Http\Resources\ItemResource;
 use App\Http\Resources\SectionResource;
 use App\Models\Item;
 use App\Models\Section;
+use Illuminate\Http\Client\Pool;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
@@ -37,13 +39,28 @@ Route::get('/items/{id}', function (string $id) {
     }
 
     $data = $response->object()->data;
-    $data->item = $item;
-    return new ItemResource($data);
+    return new ItemResource([
+        'item' => $item,
+        'webumenia_item' => $data,
+    ]);
 });
 
 Route::get('/section/{id}', function (string $id) {
     $section = Section::findOrFail($id);
-    return new SectionResource($section);
+
+    $responses = Http::pool(
+        fn(Pool $pool) => $section->items->map(
+            fn(Item $item) => $pool
+                ->as($item->id)
+                ->webumenia()
+                ->get("/v2/items/{$item->id}")
+        )
+    );
+
+    return new SectionResource([
+        'section' => $section,
+        'webumenia_items' => collect($responses)->map(fn(Response $response) => $response->object()->data),
+    ]);
 });
 
 Route::post('/collections', function (Request $request) {
