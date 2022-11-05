@@ -20,9 +20,9 @@
         </Collapsible>
         <WebumeniaButton :url="item.webumenia_url" class="mb-4" />
     </div>
-    <div class="w-full md:max-w-lg h-24 fixed bottom-0 bg-white">
-        <div class="p-4 pt-2">
-            <div class="flex space-x-4">
+    <div class="w-full md:max-w-lg h-24 fixed bottom-0 bg-gradient-to-t from-white to-transparent pointer-events-none">
+        <div class="p-4 pt-8">
+            <div class="flex space-x-4 pointer-events-auto">
                 <ConfirmButton class="bg-white" @click="returnHome">{{ $t('Find another') }}</ConfirmButton>
                 <ConfirmButton v-if="item && itemsStore.exists(item.id)" class="bg-white text-red border-red"
                     @click="itemsStore.remove(item.id)">{{ $t('Remove') }}</ConfirmButton>
