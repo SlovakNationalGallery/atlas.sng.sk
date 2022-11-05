@@ -6,13 +6,15 @@ import { i18nVue } from 'laravel-vue-i18n'
 import { createPinia } from 'pinia'
 
 import App from './App.vue'
-import Home from './views/Home.vue'
-import Detail from './views/Detail.vue'
 import Collection from './views/Collection.vue'
+import Home from './views/Home.vue'
+import ItemDetail from './views/ItemDetail.vue'
+import SectionDetail from './views/SectionDetail.vue'
 import { HEADER_CODES } from './consts'
 
 const routes = [
     {
+        name: 'home',
         path: '/',
         component: Home,
         meta: {
@@ -21,16 +23,40 @@ const routes = [
         },
     },
     {
+        name: 'item_detail',
         path: '/detail/:id',
-        component: Detail,
+        component: ItemDetail,
         meta: {
             code: HEADER_CODES.ITEM,
             title: 'Artwork detail',
         },
     },
     {
+        name: 'section_detail',
+        path: '/section/:id',
+        component: SectionDetail,
+        meta: {
+            code: HEADER_CODES.ITEM,
+            title: 'Detail zbierky',
+        },
+    },
+    {
+        name: 'section_item_detail',
+        path: '/section/:section_id/:id',
+        component: ItemDetail,
+        meta: {
+            code: HEADER_CODES.ITEM,
+            title: 'Detail diela zbierky',
+            back: (from) => ({
+                name: 'section_detail',
+                params: { id: from.params.section_id },
+            }),
+        },
+    },
+    {
+        name: 'item_edit',
         path: '/edit/:id',
-        component: Detail,
+        component: ItemDetail,
         meta: {
             edit: true,
             code: HEADER_CODES.NONE,
@@ -38,6 +64,7 @@ const routes = [
         },
     },
     {
+        name: 'my_collection',
         path: '/collection',
         component: Collection,
         meta: {
@@ -46,6 +73,7 @@ const routes = [
         },
     },
     {
+        name: 'collection_detail',
         path: '/:id?',
         component: Collection,
         meta: {
