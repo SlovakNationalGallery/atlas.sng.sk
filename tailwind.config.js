@@ -6,7 +6,7 @@ module.exports = {
                 full: '100%',
             },
             strokeWidth: {
-                2: '2px',
+                3: '3px',
             },
         },
         colors: {
