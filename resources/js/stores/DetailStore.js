@@ -8,11 +8,7 @@ export const useDetailStore = defineStore('DetailStore', {
     }),
     actions: {
         async addItem(itemId) {
-            const response = await axios.get(`/api/items/${itemId}`, {
-                headers: {
-                    'X-locale': getActiveLanguage(),
-                },
-            })
+            const response = await axios.get(`/api/items/${itemId}`)
             const item = response.data.data
             this.item = item
             return item

@@ -22,11 +22,7 @@ export const useItemsStore = defineStore('ItemsStore', {
             if (Object.keys(this.items).includes(itemId)) {
                 return this.items[itemId]
             } else {
-                const response = await axios.get(`/api/items/${itemId}`, {
-                    headers: {
-                        'X-locale': getActiveLanguage(),
-                    },
-                })
+                const response = await axios.get(`/api/items/${itemId}`)
 
                 const itemData = response.data.data
 
