@@ -15,9 +15,18 @@
                     />
                 </svg>
             </div>
-            <div class="text-gray-dark text-sm truncate">
+            <div class="text-gray-dark text-sm" :class="{ truncate: truncateDescription }">
                 <slot name="description"></slot>
             </div>
         </div>
     </div>
 </template>
+
+<script setup>
+defineProps({
+    truncateDescription: {
+        type: Boolean,
+        default: true,
+    },
+})
+</script>

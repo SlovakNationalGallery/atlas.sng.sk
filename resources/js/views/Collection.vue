@@ -11,7 +11,7 @@
 
         <router-link to="/">
             <div class="mt-3">
-                <Thumbnail>
+                <Thumbnail :truncate-description="false">
                     <template #image>
                         <div class="bg-black flex items-center justify-center h-full w-full">
                             <svg class="fill-none h-[52px] w-[52px]">
