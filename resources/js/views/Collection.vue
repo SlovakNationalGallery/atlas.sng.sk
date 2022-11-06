@@ -1,7 +1,7 @@
 <template>
     <Survey />
     <div class="border-black p-4 border-t-2">
-        <div class="flex flex-col space-y-4">
+        <div class="flex flex-col space-y-3">
             <ItemLoader :id="itemId" v-slot="{ item }" v-for="itemId in itemsStore.itemsIds" :key="itemId">
                 <router-link :to="{ name: 'item_detail', params: { id: item.id } }">
                     <ItemThumbnail :item="item" />
@@ -10,24 +10,26 @@
         </div>
 
         <router-link to="/">
-            <div class="flex my-4">
-                <div class="h-24 w-24 border-black border-2 flex items-center justify-center">
-                    <svg class="w-9 h-9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M5 16h22M16 5v22"
-                            stroke="#2F3152"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        />
-                    </svg>
-                </div>
-                <div class="py-2 px-4">
-                    <h2 class="text-base pb-1">{{ $t('Add new artwork') }}</h2>
-                    <div class="text-sm text-gray-dark">
-                        {{ $t('Enter a new artwork code') }}
-                    </div>
-                </div>
+            <div class="mt-3">
+                <Thumbnail>
+                    <template #image>
+                        <div class="bg-black flex items-center justify-center h-full w-full">
+                            <svg class="fill-none h-[52px] w-[52px]">
+                                <circle cx="7.80103" cy="7.79761" r="5.78003" class="stroke-3 stroke-white" />
+                                <circle cx="7.80103" cy="25.9978" r="5.78003" class="stroke-3 stroke-white" />
+                                <circle cx="7.80103" cy="44.198" r="5.78003" class="stroke-3 stroke-white" />
+                                <circle cx="25.9995" cy="8" r="5.5" class="stroke-3 stroke-white" />
+                                <circle cx="26.0002" cy="25.9978" r="5.78003" class="stroke-3 stroke-white" />
+                                <circle cx="26.0002" cy="44.198" r="5.78003" class="stroke-3 stroke-white" />
+                                <circle cx="44.1995" cy="7.79761" r="5.78003" class="stroke-3 stroke-white" />
+                                <circle cx="43.9995" cy="26" r="5.5" class="stroke-3 stroke-white" />
+                                <circle cx="44.1995" cy="44.198" r="5.78003" class="stroke-3 stroke-white" />
+                            </svg>
+                        </div>
+                    </template>
+                    <template #title>{{ $t('Add new artwork') }}</template>
+                    <template #description>{{ $t('Enter a new artwork code') }}</template>
+                </Thumbnail>
             </div>
         </router-link>
         <div v-if="itemsStore.items.length !== 0">
@@ -130,6 +132,7 @@ import ConfirmButton from '../components/ConfirmButton.vue'
 import ItemLoader from '../components/ItemLoader.vue'
 import ItemThumbnail from '../components/ItemThumbnail.vue'
 import Survey from '../components/Survey.vue'
+import Thumbnail from '../components/Thumbnail.vue'
 
 const route = useRoute()
 const itemsStore = useItemsStore()
