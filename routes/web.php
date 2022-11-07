@@ -1,13 +1,10 @@
 <?php
 
-use App\Http\Resources\ItemResource;
 use App\Models\Item;
 use App\Models\Section;
-use Illuminate\Http\Client\Pool;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Http;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,26 +19,7 @@ use Illuminate\Support\Facades\Http;
 
 Route::get('/items', function (Request $request) {
     $items = Item::with('code')->get();
-
-    $responses = Http::pool(
-        fn(Pool $pool) => $items->map(
-            fn(Item $item) => $pool
-                ->as($item->id)
-                ->webumenia()
-                ->get("/v2/items/{$item->id}")
-        )
-    );
-
-    $collection = $items->map(
-        fn(Item $item) => [
-            'item' => $item,
-            'webumenia_item' => $responses[$item->id]->object()?->data,
-        ]
-    );
-
-    return response()->view('items', [
-        'items' => ItemResource::collection($collection)->toArray($request),
-    ]);
+    return response()->view('items', compact('items'));
 });
 
 Route::get('/sections', function () {
