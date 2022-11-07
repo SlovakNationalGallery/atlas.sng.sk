@@ -26,7 +26,7 @@ class ItemResource extends JsonResource
                 ->map(fn($width) => $this->getImageRoute($width) . " ${width}w")
                 ->join(', '),
             'webumenia_url' => config('services.webumenia.url') . '/dielo/' . $this['webumenia_item']->id,
-            'code' => $this['item']->code?->code,
+            'code' => $this['item']->code ? $this['item']->code->code : null,
             'offset_top' => $this['item']->offset_top,
             'author_description' => $this['item']->author_description,
         ];
