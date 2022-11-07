@@ -55,6 +55,8 @@ class ImportItems extends Command
 
             $item->airtable_id = $record['id'];
 
+            $item->title = Arr::get($record, 'fields.Názov diela');
+
             $item->description = [
                 'sk' => Arr::get($record, 'fields.app text'),
                 'en' => Arr::get($record, 'fields.app text preklad'),
