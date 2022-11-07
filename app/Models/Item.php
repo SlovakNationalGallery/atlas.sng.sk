@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasCode;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
 class Item extends Model
 {
-    use HasTranslations;
+    use HasCode, HasTranslations;
 
     public $incrementing = false;
 
@@ -16,20 +17,4 @@ class Item extends Model
     protected $attributes = [
         'offset_top' => 0,
     ];
-
-    public function code()
-    {
-        return $this->morphOne(Code::class, 'codeable');
-    }
-
-    protected static function booted()
-    {
-        static::created(function (self $item) {
-            $item->code()->create();
-        });
-
-        static::deleting(function (self $item) {
-            $item->code()->delete();
-        });
-    }
 }
