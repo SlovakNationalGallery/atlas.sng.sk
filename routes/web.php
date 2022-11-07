@@ -1,8 +1,13 @@
 <?php
 
+use App\Http\Resources\ItemResource;
+use App\Models\Item;
+use App\Models\Section;
+use Illuminate\Http\Client\Pool;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Http;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +20,33 @@ use Illuminate\Support\Facades\Artisan;
 |
 */
 
-Route::get('/print', function (Request $request) {
-    $codes = \App\Models\Code::all();
-    return response()->view('print', compact('codes'));
+Route::get('/items', function (Request $request) {
+    $items = Item::with('code')->get();
+
+    $responses = Http::pool(
+        fn(Pool $pool) => $items->map(
+            fn(Item $item) => $pool
+                ->as($item->id)
+                ->webumenia()
+                ->get("/v2/items/{$item->id}")
+        )
+    );
+
+    $collection = $items->map(
+        fn(Item $item) => [
+            'item' => $item,
+            'webumenia_item' => $responses[$item->id]->object()?->data,
+        ]
+    );
+
+    return response()->view('items', [
+        'items' => ItemResource::collection($collection)->toArray($request),
+    ]);
+});
+
+Route::get('/sections', function () {
+    $sections = Section::with('code')->get();
+    return response()->view('sections', compact('sections'));
 });
 
 Route::get('/img/{code}.svg', function (Request $request, $code) {
