@@ -3,7 +3,7 @@
         <div class="shrink-0">
             <img class="rounded-full w-16" :src="authority.image_url" />
         </div>
-        <div class="mx-3">
+        <div class="mx-3 self-center">
             <div class="font-bold">{{ authority.name }}</div>
             <div class="text-sm">
                 {{ authority.birth_date }} {{ authority.birth_place }}
