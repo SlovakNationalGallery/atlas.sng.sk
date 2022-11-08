@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Item;
+use App\Models\Section;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
@@ -15,9 +17,14 @@ use Illuminate\Support\Facades\Artisan;
 |
 */
 
-Route::get('/print', function (Request $request) {
-    $codes = \App\Models\Code::all();
-    return response()->view('print', compact('codes'));
+Route::get('/items', function (Request $request) {
+    $items = Item::with('code')->get();
+    return response()->view('items', compact('items'));
+});
+
+Route::get('/sections', function () {
+    $sections = Section::with('code')->get();
+    return response()->view('sections', compact('sections'));
 });
 
 Route::get('/img/{code}.svg', function (Request $request, $code) {
