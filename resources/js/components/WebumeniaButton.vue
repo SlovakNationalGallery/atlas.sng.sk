@@ -1,5 +1,5 @@
 <template>
-    <a :href="props.url" target="_blank" class="bg-green p-2.5 rounded-xl block">
+    <a :href="props.url" target="_blank" class="bg-green border-2 border-green p-2.5 rounded-xl block">
         <div class="flex cursor-pointer">
             <div class="flex-grow">
                 <div class="flex items-center">
