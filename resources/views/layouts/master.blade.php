@@ -14,7 +14,7 @@
     <meta name="theme-color" content="#ffffff">
 
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-    <title>{{ trans('Items')}} | {{ trans('SNG Codes') }}</title>
+    <title>@section('title'){{ trans('SNG Codes') }}@show</title>
 </head>
 
 <body>

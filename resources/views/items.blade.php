@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('title')
+    {{ trans('Items') }} | @parent
+@endsection
+
 @section('content')
     <div class="mx-12 my-12">
         <h1 class="font-bold mb-8 pl-8 text-2xl">{{ trans('Items') }}</h1>
