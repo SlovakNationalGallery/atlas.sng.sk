@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Airtable Key
@@ -40,11 +39,12 @@ return [
     'default' => 'default',
 
     'tables' => [
-
-        'default' => [
-            'name' => env('AIRTABLE_TABLE'),
+        'items' => [
+            'name' => env('AIRTABLE_ITEM_TABLE'),
         ],
-
+        'sections' => [
+            'name' => env('AIRTABLE_SECTION_TABLE'),
+        ],
     ],
 
     /*

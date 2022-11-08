@@ -3,25 +3,25 @@
 namespace App\Console\Commands;
 
 use Airtable;
-use App\Models\Code;
+use App\Models\Item;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
 
-class ImportAirtable extends Command
+class ImportItems extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'import:airtable';
+    protected $signature = 'import:items';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Import data from airtable';
+    protected $description = 'Import items from airtable';
 
     /**
      * Create a new command instance.
@@ -40,44 +40,48 @@ class ImportAirtable extends Command
      */
     public function handle()
     {
-        $records = Airtable::table('default')
+        $records = Airtable::table('items')
             ->where('ID', '!=', '')
             ->get();
         $bar = $this->output->createProgressBar(count($records));
         $bar->start();
-        $records->each(function ($record) use (&$bar) {
+        $records->each(function ($record) use ($bar) {
             $bar->advance();
-            $item_id = $record['fields']['ID'];
-            $code = Code::firstOrNew([
-                'item_id' => $item_id,
-            ]);
-            if (!$code->exists) {
-                $code->code = Code::randomUniqueCode();
-            }
+            $item = Item::unguarded(
+                fn() => Item::firstOrNew([
+                    'id' => $record['fields']['ID'],
+                ])
+            );
 
-            $code->airtable_id = $record['id'];
+            $item->airtable_id = $record['id'];
 
-            $code->description = [
+            $item->title = Arr::get($record, 'fields.Názov diela');
+
+            $item->description = [
                 'sk' => Arr::get($record, 'fields.app text'),
                 'en' => Arr::get($record, 'fields.app text preklad'),
             ];
 
-            $code->author_name = [
+            $item->author_name = [
                 'sk' => Arr::get($record, 'fields.Autor/ka'),
                 'en' => Arr::get($record, 'fields.Autor/ka EN'),
             ];
 
-            $code->author_description = [
+            $item->author_description = [
                 'sk' => Arr::get($record, 'fields.Autor text SK'),
                 'en' => Arr::get($record, 'fields.Autor text EN'),
             ];
 
-            $code->offset_top = Arr::get($record, 'fields.offsetTop', 0);
+            $item->offset_top = Arr::get($record, 'fields.offsetTop', 0);
 
-            $code->save();
+            $item->save();
+
             // update code in airtable
-            if (\App::environment('production') && (empty($record['fields']['code']) || $record['fields']['code'] != $code->code)) {
-                Airtable::table('default')->patch($record['id'], ['code' => $code->code]);
+            if (
+                \App::environment('production') &&
+                (empty($record['fields']['code']) || $record['fields']['code'] != $item->code->code)
+            ) {
+                Airtable::table('items')->patch($record['id'], ['code' => $item->code->code]);
             }
         });
 

@@ -84,7 +84,7 @@ const verifyCode = (event) => {
     axios
         .get('/api/verify/' + digit)
         .then((response) => {
-            router.push('/detail/' + response.data.data.item_id)
+            router.push('/detail/' + response.data.data.codeable_id)
         })
         .catch((resonse) => {
             isWrong.value = true

@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Item;
+use App\Models\Section;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\ServiceProvider;
 
@@ -24,10 +28,20 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Http::macro('webumenia', function () {
-            return Http::withHeaders([
-                'Accept-Language' => app()->getLocale(),
-            ])->baseUrl(config('services.webumenia.api'));
-        });
+        foreach ([Http::class, PendingRequest::class] as $class) {
+            $class::macro(
+                'webumenia',
+                fn() => $class
+                    ::withHeaders([
+                        'Accept-Language' => app()->getLocale(),
+                    ])
+                    ->baseUrl(config('services.webumenia.api'))
+            );
+        }
+
+        Relation::enforceMorphMap([
+            'item' => Item::class,
+            'section' => Section::class,
+        ]);
     }
 }
