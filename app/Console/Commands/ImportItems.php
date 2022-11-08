@@ -45,7 +45,7 @@ class ImportItems extends Command
             ->get();
         $bar = $this->output->createProgressBar(count($records));
         $bar->start();
-        $records->each(function ($record) use (&$bar) {
+        $records->each(function ($record) use ($bar) {
             $bar->advance();
             $item = Item::unguarded(
                 fn() => Item::firstOrNew([

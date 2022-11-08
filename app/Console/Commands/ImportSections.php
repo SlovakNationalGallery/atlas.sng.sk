@@ -44,7 +44,7 @@ class ImportSections extends Command
         $records = Airtable::table('sections')->get();
         $bar = $this->output->createProgressBar(count($records));
         $bar->start();
-        $records->each(function ($record) use (&$bar) {
+        $records->each(function ($record) use ($bar) {
             $bar->advance();
 
             $section = Section::unguarded(

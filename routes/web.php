@@ -22,17 +22,20 @@ Route::get('/print', function (Request $request) {
 
 Route::get('/img/{code}.svg', function (Request $request, $code) {
     $color = $request->get('color', 'white');
-    return response()->view('code-svg', compact('code', 'color'))
+    return response()
+        ->view('code-svg', compact('code', 'color'))
         ->header('Content-Type', 'image/svg+xml')
         ->header('Cache-Control', 'max-age=15552000');
 })->where('code', '[0-1]{9}');
 
 Route::get('/import', function () {
-    Artisan::call('import:airtable');
-    return '<pre>' . Artisan::output() . '</pre>';
+    Artisan::call('import:items');
+    $output = Artisan::output();
+    Artisan::call('import:sections');
+    $output .= Artisan::output();
+    return '<pre>' . $output . '</pre>';
 });
 
 Route::get('/{any}', function () {
     return view('app');
 })->where('any', '.*');
-
