@@ -2,11 +2,11 @@
     <a :href="props.url" target="_blank" class="bg-green border-2 border-green p-2.5 rounded-xl block">
         <div class="flex cursor-pointer">
             <div class="flex-grow">
-                <div class="flex items-center">
+                <div class="flex">
                     <div class="shrink-0">
                         <div class="bg-black w-16 h-16 rounded-xl"></div>
                     </div>
-                    <div class="mx-3">
+                    <div class="mx-3 self-center">
                         <div class="font-bold">Otvor v Archíve</div>
                         <div class="text-sm">
                             na Web Umenia SNG
