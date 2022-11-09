@@ -66,4 +66,10 @@ const item = ref(null)
 onMounted(async () => {
     item.value = await detailStore.addItem(route.params.id)
 })
+
+const returnHome = () => {
+    router.push({
+        name: 'home',
+    })
+}
 </script>
