@@ -78,15 +78,25 @@ onMounted(async () => {
     }
 })
 
-const verifyCode = (event) => {
+const verifyCode = () => {
     if (!isActive.value) return
     const digit = parseInt(code.value, 2)
     axios
         .get('/api/verify/' + digit)
-        .then((response) => {
-            router.push('/detail/' + response.data.data.codeable_id)
+        .then(({ data }) => {
+            if (data.data.codeable_type === 'item') {
+                router.push({
+                    name: 'item_detail',
+                    params: { id: data.data.codeable_id },
+                })
+            } else if (data.data.codeable_type === 'section') {
+                router.push({
+                    name: 'section_detail',
+                    params: { id: data.data.codeable_id },
+                })
+            }
         })
-        .catch((resonse) => {
+        .catch(() => {
             isWrong.value = true
         })
 }
