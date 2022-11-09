@@ -45,6 +45,9 @@ return [
         'sections' => [
             'name' => env('AIRTABLE_SECTION_TABLE'),
         ],
+        'authorities' => [
+            'name' => env('AIRTABLE_AUTHORITY_TABLE'),
+        ],
     ],
 
     /*

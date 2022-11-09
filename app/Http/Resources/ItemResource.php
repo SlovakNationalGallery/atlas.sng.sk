@@ -2,7 +2,9 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Authority;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Collection;
 
 class ItemResource extends JsonResource
 {
@@ -14,13 +16,26 @@ class ItemResource extends JsonResource
      */
     public function toArray($request)
     {
+        $webumeniaAuthorities = collect($this['webumenia_item']->authorities);
+        $authorities = Authority::whereIn('id', $webumeniaAuthorities->pluck('id'))
+            ->get()
+            ->keyBy('id')
+            ->pipe(
+                fn($authorities) => $webumeniaAuthorities->map(
+                    fn($webumeniaAuthority) => [
+                        'authority' => $authorities[$webumeniaAuthority->id] ?? null,
+                        'webumenia_authority' => $webumeniaAuthority,
+                    ]
+                )
+            );
+
         return [
             'id' => $this['webumenia_item']->id,
             'title' => $this['webumenia_item']->title,
             'author' => $this->getAuthor(),
             'dating' => $this['webumenia_item']->dating,
             'description' => $this->getDescription(),
-            'authorities' => AuthorityResource::collection($this['webumenia_item']->authorities),
+            'authorities' => AuthorityResource::collection($authorities),
             'image_src' => $this->getImageRoute(),
             'image_srcset' => collect([220, 300, 600, 800])
                 ->map(fn($width) => $this->getImageRoute($width) . " ${width}w")
@@ -28,7 +43,6 @@ class ItemResource extends JsonResource
             'webumenia_url' => config('services.webumenia.url') . '/dielo/' . $this['webumenia_item']->id,
             'code' => $this['item']->code ? $this['item']->code->code : null,
             'offset_top' => $this['item']->offset_top,
-            'author_description' => $this['item']->author_description,
         ];
     }
 

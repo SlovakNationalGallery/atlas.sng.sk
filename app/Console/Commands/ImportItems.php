@@ -67,11 +67,6 @@ class ImportItems extends Command
                 'en' => Arr::get($record, 'fields.Autor/ka EN'),
             ];
 
-            $item->author_description = [
-                'sk' => Arr::get($record, 'fields.Autor text SK'),
-                'en' => Arr::get($record, 'fields.Autor text EN'),
-            ];
-
             $item->offset_top = Arr::get($record, 'fields.offsetTop', 0);
 
             $item->save();

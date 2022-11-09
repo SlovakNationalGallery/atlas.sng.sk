@@ -14,8 +14,8 @@
             <template v-slot:summary>
                 <AuthoritySummary :authority="authority" />
             </template>
-            <template v-slot:content v-if="item.author_description || authority.biography">
-                <AuthorityDetails :authority="authority" :item="item" />
+            <template v-slot:content v-if="authority.biography">
+                <AuthorityDetails :authority="authority" />
             </template>
         </Collapsible>
         <WebumeniaButton :url="item.webumenia_url" class="mb-4" />
