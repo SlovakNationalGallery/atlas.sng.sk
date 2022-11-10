@@ -48,6 +48,12 @@ return [
         'authorities' => [
             'name' => env('AIRTABLE_AUTHORITY_TABLE'),
         ],
+        'stories' => [
+            'name' => env('AIRTABLE_STORY_TABLE'),
+        ],
+        'story_links' => [
+            'name' => env('AIRTABLE_STORY_LINK_TABLE'),
+        ],
     ],
 
     /*
