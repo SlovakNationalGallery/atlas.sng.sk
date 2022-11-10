@@ -11,7 +11,7 @@
             <div class="py-4 whitespace-pre-line">{{ section.description }}</div>
 
             <p class="font-bold mb-2">{{ $t('Diela v zbierke') }}</p>
-            <div class="flex flex-col space-y-4">
+            <div class="flex flex-col space-y-3">
                 <router-link
                     v-for="item in section.items"
                     :key="item"
