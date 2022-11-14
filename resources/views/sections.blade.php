@@ -20,7 +20,7 @@
                 @foreach ($sections as $section)
                 <tr>
                     <td class="border-b border-gray-soft p-4 pl-8">{{ $section->code->id }}</td>
-                    <td class="border-b border-gray-soft p-4 pl-8"><img class="h-10 w-10" src="/img/{{ $section->code->code }}.svg?color=black" alt="{{ $section->code->code }}" /></td>
+                    <td class="border-b border-gray-soft p-4 pl-8"><img class="h-auto w-10" src="/img/{{ $section->code->code }}.svg?color=black" alt="{{ $section->code->code }}" /></td>
                     <td class="border-b border-gray-soft p-4 pl-8">{{ $section->title }}</td>
                 </tr>
                 @endforeach

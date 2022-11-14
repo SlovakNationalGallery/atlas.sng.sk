@@ -22,7 +22,7 @@
                 @foreach ($items as $item)
                 <tr>
                     <td class="border-b border-gray-soft p-4 pl-8">{{ $item->code->id }}</td>
-                    <td class="border-b border-gray-soft p-4 pl-8"><img class="h-10 w-10" src="/img/{{ $item->code->code }}.svg?color=black" alt="{{ $item->code->code }}" /></td>
+                    <td class="border-b border-gray-soft p-4 pl-8"><img class="h-auto w-10" src="/img/{{ $item->code->code }}.svg?color=black" alt="{{ $item->code->code }}" /></td>
                     <td class="border-b border-gray-soft p-4 pl-8">{{ $item->id }}</td>
                     <td class="border-b border-gray-soft p-4 pl-8">{{ $item->title }}</td>
                     <td class="border-b border-gray-soft p-4 pl-8">{{ $item->author_name }}</td>
