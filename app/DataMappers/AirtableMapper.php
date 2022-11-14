@@ -21,6 +21,7 @@ class AirtableMapper
                 'en' => 'Text EN',
             ],
             'links' => 'Interakcie',
+            'media' => 'Media',
         ],
         'story_links' => [
             'title' => [

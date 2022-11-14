@@ -12,6 +12,8 @@ class Section extends Model
 
     public $incrementing = false;
 
+    protected $keyType = 'string';
+
     protected $translatable = ['title', 'description'];
 
     public function items()

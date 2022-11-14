@@ -39,7 +39,7 @@ class AppServiceProvider extends ServiceProvider
             );
         }
 
-        Relation::enforceMorphMap([
+        Relation::morphMap([
             'item' => Item::class,
             'section' => Section::class,
         ]);

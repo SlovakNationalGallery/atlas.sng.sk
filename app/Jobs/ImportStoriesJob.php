@@ -38,7 +38,7 @@ class ImportStoriesJob implements ShouldQueue
             Story::whereNotIn('id', $mapped['stories']->pluck('id'))->delete();
             StoryLink::whereNotIn('id', $mapped['story_links']->pluck('id'))->delete();
 
-            Story::upsert($mapped['stories']->map->except('links')->toArray(), ['id']);
+            Story::upsert($mapped['stories']->map->except(['links', 'media'])->toArray(), ['id']);
             StoryLink::upsert(
                 $mapped['story_links']
                     // airtable single-linked record returns an array
@@ -68,6 +68,44 @@ class ImportStoriesJob implements ShouldQueue
                     ->toArray(),
                 ['story_id', 'story_link_id']
             );
+        });
+
+        $mapped['stories']->each(function ($upstreamStory) {
+            $story = Story::find($upstreamStory['id']);
+
+            $importedAirtableIds = $story
+                ->media()
+                ->pluck('custom_properties')
+                ->pluck('airtable_id');
+
+            $upstreamAirtableIds = collect($upstreamStory['media'])->pluck('id');
+
+            if ($importedAirtableIds == $upstreamAirtableIds) {
+                return;
+            }
+
+            // Inserts
+            collect($upstreamStory['media'])
+                ->reject(fn($media) => $importedAirtableIds->contains($media['id']))
+                ->each(function ($media) use ($story) {
+                    $story
+                        ->addMediaFromUrl($media['url'])
+                        ->withCustomProperties([
+                            'airtable_id' => $media['id'],
+                        ])
+                        ->withResponsiveImages()
+                        ->toMediaCollection();
+                });
+
+            // Sorting
+            $upstreamAirtableIds->each(function ($airtableId, $index) use ($story) {
+                $story
+                    ->media()
+                    ->where('custom_properties->airtable_id', $airtableId)
+                    ->update([
+                        'order_column' => $index + 1, // medialibrary sorts from 1 by default
+                    ]);
+            });
         });
     }
 }
