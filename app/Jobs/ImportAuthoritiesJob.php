@@ -26,7 +26,7 @@ class ImportAuthoritiesJob implements ShouldQueue
             ->pipe(fn($authorities) => $mapper->mapTable($authorities, 'authorities'));
 
         DB::transaction(function () use ($authorities) {
-            Authority::whereNotIn('id', $authorities->pluck('id'))->delete(); // todo destroy?
+            Authority::whereNotIn('id', $authorities->pluck('id'))->delete();
             Authority::upsert($authorities->toArray(), ['id']);
         });
     }
