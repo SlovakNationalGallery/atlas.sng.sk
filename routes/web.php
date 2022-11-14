@@ -1,5 +1,6 @@
 <?php
 
+use App\Jobs\ImportAuthoritiesJob;
 use App\Models\Item;
 use App\Models\Section;
 use Illuminate\Http\Request;
@@ -40,6 +41,7 @@ Route::get('/import', function () {
     $output = Artisan::output();
     Artisan::call('import:sections');
     $output .= Artisan::output();
+    ImportAuthoritiesJob::dispatchSync();
     return '<pre>' . $output . '</pre>';
 });
 

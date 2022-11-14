@@ -10,19 +10,30 @@ class AuthorityResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'name' => formatName($this->name),
-            'has_image' => $this->has_image,
-            'biography' => $this->formatBiography($this->biography),
-            'birth_place' => $this->birth_place,
-            'death_place' => $this->death_place,
-            'birth_date' => $this->birth_date,
-            'death_date' => $this->death_date,
-            'image_url' => $this->getImageUrl($this->image_path),
+            'id' => $this['webumenia_authority']->id,
+            'name' => $this->getName(),
+            'has_image' => $this['webumenia_authority']->has_image,
+            'biography' => $this->getBiography(),
+            'birth_place' => $this['webumenia_authority']->birth_place,
+            'death_place' => $this['webumenia_authority']->death_place,
+            'birth_date' => $this['webumenia_authority']->birth_date,
+            'death_date' => $this['webumenia_authority']->death_date,
+            'image_url' => $this->getImageUrl($this['webumenia_authority']->image_path),
         ];
     }
 
-    public function formatBiography(?string $biography): ?string
+    protected function getName(): string
+    {
+        return $this['authority']->name ?? formatName($this['webumenia_authority']->name);
+    }
+
+    protected function getBiography(): string
+    {
+        return $this['authority']->biography ??
+            $this->formatWebumeniaBiography($this['webumenia_authority']->biography);
+    }
+
+    protected function formatWebumeniaBiography(?string $biography): ?string
     {
         if (null === $biography) {
             return null;
@@ -36,7 +47,7 @@ class AuthorityResource extends JsonResource
             ->trim();
     }
 
-    public function getImageUrl(string $imagePath): string
+    protected function getImageUrl(string $imagePath): string
     {
         return sprintf('%s%s', config('services.webumenia.url'), $imagePath);
     }
