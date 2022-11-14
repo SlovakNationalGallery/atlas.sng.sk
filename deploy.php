@@ -4,8 +4,8 @@ namespace Deployer;
 require 'recipe/laravel.php';
 require 'contrib/npm.php';
 
-set('bin/php', 'php7.4');
-set('bin/composer', 'php7.4 $(which composer)');
+set('bin/php', 'php8.1');
+set('bin/composer', '{{bin/php}} $(which composer)');
 
 // Project name
 set('application', 'bookmarks');
@@ -14,13 +14,13 @@ set('application', 'bookmarks');
 set('repository', 'git@github.com:SlovakNationalGallery/bookmarks.sng.sk.git');
 
 // [Optional] Allocate tty for git clone. Default value is false.
-set('git_tty', true); 
+set('git_tty', true);
 
-// Shared files/dirs between deploys 
+// Shared files/dirs between deploys
 add('shared_files', []);
 add('shared_dirs', ['storage', 'resources/fonts']);
 
-// Writable dirs by web server 
+// Writable dirs by web server
 add('writable_dirs', []);
 set('allow_anonymous_stats', false);
 
@@ -45,4 +45,3 @@ before('deploy:symlink', 'artisan:migrate');
 
 after('deploy:update_code', 'npm:install');
 after('deploy:shared', 'build');
-
