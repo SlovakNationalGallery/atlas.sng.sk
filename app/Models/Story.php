@@ -19,6 +19,6 @@ class Story extends Model implements HasMedia
 
     public function links()
     {
-        return $this->belongsToMany(StoryLink::class);
+        return $this->belongsToMany(StoryLink::class)->orderByPivot('ord');
     }
 }

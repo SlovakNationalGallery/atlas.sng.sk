@@ -34,7 +34,7 @@ const props = defineProps(['section'])
 const section = ref(null)
 
 onMounted(() => {
-    axios.get(`/api/section/${route.params.id}`).then(({ data }) => {
+    axios.get(`/api/sections/${route.params.id}`).then(({ data }) => {
         section.value = data.data
     })
 })
