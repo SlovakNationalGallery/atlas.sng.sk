@@ -9,6 +9,10 @@ class StoryLink extends Model
 {
     use HasTranslations;
 
+    public $incrementing = false;
+
+    protected $keyType = 'string';
+
     protected array $translatable = ['title'];
 
     public function story()

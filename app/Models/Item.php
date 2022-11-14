@@ -12,6 +12,8 @@ class Item extends Model
 
     public $incrementing = false;
 
+    protected $keyType = 'string';
+
     protected $translatable = ['description', 'author_name', 'author_description'];
 
     protected $attributes = [
