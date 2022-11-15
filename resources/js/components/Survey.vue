@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!surveyStore.isDone" class="border-black p-4 border-t-2">
+    <div v-if="!surveyStore.isDone" class="border-black p-4 border-b-2">
         <h3 class="text-lg font-bold mb-3">
             {{ $t('Help us make the app better') }}
         </h3>
