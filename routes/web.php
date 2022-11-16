@@ -1,5 +1,6 @@
 <?php
 
+use App\Jobs\ImportExhibitionsJob;
 use App\Jobs\ImportAuthoritiesJob;
 use App\Models\Item;
 use App\Models\Section;
@@ -37,6 +38,7 @@ Route::get('/img/{code}.svg', function (Request $request, $code) {
 })->where('code', '[0-1]{9}');
 
 Route::get('/import', function () {
+    ImportExhibitionsJob::dispatchSync();
     Artisan::call('import:items');
     $output = Artisan::output();
     Artisan::call('import:sections');
