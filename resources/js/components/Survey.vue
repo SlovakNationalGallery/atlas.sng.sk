@@ -1,15 +1,14 @@
 <template>
-    <div v-if="!surveyStore.isDone" class="border-black p-4 border-b-2">
-        <h3 class="text-lg font-bold mb-3">
-            {{ $t('Help us make the app better') }}
+    <div v-if="!surveyStore.isDone" class="border-black p-4 border-t-2">
+        <h3 class="text-base font-bold mb-3">
+            {{ $t('Help us improve the app for you!') }}
         </h3>
         <div class="mb-4">
-            {{ $t('How did you like your experience with the app? Did it match your expectations?') }}
-            <br />
-            {{ $t('Let us know in the brief online survey.') }}
+            {{ $t('Did you enjoy your experience? What would you change to make it better for you?') }}
+            {{ $t('Let us know in the brief survey below!') }}
         </div>
-        <ConfirmButton @click="getFeedback" class="bg-black text-white">
-            {{ $t('Give feedback') }}
+        <ConfirmButton @click="getFeedback" class="bg-white text-black">
+            {{ $t('Give feedback') }} (3 min)
         </ConfirmButton>
     </div>
 </template>

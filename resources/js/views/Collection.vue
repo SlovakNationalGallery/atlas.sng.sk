@@ -1,5 +1,4 @@
 <template>
-    <Survey />
     <div class="p-4">
         <div class="flex flex-col space-y-3">
             <router-link to="/">
@@ -39,15 +38,14 @@
     <div class="mt-auto w-full md:max-w-lg bg-green border-black border-t-2">
         <div class="p-4">
             <div class="flex flex-col">
-                <h3 class="text-base font-bold mb-4"
-                    v-html="$t('Your collection will stay here even after you close the app. Get back to it later.')">
+                <h3 class="text-base font-bold mb-4" v-html="$t('How to revisit collection from home?')">
                 </h3>
-                <ul class="list-disc list-outside mb-4 ml-4">
-                    <li>
-                        {{ $t('Send the link to your e-mail or share it with friends.') }}
-                    </li>
-                    <li>{{ $t('The link never expires.') }}</li>
-                </ul>
+                <div class="mb-4">
+                    {{ $t('Send the collection link to your e-mail or share it with friends.') }}
+                    {{ $t('The link does never expire - your collection will stay here even after you close the app.')
+                    }}
+                    {{ $t('Get back to it later.') }}
+                </div>
                 <ConfirmButton v-if="!shareUrl" class="bg-black text-white" @click="shareCollection"
                     :disabled="loading">
                     <span v-if="loading">{{ $t('Loading...') }}</span>
@@ -77,6 +75,7 @@
             </div>
         </div>
     </div>
+    <Survey />
     <CardModal @close="toggleModal" :visible="modalActive">
         <h3 class="font-bold text-2xl my-4">{{ $t('Remove all artworks?') }}</h3>
         <div class="text-base">{{ $t('This cannot be undone') }}</div>
