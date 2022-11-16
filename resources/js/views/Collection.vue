@@ -20,7 +20,7 @@
                         </div>
                     </template>
                     <template #title>{{ $t('Add new artwork') }}</template>
-                    <template #description>{{ $t('Enter a new artwork code') }}</template>
+                    <template #description>{{ $t('Enter a new artwork code to add to your collection') }}</template>
                 </Thumbnail>
             </router-link>
             <ItemLoader :id="itemId" v-slot="{ item }" v-for="itemId in itemsStore.itemsIds" :key="itemId">
