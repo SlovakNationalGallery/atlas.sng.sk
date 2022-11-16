@@ -48,6 +48,9 @@ return [
         'authorities' => [
             'name' => env('AIRTABLE_AUTHORITY_TABLE'),
         ],
+        'exhibitions' => [
+            'name' => env('AIRTABLE_EXHIBITION_TABLE'),
+        ],
     ],
 
     /*
