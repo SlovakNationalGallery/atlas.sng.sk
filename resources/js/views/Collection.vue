@@ -2,15 +2,7 @@
     <Survey />
     <div class="p-4">
         <div class="flex flex-col space-y-3">
-            <ItemLoader :id="itemId" v-slot="{ item }" v-for="itemId in itemsStore.itemsIds" :key="itemId">
-                <router-link :to="{ name: 'item_detail', params: { id: item.id } }">
-                    <ItemThumbnail :item="item" />
-                </router-link>
-            </ItemLoader>
-        </div>
-
-        <router-link to="/">
-            <div class="mt-3">
+            <router-link to="/">
                 <Thumbnail :truncate-description="false">
                     <template #image>
                         <div class="bg-black flex items-center justify-center h-full w-full">
@@ -30,8 +22,13 @@
                     <template #title>{{ $t('Add new artwork') }}</template>
                     <template #description>{{ $t('Enter a new artwork code') }}</template>
                 </Thumbnail>
-            </div>
-        </router-link>
+            </router-link>
+            <ItemLoader :id="itemId" v-slot="{ item }" v-for="itemId in itemsStore.itemsIds" :key="itemId">
+                <router-link :to="{ name: 'item_detail', params: { id: item.id } }">
+                    <ItemThumbnail :item="item" />
+                </router-link>
+            </ItemLoader>
+        </div>
         <div v-if="itemsStore.items.length !== 0">
             <hr class="h-0.5 bg-gray-soft border-0 mt-6 mb-2" />
             <button class="py-4 w-full active:text-gray-dark" @click="toggleModal">
