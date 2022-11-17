@@ -35,7 +35,7 @@
             </button>
         </div>
     </div>
-    <div class="mt-auto w-full md:max-w-lg bg-green border-black border-t-2">
+    <div class="mt-auto w-full md:max-w-lg bg-green border-black border-t-2" id="share">
         <div class="p-4">
             <div class="flex flex-col">
                 <h3 class="text-base font-bold mb-4" v-html="$t('How to revisit collection from home?')">
