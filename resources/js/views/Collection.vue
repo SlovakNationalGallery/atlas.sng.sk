@@ -29,9 +29,8 @@
             </ItemLoader>
         </div>
         <div v-if="itemsStore.items.length !== 0">
-            <hr class="h-0.5 bg-gray-soft border-0 mt-6 mb-2" />
-            <button class="py-4 w-full active:text-gray-dark" @click="toggleModal">
-                {{ $t('Clear collection') }}
+            <button class="pt-6 pb-2 w-full active:text-gray-dark" @click="toggleModal">
+                {{ $t('Remove all artworks from collection') }}
             </button>
         </div>
     </div>
