@@ -11,7 +11,7 @@
                     class="stroke-2 stroke-black [stroke-linecap:round] [stroke-linejoin:round]" />
             </svg>
         </div>
-        <h1 class="text-xl text-center flex-grow">
+        <h1 class="text-xl text-center grow">
             {{ $t($route.meta.title) }}
             <span v-if="$route.name === 'my_collection'">({{ count }})</span>
         </h1>
