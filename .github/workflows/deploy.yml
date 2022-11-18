@@ -12,9 +12,9 @@ jobs:
             - uses: actions/checkout@master
             - uses: shivammathur/setup-php@v2
               with:
-                  php-version: 7.4
+                  php-version: 8.1
             - uses: deployphp/action@v1
               with:
                   private-key: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
-                  deployer-version: '7.0.0-rc.4'
+                  deployer-version: '7.0.2'
                   dep: deploy
