@@ -37,6 +37,7 @@ class ImportStoriesJob implements ShouldQueue
         DB::transaction(function () use ($mapped) {
             Story::whereNotIn('id', $mapped['stories']->pluck('id'))->delete();
             StoryLink::whereNotIn('id', $mapped['story_links']->pluck('id'))->delete();
+            DB::table('story_story_link')->delete();
 
             Story::upsert($mapped['stories']->map->except(['links', 'media'])->toArray(), ['id']);
             StoryLink::upsert(
