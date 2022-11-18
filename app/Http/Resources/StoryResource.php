@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class StoryResource extends JsonResource
 {
@@ -18,7 +19,9 @@ class StoryResource extends JsonResource
             'id' => $this->id,
             'text' => $this->text,
             'links' => StoryLinkResource::collection($this->links),
-            'media' => $this->getMedia(),
+            'images' => ImageResource::collection(
+                $this->getMedia()->filter(fn(Media $media) => $media->hasResponsiveImages())
+            ),
         ];
     }
 }
