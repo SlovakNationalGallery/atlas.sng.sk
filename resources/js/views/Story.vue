@@ -1,7 +1,7 @@
 <template>
     <div class="bg-black text-white">
         <div :class="{ 'opacity-50': story !== active }" v-for="(story, i) in stories">
-            {{ story.text }}
+            <Markdown :source="story.text" />
 
             <div
                 v-show="story === active || selectedLinks[i] === link"
@@ -19,6 +19,7 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
+import Markdown from 'vue3-markdown-it'
 
 const route = useRoute()
 const stories = ref([])
