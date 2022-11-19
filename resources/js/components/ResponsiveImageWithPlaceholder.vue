@@ -6,7 +6,7 @@
         :sizes="sizes"
         :src="props.image.src"
         :width="props.image.width"
-        :heigth="props.image.height"
+        :height="props.image.height"
     />
 </template>
 
