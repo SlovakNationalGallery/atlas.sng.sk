@@ -15,6 +15,7 @@ class AddExhibitionIdToCodesTable extends Migration
     {
         Schema::table('codes', function (Blueprint $table) {
             $table->string('exhibition_id')->nullable();
+            $table->foreign('exhibition_id')->references('id')->on('exhibitions');
         });
     }
 
