@@ -30,6 +30,9 @@ class AirtableMapper
             ],
             'story_id' => 'Links to',
         ],
+        'exhibitions' => [
+            'name' => 'Name',
+        ],
     ];
 
     public function getField(string $field)

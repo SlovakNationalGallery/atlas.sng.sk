@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Airtable;
 use App\Models\Item;
+use App\Models\Exhibition;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
 
@@ -40,12 +41,13 @@ class ImportItems extends Command
      */
     public function handle()
     {
+        $exhibition_ids = Exhibition::all()->pluck('id');
         $records = Airtable::table('items')
             ->where('ID', '!=', '')
             ->get();
         $bar = $this->output->createProgressBar(count($records));
         $bar->start();
-        $records->each(function ($record) use ($bar) {
+        $records->each(function ($record) use ($bar, $exhibition_ids) {
             $bar->advance();
             $item = Item::unguarded(
                 fn() => Item::firstOrNew([
@@ -71,6 +73,11 @@ class ImportItems extends Command
 
             $item->save();
 
+            if ($item->code && $exhibition_ids->contains(Arr::get($record, 'fields.Výstava.0'))) {
+                $item->code->exhibition_id = Arr::get($record, 'fields.Výstava.0');
+                $item->code->save();
+            }
+            
             // update code in airtable
             if (
                 \App::environment('production') &&
