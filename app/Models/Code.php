@@ -14,6 +14,11 @@ class Code extends Model
         return $this->morphTo();
     }
 
+    public function exhibition()
+    {
+        return $this->belongsTo(Exhibition::class);
+    }
+
     // codes are stored in DB in decimal value, e.g. 000101010 -> 42
     public function getCodeAttribute($value)
     {

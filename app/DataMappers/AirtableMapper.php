@@ -15,6 +15,9 @@ class AirtableMapper
                 'en' => 'Text EN',
             ],
         ],
+        'exhibitions' => [
+            'name' => 'Name',
+        ],
     ];
 
     public function getField(string $field)
