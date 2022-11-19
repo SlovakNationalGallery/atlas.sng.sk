@@ -3,7 +3,7 @@
         <div
             :ref="setStoryRef"
             class="m-4 scroll-mt-14"
-            :class="{ 'opacity-50 pointer-events-none': story !== active }"
+            :class="{ 'opacity-50': story !== active }"
             v-for="(story, i) in stories"
         >
             <Markdown :source="story.text" />
@@ -13,6 +13,7 @@
             </div>
 
             <button
+                :disabled="story !== active"
                 v-show="story === active || selectedLinks[i] === link"
                 class="block border-1 border-green cursor-pointer my-4 p-3 rounded-xl text-green text-left w-full"
                 @click="navigate(link)"
