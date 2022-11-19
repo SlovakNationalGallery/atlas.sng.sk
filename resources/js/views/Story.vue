@@ -9,7 +9,7 @@
             <Markdown :source="story.text" />
 
             <div class="my-4" v-for="image in story.images">
-                <ResponsiveImage class="rounded-xl w-full" :image="image" />
+                <ResponsiveImageWithPlaceholder class="rounded-xl w-full" :image="image" />
             </div>
 
             <button
@@ -29,7 +29,7 @@
 import { nextTick, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import Markdown from 'vue3-markdown-it'
-import ResponsiveImage from '../components/ResponsiveImage.vue'
+import ResponsiveImageWithPlaceholder from '../components/ResponsiveImageWithPlaceholder.vue'
 
 const route = useRoute()
 const stories = ref([])
