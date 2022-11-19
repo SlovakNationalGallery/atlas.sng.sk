@@ -1,6 +1,11 @@
 <template>
-    <div ref="storiesRef" class="bg-black grow text-base text-white">
-        <div class="m-4" :class="{ 'opacity-50 pointer-events-none': story !== active }" v-for="(story, i) in stories">
+    <div class="bg-black grow text-base text-white">
+        <div
+            :ref="setStoryRef"
+            class="m-4 scroll-mt-14"
+            :class="{ 'opacity-50 pointer-events-none': story !== active }"
+            v-for="(story, i) in stories"
+        >
             <Markdown :source="story.text" />
 
             <div class="my-4" v-for="image in story.images">
@@ -29,12 +34,20 @@ const route = useRoute()
 const stories = ref([])
 const active = ref(null)
 const selectedLinks = ref([])
-const storiesRef = ref(null)
+const storyRefs = ref([])
 
 const navigate = (link) => {
     selectedLinks.value.push(link)
     active.value = null
     loadStory(link.story_id)
+}
+
+const setStoryRef = (el) => {
+    if (!el) {
+        return
+    }
+
+    storyRefs.value.push(el)
 }
 
 const loadStory = (id) => {
@@ -43,9 +56,9 @@ const loadStory = (id) => {
         stories.value.push(active.value)
 
         nextTick(() => {
-            storiesRef.value.scrollIntoView({
+            storyRefs.value[storyRefs.value.length - 1].scrollIntoView({
                 behavior: 'smooth',
-                block: 'end',
+                block: 'start',
             })
         })
     })
