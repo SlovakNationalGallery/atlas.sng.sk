@@ -1,6 +1,6 @@
 <template>
     <div class="border-black border-y-2 flex items-center h-12 sticky top-0 w-full z-10 bg-white">
-        <div @click="$router.push(back)" class="cursor-pointer px-2.5 h-full border-r-2 flex items-center" :class="[$route.name === 'home' ? 'bg-green border-r-black' : 'border-r-transparent', 
+        <div @click="$router.push(back)" class="cursor-pointer px-3 h-full border-r-2 flex items-center" :class="[$route.name === 'home' ? 'bg-green border-r-black' : 'border-r-transparent', 
         $route.name === 'my_collection' ? 'flex-1' : '']">
             <svg v-if="$route.name === 'home'" class="h-[26px] w-[26px] fill-black stroke-black stroke-[0.2]">
                 <path
@@ -15,10 +15,11 @@
             {{ $t($route.meta.title) }}
             <span v-if="$route.name === 'my_collection'">({{ count }})</span>
         </h1>
-        <button class="flex-1 bg-green rounded-xl text-sm px-3 py-1 mx-4 font-bold" @click="scroll('share')"
-            v-if="$route.name === 'my_collection'">
-            {{ $t('Share') }}
-        </button>
+        <div class="flex-1 px-3 border-l-2 border-transparent text-right" v-if="$route.name === 'my_collection'">
+            <button class="bg-green rounded-xl text-sm px-3 py-1 font-bold ml-auto" @click="scroll('share')">
+                {{ $t('Share') }}
+            </button>
+        </div>
         <router-link to="/collection" class="relative" v-else>
             <div class="flex px-4 py-2 h-full border-black border-l-2 border-l-transparent transition-colors"
                 :class="{ 'border-l-black bg-green': isActive, 'opacity-40': !count }">
