@@ -1,16 +1,7 @@
 <template>
-    <Survey />
     <div class="p-4">
         <div class="flex flex-col space-y-3">
-            <ItemLoader :id="itemId" v-slot="{ item }" v-for="itemId in itemsStore.itemsIds" :key="itemId">
-                <router-link :to="{ name: 'item_detail', params: { id: item.id } }">
-                    <ItemThumbnail :item="item" />
-                </router-link>
-            </ItemLoader>
-        </div>
-
-        <router-link to="/">
-            <div class="mt-3">
+            <router-link to="/">
                 <Thumbnail :truncate-description="false">
                     <template #image>
                         <div class="bg-black flex items-center justify-center h-full w-full">
@@ -28,29 +19,32 @@
                         </div>
                     </template>
                     <template #title>{{ $t('Add new artwork') }}</template>
-                    <template #description>{{ $t('Enter a new artwork code') }}</template>
+                    <template #description>{{ $t('Enter a new artwork code to add to your collection') }}</template>
                 </Thumbnail>
-            </div>
-        </router-link>
+            </router-link>
+            <ItemLoader :id="itemId" v-slot="{ item }" v-for="itemId in itemsStore.itemsIds" :key="itemId">
+                <router-link :to="{ name: 'item_detail', params: { id: item.id } }">
+                    <ItemThumbnail :item="item" />
+                </router-link>
+            </ItemLoader>
+        </div>
         <div v-if="itemsStore.items.length !== 0">
-            <hr class="h-0.5 bg-gray-soft border-0 mt-6 mb-2" />
-            <button class="py-4 w-full active:text-gray-dark" @click="toggleModal">
-                {{ $t('Clear collection') }}
+            <button class="pt-6 pb-2 w-full active:text-gray-dark" @click="toggleModal">
+                {{ $t('Remove all artworks from collection') }}
             </button>
         </div>
     </div>
-    <div class="mt-auto w-full md:max-w-lg bg-green border-black border-t-2">
+    <div class="mt-auto w-full md:max-w-lg bg-green border-black border-t-2" id="share">
         <div class="p-4">
             <div class="flex flex-col">
-                <h3 class="text-base font-bold mb-4"
-                    v-html="$t('Your collection will stay here even after you close the app. Get back to it later.')">
+                <h3 class="text-base font-bold mb-4" v-html="$t('How to revisit collection from home?')">
                 </h3>
-                <ul class="list-disc list-outside mb-4 ml-4">
-                    <li>
-                        {{ $t('Send the link to your e-mail or share it with friends.') }}
-                    </li>
-                    <li>{{ $t('The link never expires.') }}</li>
-                </ul>
+                <div class="mb-4">
+                    {{ $t('Send the collection link to your e-mail or share it with friends.') }}
+                    {{ $t('The link does never expire - your collection will stay here even after you close the app.')
+                    }}
+                    {{ $t('Get back to it later.') }}
+                </div>
                 <ConfirmButton v-if="!shareUrl" class="bg-black text-white" @click="shareCollection"
                     :disabled="loading">
                     <span v-if="loading">{{ $t('Loading...') }}</span>
@@ -80,6 +74,7 @@
             </div>
         </div>
     </div>
+    <Survey />
     <CardModal @close="toggleModal" :visible="modalActive">
         <h3 class="font-bold text-2xl my-4">{{ $t('Remove all artworks?') }}</h3>
         <div class="text-base">{{ $t('This cannot be undone') }}</div>
