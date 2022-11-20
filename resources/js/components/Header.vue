@@ -16,7 +16,7 @@
             <span v-if="$route.name === 'my_collection'">({{ count }})</span>
         </h1>
         <div class="flex-1 px-3 border-l-2 border-transparent text-right" v-if="$route.name === 'my_collection'">
-            <button class="bg-green rounded-xl text-sm px-3 py-1 font-bold ml-auto" @click="scroll('share')">
+            <button class="bg-green rounded-xl text-sm px-3 py-1 font-bold" @click="scroll('share')">
                 {{ $t('Share') }}
             </button>
         </div>
