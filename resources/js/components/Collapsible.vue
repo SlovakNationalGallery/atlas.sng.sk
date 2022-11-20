@@ -1,7 +1,7 @@
 <template>
     <div class="border-2 border-black p-2.5 rounded-xl">
         <div @click="open = !open" class="flex" :class="{ 'cursor-pointer': $slots.content }">
-            <div class="flex-grow">
+            <div class="grow">
                 <slot name="summary"></slot>
             </div>
             <div v-if="$slots.content">
