@@ -66,10 +66,11 @@ const routes = [
     },
     {
         name: 'story',
-        path: '/story/:id',
+        path: '/story/:id?',
         component: Story,
         meta: {
             title: 'Story',
+            id: process.env.MIX_DEFAULT_STORY,
         },
     },
     {

@@ -66,6 +66,6 @@ const loadStory = (id) => {
 }
 
 onMounted(() => {
-    loadStory(route.params.id)
+    loadStory(route.params.id || route.meta.id)
 })
 </script>
