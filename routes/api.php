@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Resources\CodeResource;
 use App\Http\Resources\ItemResource;
 use App\Http\Resources\SectionResource;
+use App\Http\Resources\StoryResource;
 use App\Models\Item;
 use App\Models\Section;
+use App\Models\Story;
 use Illuminate\Http\Client\Pool;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
@@ -45,7 +47,7 @@ Route::get('/items/{id}', function (string $id) {
     ]);
 });
 
-Route::get('/section/{id}', function (string $id) {
+Route::get('/sections/{id}', function (string $id) {
     $section = Section::findOrFail($id);
 
     $responses = Http::pool(
@@ -82,4 +84,9 @@ Route::post('/collections', function (Request $request) {
 Route::get('/collections/{hashid}', function ($hashid) {
     $collection = Collection::findByHashidOrFail($hashid);
     return $collection->items;
+});
+
+Route::get('/stories/{id}', function (string $id) {
+    $story = Story::findOrFail($id);
+    return new StoryResource($story);
 });

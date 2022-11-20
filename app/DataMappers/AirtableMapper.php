@@ -33,6 +33,21 @@ class AirtableMapper
         'exhibitions' => [
             'name' => 'Name',
         ],
+        'stories' => [
+            'text' => [
+                'sk' => 'Text SK',
+                'en' => 'Text EN',
+            ],
+            'links' => 'Interakcie',
+            'media' => 'Media',
+        ],
+        'story_links' => [
+            'title' => [
+                'sk' => 'Text SK',
+                'en' => 'Text EN',
+            ],
+            'story_id' => 'Links to',
+        ],
     ];
 
     public function getField(string $field)

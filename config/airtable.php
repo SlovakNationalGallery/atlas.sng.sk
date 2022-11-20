@@ -57,6 +57,12 @@ return [
         'exhibitions' => [
             'name' => env('AIRTABLE_EXHIBITION_TABLE'),
         ],
+        'stories' => [
+            'name' => env('AIRTABLE_STORY_TABLE'),
+        ],
+        'story_links' => [
+            'name' => env('AIRTABLE_STORY_LINK_TABLE'),
+        ],
     ],
 
     /*

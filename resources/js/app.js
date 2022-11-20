@@ -10,6 +10,7 @@ import Collection from './views/Collection.vue'
 import Home from './views/Home.vue'
 import ItemDetail from './views/ItemDetail.vue'
 import SectionDetail from './views/SectionDetail.vue'
+import Story from './views/Story.vue'
 import { HEADER_CODES } from './consts'
 
 const routes = [
@@ -61,6 +62,15 @@ const routes = [
             edit: true,
             code: HEADER_CODES.NONE,
             title: 'Artwork detail',
+        },
+    },
+    {
+        name: 'story',
+        path: '/story/:id?',
+        component: Story,
+        meta: {
+            title: 'Story',
+            id: process.env.MIX_DEFAULT_STORY,
         },
     },
     {
