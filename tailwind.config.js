@@ -25,9 +25,10 @@ module.exports = {
                     },
                 },
             }),
-            padding: {
+            padding: (theme) => ({
+                bar: `calc(1.5 * ${theme('fontSize.sm')} + ${theme('spacing.8')})`,
                 full: '100%',
-            },
+            }),
             strokeWidth: {
                 3: '3',
             },

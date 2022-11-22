@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-black grow text-base text-white">
+    <div class="bg-black grow pb-bar text-base text-white">
         <div
             :ref="setStoryRef"
             class="m-4 scroll-mt-14"

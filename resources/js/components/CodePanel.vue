@@ -1,12 +1,12 @@
 <template>
-    <div v-if="show" class="cursor-zoom-out fixed inset-0" @click="show = false"></div>
+    <div v-if="shown" class="cursor-zoom-out fixed inset-0" @click="shown = false"></div>
     <div
         class="bg-white duration-500 fixed top-full w-full md:max-w-lg md:mx-auto"
-        :class="[show ? '-translate-y-full' : null, peek ? 'animate-peek' : null]"
+        :class="{ '-translate-y-full': shown, 'animate-peek': peek }"
     >
         <div class="absolute bg-white bottom-full flex items-center rounded-t-xl w-full">
             <div class="flex-1 px-3">
-                <svg @click="showOnboarding = true" class="cursor-pointer h-[32px] w-[32px]">
+                <svg @click="shownOnboarding = true" class="cursor-pointer h-[32px] w-[32px]">
                     <path
                         d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z"
                         class="fill-black"
@@ -25,9 +25,9 @@
                 <button
                     @click="togglePanel"
                     class="bg-black my-2 px-3 py-2 rounded-full text-sm text-white"
-                    :class="[peek ? 'animate-grow' : null]"
+                    :class="{ 'animate-grow': peek }"
                 >
-                    {{ $t(show ? 'Tap to hide' : 'Tap to collect artworks') }}
+                    {{ $t(shown ? 'Tap to hide' : 'Tap to collect artworks') }}
                 </button>
             </div>
             <div class="flex-1 px-3">
@@ -56,7 +56,7 @@
             </button>
         </div>
     </div>
-    <OnboardingModal @close="showOnboarding = false" :visible="showOnboarding"></OnboardingModal>
+    <OnboardingModal @close="shownOnboarding = false" :visible="shownOnboarding"></OnboardingModal>
 </template>
 
 <script setup>
@@ -70,8 +70,8 @@ import OnboardingModal from '../components/OnboardingModal.vue'
 const router = useRouter()
 const code = reactive(Array(9).fill(0))
 const wrong = ref(false)
-const show = ref(false)
-const showOnboarding = ref(false)
+const shown = ref(false)
+const shownOnboarding = ref(false)
 const peek = ref(true)
 
 const active = computed(() => {
@@ -82,7 +82,7 @@ const togglePanel = () => {
     peek.value = false
     // ugly hack since nextTick does not help
     setTimeout(() => {
-        show.value = !show.value
+        shown.value = !shown.value
     }, 0)
 }
 
