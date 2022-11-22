@@ -23,12 +23,15 @@
             </button>
         </div>
     </div>
+
+    <CodePanel />
 </template>
 
 <script setup>
 import { nextTick, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import Markdown from 'vue3-markdown-it'
+import CodePanel from '../components/CodePanel.vue'
 import ResponsiveImageWithPlaceholder from '../components/ResponsiveImageWithPlaceholder.vue'
 
 const route = useRoute()
