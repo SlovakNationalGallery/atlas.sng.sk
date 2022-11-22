@@ -1,8 +1,8 @@
 <template>
     <div v-if="show" class="cursor-zoom-out fixed inset-0" @click="show = false"></div>
     <div
-        class="bg-white duration-500 fixed bg-white bottom-0 w-full md:max-w-lg md:mx-auto"
-        :class="{ 'translate-y-full': !show }"
+        class="bg-white duration-500 fixed top-full w-full md:max-w-lg md:mx-auto"
+        :class="[show ? '-translate-y-full' : null, peek ? 'animate-peek' : null]"
     >
         <div class="absolute bg-white bottom-full flex items-center rounded-t-xl w-full">
             <div class="flex-1 px-3">
@@ -22,7 +22,11 @@
                 </svg>
             </div>
             <div class="grow text-center">
-                <button @click="show = !show" class="bg-black my-2 px-3 py-2 rounded-full text-sm text-white">
+                <button
+                    @click="togglePanel"
+                    class="bg-black my-2 px-3 py-2 rounded-full text-sm text-white"
+                    :class="[peek ? 'animate-grow' : null]"
+                >
                     {{ $t(show ? 'Tap to hide' : 'Tap to collect artworks') }}
                 </button>
             </div>
@@ -68,10 +72,19 @@ const code = reactive(Array(9).fill(0))
 const wrong = ref(false)
 const show = ref(false)
 const showOnboarding = ref(false)
+const peek = ref(true)
 
 const active = computed(() => {
     return code.some((bit) => bit)
 })
+
+const togglePanel = () => {
+    peek.value = false
+    // ugly hack since nextTick does not help
+    setTimeout(() => {
+        show.value = !show.value
+    }, 0)
+}
 
 const verifyCode = () => {
     const digit = parseInt(code.join(''), 2)
