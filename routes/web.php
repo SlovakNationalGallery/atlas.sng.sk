@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Artisan;
 */
 
 Route::get('/items', function (Request $request) {
-    $items = Item::with('code')->get()->sortBy(function ($item) {
+    $items = Item::with('code', 'code.exhibition')->get()->sortBy(function ($item) {
         return $item->code->exhibition_id;
     });
     return response()->view('items', compact('items'));
