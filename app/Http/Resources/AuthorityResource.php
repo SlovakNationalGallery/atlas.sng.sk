@@ -27,7 +27,7 @@ class AuthorityResource extends JsonResource
         return $this['authority']->name ?? formatName($this['webumenia_authority']->name);
     }
 
-    protected function getBiography(): string
+    protected function getBiography(): ?string
     {
         return $this['authority']->biography ??
             $this->formatWebumeniaBiography($this['webumenia_authority']->biography);
