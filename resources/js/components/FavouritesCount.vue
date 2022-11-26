@@ -22,7 +22,7 @@
                 v-if="showTooltip"
                 class="tooltip absolute right-4 top-[52px] z-50 shadow-lg bg-black border-black border-2"
             >
-                <div class="absolute w-3 h-3 top-0 right-[10px] -mt-2 rotate-45 bg-black z-0"></div>
+                <div class="absolute w-3 h-3 top-0 right-2.5 -mt-2 rotate-45 bg-black z-0"></div>
                 <div class="w-full h-full bg-green relative p-2 whitespace-nowrap">
                     {{ $t('Saved! Tap this icon to view your collection.') }}
                 </div>
