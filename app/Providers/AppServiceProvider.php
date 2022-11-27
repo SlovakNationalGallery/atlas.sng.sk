@@ -39,6 +39,14 @@ class AppServiceProvider extends ServiceProvider
             );
         }
 
+        Http::macro(
+            'vimeo',
+            fn() => Http::withHeaders([
+                'Authorization' => sprintf('bearer %s', config('services.vimeo.access_token')),
+                'Accept' => sprintf('application/vnd.vimeo.*+json;version=%s', config('services.vimeo.api_version')),
+            ])->baseUrl(config('services.vimeo.api'))
+        );
+
         Relation::morphMap([
             'item' => Item::class,
             'section' => Section::class,

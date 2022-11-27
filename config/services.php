@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Third Party Services
@@ -19,6 +18,12 @@ return [
         'api' => env('WEBUMENIA_API', 'https://www.webumenia.sk/api'),
     ],
 
+    'vimeo' => [
+        'api' => env('VIMEO_API', 'https://api.vimeo.com'),
+        'access_token' => env('VIMEO_ACCESS_TOKEN'),
+        'api_version' => env('VIMEO_API_VERSION', '3.4'),
+    ],
+
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),
@@ -34,5 +39,4 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
-
 ];
