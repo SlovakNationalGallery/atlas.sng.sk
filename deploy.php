@@ -8,10 +8,10 @@ set('bin/php', 'php8.1');
 set('bin/composer', '{{bin/php}} $(which composer)');
 
 // Project name
-set('application', 'bookmarks');
+set('application', 'atlas');
 
 // Project repository
-set('repository', 'git@github.com:SlovakNationalGallery/bookmarks.sng.sk.git');
+set('repository', 'git@github.com:SlovakNationalGallery/atlas.sng.sk.git');
 
 // [Optional] Allocate tty for git clone. Default value is false.
 set('git_tty', true);
@@ -27,7 +27,7 @@ set('allow_anonymous_stats', false);
 // Hosts
 
 host('lab_sng@webumenia.sk')
-    ->set('deploy_path', '/var/www/bookmarks.sng.sk')
+    ->set('deploy_path', '/var/www/atlas.sng.sk')
     ->set('user', 'lab_sng');
 
 // Tasks
