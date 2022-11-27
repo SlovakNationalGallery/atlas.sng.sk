@@ -22,6 +22,7 @@ class AirtableMapper
             ],
             'links' => 'Interakcie',
             'media' => 'Media',
+            'video' => 'Video',
         ],
         'story_links' => [
             'title' => [

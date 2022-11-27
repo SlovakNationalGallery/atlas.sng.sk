@@ -12,6 +12,10 @@
                 <ResponsiveImageWithPlaceholder class="rounded-xl w-full" :image="image" />
             </div>
 
+            <div class="my-4" v-if="story.video_thumbnail">
+                <ResponsiveImage class="rounded-xl w-full" :image="story.video_thumbnail" />
+            </div>
+
             <button
                 :disabled="story !== active"
                 v-show="story === active || selectedLinks[i] === link"
@@ -32,6 +36,7 @@ import { nextTick, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import Markdown from 'vue3-markdown-it'
 import CodePanel from '../components/CodePanel.vue'
+import ResponsiveImage from '../components/ResponsiveImage.vue'
 import ResponsiveImageWithPlaceholder from '../components/ResponsiveImageWithPlaceholder.vue'
 
 const route = useRoute()

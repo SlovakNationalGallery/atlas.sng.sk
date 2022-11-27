@@ -20,12 +20,16 @@ use Illuminate\Support\Facades\Artisan;
 */
 
 Route::get('/items', function (Request $request) {
-    $items = Item::with('code')->get();
+    $items = Item::with('code', 'code.exhibition')->get()->sortBy(function ($item) {
+        return $item->code->exhibition_id;
+    });
     return response()->view('items', compact('items'));
 });
 
 Route::get('/sections', function () {
-    $sections = Section::with('code')->get();
+    $sections = Section::with('code', 'code.exhibition')->get()->sortBy(function ($section) {
+        return $section->code->exhibition_id;
+    });
     return response()->view('sections', compact('sections'));
 });
 
