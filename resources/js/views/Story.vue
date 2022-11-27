@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-black grow text-base text-white">
+    <div class="bg-black grow pb-bar text-base text-white">
         <div
             :ref="setStoryRef"
             class="m-4 scroll-mt-14"
@@ -27,12 +27,15 @@
             </button>
         </div>
     </div>
+
+    <CodePanel />
 </template>
 
 <script setup>
 import { nextTick, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import Markdown from 'vue3-markdown-it'
+import CodePanel from '../components/CodePanel.vue'
 import ResponsiveImage from '../components/ResponsiveImage.vue'
 import ResponsiveImageWithPlaceholder from '../components/ResponsiveImageWithPlaceholder.vue'
 
