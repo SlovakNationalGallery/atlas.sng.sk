@@ -1,4 +1,4 @@
-# kod.sng.sk
+# atlas.sng.sk
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -14,7 +14,7 @@ This software is built with the [Laravel framework](http://laravel.com/).
 
 It requires
 
-1. PHP >= 7.4.x
+1. PHP >= 8.0.x
 1. MySQL >= 5.7
 
 **Set up** with
