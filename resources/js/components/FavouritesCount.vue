@@ -1,9 +1,10 @@
 <template>
-    <router-link :to="{ name: 'my_collection' }" class="relative">
-        <div
-            class="flex h-full justify-end transition-colors"
-            :class="{ 'border-l-black bg-green': showTooltip, 'opacity-40': !count }"
-        >
+    <router-link
+        :to="{ name: 'my_collection' }"
+        class="relative transition-colors"
+        :class="{ '!border-l-black bg-green': showTooltip, 'opacity-40': !count }"
+    >
+        <div class="flex h-full justify-end">
             <div class="font-bold text-base pr-1">{{ count }}</div>
             <svg class="stroke-black stroke-2 w-[29px] h-[25px]" :class="[count ? 'fill-green' : 'fill-white']">
                 <path
