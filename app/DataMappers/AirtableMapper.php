@@ -22,7 +22,10 @@ class AirtableMapper
             ],
             'links' => 'Interakcie',
             'media' => 'Media',
-            'video' => 'Video',
+            'video' => [
+                'sk' => 'Video SK',
+                'en' => 'Video EN',
+            ],
         ],
         'story_links' => [
             'title' => [
@@ -33,21 +36,6 @@ class AirtableMapper
         ],
         'exhibitions' => [
             'name' => 'Name',
-        ],
-        'stories' => [
-            'text' => [
-                'sk' => 'Text SK',
-                'en' => 'Text EN',
-            ],
-            'links' => 'Interakcie',
-            'media' => 'Media',
-        ],
-        'story_links' => [
-            'title' => [
-                'sk' => 'Text SK',
-                'en' => 'Text EN',
-            ],
-            'story_id' => 'Links to',
         ],
     ];
 
