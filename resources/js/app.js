@@ -38,7 +38,7 @@ const routes = [
         component: SectionDetail,
         meta: {
             code: HEADER_CODES.ITEM,
-            title: 'Detail zbierky',
+            title: 'Section detail',
         },
     },
     {
@@ -47,7 +47,7 @@ const routes = [
         component: ItemDetail,
         meta: {
             code: HEADER_CODES.ITEM,
-            title: 'Detail diela zbierky',
+            title: 'Section › Artwork detail',
             back: (from) => ({
                 name: 'section_detail',
                 params: { id: from.params.section_id },

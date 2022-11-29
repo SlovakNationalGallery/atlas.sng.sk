@@ -3,14 +3,14 @@
         <div class="h-full bg-black p-4">
             <img class="h-9 w-9" :src="`/img/${section.code}.svg`" :alt="section.code" />
             <p class="font-bold mb-2 mt-4 text-green">
-                {{ $t('Zbierka :count diel', { count: section.items.length }) }}
+                {{ $t('Section with :count artworks', { count: section.items.length }) }}
             </p>
             <h2 class="font-bold text-white text-xl">{{ section.title }}</h2>
         </div>
         <div class="px-4">
             <div class="py-4 whitespace-pre-line">{{ section.description }}</div>
 
-            <p class="font-bold mb-2">{{ $t('Diela v zbierke') }}</p>
+            <p class="font-bold mb-2">{{ $t('Artworks in section') }}</p>
             <div class="flex flex-col space-y-3">
                 <router-link
                     v-for="item in section.items"

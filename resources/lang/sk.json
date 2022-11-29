@@ -47,5 +47,9 @@
     "Saved! Tap this icon to view your collection.": "Uložené! Tu nájdeš svoju kolekciu.",
     "Enlarge": "Zväčšiť",
     "Items": "Diela",
-    "Sections": "Sekcie"
+    "Sections": "Sekcie",
+    "Section detail" : "Detail zbierky",
+    "Section with :count artworks": "Zbierka :count diel",
+    "Artworks in section": "Diela v zbierke",
+    "Section › Artwork detail": "Detail diela zbierky"
 }
