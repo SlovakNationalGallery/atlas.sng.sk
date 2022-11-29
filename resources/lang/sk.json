@@ -7,7 +7,7 @@
     "Help": "Pomoc",
     "Try again": "Zlý kód",
     "Learn more on webumenia.sk": "Viac o diele na webumenia.sk",
-    "Find another": "Nájsť iné",
+    "Back": "Späť",
     "Save": "Uložiť",
     "Remove": "Odstrániť",
     "My collection": "Moja kolekcia",
@@ -48,7 +48,7 @@
     "Enlarge": "Zväčšiť",
     "Items": "Diela",
     "Sections": "Sekcie",
-    "Section detail" : "Detail zbierky",
+    "Section detail": "Detail zbierky",
     "Section with :count artworks": "Zbierka :count diel",
     "Artworks in section": "Diela v zbierke",
     "Section › Artwork detail": "Detail diela zbierky"
