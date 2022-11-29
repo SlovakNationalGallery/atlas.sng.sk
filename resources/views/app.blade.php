@@ -14,7 +14,7 @@
     <meta name="theme-color" content="#ffffff">
 
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-    <title>{{ trans('SNG Codes') }}</title>
+    <title>{{ trans('Atlas SNG') }}</title>
     @if (App::environment('production'))
         {{-- Clarity --}}
         <script type="text/javascript">

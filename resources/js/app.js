@@ -20,7 +20,7 @@ const routes = [
         component: Home,
         meta: {
             code: HEADER_CODES.NONE,
-            title: 'SNG Codes',
+            title: 'Atlas SNG',
         },
     },
     {
