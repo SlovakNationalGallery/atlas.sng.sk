@@ -14,7 +14,7 @@
     <meta name="theme-color" content="#ffffff">
 
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-    <title>@section('title'){{ trans('SNG Codes') }}@show</title>
+    <title>@section('title'){{ trans('Atlas SNG') }}@show</title>
 </head>
 
 <body>
