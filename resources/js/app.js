@@ -19,7 +19,7 @@ const routes = [
         component: Story,
         meta: {
             title: 'Atlas SNG',
-            id: process.env.MIX_DEFAULT_STORY,
+            id: import.meta.env.VITE_DEFAULT_STORY,
         },
     },
     {

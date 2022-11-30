@@ -23,9 +23,9 @@ const surveyStore = useSurveyStore()
 const getFeedback = () => {
     surveyStore.done()
     if (getActiveLanguage() == 'sk') {
-        window.open(process.env.VITE_SURVEY_SK, '_blank').focus()
+        window.open(import.meta.env.VITE_SURVEY_SK, '_blank').focus()
     } else {
-        window.open(process.env.VITE_SURVEY_EN, '_blank').focus()
+        window.open(import.meta.env.VITE_SURVEY_EN, '_blank').focus()
     }
 }
 </script>
