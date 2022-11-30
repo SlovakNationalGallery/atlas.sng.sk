@@ -33,6 +33,7 @@ export default defineConfig({
                     })
                 }
             },
+            valetTls: 'atlas.sng.local',
         },
     ],
 })
