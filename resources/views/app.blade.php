@@ -12,9 +12,8 @@
     <link rel="manifest" href="/site.webmanifest">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000">
     <meta name="theme-color" content="#ffffff">
-
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <title>{{ trans('Atlas SNG') }}</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     @if (App::environment('production'))
         {{-- Clarity --}}
         <script type="text/javascript">
@@ -47,7 +46,6 @@
 
 <body>
     <div id="app" class="md:max-w-lg md:mx-auto md:my-auto bg-white min-h-screen flex flex-col"></div>
-    <script src="{{ mix('/js/app.js') }}"></script>
 </body>
 
 </html>
