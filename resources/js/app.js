@@ -7,20 +7,19 @@ import { createPinia } from 'pinia'
 
 import App from './App.vue'
 import Collection from './views/Collection.vue'
-import Home from './views/Home.vue'
 import ItemDetail from './views/ItemDetail.vue'
 import SectionDetail from './views/SectionDetail.vue'
 import Story from './views/Story.vue'
-import { HEADER_CODES } from './consts'
+import { useHistoryStore } from './stores/HistoryStore'
 
 const routes = [
     {
         name: 'home',
         path: '/',
-        component: Home,
+        component: Story,
         meta: {
-            code: HEADER_CODES.NONE,
             title: 'Atlas SNG',
+            id: process.env.MIX_DEFAULT_STORY,
         },
     },
     {
@@ -28,7 +27,6 @@ const routes = [
         path: '/detail/:id',
         component: ItemDetail,
         meta: {
-            code: HEADER_CODES.ITEM,
             title: 'Artwork detail',
         },
     },
@@ -37,7 +35,6 @@ const routes = [
         path: '/section/:id',
         component: SectionDetail,
         meta: {
-            code: HEADER_CODES.ITEM,
             title: 'Section detail',
         },
     },
@@ -46,12 +43,7 @@ const routes = [
         path: '/section/:section_id/:id',
         component: ItemDetail,
         meta: {
-            code: HEADER_CODES.ITEM,
             title: 'Section › Artwork detail',
-            back: (from) => ({
-                name: 'section_detail',
-                params: { id: from.params.section_id },
-            }),
         },
     },
     {
@@ -60,17 +52,15 @@ const routes = [
         component: ItemDetail,
         meta: {
             edit: true,
-            code: HEADER_CODES.NONE,
             title: 'Artwork detail',
         },
     },
     {
         name: 'story',
-        path: '/story/:id?',
+        path: '/story/:id',
         component: Story,
         meta: {
             title: 'Story',
-            id: process.env.MIX_DEFAULT_STORY,
         },
     },
     {
@@ -78,7 +68,6 @@ const routes = [
         path: '/collection',
         component: Collection,
         meta: {
-            code: HEADER_CODES.FULL,
             title: 'My collection',
         },
     },
@@ -87,14 +76,14 @@ const routes = [
         path: '/:id?',
         component: Collection,
         meta: {
-            code: HEADER_CODES.FULL,
             title: 'My collection',
         },
     },
 ]
 
+const history = createWebHistory()
 const router = createRouter({
-    history: createWebHistory(),
+    history,
     routes,
 })
 
@@ -117,3 +106,6 @@ app.use(i18nVue, {
 })
 app.use(createPinia())
 app.mount('#app')
+
+const historyStore = useHistoryStore()
+historyStore.set(history)

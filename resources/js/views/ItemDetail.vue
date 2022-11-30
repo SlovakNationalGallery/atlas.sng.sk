@@ -23,7 +23,12 @@
     <div class="w-full md:max-w-lg h-24 fixed bottom-0 bg-gradient-to-t from-white to-transparent pointer-events-none">
         <div class="p-4 pt-8">
             <div class="flex space-x-4 pointer-events-auto">
-                <ConfirmButton class="bg-white" @click="returnHome">{{ $t('Find another') }}</ConfirmButton>
+                <HistoryBack v-slot="{ back }">
+                    <ConfirmButton class="group bg-white" @click="back">
+                        <SvgBack class="group-active:stroke-white mr-2" />
+                        {{ $t('Back') }}
+                    </ConfirmButton>
+                </HistoryBack>
                 <ConfirmButton v-if="item && itemsStore.exists(item.id)" class="bg-white text-red border-red"
                     @click="itemsStore.remove(item.id)">{{ $t('Remove') }}</ConfirmButton>
                 <ConfirmButton v-else class="bg-green" @click="itemsStore.add(item)">
@@ -50,6 +55,8 @@ import ConfirmButton from '../components/ConfirmButton.vue'
 import ItemImageLightbox from '../components/ItemImageLightbox.vue'
 import ItemImageMovable from '../components/ItemImageMovable.vue'
 import WebumeniaButton from '../components/WebumeniaButton.vue'
+import HistoryBack from '../components/HistoryBack.vue'
+import SvgBack from '../components/svg/Back.vue'
 
 const router = useRouter()
 const route = useRoute()
