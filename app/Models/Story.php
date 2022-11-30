@@ -16,7 +16,7 @@ class Story extends Model implements HasMedia
 
     protected $keyType = 'string';
 
-    protected array $translatable = ['text'];
+    protected array $translatable = ['text', 'video'];
 
     public function links()
     {
