@@ -43,7 +43,7 @@ class ImportSections extends Command
     public function handle()
     {
         $exhibition_ids = Exhibition::all()->pluck('id');
-        $records = Airtable::table('sections')->get();
+        $records = Airtable::table('sections')->all();
         $bar = $this->output->createProgressBar(count($records));
         $bar->start();
         $records->each(function ($record) use ($bar, $exhibition_ids) {

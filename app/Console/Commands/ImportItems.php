@@ -44,7 +44,7 @@ class ImportItems extends Command
         $exhibition_ids = Exhibition::all()->pluck('id');
         $records = Airtable::table('items')
             ->where('ID', '!=', '')
-            ->get();
+            ->all();
         $bar = $this->output->createProgressBar(count($records));
         $bar->start();
         $records->each(function ($record) use ($bar, $exhibition_ids) {
@@ -77,7 +77,7 @@ class ImportItems extends Command
                 $item->code->exhibition_id = Arr::get($record, 'fields.Výstava.0');
                 $item->code->save();
             }
-            
+
             // update code in airtable
             if (
                 \App::environment('production') &&
