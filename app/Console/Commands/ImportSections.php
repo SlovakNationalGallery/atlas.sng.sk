@@ -43,7 +43,7 @@ class ImportSections extends Command
     public function handle()
     {
         $exhibition_ids = Exhibition::all()->pluck('id');
-        $records = Airtable::table('sections')->get();
+        $records = Airtable::table('sections')->all();
         $bar = $this->output->createProgressBar(count($records));
         $bar->start();
         $records->each(function ($record) use ($bar, $exhibition_ids) {
@@ -65,11 +65,19 @@ class ImportSections extends Command
                 'en' => Arr::get($record, 'fields.Text sekcie EN'),
             ];
 
-            $itemIds = Arr::get($record, 'fields.Diela sekcie', []);
             $section->save();
 
-            $items = Item::whereIn('airtable_id', $itemIds)->get();
-            $section->items()->sync($items);
+            $airtableIds = Arr::get($record, 'fields.Diela sekcie', []);
+            $itemsLookup = Item::whereIn('airtable_id', $airtableIds)->pluck('id', 'airtable_id');
+            $section->items()->sync(
+                collect($airtableIds)->mapWithKeys(
+                    fn($airtableId, $index) => [
+                        $itemsLookup[$airtableId] => [
+                            'ord' => $index,
+                        ],
+                    ]
+                )
+            );
 
             if ($section->code && $exhibition_ids->contains(Arr::get($record, 'fields.Výstava.0'))) {
                 $section->code->exhibition_id = Arr::get($record, 'fields.Výstava.0');
