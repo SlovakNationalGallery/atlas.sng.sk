@@ -13,13 +13,12 @@
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000">
     <meta name="theme-color" content="#ffffff">
 
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <title>@section('title'){{ trans('Atlas SNG') }}@show</title>
 </head>
 
 <body>
     @yield('content')
-    <script src="{{ mix('/js/app.js') }}"></script>
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-require('./bootstrap')
+import './bootstrap'
 
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
@@ -19,7 +19,7 @@ const routes = [
         component: Story,
         meta: {
             title: 'Atlas SNG',
-            id: process.env.MIX_DEFAULT_STORY,
+            id: import.meta.env.VITE_DEFAULT_STORY,
         },
     },
     {
