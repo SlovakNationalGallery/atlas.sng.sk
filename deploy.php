@@ -33,7 +33,9 @@ host('lab_sng@webumenia.sk')
 // Tasks
 
 task('build', function () {
-    run('cd {{release_path}} && {{bin/npm}} run production');
+    cd('{{release_path}}');
+
+    run('source "$HOME/.nvm/nvm.sh" && nvm use 16.16.0 && npm ci && npm run build');
 });
 
 // [Optional] if deploy fails automatically unlock.
