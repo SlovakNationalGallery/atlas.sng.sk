@@ -3,8 +3,8 @@
         <div
             :ref="setStoryRef"
             class="m-4 scroll-mt-14"
-            :class="{ 'opacity-50': story !== active }"
-            v-for="(story, i) in stories"
+            :class="{ 'opacity-50': story !== storiesStore.active }"
+            v-for="(story, i) in storiesStore.stories"
         >
             <Markdown :source="story.text" />
 
@@ -17,8 +17,8 @@
             </div>
 
             <button
-                :disabled="story !== active"
-                v-show="story === active || selectedLinks[i] === link"
+                :disabled="story !== storiesStore.active"
+                v-show="story === storiesStore.active || storiesStore.selectedLinks[i] === link"
                 class="block border-1 border-green cursor-pointer my-4 p-3 rounded-xl text-green text-left w-full"
                 @click="navigate(link)"
                 v-for="link in story.links"
@@ -38,16 +38,14 @@ import Markdown from 'vue3-markdown-it'
 import CodePanel from '../components/CodePanel.vue'
 import ResponsiveImage from '../components/ResponsiveImage.vue'
 import ResponsiveImageWithPlaceholder from '../components/ResponsiveImageWithPlaceholder.vue'
+import { useStoriesStore } from '../stores/StoriesStore'
 
+const storiesStore = useStoriesStore()
 const route = useRoute()
-const stories = ref([])
-const active = ref(null)
-const selectedLinks = ref([])
 const storyRefs = ref([])
 
 const navigate = (link) => {
-    selectedLinks.value.push(link)
-    active.value = null
+    storiesStore.selectLink(link)
     loadStory(link.story_id)
 }
 
@@ -61,8 +59,7 @@ const setStoryRef = (el) => {
 
 const loadStory = (id) => {
     return axios.get(`/api/stories/${id}`).then(({ data }) => {
-        active.value = data.data
-        stories.value.push(active.value)
+        storiesStore.addStory(data.data)
 
         nextTick(() => {
             storyRefs.value[storyRefs.value.length - 1].scrollIntoView({
@@ -74,6 +71,8 @@ const loadStory = (id) => {
 }
 
 onMounted(() => {
-    loadStory(route.params.id || route.meta.id)
+    if (!storiesStore.stories.length) {
+        loadStory(route.params.id || route.meta.id)
+    }
 })
 </script>
