@@ -2,7 +2,7 @@
     <div v-if="shown" class="cursor-zoom-out fixed inset-0" @click="shown = false"></div>
     <div
         class="bg-white duration-500 fixed top-full w-full md:max-w-lg md:mx-auto"
-        :class="{ '-translate-y-full': shown, 'animate-peek': peek }"
+        :class="{ '-translate-y-full': shown, 'animate-peek': storiesStore.peekCodePanel }"
     >
         <div class="absolute bg-white bottom-full flex items-center rounded-t-xl w-full">
             <div class="flex-1 px-3">
@@ -25,7 +25,7 @@
                 <button
                     @click="togglePanel"
                     class="bg-black my-2 px-3 py-2 rounded-full text-sm text-white"
-                    :class="{ 'animate-grow': peek }"
+                    :class="{ 'animate-grow': storiesStore.peekCodePanel }"
                 >
                     {{ $t(shown ? 'Tap to hide' : 'Tap to collect artworks') }}
                 </button>
@@ -66,20 +66,21 @@ import { useRouter } from 'vue-router'
 import CircleButton from '../components/CircleButton.vue'
 import FavouritesCount from '../components/FavouritesCount.vue'
 import OnboardingModal from '../components/OnboardingModal.vue'
+import { useStoriesStore } from '../stores/StoriesStore'
 
+const storiesStore = useStoriesStore()
 const router = useRouter()
 const code = reactive(Array(9).fill(0))
 const wrong = ref(false)
 const shown = ref(false)
 const shownOnboarding = ref(false)
-const peek = ref(true)
 
 const active = computed(() => {
     return code.some((bit) => bit)
 })
 
 const togglePanel = () => {
-    peek.value = false
+    storiesStore.peekCodePanel = false
     // ugly hack since nextTick does not help
     setTimeout(() => {
         shown.value = !shown.value

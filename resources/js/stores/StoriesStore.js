@@ -6,6 +6,7 @@ export const useStoriesStore = defineStore('StoriesStore', {
         stories: ref([]),
         selectedLinks: ref([]),
         active: ref(null),
+        peekCodePanel: ref(true),
     }),
     actions: {
         addStory(story) {
