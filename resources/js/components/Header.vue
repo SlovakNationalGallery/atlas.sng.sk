@@ -23,6 +23,7 @@
                 {{ $t('Share') }}
             </button>
         </div>
+        <LanguageSwitcher v-else-if="$route.name === 'home'" />
         <FavouritesCount v-else class="border-l-2 border-l-transparent px-4 py-2" :show-tooltip="isActive" />
     </div>
 
@@ -35,6 +36,7 @@ import { useItemsStore } from '../stores/ItemsStore'
 import About from './About.vue'
 import FavouritesCount from './FavouritesCount.vue'
 import HistoryBack from './HistoryBack.vue'
+import LanguageSwitcher from './LanguageSwitcher.vue'
 import SvgBack from './svg/Back.vue'
 import SvgClose from './svg/Close.vue'
 import SvgLogo from './svg/Logo.vue'
