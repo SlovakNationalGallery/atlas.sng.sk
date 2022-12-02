@@ -2,56 +2,49 @@ import { defineStore } from 'pinia'
 import { useStorage } from '@vueuse/core'
 import axios from 'axios'
 
-export const useItemsStore = defineStore('ItemsStore', {
+export const useItemStore = defineStore('ItemStore', {
     state: () => ({
-        itemsIds: useStorage('itemIds', []),
-        items: {},
+        favouriteItemIds: useStorage('favouriteItemIds', []),
+        items: useStorage('items', {}),
         collectionLink: useStorage('collectionLink', null),
     }),
     getters: {
-        count() {
-            return this.itemsIds.length
-        },
-        exists: (state) => {
-            return (itemId) => state.itemsIds.includes(itemId)
+        favouritesCount() {
+            return this.favouriteItemIds.length
         },
     },
     actions: {
-        async get(itemId) {
-            if (Object.keys(this.items).includes(itemId)) {
-                return this.items[itemId]
-            } else {
-                const response = await axios.get(`/api/items/${itemId}`)
-
-                const itemData = response.data.data
-
-                this.items[itemId] = itemData
-                return itemData
+        get(id) {
+            if (id in this.items) {
+                return this.items[id]
             }
+        },
+        isFavourite(id) {
+            return this.favouriteItemIds.includes(id)
+        },
+        async load(id) {
+            const response = await axios.get(`/api/items/${id}`)
+            return (this.items[id] = response.data.data)
         },
         clearCollectionLink() {
             this.collectionLink = null
         },
-        add(item) {
-            const { id } = item
-            if (!this.itemsIds.includes(id)) {
-                this.items[id] = item
-                this.itemsIds.push(id)
+        addFavourite(id) {
+            if (!this.favouriteItemIds.includes(id)) {
+                this.favouriteItemIds.push(id)
                 this.clearCollectionLink()
             }
         },
-        remove(itemId) {
-            this.itemsIds = this.itemsIds.filter((item) => item !== itemId)
-            delete this.items[itemId]
+        removeFavourite(id) {
+            this.favouriteItemIds = this.favouriteItemIds.filter((favouriteItemId) => favouriteItemId !== id)
             this.clearCollectionLink()
         },
-        clearItemsFromState() {
-            this.items = {}
-        },
-        removeAll() {
-            this.itemsIds = []
-            this.items = {}
+        removeFavourites() {
+            this.favouriteItemIds = []
             this.clearCollectionLink()
+        },
+        clearCache() {
+            this.items = {}
         },
         async getCollectionLink() {
             if (this.collectionLink) {

@@ -22,15 +22,24 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
-import { useItemsStore } from '../stores/ItemsStore'
+import { useInteractionStore } from '../stores/InteractionStore'
+import { useItemStore } from '../stores/ItemStore'
 import { useLocaleStore } from '../stores/LocaleStore'
+import { useSectionStore } from '../stores/SectionStore'
+import { useStoryStore } from '../stores/StoryStore'
 
 const router = useRouter()
-const itemsStore = useItemsStore()
+const interactionStore = useInteractionStore()
+const itemStore = useItemStore()
 const localeStore = useLocaleStore()
+const sectionStore = useSectionStore()
+const storyStore = useStoryStore()
 
 const switchLanguage = (locale) => {
-    itemsStore.clearItemsFromState()
+    interactionStore.clear()
+    itemStore.clearCache()
+    sectionStore.clearCache()
+    storyStore.clearCache()
     localeStore.locale = locale
     router.go()
 }

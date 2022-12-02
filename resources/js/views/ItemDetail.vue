@@ -30,12 +30,12 @@
                     </ConfirmButton>
                 </HistoryBack>
                 <ConfirmButton
-                    v-if="item && itemsStore.exists(item.id)"
+                    v-if="item && itemStore.isFavourite(item.id)"
                     class="bg-white text-red border-red"
-                    @click="itemsStore.remove(item.id)"
+                    @click="itemStore.removeFavourite(item.id)"
                     >{{ $t('Remove') }}</ConfirmButton
                 >
-                <ConfirmButton v-else class="bg-green" @click="itemsStore.add(item)">
+                <ConfirmButton v-else class="bg-green" @click="addItemFavourited(item)">
                     <svg class="mr-3 w-[25px] h-[22px] stroke-black stroke-2 fill-green">
                         <path
                             class="[stroke-linecap:round] [stroke-linejoin:bevel]"
@@ -52,7 +52,7 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import { useItemsStore } from '../stores/ItemsStore'
+import { useItemStore } from '../stores/ItemStore'
 import AuthorityDetails from '../components/AuthorityDetails.vue'
 import AuthoritySummary from '../components/AuthoritySummary.vue'
 import Collapsible from '../components/Collapsible.vue'
@@ -62,12 +62,20 @@ import ItemImageMovable from '../components/ItemImageMovable.vue'
 import WebumeniaButton from '../components/WebumeniaButton.vue'
 import HistoryBack from '../components/HistoryBack.vue'
 import SvgBack from '../components/svg/Back.vue'
+import { useInteractionStore } from '../stores/InteractionStore'
 
 const route = useRoute()
-const itemsStore = useItemsStore()
+const interactionStore = useInteractionStore()
+const itemStore = useItemStore()
 const item = ref(null)
 
+const addItemFavourited = (item) => {
+    itemStore.addFavourite(item.id)
+    interactionStore.addItemFavourited(item.id)
+}
+
 onMounted(async () => {
-    item.value = await itemsStore.get(route.params.id)
+    const id = route.params.id
+    item.value = itemStore.get(id) || (await itemStore.load(id))
 })
 </script>

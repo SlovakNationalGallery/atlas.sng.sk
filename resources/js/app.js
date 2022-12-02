@@ -7,9 +7,9 @@ import { createPinia } from 'pinia'
 
 import App from './App.vue'
 import Collection from './views/Collection.vue'
+import Interaction from './views/Interaction.vue'
 import ItemDetail from './views/ItemDetail.vue'
 import SectionDetail from './views/SectionDetail.vue'
-import Story from './views/Story.vue'
 import { useHistoryStore } from './stores/HistoryStore'
 import { useLocaleStore } from './stores/LocaleStore'
 
@@ -17,10 +17,9 @@ const routes = [
     {
         name: 'home',
         path: '/',
-        component: Story,
+        component: Interaction,
         meta: {
             title: 'Atlas SNG',
-            id: import.meta.env.VITE_DEFAULT_STORY,
         },
     },
     {
@@ -59,7 +58,7 @@ const routes = [
     {
         name: 'story',
         path: '/story/:id',
-        component: Story,
+        component: Interaction,
         meta: {
             title: 'Story',
         },
@@ -86,6 +85,12 @@ const history = createWebHistory()
 const router = createRouter({
     history,
     routes,
+    scrollBehavior(to, from, savedPosition) {
+        if (to.name === 'home') {
+            return savedPosition
+        }
+        return { top: 0 }
+    },
 })
 
 const app = createApp(App)

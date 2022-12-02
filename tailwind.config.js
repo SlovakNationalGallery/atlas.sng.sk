@@ -32,6 +32,7 @@ module.exports = {
                 dark: '#6D6E7D',
             },
             transparent: 'transparent',
+            current: 'currentColor',
         },
         fontFamily: {
             sans: ['GTWalsheim', 'sans-serif'],

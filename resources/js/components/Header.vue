@@ -16,7 +16,7 @@
         </HistoryBack>
         <h1 class="grow px-2 text-xl" :class="{ 'text-center': $route.name !== 'home' }">
             {{ $t(openedAbout ? 'About' : $route.meta.title) }}
-            <span v-if="$route.name === 'my_collection'">({{ count }})</span>
+            <span v-if="$route.name === 'my_collection'">({{ itemStore.favouritesCount }})</span>
         </h1>
         <div class="flex-1 px-3 border-l-2 border-transparent text-right" v-if="$route.name === 'my_collection'">
             <button class="bg-green rounded-xl text-sm px-3 py-1 font-bold" @click="scroll('share')">
@@ -32,7 +32,7 @@
 
 <script setup>
 import { computed, ref } from 'vue'
-import { useItemsStore } from '../stores/ItemsStore'
+import { useItemStore } from '../stores/ItemStore'
 import About from './About.vue'
 import FavouritesCount from './FavouritesCount.vue'
 import HistoryBack from './HistoryBack.vue'
@@ -43,9 +43,8 @@ import SvgLogo from './svg/Logo.vue'
 
 const openedAbout = ref(false)
 
-const itemsStore = useItemsStore()
+const itemStore = useItemStore()
 
-const count = computed(() => itemsStore.count)
 const isActive = ref(false)
 
 const displayTooltip = () => {
@@ -61,7 +60,7 @@ const scroll = (id) => {
     })
 }
 
-itemsStore.$onAction(({ name: actionName }) => {
+itemStore.$onAction(({ name: actionName }) => {
     if (actionName === 'add') {
         displayTooltip()
     }
