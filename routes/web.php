@@ -4,6 +4,7 @@ use App\Jobs\ImportExhibitionsJob;
 use App\Jobs\ImportAuthoritiesJob;
 use App\Models\Item;
 use App\Models\Section;
+use App\Models\Story;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
@@ -20,17 +21,26 @@ use Illuminate\Support\Facades\Artisan;
 */
 
 Route::get('/items', function (Request $request) {
-    $items = Item::with('code', 'code.exhibition')->get()->sortBy(function ($item) {
-        return $item->code->exhibition_id;
-    });
+    $items = Item::with('code', 'code.exhibition')
+        ->get()
+        ->sortBy(function ($item) {
+            return $item->code->exhibition_id;
+        });
     return response()->view('items', compact('items'));
 });
 
 Route::get('/sections', function () {
-    $sections = Section::with('code', 'code.exhibition')->get()->sortBy(function ($section) {
-        return $section->code->exhibition_id;
-    });
+    $sections = Section::with('code', 'code.exhibition')
+        ->get()
+        ->sortBy(function ($section) {
+            return $section->code->exhibition_id;
+        });
     return response()->view('sections', compact('sections'));
+});
+
+Route::get('/stories', function () {
+    $stories = Story::with('links')->get();
+    return response()->view('stories', compact('stories'));
 });
 
 Route::get('/img/{code}.svg', function (Request $request, $code) {

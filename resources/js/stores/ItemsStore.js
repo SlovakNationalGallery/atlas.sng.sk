@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia'
 import { useStorage } from '@vueuse/core'
 import axios from 'axios'
-import { getActiveLanguage } from 'laravel-vue-i18n'
 
 export const useItemsStore = defineStore('ItemsStore', {
     state: () => ({

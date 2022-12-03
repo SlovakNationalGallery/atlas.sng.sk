@@ -11,6 +11,7 @@ import ItemDetail from './views/ItemDetail.vue'
 import SectionDetail from './views/SectionDetail.vue'
 import Story from './views/Story.vue'
 import { useHistoryStore } from './stores/HistoryStore'
+import { useLocaleStore } from './stores/LocaleStore'
 
 const routes = [
     {
@@ -87,25 +88,17 @@ const router = createRouter({
     routes,
 })
 
-const getBrowserLocale = () => {
-    const navigatorLocale = navigator.languages !== undefined ? navigator.languages[0] : navigator.language
-
-    if (!navigatorLocale) {
-        return undefined
-    }
-
-    const trimmedLocale = navigatorLocale.trim().split(/-|_/)[0]
-    return trimmedLocale
-}
-
 const app = createApp(App)
 app.use(router)
+app.use(createPinia())
+
+const localeStore = useLocaleStore()
 app.use(i18nVue, {
-    lang: getBrowserLocale(),
+    lang: localeStore.locale,
     resolve: (lang) => import(`../lang/${lang}.json`),
 })
-app.use(createPinia())
-app.mount('#app')
 
 const historyStore = useHistoryStore()
 historyStore.set(history)
+
+app.mount('#app')

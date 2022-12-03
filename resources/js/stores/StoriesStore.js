@@ -5,7 +5,7 @@ export const useStoriesStore = defineStore('StoriesStore', {
     state: () => ({
         stories: useStorage('stories', []),
         selectedLinkIds: useStorage('selectedLinkIds', []),
-        peekCodePanel: useStorage('peekCodePanel', false),
+        peekCodePanel: useStorage('peekCodePanel', true),
     }),
     actions: {
         addStory(story) {
