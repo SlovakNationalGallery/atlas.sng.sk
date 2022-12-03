@@ -1,6 +1,11 @@
+import fs from 'fs'
 import laravel from 'laravel-vite-plugin'
 import vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
+import { homedir } from 'os'
+import { resolve } from 'path'
+
+let host = 'atlas.sng.local'
 
 export default defineConfig({
     plugins: [
@@ -24,16 +29,32 @@ export default defineConfig({
         }),
         laravel(['resources/css/app.css', 'resources/js/app.js']),
         {
-            name: 'blade',
-            handleHotUpdate({ file, server }) {
-                if (file.endsWith('.blade.php')) {
-                    server.ws.send({
-                        type: 'full-reload',
-                        path: '*',
-                    })
-                }
-            },
-            valetTls: 'atlas.sng.local',
+            valetTls: host,
+            refresh: true,
         },
     ],
+    server: detectServerConfig(host),
 })
+
+// credits: https://freek.dev/2276-making-vite-and-valet-play-nice-together
+function detectServerConfig(host) {
+    let keyPath = resolve(homedir(), `.config/valet/Certificates/${host}.key`)
+    let certificatePath = resolve(homedir(), `.config/valet/Certificates/${host}.crt`)
+
+    if (!fs.existsSync(keyPath)) {
+        return {}
+    }
+
+    if (!fs.existsSync(certificatePath)) {
+        return {}
+    }
+
+    return {
+        hmr: { host },
+        host,
+        https: {
+            key: fs.readFileSync(keyPath),
+            cert: fs.readFileSync(certificatePath),
+        },
+    }
+}
