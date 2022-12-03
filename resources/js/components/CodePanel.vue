@@ -1,8 +1,11 @@
 <template>
     <div v-if="shown" class="cursor-zoom-out fixed inset-0" @click="shown = false"></div>
     <div
-        class="bg-white duration-500 fixed top-full w-full md:max-w-lg md:mx-auto"
-        :class="{ '-translate-y-full': shown, 'animate-peek': storiesStore.peekCodePanel }"
+        class="bg-white ease-in-out fixed top-full w-full md:max-w-lg md:mx-auto"
+        :class="[
+            peekingIn || peekingOut ? 'duration-300' : 'duration-500',
+            shown || peekingIn ? (shown ? '-translate-y-full' : 'translate-y-peeking') : 'translate-y-0',
+        ]"
     >
         <div class="absolute bg-white bottom-full flex items-center rounded-t-xl w-full">
             <div class="flex-1 px-3">
@@ -24,8 +27,8 @@
             <div class="grow text-center">
                 <button
                     @click="togglePanel"
-                    class="bg-black my-2 px-3 py-2 rounded-full text-sm text-white"
-                    :class="{ 'animate-grow': storiesStore.peekCodePanel }"
+                    class="bg-black duration-300 ease-in-out my-2 px-3 py-2 rounded-full text-sm text-white"
+                    :class="[peekingIn ? 'text-base text-green' : 'text-white']"
                 >
                     {{ $t(shown ? 'Tap to hide' : 'Tap to collect artworks') }}
                 </button>
@@ -61,7 +64,7 @@
 
 <script setup>
 import { computed } from '@vue/reactivity'
-import { reactive, ref, watch } from 'vue'
+import { onMounted, reactive, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import CircleButton from '../components/CircleButton.vue'
 import FavouritesCount from '../components/FavouritesCount.vue'
@@ -74,6 +77,8 @@ const code = reactive(Array(9).fill(0))
 const wrong = ref(false)
 const shown = ref(false)
 const shownOnboarding = ref(false)
+const peekingIn = ref(false)
+const peekingOut = ref(false)
 
 const active = computed(() => {
     return code.some((bit) => bit)
@@ -81,10 +86,7 @@ const active = computed(() => {
 
 const togglePanel = () => {
     storiesStore.peekCodePanel = false
-    // ugly hack since nextTick does not help
-    setTimeout(() => {
-        shown.value = !shown.value
-    }, 0)
+    shown.value = !shown.value
 }
 
 const verifyCode = () => {
@@ -111,5 +113,30 @@ const verifyCode = () => {
 
 watch(code, () => {
     wrong.value = false
+})
+
+onMounted(() => {
+    if (storiesStore.peekCodePanel) {
+        const delay = (duration) => {
+            return new Promise((resolve) => {
+                setTimeout(resolve, duration)
+            })
+        }
+        Promise.resolve()
+            .then(() => delay(800)) // initial delay
+            .then(() => {
+                peekingIn.value = true
+            })
+            .then(() => delay(300)) // duration in
+            .then(() => delay(800)) // delay between
+            .then(() => {
+                peekingIn.value = false
+                peekingOut.value = true
+            })
+            .then(() => delay(300)) // duration out
+            .then(() => {
+                peekingOut.value = false
+            })
+    }
 })
 </script>
