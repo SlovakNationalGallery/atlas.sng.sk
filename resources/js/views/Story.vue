@@ -3,7 +3,7 @@
         <div
             :ref="setStoryRef"
             class="m-4 scroll-mt-14"
-            :class="{ 'opacity-50': story !== storiesStore.active }"
+            :class="{ 'opacity-50': !isActive(i) }"
             v-for="(story, i) in storiesStore.stories"
         >
             <Markdown :source="story.text" />
@@ -17,8 +17,8 @@
             </div>
 
             <button
-                :disabled="story !== storiesStore.active"
-                v-show="story === storiesStore.active || storiesStore.selectedLinks[i] === link"
+                :disabled="!isActive(i)"
+                v-show="isActive(i) || storiesStore.selectedLinkIds[i] === link.id"
                 class="block border-1 border-green cursor-pointer my-4 p-3 rounded-xl text-green text-left w-full"
                 @click="navigate(link)"
                 v-for="link in story.links"
@@ -32,6 +32,7 @@
 </template>
 
 <script setup>
+import { Scope } from 'eslint-scope'
 import { nextTick, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import Markdown from 'vue3-markdown-it'
@@ -49,6 +50,14 @@ const navigate = (link) => {
     loadStory(link.story_id)
 }
 
+const isLastStoryLoaded = () => {
+    return storiesStore.selectedLinkIds.length < storiesStore.stories.length
+}
+
+const isActive = (i) => {
+    return i === storiesStore.stories.length - 1 && isLastStoryLoaded()
+}
+
 const setStoryRef = (el) => {
     if (!el) {
         return
@@ -57,22 +66,30 @@ const setStoryRef = (el) => {
     storyRefs.value.push(el)
 }
 
+const scrollLastIntoView = () => {
+    if (storyRefs.value.length) {
+        storyRefs.value[storyRefs.value.length - 1].scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+        })
+    }
+}
+
 const loadStory = (id) => {
     return axios.get(`/api/stories/${id}`).then(({ data }) => {
         storiesStore.addStory(data.data)
 
-        nextTick(() => {
-            storyRefs.value[storyRefs.value.length - 1].scrollIntoView({
-                behavior: 'smooth',
-                block: 'start',
-            })
-        })
+        nextTick(scrollLastIntoView)
     })
 }
 
 onMounted(() => {
     if (!storiesStore.stories.length) {
         loadStory(route.params.id || route.meta.id)
+    } else if (!isLastStoryLoaded()) {
+        loadStory(storiesStore.selectedLinkIds[storiesStore.selectedLinkIds.length - 1])
+    } else {
+        nextTick(scrollLastIntoView)
     }
 })
 </script>
