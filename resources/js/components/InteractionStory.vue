@@ -1,5 +1,5 @@
 <template>
-    <div class="scroll-mt-14" :class="{ 'opacity-50': !active }">
+    <div class="scroll-mt-14" :class="{ 'opacity-50': !active }" :id="active ? 'active-story' : undefined">
         <div class="my-4">
             <Markdown :source="story.text" />
         </div>

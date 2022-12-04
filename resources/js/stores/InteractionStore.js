@@ -1,37 +1,29 @@
 import { useStorage } from '@vueuse/core'
 import { defineStore } from 'pinia'
-import { useItemStore } from './ItemStore'
-import { useSectionStore } from './SectionStore'
 import { useStoryStore } from './StoryStore'
 
 export const useInteractionStore = defineStore('InteractionStore', {
     state: () => ({
         interactions: useStorage('interactions', []),
-        activeStoryId: useStorage('activeStoryId', null),
         peekCodePanel: useStorage('peekCodePanel', false),
+        cursor: useStorage('cursor', -1),
     }),
     getters: {
-        interactionsWithData() {
-            const stores = {
-                story: useStoryStore(),
-                itemViewed: useItemStore(),
-                itemFavourited: useItemStore(),
-                sectionViewed: useSectionStore(),
+        active() {
+            if (this.cursor > -1) {
+                return this.interactions[this.cursor]
             }
-
-            return this.interactions.map((interaction) => {
-                const data = stores[interaction.type].get(interaction.id)
-                return { ...interaction, data }
-            })
         },
         activeStory() {
-            const storiesStore = useStoryStore()
-            return storiesStore.get(this.activeStoryId)
+            if (this.active && this.active.type === 'story') {
+                const storiesStore = useStoryStore()
+                return storiesStore.get(this.active.id)
+            }
         },
-        lastInteractionStory() {
-            return this.interactionStories[this.interactionStories.length - 1]
+        lastStory() {
+            return this.stories[this.stories.length - 1]
         },
-        interactionStories() {
+        stories() {
             const storiesStore = useStoryStore()
             return this.interactions
                 .filter((interaction) => interaction.type === 'story')
@@ -39,6 +31,13 @@ export const useInteractionStore = defineStore('InteractionStore', {
         },
     },
     actions: {
+        addStory(id) {
+            const length = this.interactions.push({
+                type: 'story',
+                id,
+            })
+            this.cursor = length - 1
+        },
         addItemViewed(id) {
             this.interactions.push({
                 type: 'itemViewed',
@@ -62,13 +61,9 @@ export const useInteractionStore = defineStore('InteractionStore', {
                 id,
             })
         },
-        selectLink(link) {
-            this.interactions.push({
-                type: 'story',
-                id: this.activeStoryId,
-                linkId: link.id,
-            })
-            this.activeStoryId = null
+        selectLink(id) {
+            this.active.linkId = id
+            this.cursor = -1
         },
         clear() {
             this.interactions = []
