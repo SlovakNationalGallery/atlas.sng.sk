@@ -19,4 +19,9 @@ class Item extends Model
     protected $attributes = [
         'offset_top' => 0,
     ];
+
+    public function getVideoAttribute()
+    {
+        return ($this->attributes['video']) ? getVimeoVideoIdFromUrl($this->attributes['video']) : null;
+    }
 }
