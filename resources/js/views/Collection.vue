@@ -1,7 +1,7 @@
 <template>
     <div class="p-4">
         <div class="flex flex-col space-y-3">
-            <router-link to="/">
+            <router-link :to="{ name: 'home', hash: '#code' }">
                 <Thumbnail :truncate-description="false">
                     <template #image>
                         <div class="bg-black flex items-center justify-center h-full w-full">
