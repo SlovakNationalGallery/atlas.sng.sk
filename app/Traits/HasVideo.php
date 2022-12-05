@@ -5,6 +5,11 @@ use App\Video\VimeoApi;
 
 trait HasVideo
 {
+    public function getVideoIdAttribute()
+    {
+        return $this->video ? $this->getVimeoVideoIdFromUrl($this->video) : null;
+    }
+
     public function getVideoThumbnailAttribute()
     {
         if (!$this->video) {
