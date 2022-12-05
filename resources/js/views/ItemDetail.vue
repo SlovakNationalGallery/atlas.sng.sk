@@ -25,7 +25,8 @@
             <template v-slot:content>
                 <div
                     :class="['aspect-w-' + item.video_aspect_ratio.width, 'aspect-h-' + item.video_aspect_ratio.height]">
-                    <iframe :src="item.video_embed" frameborder="0" allow="autoplay;" allowfullscreen></iframe>
+                    <iframe class="rounded-xl" :src="item.video_embed" frameborder="0" allow="autoplay;"
+                        allowfullscreen></iframe>
                 </div>
             </template>
         </Collapsible>
