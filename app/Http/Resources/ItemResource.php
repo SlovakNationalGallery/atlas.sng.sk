@@ -43,6 +43,10 @@ class ItemResource extends JsonResource
             'webumenia_url' => config('services.webumenia.url') . '/dielo/' . $this['webumenia_item']->id,
             'code' => $this['item']->code ? $this['item']->code->code : null,
             'offset_top' => $this['item']->offset_top,
+            'video' => $this['item']->video,
+            'video_thumbnail' => $this['item']->video_thumbnail,
+            'video_embed' => $this['item']->video_embed,
+            'video_aspect_ratio' => $this['item']->video_aspect_ratio,
         ];
     }
 

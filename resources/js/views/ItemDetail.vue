@@ -18,6 +18,17 @@
                 <AuthorityDetails :authority="authority" />
             </template>
         </Collapsible>
+        <Collapsible v-if="item.video" class="mb-4">
+            <template v-slot:summary>
+                <VideoSummary :thumbnail="item.video_thumbnail" />
+            </template>
+            <template v-slot:content>
+                <div
+                    :class="['aspect-w-' + item.video_aspect_ratio.width, 'aspect-h-' + item.video_aspect_ratio.height]">
+                    <iframe :src="item.video_embed" frameborder="0" allow="autoplay;" allowfullscreen></iframe>
+                </div>
+            </template>
+        </Collapsible>
         <WebumeniaButton :url="item.webumenia_url" class="mb-4" />
     </div>
     <div class="w-full md:max-w-lg h-24 fixed bottom-0 bg-gradient-to-t from-white to-transparent pointer-events-none">
@@ -29,18 +40,12 @@
                         {{ $t('Back') }}
                     </ConfirmButton>
                 </HistoryBack>
-                <ConfirmButton
-                    v-if="item && itemStore.isFavourite(item.id)"
-                    class="bg-white text-red border-red"
-                    @click="itemStore.removeFavourite(item.id)"
-                    >{{ $t('Remove') }}</ConfirmButton
-                >
+                <ConfirmButton v-if="item && itemStore.isFavourite(item.id)" class="bg-white text-red border-red"
+                    @click="itemStore.removeFavourite(item.id)">{{ $t('Remove') }}</ConfirmButton>
                 <ConfirmButton v-else class="bg-green" @click="addItemFavourited(item)">
                     <svg class="mr-3 w-[25px] h-[22px] stroke-black stroke-2 fill-green">
-                        <path
-                            class="[stroke-linecap:round] [stroke-linejoin:bevel]"
-                            d="M13.7382 19.5758L13.7416 19.5724L21.3354 11.9786L21.3371 11.9768C23.5245 9.77851 23.9117 6.11062 21.7475 3.70364C21.215 3.109 20.5669 2.62911 19.8427 2.29327C19.1181 1.95727 18.3327 1.77252 17.5344 1.75032C16.736 1.72811 15.9415 1.86892 15.1994 2.16412C14.4573 2.45933 13.7832 2.90275 13.2183 3.46727L13.2157 3.46986L12.5005 4.18977L11.9818 3.6671L11.9818 3.66709L11.9773 3.66264C9.779 1.4753 6.1111 1.08803 3.70413 3.25224C3.10948 3.78478 2.6296 4.43291 2.29376 5.15709C1.95776 5.88162 1.77301 6.66706 1.75081 7.46541C1.7286 8.26376 1.8694 9.05825 2.16461 9.80034L3.09379 9.43071L2.16461 9.80034C2.45982 10.5424 2.90324 11.2165 3.46776 11.7815L3.46802 11.7817L11.2586 19.5724L11.2621 19.5758C11.5915 19.9021 12.0364 20.0851 12.5001 20.0851C12.9638 20.0851 13.4088 19.9021 13.7382 19.5758Z"
-                        />
+                        <path class="[stroke-linecap:round] [stroke-linejoin:bevel]"
+                            d="M13.7382 19.5758L13.7416 19.5724L21.3354 11.9786L21.3371 11.9768C23.5245 9.77851 23.9117 6.11062 21.7475 3.70364C21.215 3.109 20.5669 2.62911 19.8427 2.29327C19.1181 1.95727 18.3327 1.77252 17.5344 1.75032C16.736 1.72811 15.9415 1.86892 15.1994 2.16412C14.4573 2.45933 13.7832 2.90275 13.2183 3.46727L13.2157 3.46986L12.5005 4.18977L11.9818 3.6671L11.9818 3.66709L11.9773 3.66264C9.779 1.4753 6.1111 1.08803 3.70413 3.25224C3.10948 3.78478 2.6296 4.43291 2.29376 5.15709C1.95776 5.88162 1.77301 6.66706 1.75081 7.46541C1.7286 8.26376 1.8694 9.05825 2.16461 9.80034L3.09379 9.43071L2.16461 9.80034C2.45982 10.5424 2.90324 11.2165 3.46776 11.7815L3.46802 11.7817L11.2586 19.5724L11.2621 19.5758C11.5915 19.9021 12.0364 20.0851 12.5001 20.0851C12.9638 20.0851 13.4088 19.9021 13.7382 19.5758Z" />
                     </svg>
                     {{ $t('Save') }}
                 </ConfirmButton>
@@ -60,6 +65,7 @@ import ConfirmButton from '../components/ConfirmButton.vue'
 import ItemImageLightbox from '../components/ItemImageLightbox.vue'
 import ItemImageMovable from '../components/ItemImageMovable.vue'
 import WebumeniaButton from '../components/WebumeniaButton.vue'
+import VideoSummary from '../components/VideoSummary.vue'
 import HistoryBack from '../components/HistoryBack.vue'
 import SvgBack from '../components/svg/Back.vue'
 import { useInteractionStore } from '../stores/InteractionStore'

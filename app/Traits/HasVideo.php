@@ -5,23 +5,13 @@ use App\Video\VimeoApi;
 
 trait HasVideo
 {
-    public function initializeHasVideo()
-    {
-        $this->append('video_id', 'video_thumbnail');
-    }
-
-    public function getVideoIdAttribute()
-    {
-        return $this->video ? $this->getVimeoVideoIdFromUrl($this->video) : null;
-    }
-
     public function getVideoThumbnailAttribute()
     {
         if (!$this->video) {
             return null;
         }
-        $thumbnail = app(VimeoApi::class)->getThumbnail($this->video_id);
-        $sizes = collect($thumbnail->sizes);
+        $video = app(VimeoApi::class)->getVideo($this->video_id);
+        $sizes = collect($video['pictures']->sizes);
         $largest = $sizes->last();
         return [
             'src' => $largest->link,
@@ -29,6 +19,28 @@ trait HasVideo
             'width' => $largest->width,
             'height' => $largest->height,
         ];
+    }
+
+    public function getVideoAspectRatioAttribute()
+    {
+        if (!$this->video) {
+            return null;
+        }
+        $video = app(VimeoApi::class)->getVideo($this->video_id);
+        $divisor = gmp_intval(gmp_gcd($video['width'], $video['height']));
+        return collect([
+            'width' => $video['width'] / $divisor,
+            'height' => $video['height'] / $divisor,
+        ]);
+    }
+
+    public function getVideoEmbedAttribute()
+    {
+        if (!$this->video) {
+            return null;
+        }
+        $video = app(VimeoApi::class)->getVideo($this->video_id);
+        return $video['player_embed_url'];
     }
 
     /**
