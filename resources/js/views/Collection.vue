@@ -22,13 +22,13 @@
                     <template #description>{{ $t('Enter a new artwork code to add to your collection') }}</template>
                 </Thumbnail>
             </router-link>
-            <ItemLoader :id="itemId" v-slot="{ item }" v-for="itemId in itemsStore.itemsIds" :key="itemId">
-                <router-link :to="{ name: 'item_detail', params: { id: item.id } }">
+            <ItemLoader :id="id" v-slot="{ item }" v-for="id in itemStore.favouriteItemIds" :key="id">
+                <router-link :to="{ name: 'item_detail', params: { id } }">
                     <ItemThumbnail :item="item" />
                 </router-link>
             </ItemLoader>
         </div>
-        <div v-if="itemsStore.items.length !== 0">
+        <div v-if="itemStore.favouritesCount">
             <button class="pt-6 pb-2 w-full active:text-gray-dark" @click="toggleModal">
                 {{ $t('Remove all artworks from collection') }}
             </button>
@@ -120,7 +120,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { useItemsStore } from '../stores/ItemsStore'
+import { useItemStore } from '../stores/ItemStore'
 import CardModal from '../components/CardModal.vue'
 import ConfirmButton from '../components/ConfirmButton.vue'
 import ItemLoader from '../components/ItemLoader.vue'
@@ -129,7 +129,7 @@ import Survey from '../components/Survey.vue'
 import Thumbnail from '../components/Thumbnail.vue'
 
 const route = useRoute()
-const itemsStore = useItemsStore()
+const itemStore = useItemStore()
 const modalActive = ref(false)
 const loading = ref(false)
 const shareUrl = ref('')
@@ -140,12 +140,12 @@ const toggleModal = () => {
 
 const removeCollection = () => {
     toggleModal()
-    itemsStore.removeAll()
+    itemStore.removeFavourites()
 }
 
 const shareCollection = async () => {
     loading.value = true
-    shareUrl.value = await itemsStore.getCollectionLink()
+    shareUrl.value = await itemStore.getCollectionLink()
     shareUrlDialog()
     loading.value = false
 }
@@ -164,7 +164,7 @@ const shareUrlDialog = (openLink = false) => {
 
 onMounted(async () => {
     if (route.params.id) {
-        itemsStore.fetch(route.params.id)
+        itemStore.fetch(route.params.id)
     }
 })
 </script>
