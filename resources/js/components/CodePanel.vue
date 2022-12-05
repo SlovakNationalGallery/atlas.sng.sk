@@ -26,7 +26,7 @@
             </div>
             <div class="grow text-center">
                 <button
-                    @click="togglePanel"
+                    @click="shown = !shown"
                     class="bg-black duration-300 ease-in-out my-2 px-3 py-2 rounded-full text-sm text-white"
                     :class="[peekingIn ? 'text-base text-green' : 'text-white']"
                 >
@@ -65,14 +65,15 @@
 <script setup>
 import { computed } from '@vue/reactivity'
 import { onMounted, reactive, ref, watch } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import CircleButton from '../components/CircleButton.vue'
 import FavouritesCount from '../components/FavouritesCount.vue'
 import OnboardingModal from '../components/OnboardingModal.vue'
-import { useStoriesStore } from '../stores/StoriesStore'
+import { useInteractionStore } from '../stores/InteractionStore'
 
-const storiesStore = useStoriesStore()
+const interactionStore = useInteractionStore()
 const router = useRouter()
+const route = useRoute()
 const code = reactive(Array(9).fill(0))
 const wrong = ref(false)
 const shown = ref(false)
@@ -84,25 +85,28 @@ const active = computed(() => {
     return code.some((bit) => bit)
 })
 
-const togglePanel = () => {
-    storiesStore.peekCodePanel = false
-    shown.value = !shown.value
-}
+watch(shown, (value) => {
+    router.replace({ hash: value ? '#code' : undefined })
+    interactionStore.peekCodePanel = false
+})
 
 const verifyCode = () => {
     const digit = parseInt(code.join(''), 2)
     axios
         .get('/api/verify/' + digit)
         .then(({ data }) => {
+            const id = data.data.codeable_id
             if (data.data.codeable_type === 'item') {
+                interactionStore.addItemViewed(id)
                 router.push({
                     name: 'item_detail',
-                    params: { id: data.data.codeable_id },
+                    params: { id },
                 })
             } else if (data.data.codeable_type === 'section') {
+                interactionStore.addSectionViewed(id)
                 router.push({
                     name: 'section_detail',
-                    params: { id: data.data.codeable_id },
+                    params: { id },
                 })
             }
         })
@@ -116,7 +120,9 @@ watch(code, () => {
 })
 
 onMounted(() => {
-    if (storiesStore.peekCodePanel) {
+    if (route.hash === '#code') {
+        shown.value = true
+    } else if (interactionStore.peekCodePanel) {
         const delay = (duration) => {
             return new Promise((resolve) => {
                 setTimeout(resolve, duration)

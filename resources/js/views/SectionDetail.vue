@@ -28,14 +28,15 @@
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import ItemThumbnail from '../components/ItemThumbnail.vue'
+import { useSectionStore } from '../stores/SectionStore'
 
 const route = useRoute()
 const props = defineProps(['section'])
+const sectionStore = useSectionStore()
 const section = ref(null)
 
-onMounted(() => {
-    axios.get(`/api/sections/${route.params.id}`).then(({ data }) => {
-        section.value = data.data
-    })
+onMounted(async () => {
+    const id = route.params.id
+    section.value = sectionStore.get(id) || (await sectionStore.load(id))
 })
 </script>
