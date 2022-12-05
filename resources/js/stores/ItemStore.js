@@ -52,7 +52,7 @@ export const useItemStore = defineStore('ItemStore', {
             } else {
                 const response = await axios
                     .post('/api/collections', {
-                        items: this.itemsIds,
+                        items: this.favouriteItemIds,
                     })
                     .catch((err) => {
                         console.log(err)
@@ -65,7 +65,7 @@ export const useItemStore = defineStore('ItemStore', {
         async fetch(collectionId) {
             this.clearCollectionLink()
             this.items = {}
-            this.itemsIds = (await axios.get(`/api/collections/${collectionId}`)).data
+            this.favouriteItemIds = (await axios.get(`/api/collections/${collectionId}`)).data
         },
     },
 })
