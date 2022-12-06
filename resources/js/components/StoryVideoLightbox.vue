@@ -1,5 +1,5 @@
 <template>
-    <div role="link" class="relative" @click.prevent="active && (visible = true)">
+    <div role="link" class="relative" @click="active && (visible = true)">
         <ResponsiveImage class="rounded-xl w-full object-cover cursor-pointer" :image="story.video_thumbnail" />
         <button
             class="bg-green rounded-xl px-3 py-2 bottom-3 right-3 absolute flex items-center appearance-none text-[16px] text-black font-medium">
