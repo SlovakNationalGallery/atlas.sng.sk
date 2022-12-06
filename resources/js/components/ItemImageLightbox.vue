@@ -10,9 +10,9 @@
         <div class="bg-black opacity-70 absolute inset-0 cursor-zoom-out" @click="visible = false" />
         <div class="relative max-h-full w-full md:max-w-lg" @click.stop="visible = false">
             <img :src="item.image_src" />
-            <div class="absolute cursor-pointer p-1 bg-white top-0 right-0" @click.stop="visible = false">
+            <button class="absolute cursor-pointer p-1 bg-white top-0 right-0" @click.stop="visible = false">
                 <SvgClose />
-            </div>
+            </button>
         </div>
     </div>
 </template>
