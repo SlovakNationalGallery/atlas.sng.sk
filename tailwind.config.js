@@ -62,8 +62,4 @@ module.exports = {
             screen: 'calc(var(--vh) * 100)',
         }),
     },
-    corePlugins: {
-        aspectRatio: false,
-    },
-    plugins: [require('@tailwindcss/aspect-ratio')],
 }

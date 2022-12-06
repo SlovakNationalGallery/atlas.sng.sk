@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-gray-softest aspect-w-4 aspect-h-3 border-black border-b-2 relative" v-if="item">
+    <div class="bg-gray-softest w-full border-black border-b-2 relative" v-if="item">
         <ItemImageMovable v-if="$route.meta.edit" :item="item"></ItemImageMovable>
         <ItemImageLightbox v-else :item="item"></ItemImageLightbox>
     </div>
@@ -23,10 +23,9 @@
                 <VideoSummary :thumbnail="item.video_thumbnail" />
             </template>
             <template v-slot:content>
-                <div :style="{ aspectRatio: `${item.video_aspect_ratio.width}/${item.video_aspect_ratio.height}` }">
-                    <iframe class="rounded-xl w-full h-full" :src="item.video_embed" frameborder="0" allow="autoplay;"
-                        allowfullscreen></iframe>
-                </div>
+                <iframe class="rounded-xl w-full"
+                    :style="{ aspectRatio: `${item.video_aspect_ratio.width}/${item.video_aspect_ratio.height}` }"
+                    :src="item.video_embed" frameborder="0" allow="autoplay;" allowfullscreen></iframe>
             </template>
         </Collapsible>
         <WebumeniaButton :url="item.webumenia_url" class="mb-4" />
