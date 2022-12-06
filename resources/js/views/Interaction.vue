@@ -6,8 +6,9 @@
                 :story="storyStore.get(interaction.id)"
                 :linkId="interaction.linkId"
                 :active="interaction === interactionStore.active"
+                :first="i === 0"
                 @navigate="navigate"
-                class="my-4"
+                class="my-8"
             />
             <InteractionItemFavourited
                 v-else-if="interaction.type === 'itemFavourited'"
