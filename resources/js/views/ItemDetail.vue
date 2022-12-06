@@ -23,9 +23,8 @@
                 <VideoSummary :thumbnail="item.video_thumbnail" />
             </template>
             <template v-slot:content>
-                <iframe class="rounded-xl w-full"
-                    :style="{ aspectRatio: `${item.video_aspect_ratio.width}/${item.video_aspect_ratio.height}` }"
-                    :src="item.video_embed" frameborder="0" allow="autoplay;" allowfullscreen></iframe>
+                <ResponsiveVideoEmbed :src="item.video_embed" :width="item.video_aspect_ratio.width"
+                    :height="item.video_aspect_ratio.height" />
             </template>
         </Collapsible>
         <WebumeniaButton :url="item.webumenia_url" class="mb-4" />
@@ -66,6 +65,7 @@ import ItemImageMovable from '../components/ItemImageMovable.vue'
 import WebumeniaButton from '../components/WebumeniaButton.vue'
 import VideoSummary from '../components/VideoSummary.vue'
 import HistoryBack from '../components/HistoryBack.vue'
+import ResponsiveVideoEmbed from '../components/ResponsiveVideoEmbed.vue'
 import SvgBack from '../components/svg/Back.vue'
 import { useInteractionStore } from '../stores/InteractionStore'
 

@@ -10,10 +10,8 @@
     <div class="fixed inset-0 z-50 flex justify-center items-center" v-if="visible" @click="visible = false">
         <div class="bg-black opacity-70 absolute inset-0 cursor-zoom-out" @click="visible = false" />
         <div class="relative max-h-full w-full md:max-w-lg mx-4" @click.stop="visible = false">
-            <div :style="'aspect-ratio:' + story.video_aspect_ratio.width + ' / ' + story.video_aspect_ratio.height">
-                <iframe class="rounded-xl w-full h-full" :src="story.video_embed" frameborder="0" allow="autoplay;"
-                    allowfullscreen></iframe>
-            </div>
+            <ResponsiveVideoEmbed :src="story.video_embed" :width="story.video_aspect_ratio.width"
+                :height="story.video_aspect_ratio.height" />
             <div class="absolute cursor-pointer p-1 top-0 right-0 bg-white rounded-tr-xl" @click.stop="visible = false">
                 <SvgClose />
             </div>
@@ -24,6 +22,7 @@
 <script setup>
 import { ref } from 'vue'
 import ResponsiveImage from './ResponsiveImage.vue'
+import ResponsiveVideoEmbed from './ResponsiveVideoEmbed.vue'
 import SvgClose from './svg/Close.vue'
 import SvgPlay from './svg/Play.vue'
 
