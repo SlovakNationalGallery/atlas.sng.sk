@@ -9,12 +9,7 @@
         </div>
 
         <div class="my-4 relative" v-if="story.video_thumbnail">
-            <ResponsiveImage class="rounded-xl w-full object-cover cursor-pointer" :image="story.video_thumbnail" />
-            <div
-                class="bg-green rounded-xl px-3 py-2 bottom-3 right-3 absolute flex items-center appearance-none text-[16px] text-black font-medium">
-                <SvgPlay class="mr-2" />
-                {{ $t('Play video') }} ({{ story.video_duration }})
-            </div>
+            <StoryVideoLightbox :story="story"></StoryVideoLightbox>
         </div>
 
         <button :disabled="!active" v-show="active || linkId === link.id"
@@ -27,9 +22,8 @@
 
 <script setup>
 import Markdown from 'vue3-markdown-it'
-import ResponsiveImage from './ResponsiveImage.vue'
 import ResponsiveImageWithPlaceholder from './ResponsiveImageWithPlaceholder.vue'
-import SvgPlay from './svg/Play.vue'
+import StoryVideoLightbox from '../components/StoryVideoLightbox.vue'
 
 const props = defineProps(['story', 'active', 'linkId'])
 const emit = defineEmits(['navigate'])
