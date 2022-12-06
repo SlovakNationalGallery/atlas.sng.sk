@@ -23,7 +23,7 @@
                 <VideoSummary :thumbnail="item.video_thumbnail" />
             </template>
             <template v-slot:content>
-                <div :style="'aspect-ratio:' + item.video_aspect_ratio.width + ' / ' + item.video_aspect_ratio.height">
+                <div :style="{ aspectRatio: `${item.video_aspect_ratio.width}/${item.video_aspect_ratio.height}`">
                     <iframe class="rounded-xl w-full h-full" :src="item.video_embed" frameborder="0" allow="autoplay;"
                         allowfullscreen></iframe>
                 </div>
