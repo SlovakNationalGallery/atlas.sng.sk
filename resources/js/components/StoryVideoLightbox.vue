@@ -7,14 +7,14 @@
             {{ $t('Play video') }} ({{ story.video_duration }})
         </button>
     </a>
-    <div class="fixed inset-0 z-50 items-center" v-if="visible" @click="visible = false">
+    <div class="fixed inset-0 z-50 flex justify-center items-center" v-if="visible" @click="visible = false">
         <div class="bg-black opacity-70 absolute inset-0 cursor-zoom-out" @click="visible = false" />
-        <div class="h-full max-w-full p-4 relative md:max-w-lg"
-            :class="['aspect-w-' + story.video_aspect_ratio.width, 'aspect-h-' + story.video_aspect_ratio.height]"
-            @click.stop="visible = false">
-            <iframe class="rounded-xl w-full h-full" :src="story.video_embed" frameborder="0" allow="autoplay;"
-                allowfullscreen></iframe>
-            <div class="absolute cursor-pointer p-1 bg-white top-0 right-0" @click.stop="visible = false">
+        <div class="relative max-h-full w-full md:max-w-lg mx-4" @click.stop="visible = false">
+            <div :style="'aspect-ratio:' + story.video_aspect_ratio.width + ' / ' + story.video_aspect_ratio.height">
+                <iframe class="rounded-xl w-full h-full" :src="story.video_embed" frameborder="0" allow="autoplay;"
+                    allowfullscreen></iframe>
+            </div>
+            <div class="absolute cursor-pointer p-1 top-0 right-0 bg-white rounded-tr-xl" @click.stop="visible = false">
                 <SvgClose />
             </div>
         </div>
