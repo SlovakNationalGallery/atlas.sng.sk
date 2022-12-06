@@ -1,5 +1,5 @@
 <template>
-    <svg class="h-[24px] w-[24px] fill-none stroke-1.5 stroke-current [stroke-linecap:round] [stroke-linejoin:round]">
+    <svg class="h-[24px] w-[24px] stroke-[1.5px] stroke-current [stroke-linecap:round] [stroke-linejoin:round]">
         <path d="M15.75 4.5H19.5V8.25" />
         <path d="M14.25 9.75L19.5 4.5" />
         <path d="M8.25 19.5H4.5V15.75" />
