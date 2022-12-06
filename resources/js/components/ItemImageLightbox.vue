@@ -1,5 +1,5 @@
 <template>
-    <div role="link" class="relative" @click.prevent="visible = true">
+    <div role="link" class="relative" @click="visible = true">
         <ItemImage :item="item" :offset-top="item.offset_top"></ItemImage>
         <button class="rounded-xl bg-black/70 py-1 px-2 absolute bottom-3 right-3 text-white text-sm flex items-center">
             <SvgArrowsOut class="mr-2" />
