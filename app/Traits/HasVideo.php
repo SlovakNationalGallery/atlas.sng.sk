@@ -50,4 +50,13 @@ trait HasVideo
         $video = app(VimeoApi::class)->getVideo($this->video_id);
         return $video['player_embed_url'];
     }
+
+    public function getVideoDurationAttribute()
+    {
+        if (!$this->video) {
+            return null;
+        }
+        $video = app(VimeoApi::class)->getVideo($this->video_id);
+        return $video['duration'];
+    }
 }

@@ -8,7 +8,7 @@
             <ResponsiveImageWithPlaceholder class="rounded-xl w-full" :image="image" />
         </div>
 
-        <div class="my-4 relative" v-if="story.video_thumbnail">
+        <div class="my-4 relative" v-if="story.video_embed">
             <StoryVideoLightbox :story="story"></StoryVideoLightbox>
         </div>
 
