@@ -18,7 +18,7 @@
                 <AuthorityDetails :authority="authority" />
             </template>
         </Collapsible>
-        <Collapsible v-if="item.video" class="mb-4">
+        <Collapsible v-if="item.video_embed" class="mb-4">
             <template v-slot:summary>
                 <VideoSummary :thumbnail="item.video_thumbnail" />
             </template>
