@@ -3,9 +3,7 @@
         <img v-if="first" class="mx-auto mb-8 -mt-2 h-40" src="../../img/interaction-intro-ester.svg" alt="Ester" />
         <img v-else-if="active" class="h-12 rounded-xl w-12" src="../../img/avatar-ester.svg" alt="Avatar" />
 
-        <div class="my-4">
-            <Markdown :source="story.text" />
-        </div>
+        <div class="my-4 space-y-6" v-html="story.text"></div>
 
         <div class="my-4" v-for="image in story.images">
             <ResponsiveImageWithPlaceholder class="rounded-xl w-full" :image="image" />
@@ -30,7 +28,6 @@
 </template>
 
 <script setup>
-import Markdown from 'vue3-markdown-it'
 import ResponsiveImage from './ResponsiveImage.vue'
 import ResponsiveImageWithPlaceholder from './ResponsiveImageWithPlaceholder.vue'
 import SvgChatCircle from './svg/ChatCircle.vue'
