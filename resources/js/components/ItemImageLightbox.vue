@@ -1,11 +1,11 @@
 <template>
-    <a href="#" @click.prevent="visible = true">
+    <div role="link" class="relative" @click.prevent="visible = true">
         <ItemImage :item="item" :offset-top="item.offset_top"></ItemImage>
         <button class="rounded-xl bg-black/70 py-1 px-2 absolute bottom-3 right-3 text-white text-sm flex items-center">
             <SvgArrowsOut class="mr-2" />
             <span>{{ $t('Enlarge') }}</span>
         </button>
-    </a>
+    </div>
     <div class="fixed inset-0 z-50 flex justify-center items-center" v-if="visible" @click="visible = false">
         <div class="bg-black opacity-70 absolute inset-0 cursor-zoom-out" @click="visible = false" />
         <div class="relative max-h-full w-full md:max-w-lg" @click.stop="visible = false">

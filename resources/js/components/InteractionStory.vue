@@ -9,7 +9,7 @@
         </div>
 
         <div class="my-4 relative" v-if="story.video_embed">
-            <StoryVideoLightbox :story="story"></StoryVideoLightbox>
+            <StoryVideoLightbox :story="story" :active="active"></StoryVideoLightbox>
         </div>
 
         <button :disabled="!active" v-show="active || linkId === link.id"
