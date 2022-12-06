@@ -70,6 +70,7 @@ class ImportItems extends Command
             ];
 
             $item->offset_top = Arr::get($record, 'fields.offsetTop', 0);
+            $item->video = Arr::get($record, 'fields.Video URL');
 
             $item->save();
 

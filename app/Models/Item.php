@@ -3,12 +3,13 @@
 namespace App\Models;
 
 use App\Models\Concerns\HasCode;
+use App\Traits\HasVideo;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
 class Item extends Model
 {
-    use HasCode, HasTranslations;
+    use HasCode, HasTranslations, HasVideo;
 
     public $incrementing = false;
 

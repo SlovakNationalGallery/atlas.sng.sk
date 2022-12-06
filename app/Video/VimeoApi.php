@@ -7,20 +7,23 @@ use Illuminate\Support\Facades\Http;
 
 class VimeoApi
 {
-    public function getThumbnail($videoId)
+    public function getVideo($videoId)
     {
-        $response = Http::vimeo()
-            ->get("/videos/$videoId/pictures")
-            ->object();
+        return Cache::remember(sprintf('vimeo_video.%s', $videoId), now()->addHour(), function () use ($videoId) {
+            $response = Http::vimeo()
+                ->get("/videos/$videoId/")
+                ->object();
 
-        if (isset($response->error)) {
-            throw new \Exception($response->error);
-        }
-
-        return Cache::remember(
-            sprintf('vimeo_thumbnail.%s', $videoId),
-            now()->addHour(),
-            fn() => collect($response->data)->first(fn($thumbnail) => $thumbnail->active)
-        );
+            if (isset($response->error)) {
+                throw new \Exception($response->error);
+            }
+            return collect([
+                'player_embed_url' => $response->player_embed_url,
+                'duration' => $response->duration,
+                'width' => $response->width,
+                'height' => $response->height,
+                'pictures' => $response->pictures,
+            ]);
+        });
     }
 }

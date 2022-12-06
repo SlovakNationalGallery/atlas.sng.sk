@@ -23,20 +23,7 @@ class StoryResource extends JsonResource
             'images' => ImageResource::collection(
                 $this->getMedia()->filter(fn(Media $media) => $media->hasResponsiveImages())
             ),
-            'video_thumbnail' => $this->when($this->video, fn() => $this->getVideoThumbnail()),
-        ];
-    }
-
-    protected function getVideoThumbnail()
-    {
-        $thumbnail = app(VimeoApi::class)->getThumbnail($this->video);
-        $sizes = collect($thumbnail->sizes);
-        $largest = $sizes->last();
-        return [
-            'src' => $largest->link,
-            'srcset' => $sizes->map(fn($size) => sprintf('%s %sw', $size->link, $size->width))->join(', '),
-            'width' => $largest->width,
-            'height' => $largest->height,
+            'video_thumbnail' => $this->video_thumbnail,
         ];
     }
 }
