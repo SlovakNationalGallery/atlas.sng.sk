@@ -20,17 +20,18 @@
     font-style: normal;
 }
 
-/*
 @font-face {
     font-family: 'GTWalsheim';
     src: url('../fonts/GT-Walsheim/GT-Walsheim-Regular-Oblique.eot');
     src: url('../fonts/GT-Walsheim/GT-Walsheim-Regular-Oblique.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/GT-Walsheim/GT-Walsheim-Regular-Oblique.woff2') format('woff2'),
-         url('../fonts/GT-Walsheim/GT-Walsheim-Regular-Oblique.woff') format('woff'),
-         url('../fonts/GT-Walsheim/GT-Walsheim-Regular-Oblique.ttf') format('truetype');
+        url('../fonts/GT-Walsheim/GT-Walsheim-Regular-Oblique.woff2') format('woff2'),
+        url('../fonts/GT-Walsheim/GT-Walsheim-Regular-Oblique.woff') format('woff'),
+        url('../fonts/GT-Walsheim/GT-Walsheim-Regular-Oblique.ttf') format('truetype');
     font-weight: 400;
     font-style: oblique;
 }
+
+/*
 
 @font-face {
     font-family: 'GTWalsheim';

@@ -4,7 +4,6 @@ namespace App\Http\Resources;
 
 use App\Models\Authority;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Collection;
 
 class ItemResource extends JsonResource
 {
@@ -57,7 +56,7 @@ class ItemResource extends JsonResource
     private function getDescription()
     {
         if ($this['item']->description) {
-            return nl2br($this['item']->description);
+            return str($this['item']->description)->markdown();
         }
 
         return $this['webumenia_item']->description;
