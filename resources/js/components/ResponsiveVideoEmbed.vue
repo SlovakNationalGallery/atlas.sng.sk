@@ -1,6 +1,13 @@
 <template>
-    <iframe class="rounded-xl w-full" :src="props.src" frameborder="0" allow="autoplay;"
-        :style="{ aspectRatio: `${props.width}/${props.height}` }" allowfullscreen></iframe>
+    <iframe
+        class="w-full rounded-xl"
+        :src="props.src"
+        frameborder="0"
+        allow="autoplay;"
+        :style="{ aspectRatio: `${props.width}/${props.height}` }"
+        allowfullscreen
+        disablepictureinpicture
+    ></iframe>
 </template>
 
 <script setup>
