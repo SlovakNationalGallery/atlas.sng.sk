@@ -9,7 +9,7 @@
         </div>
         <h2 class="text-xl font-bold">{{ item.title }}</h2>
         <h3 class="text-gray-dark text-base">{{ item.author }} · {{ item.dating }}</h3>
-        <div class="py-4" v-html="item.description"></div>
+        <div class="py-4 space-y-4" v-html="item.description"></div>
         <Collapsible :open="i === 0" v-for="(authority, i) in item.authorities" :key="authority.id" class="mb-4">
             <template v-slot:summary>
                 <AuthoritySummary :authority="authority" />

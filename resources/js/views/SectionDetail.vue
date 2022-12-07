@@ -8,7 +8,7 @@
             <h2 class="font-bold text-white text-xl">{{ section.title }}</h2>
         </div>
         <div class="px-4">
-            <div class="py-4 whitespace-pre-line">{{ section.description }}</div>
+            <div class="py-4 space-y-4" v-html="section.description"></div>
 
             <p class="font-bold mb-2">{{ $t('Artworks in section') }}</p>
             <div class="flex flex-col space-y-3">

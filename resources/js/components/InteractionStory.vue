@@ -1,8 +1,6 @@
 <template>
     <div class="scroll-mt-14" :class="{ 'opacity-50': !active }" :id="active ? 'active-story' : undefined">
-        <div class="my-4">
-            <Markdown :source="story.text" />
-        </div>
+        <div class="my-4 space-y-6" v-html="story.text"></div>
 
         <div class="my-4" v-for="image in story.images">
             <ResponsiveImageWithPlaceholder class="rounded-xl w-full" :image="image" />
@@ -21,7 +19,7 @@
 </template>
 
 <script setup>
-import Markdown from 'vue3-markdown-it'
+import ResponsiveImage from './ResponsiveImage.vue'
 import ResponsiveImageWithPlaceholder from './ResponsiveImageWithPlaceholder.vue'
 import StoryVideoLightbox from '../components/StoryVideoLightbox.vue'
 
