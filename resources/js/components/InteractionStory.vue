@@ -6,7 +6,7 @@
         <div class="my-4 space-y-6" v-html="story.text"></div>
 
         <div class="my-4" v-for="image in story.images">
-            <ResponsiveImageWithPlaceholder class="rounded-xl w-full" :image="image" />
+            <ResponsiveImageWithSizes class="rounded-xl w-full" :image="image" />
         </div>
 
         <div class="my-4 relative" v-if="story.video_embed">
@@ -28,9 +28,9 @@
 </template>
 
 <script setup>
-import ResponsiveImageWithPlaceholder from './ResponsiveImageWithPlaceholder.vue'
-import SvgChatCircle from './svg/ChatCircle.vue'
+import ResponsiveImageWithSizes from './ResponsiveImageWithSizes.vue'
 import StoryVideoLightbox from '../components/StoryVideoLightbox.vue'
+import SvgChatCircle from './svg/ChatCircle.vue'
 
 const props = defineProps(['story', 'active', 'linkId', 'first'])
 const emit = defineEmits(['navigate'])
