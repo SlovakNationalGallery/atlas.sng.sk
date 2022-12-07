@@ -4,7 +4,7 @@ namespace Deployer;
 require 'recipe/laravel.php';
 
 set('bin/php', 'php8.1');
-set('bin/composer', '{{bin/php}} $(which composer)');
+set('bin/composer', '{{bin/php}} $(which composer2)');
 
 // Project name
 set('application', 'atlas');
@@ -26,7 +26,9 @@ host('lab_sng@webumenia.sk')
 task('build', function () {
     cd('{{release_path}}');
 
-    run('source "$HOME/.nvm/nvm.sh" && nvm use 16.16.0 && npm ci && npm run build');
+    run(
+        'source "$HOME/.nvm/nvm.sh" && nvm use 16.16.0 && npm ci && npm run build'
+    );
 });
 
 // Hooks
