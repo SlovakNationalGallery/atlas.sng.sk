@@ -24,6 +24,9 @@ class StoryResource extends JsonResource
                 $this->getMedia()->filter(fn(Media $media) => $media->hasResponsiveImages())
             ),
             'video_thumbnail' => $this->video_thumbnail,
+            'video_duration' => $this->video_duration ? gmdate('i:s', $this->video_duration) : null,
+            'video_embed' => $this->video_embed,
+            'video_aspect_ratio' => $this->video_aspect_ratio,
         ];
     }
 }

@@ -20,8 +20,10 @@ trait HasVideo
         $sizes = collect($video['pictures']->sizes);
         $largest = $sizes->last();
         return [
-            'src' => $largest->link,
-            'srcset' => $sizes->map(fn($size) => sprintf('%s %sw', $size->link, $size->width))->join(', '),
+            'src' => Str::remove('?r=pad', $largest->link),
+            'srcset' => $sizes
+                ->map(fn($size) => sprintf('%s %sw', Str::remove('?r=pad', $size->link), $size->width))
+                ->join(', '),
             'width' => $largest->width,
             'height' => $largest->height,
         ];
@@ -47,5 +49,14 @@ trait HasVideo
         }
         $video = app(VimeoApi::class)->getVideo($this->video_id);
         return $video['player_embed_url'];
+    }
+
+    public function getVideoDurationAttribute()
+    {
+        if (!$this->video) {
+            return null;
+        }
+        $video = app(VimeoApi::class)->getVideo($this->video_id);
+        return $video['duration'];
     }
 }

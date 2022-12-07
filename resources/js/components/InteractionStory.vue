@@ -9,8 +9,8 @@
             <ResponsiveImageWithPlaceholder class="rounded-xl w-full" :image="image" />
         </div>
 
-        <div class="my-4" v-if="story.video_thumbnail">
-            <ResponsiveImage class="rounded-xl w-full" :image="story.video_thumbnail" />
+        <div class="my-4 relative" v-if="story.video_embed">
+            <StoryVideoLightbox :story="story" :active="active"></StoryVideoLightbox>
         </div>
 
         <button
@@ -28,9 +28,9 @@
 </template>
 
 <script setup>
-import ResponsiveImage from './ResponsiveImage.vue'
 import ResponsiveImageWithPlaceholder from './ResponsiveImageWithPlaceholder.vue'
 import SvgChatCircle from './svg/ChatCircle.vue'
+import StoryVideoLightbox from '../components/StoryVideoLightbox.vue'
 
 const props = defineProps(['story', 'active', 'linkId', 'first'])
 const emit = defineEmits(['navigate'])
