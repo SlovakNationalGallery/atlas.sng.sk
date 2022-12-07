@@ -16,13 +16,17 @@ class ItemResource extends JsonResource
     public function toArray($request)
     {
         $webumeniaAuthorities = collect($this['webumenia_item']->authorities);
-        $authorities = Authority::whereIn('id', $webumeniaAuthorities->pluck('id'))
+        $authorities = Authority::whereIn(
+            'id',
+            $webumeniaAuthorities->pluck('id')
+        )
             ->get()
             ->keyBy('id')
             ->pipe(
                 fn($authorities) => $webumeniaAuthorities->map(
                     fn($webumeniaAuthority) => [
-                        'authority' => $authorities[$webumeniaAuthority->id] ?? null,
+                        'authority' =>
+                            $authorities[$webumeniaAuthority->id] ?? null,
                         'webumenia_authority' => $webumeniaAuthority,
                     ]
                 )
@@ -40,18 +44,27 @@ class ItemResource extends JsonResource
             'image_srcset' => collect([220, 300, 600, 800])
                 ->map(fn($width) => $this->getImageRoute($width) . " ${width}w")
                 ->join(', '),
-            'webumenia_url' => config('services.webumenia.url') . '/dielo/' . $this['webumenia_item']->id,
+            'webumenia_url' =>
+                config('services.webumenia.url') .
+                '/dielo/' .
+                $this['webumenia_item']->id,
             'code' => $this['item']->code ? $this['item']->code->code : null,
             'offset_top' => $this['item']->offset_top,
             'video_thumbnail' => $this['item']->video_thumbnail,
             'video_embed' => $this['item']->video_embed,
             'video_aspect_ratio' => $this['item']->video_aspect_ratio,
+            'video_title' => $this['item']->video_title,
+            'video_subtitle' => $this['item']->video_subtitle,
         ];
     }
 
     private function getImageRoute($width = 600)
     {
-        return config('services.webumenia.url') . '/dielo/nahlad/' . $this['webumenia_item']->id . '/' . $width;
+        return config('services.webumenia.url') .
+            '/dielo/nahlad/' .
+            $this['webumenia_item']->id .
+            '/' .
+            $width;
     }
 
     private function getDescription()
