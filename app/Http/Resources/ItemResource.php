@@ -32,6 +32,7 @@ class ItemResource extends JsonResource
             'id' => $this['webumenia_item']->id,
             'title' => $this['webumenia_item']->title,
             'author' => $this->getAuthor(),
+            'author_description' => $this['item']->author_description,
             'dating' => $this['webumenia_item']->dating,
             'description' => $this->getDescription(),
             'authorities' => AuthorityResource::collection($authorities),

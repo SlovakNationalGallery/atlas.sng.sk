@@ -9,8 +9,8 @@
         </div>
         <h2 class="text-xl font-bold">{{ item.title }}</h2>
         <h3 class="text-gray-dark text-base">{{ item.author }} · {{ item.dating }}</h3>
-        <div class="py-4 space-y-4" v-html="item.description"></div>
-        <Collapsible :open="i === 0" v-for="(authority, i) in item.authorities" :key="authority.id" class="mb-4">
+        <div class="my-4 space-y-4" v-html="item.description"></div>
+        <Collapsible :open="i === 0" v-for="(authority, i) in item.authorities" :key="authority.id" class="my-4">
             <template v-slot:summary>
                 <AuthoritySummary :authority="authority" />
             </template>
@@ -18,7 +18,15 @@
                 <AuthorityDetails :authority="authority" />
             </template>
         </Collapsible>
-        <Collapsible v-if="item.video_embed" class="mb-4">
+        <Collapsible v-if="item.author_description" class="my-4">
+            <template v-slot:summary>
+                <AuthorSummary :item="item" />
+            </template>
+            <template v-slot:content>
+                <AuthorDetails :item="item" />
+            </template>
+        </Collapsible>
+        <Collapsible v-if="item.video_embed" class="my-4">
             <template v-slot:summary>
                 <VideoSummary :thumbnail="item.video_thumbnail" />
             </template>
@@ -27,7 +35,7 @@
                     :height="item.video_aspect_ratio.height" />
             </template>
         </Collapsible>
-        <WebumeniaButton :url="item.webumenia_url" class="mb-4" />
+        <WebumeniaButton :url="item.webumenia_url" class="my-4" />
     </div>
     <div class="w-full md:max-w-lg h-24 fixed bottom-0 bg-gradient-to-t from-white to-transparent pointer-events-none">
         <div class="p-4 pt-8">
@@ -68,6 +76,8 @@ import HistoryBack from '../components/HistoryBack.vue'
 import ResponsiveVideoEmbed from '../components/ResponsiveVideoEmbed.vue'
 import SvgBack from '../components/svg/Back.vue'
 import { useInteractionStore } from '../stores/InteractionStore'
+import AuthorSummary from '../components/AuthorSummary.vue'
+import AuthorDetails from '../components/AuthorDetails.vue'
 
 const route = useRoute()
 const interactionStore = useInteractionStore()
