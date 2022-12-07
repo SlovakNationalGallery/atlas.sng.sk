@@ -1,12 +1,15 @@
 <template>
     <div class="flex">
         <div class="shrink-0">
-            <ResponsiveImage class="rounded-xl w-16 h-16 object-cover" :image="thumbnail" />
+            <ResponsiveImage
+                class="h-16 w-16 rounded-xl object-cover"
+                :image="thumbnail"
+            />
         </div>
         <div class="mx-3 self-center">
-            <div class="font-bold">Video</div>
+            <div class="font-bold">{{ title ?? 'Video' }}</div>
             <div class="text-sm">
-                Ako sme dielo inštalovali?
+                {{ subtitle ?? $t('Peek behind the curtain') }}
             </div>
         </div>
     </div>
@@ -14,5 +17,5 @@
 
 <script setup>
 import ResponsiveImage from './ResponsiveImage.vue'
-const props = defineProps(['thumbnail'])
+const props = defineProps(['thumbnail', 'title', 'subtitle'])
 </script>

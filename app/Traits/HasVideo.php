@@ -8,7 +8,9 @@ trait HasVideo
 {
     public function getVideoIdAttribute()
     {
-        return $this->video ? (int) Str::remove('https://vimeo.com/', $this->video) : null;
+        return $this->video
+            ? (int) Str::remove('https://vimeo.com/', $this->video)
+            : null;
     }
 
     public function getVideoThumbnailAttribute()
@@ -22,7 +24,13 @@ trait HasVideo
         return [
             'src' => Str::remove('?r=pad', $largest->link),
             'srcset' => $sizes
-                ->map(fn($size) => sprintf('%s %sw', Str::remove('?r=pad', $size->link), $size->width))
+                ->map(
+                    fn($size) => sprintf(
+                        '%s %sw',
+                        Str::remove('?r=pad', $size->link),
+                        $size->width
+                    )
+                )
                 ->join(', '),
             'width' => $largest->width,
             'height' => $largest->height,
