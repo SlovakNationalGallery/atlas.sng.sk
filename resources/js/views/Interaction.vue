@@ -72,10 +72,11 @@ const loadStory = async (id) => {
 }
 
 onMounted(async () => {
-    if (!interactionStore.activeStory && interactionStore.lastStory) {
-        loadStory(interactionStore.lastStory.id)
+    if (route.params.id) {
+        interactionStore.clear()
+        loadStory(route.params.id)
     } else if (!interactionStore.activeStory) {
-        loadStory(route.params.id || import.meta.env.VITE_DEFAULT_STORY)
+        loadStory(interactionStore.lastStory?.id || import.meta.env.VITE_DEFAULT_STORY)
     }
 
     nextTick(scrollActiveIntoView)
