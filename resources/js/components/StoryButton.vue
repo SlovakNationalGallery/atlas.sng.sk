@@ -1,6 +1,6 @@
 <template>
-    <router-link
-        :to="{ name: 'story', params: { id: story_id } }"
+    <div
+        @click="toggleModal"
         class="block rounded-xl border-2 border-black bg-green/30 p-2.5"
     >
         <div class="flex cursor-pointer">
@@ -23,11 +23,44 @@
             </div>
             <ChatCircleSmall />
         </div>
-    </router-link>
+    </div>
+    <CardModal @close="toggleModal" :visible="modalActive">
+        <h3 class="my-4 text-2xl font-bold">
+            {{ $t('Do you want to interrupt your current trail?') }}
+        </h3>
+        <div class="text-lg">{{ $t('This cannot be undone') }}</div>
+        <div class="flex space-x-3">
+            <ConfirmButton
+                class="my-4 bg-black text-white"
+                @click="openStory"
+                >{{ $t('OK') }}</ConfirmButton
+            >
+            <ConfirmButton class="my-4" @click="toggleModal">{{
+                $t('Close')
+            }}</ConfirmButton>
+        </div>
+    </CardModal>
 </template>
 
 <script setup>
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import ChatCircleSmall from './svg/ChatCircleSmall.vue'
+import CardModal from '../components/CardModal.vue'
+import ConfirmButton from '../components/ConfirmButton.vue'
 
 const props = defineProps(['story_id'])
+const modalActive = ref(false)
+const router = useRouter()
+
+const toggleModal = () => {
+    modalActive.value = !modalActive.value
+}
+
+const openStory = () => {
+    router.push({
+        name: 'story',
+        params: { id: props.story_id },
+    })
+}
 </script>
