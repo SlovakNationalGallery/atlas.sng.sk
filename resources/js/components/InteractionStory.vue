@@ -16,7 +16,7 @@
         <button
             :disabled="!active"
             v-show="active || linkId === link.id"
-            class="block border-1 flex font-bold gap-x-2 items-center my-4 p-3 rounded-xl text-left w-full"
+            class="block border-1 flex font-bold gap-x-2 items-center leading-8 my-4 p-3 rounded-xl text-left w-full"
             :class="[active ? 'bg-green border-green text-black' : 'border-white/10 text-white']"
             @click="emit('navigate', link)"
             v-for="link in story.links"
