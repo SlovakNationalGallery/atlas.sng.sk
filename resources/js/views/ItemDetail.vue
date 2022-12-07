@@ -7,8 +7,8 @@
         <div class="bg-black rounded-md p-1.5 inline-block -top-8 absolute" v-if="item.code">
             <img class="h-9 w-9" :src="`/img/${item.code}.svg`" :alt="item.code" />
         </div>
-        <h2 class="text-xl font-bold">{{ item.title }}</h2>
-        <h3 class="text-gray-dark text-base">{{ item.author }} · {{ item.dating }}</h3>
+        <h2 class="text-1.5xl font-bold">{{ item.title }}</h2>
+        <h3 class="text-gray-dark text-lg">{{ item.author }} · {{ item.dating }}</h3>
         <div class="my-4 space-y-4" v-html="item.description"></div>
         <Collapsible :open="i === 0" v-for="(authority, i) in item.authorities" :key="authority.id" class="my-4">
             <template v-slot:summary>

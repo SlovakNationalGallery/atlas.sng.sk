@@ -5,7 +5,7 @@
         :class="{ '!border-l-black bg-green': showTooltip, 'opacity-40': !itemStore.favouritesCount }"
     >
         <div class="flex h-full justify-end">
-            <div class="font-bold text-base pr-1">{{ itemStore.favouritesCount }}</div>
+            <div class="font-bold text-lg pr-1">{{ itemStore.favouritesCount }}</div>
             <svg
                 class="stroke-black stroke-2 w-[29px] h-[25px]"
                 :class="[itemStore.favouritesCount ? 'fill-green' : 'fill-white']"
