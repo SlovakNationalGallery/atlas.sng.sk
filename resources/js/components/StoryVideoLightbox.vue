@@ -1,5 +1,5 @@
 <template>
-    <div role="link" class="relative" @click="active && (visible = true)">
+    <div role="link" class="relative" @click="visible = true">
         <ResponsiveImage class="rounded-xl w-full object-cover cursor-pointer" :image="story.video_thumbnail" />
         <button
             class="bg-green rounded-xl px-3 py-2 bottom-3 right-3 absolute flex items-center appearance-none text-[16px] text-black font-medium">
@@ -27,6 +27,6 @@ import ResponsiveVideoEmbed from './ResponsiveVideoEmbed.vue'
 import SvgClose from './svg/Close.vue'
 import SvgPlay from './svg/Play.vue'
 
-const props = defineProps(['story', 'active'])
+const props = defineProps(['story'])
 const visible = ref(false)
 </script>

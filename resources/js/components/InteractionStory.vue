@@ -10,7 +10,7 @@
         </div>
 
         <div class="my-4 relative" v-if="story.video_embed">
-            <StoryVideoLightbox :story="story" :active="active"></StoryVideoLightbox>
+            <StoryVideoLightbox :story="story"></StoryVideoLightbox>
         </div>
 
         <button
