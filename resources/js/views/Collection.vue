@@ -37,7 +37,7 @@
     <div class="mt-auto w-full md:max-w-lg bg-green border-black border-t-2" id="share">
         <div class="p-4">
             <div class="flex flex-col">
-                <h3 class="text-base font-bold mb-4" v-html="$t('How to revisit collection from home?')"></h3>
+                <h3 class="text-lg font-bold mb-4" v-html="$t('How to revisit collection from home?')"></h3>
                 <div class="mb-4">
                     {{ $t('Send the collection link to your e-mail or share it with friends.') }}
                     {{
@@ -109,7 +109,7 @@
     <Survey />
     <CardModal @close="toggleModal" :visible="modalActive">
         <h3 class="font-bold text-2xl my-4">{{ $t('Remove all artworks?') }}</h3>
-        <div class="text-base">{{ $t('This cannot be undone') }}</div>
+        <div class="text-lg">{{ $t('This cannot be undone') }}</div>
         <div class="flex space-x-3">
             <ConfirmButton class="bg-black text-white my-4" @click="removeCollection">{{ $t('Remove') }}</ConfirmButton>
             <ConfirmButton class="my-4" @click="toggleModal">{{ $t('Close') }}</ConfirmButton>

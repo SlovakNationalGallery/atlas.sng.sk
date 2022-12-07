@@ -16,7 +16,7 @@
                         </div>
                     </div>
 
-                    <p class="m-4 text-lg">
+                    <p class="m-4 text-xl">
                         Objavte príbehy umeleckých diel s digitálnou sprievodkyňou! Svetom novej SNG vás prevedie
                         <span class="font-bold text-red-pastel">Ester</span> a jej atlas.sng.sk.
                     </p>

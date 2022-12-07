@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-black grow px-4 pb-bar text-base text-white">
+    <div class="bg-black grow px-4 pb-bar text-lg text-white">
         <template v-for="(interaction, i) in interactionStore.interactions" :key="i">
             <InteractionStory
                 v-if="interaction.type === 'story'"

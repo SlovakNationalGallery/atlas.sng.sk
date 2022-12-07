@@ -20,8 +20,8 @@
                 :alt="item.code"
             />
         </div>
-        <h2 class="text-xl font-bold">{{ item.title }}</h2>
-        <h3 class="text-base text-gray-dark">
+        <h2 class="text-1.5xl font-bold">{{ item.title }}</h2>
+        <h3 class="text-lg text-gray-dark">
             {{ item.author }} · {{ item.dating }}
         </h3>
         <div class="my-4 space-y-4" v-html="item.description"></div>

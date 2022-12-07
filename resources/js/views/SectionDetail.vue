@@ -5,7 +5,7 @@
             <p class="font-bold mb-2 mt-4 text-green">
                 {{ $t('Section with :count artworks', { count: section.items.length }) }}
             </p>
-            <h2 class="font-bold text-white text-xl">{{ section.title }}</h2>
+            <h2 class="font-bold text-white text-1.5xl">{{ section.title }}</h2>
         </div>
         <div class="px-4">
             <div class="py-4 space-y-4" v-html="section.description"></div>

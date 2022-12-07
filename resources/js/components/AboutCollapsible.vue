@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div @click="open = !open" class="cursor-pointer flex p-4 text-lg">
+        <div @click="open = !open" class="cursor-pointer flex p-4 text-xl">
             <div class="grow">
                 <slot name="summary"></slot>
             </div>

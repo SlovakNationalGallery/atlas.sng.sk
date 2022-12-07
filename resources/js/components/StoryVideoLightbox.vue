@@ -2,7 +2,7 @@
     <div role="link" class="relative" @click="visible = true">
         <ResponsiveImage class="rounded-xl w-full object-cover cursor-pointer" :image="story.video_thumbnail" />
         <button
-            class="bg-green rounded-xl px-3 py-2 bottom-3 right-3 absolute flex items-center appearance-none text-[16px] text-black font-medium">
+            class="bg-green rounded-xl px-3 py-2 bottom-3 right-3 absolute flex items-center appearance-none text-base text-black font-medium">
             <SvgPlay class="mr-2" />
             {{ $t('Play video') }} ({{ story.video_duration }})
         </button>

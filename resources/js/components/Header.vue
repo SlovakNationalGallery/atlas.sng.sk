@@ -14,7 +14,7 @@
                 <SvgLogo v-else />
             </div>
         </HistoryBack>
-        <h1 class="grow px-2 text-xl" :class="{ 'text-center': $route.name !== 'home' }">
+        <h1 class="grow px-2 text-1.5xl" :class="{ 'text-center': $route.name !== 'home' }">
             {{ $t(openedAbout ? 'About' : $route.meta.title) }}
             <span v-if="$route.name === 'my_collection'">({{ itemStore.favouritesCount }})</span>
         </h1>

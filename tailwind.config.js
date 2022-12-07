@@ -1,12 +1,18 @@
 module.exports = {
-    content: ['./resources/**/*.blade.php', './resources/**/*.js', './resources/**/*.vue'],
+    content: [
+        './resources/**/*.blade.php',
+        './resources/**/*.js',
+        './resources/**/*.vue',
+    ],
     theme: {
         extend: {
             borderWidth: {
                 1: '1px',
             },
             padding: (theme) => ({
-                bar: `calc(1.5 * ${theme('fontSize.sm')} + ${theme('spacing.8')})`,
+                bar: `calc(1.5 * ${theme('fontSize.sm')} + ${theme(
+                    'spacing.8'
+                )})`,
                 full: '100%',
             }),
             strokeWidth: {
@@ -39,9 +45,10 @@ module.exports = {
         },
         fontSize: {
             sm: ['14px'],
-            base: ['18px'],
-            lg: ['20px'],
-            xl: ['22px'],
+            base: ['16px'],
+            lg: ['18px'],
+            xl: ['20px'],
+            '1.5xl': ['22px'],
             '2xl': ['24px'],
         },
         fontWeight: {
