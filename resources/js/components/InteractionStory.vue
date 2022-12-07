@@ -3,7 +3,7 @@
         <div class="my-4 space-y-6" v-html="story.text"></div>
 
         <div class="my-4" v-for="image in story.images">
-            <ResponsiveImageWithPlaceholder class="rounded-xl w-full" :image="image" />
+            <ResponsiveImageWithSizes class="rounded-xl w-full" :image="image" />
         </div>
 
         <div class="my-4" v-if="story.video_thumbnail">
@@ -24,7 +24,7 @@
 
 <script setup>
 import ResponsiveImage from './ResponsiveImage.vue'
-import ResponsiveImageWithPlaceholder from './ResponsiveImageWithPlaceholder.vue'
+import ResponsiveImageWithSizes from './ResponsiveImageWithSizes.vue'
 
 const props = defineProps(['story', 'active', 'linkId'])
 const emit = defineEmits(['navigate'])
