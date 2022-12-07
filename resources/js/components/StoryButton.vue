@@ -49,7 +49,7 @@ import ChatCircleSmall from './svg/ChatCircleSmall.vue'
 import CardModal from '../components/CardModal.vue'
 import ConfirmButton from '../components/ConfirmButton.vue'
 
-const props = defineProps(['story_id'])
+const props = defineProps(['storyId'])
 const modalActive = ref(false)
 const router = useRouter()
 

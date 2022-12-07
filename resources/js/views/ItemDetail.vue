@@ -67,7 +67,7 @@
             </template>
         </Collapsible>
         <StoryButton
-            :story_id="item.story_id"
+            :storyId="item.story_id"
             class="my-4"
             v-if="item.story_id"
         />
