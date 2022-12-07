@@ -38,7 +38,11 @@
                 <AuthorityDetails :authority="authority" />
             </template>
         </Collapsible>
-        <Collapsible v-if="!item.authorities.length && item.author_description" :open="true" class="my-4">
+        <Collapsible
+            v-if="!item.authorities.length && item.author_description"
+            :open="true"
+            class="my-4"
+        >
             <template v-slot:summary>
                 <AuthorSummary :item="item" />
             </template>
@@ -62,6 +66,11 @@
                 />
             </template>
         </Collapsible>
+        <StoryButton
+            :storyId="item.story_id"
+            class="my-4"
+            v-if="item.story_id"
+        />
         <WebumeniaButton :url="item.webumenia_url" class="my-4" />
     </div>
     <div
@@ -112,6 +121,7 @@ import ConfirmButton from '../components/ConfirmButton.vue'
 import ItemImageLightbox from '../components/ItemImageLightbox.vue'
 import ItemImageMovable from '../components/ItemImageMovable.vue'
 import WebumeniaButton from '../components/WebumeniaButton.vue'
+import StoryButton from '../components/StoryButton.vue'
 import VideoSummary from '../components/VideoSummary.vue'
 import HistoryBack from '../components/HistoryBack.vue'
 import ResponsiveVideoEmbed from '../components/ResponsiveVideoEmbed.vue'

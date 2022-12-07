@@ -87,6 +87,8 @@ class ImportItems extends Command
                 'en' => Arr::get($record, 'fields.Video subtitle EN'),
             ];
 
+            $item->story_id = Arr::get($record, 'fields.Story node.0');
+
             $item->save();
 
             if (

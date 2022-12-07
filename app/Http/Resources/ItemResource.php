@@ -55,6 +55,7 @@ class ItemResource extends JsonResource
             'video_aspect_ratio' => $this['item']->video_aspect_ratio,
             'video_title' => $this['item']->video_title,
             'video_subtitle' => $this['item']->video_subtitle,
+            'story_id' => $this['item']->story_id,
         ];
     }
 
