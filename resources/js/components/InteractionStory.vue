@@ -1,7 +1,7 @@
 <template>
     <div class="scroll-mt-20" :id="active ? 'active-story' : undefined">
         <img v-if="first" class="mx-auto mb-8 h-40" src="../../img/interaction-intro-ester.svg" alt="Ester" />
-        <img v-else-if="active" class="h-12 rounded-xl w-12" src="../../img/avatar-ester.svg" alt="Avatar" />
+        <img v-else-if="active" class="h-12 rounded-xl w-12" src="../../img/avatar-ester.png" alt="Avatar" />
 
         <div class="my-4 space-y-6" v-html="story.text"></div>
 
