@@ -60,7 +60,7 @@ const toggleModal = () => {
 const openStory = () => {
     router.push({
         name: 'story',
-        params: { id: props.story_id },
+        params: { id: props.storyId },
     })
 }
 </script>
