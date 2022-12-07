@@ -15,7 +15,7 @@
             </div>
         </HistoryBack>
         <h1 class="grow px-2 text-1.5xl" :class="{ 'text-center': $route.name !== 'home' }">
-            {{ $t(openedAbout ? 'About' : $route.meta.title) }}
+            {{ $t(openedAbout ? 'About the App' : $route.meta.title) }}
             <span v-if="$route.name === 'my_collection'">({{ itemStore.favouritesCount }})</span>
         </h1>
         <div class="flex-1 px-3 border-l-2 border-transparent text-right" v-if="$route.name === 'my_collection'">

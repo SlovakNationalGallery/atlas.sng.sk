@@ -30,7 +30,7 @@
                     class="bg-black duration-300 ease-in-out my-2 px-3 py-2 rounded-full text-sm text-white"
                     :class="[peekingIn ? 'text-lg text-green' : 'text-white']"
                 >
-                    {{ $t(shown ? 'Tap to hide' : 'Tap to collect artworks') }}
+                    {{ $t(shown ? 'Hide' : 'Tap to check the code') }}
                 </button>
             </div>
             <div class="flex-1 px-3">
@@ -55,7 +55,7 @@
                 class="bg-white py-2 rounded-xl text-xl w-full"
                 :class="[active ? 'bg-black text-white' : 'opacity-30', wrong ? 'bg-red' : null]"
             >
-                {{ $t(wrong ? 'Try again' : 'Tap to check code') }}
+                {{ $t(wrong ? 'Try again' : 'Check the code') }}
             </button>
         </div>
     </div>
