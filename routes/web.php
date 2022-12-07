@@ -1,11 +1,12 @@
 <?php
 
-use App\Jobs\ImportExhibitionsJob;
-use App\Jobs\ImportAuthoritiesJob;
 use App\Models\Item;
-use App\Models\Section;
 use App\Models\Story;
+use App\Models\Section;
 use Illuminate\Http\Request;
+use App\Jobs\ImportStoriesJob;
+use App\Jobs\ImportAuthoritiesJob;
+use App\Jobs\ImportExhibitionsJob;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 
@@ -52,12 +53,19 @@ Route::get('/img/{code}.svg', function (Request $request, $code) {
 })->where('code', '[0-1]{9}');
 
 Route::get('/import', function () {
+    $output = "Import Exhibitions \n";
     ImportExhibitionsJob::dispatchSync();
     Artisan::call('import:items');
-    $output = Artisan::output();
-    Artisan::call('import:sections');
+    $output .= "Import Items \n";
     $output .= Artisan::output();
+    Artisan::call('import:sections');
+    $output .= "Import Sections \n";
+    $output .= Artisan::output();
+    $output .= "Import Authorities \n";
     ImportAuthoritiesJob::dispatchSync();
+    $output .= "Import Stories \n";
+    ImportStoriesJob::dispatchSync();
+    $output .= 'Done 🎉';
     return '<pre>' . $output . '</pre>';
 });
 
