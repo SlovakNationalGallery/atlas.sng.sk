@@ -38,7 +38,7 @@
                 <AuthorityDetails :authority="authority" />
             </template>
         </Collapsible>
-        <Collapsible v-if="item.author_description" class="my-4">
+        <Collapsible v-if="!item.authorities.length && item.author_description" :open="true" class="my-4">
             <template v-slot:summary>
                 <AuthorSummary :item="item" />
             </template>
