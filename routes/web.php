@@ -53,7 +53,9 @@ Route::get('/img/{code}.svg', function (Request $request, $code) {
 })->where('code', '[0-1]{9}');
 
 Route::get('/import', function () {
-    $output = "Import Exhibitions \n";
+    $output = "Import Stories \n";
+    ImportStoriesJob::dispatchSync();
+    $output .= "Import Exhibitions \n";
     ImportExhibitionsJob::dispatchSync();
     Artisan::call('import:items');
     $output .= "Import Items \n";
@@ -63,8 +65,6 @@ Route::get('/import', function () {
     $output .= Artisan::output();
     $output .= "Import Authorities \n";
     ImportAuthoritiesJob::dispatchSync();
-    $output .= "Import Stories \n";
-    ImportStoriesJob::dispatchSync();
     $output .= 'Done 🎉';
     return '<pre>' . $output . '</pre>';
 });
