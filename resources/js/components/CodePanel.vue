@@ -1,15 +1,15 @@
 <template>
-    <div v-if="shown" class="cursor-zoom-out fixed inset-0" @click="shown = false"></div>
+    <div v-if="shown" class="fixed inset-0 cursor-zoom-out" @click="shown = false"></div>
     <div
-        class="bg-white ease-in-out fixed top-full w-full md:max-w-lg md:mx-auto"
+        class="fixed top-full w-full bg-white ease-in-out md:mx-auto md:max-w-lg"
         :class="[
             peekingIn || peekingOut ? 'duration-300' : 'duration-500',
             shown || peekingIn ? (shown ? '-translate-y-full' : 'translate-y-peeking') : 'translate-y-0',
         ]"
     >
-        <div class="absolute bg-white bottom-full flex items-center rounded-t-xl w-full">
+        <div class="absolute bottom-full flex w-full items-center rounded-t-xl bg-white">
             <div class="flex-1 px-3">
-                <svg @click="shownOnboarding = true" class="cursor-pointer h-[32px] w-[32px]">
+                <svg @click="shownOnboarding = true" class="h-[32px] w-[32px] cursor-pointer">
                     <path
                         d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z"
                         class="fill-black"
@@ -20,14 +20,14 @@
                     />
                     <path
                         d="M16 18V17C16.6922 17 17.3689 16.7947 17.9445 16.4101C18.5201 16.0256 18.9687 15.4789 19.2336 14.8394C19.4985 14.1999 19.5678 13.4961 19.4327 12.8172C19.2977 12.1383 18.9644 11.5146 18.4749 11.0251C17.9854 10.5356 17.3618 10.2023 16.6828 10.0673C16.0039 9.9322 15.3001 10.0015 14.6606 10.2664C14.0211 10.5313 13.4744 10.9799 13.0899 11.5555C12.7053 12.1311 12.5 12.8078 12.5 13.5"
-                        class="stroke-2 stroke-white [stroke-linecap:round] [stroke-linejoin:round]"
+                        class="stroke-white stroke-2 [stroke-linecap:round] [stroke-linejoin:round]"
                     />
                 </svg>
             </div>
             <div class="grow text-center">
                 <button
                     @click="shown = !shown"
-                    class="bg-black duration-300 ease-in-out my-2 px-3 py-2 rounded-full text-sm text-white min-w-[120px]"
+                    class="my-2 min-w-[120px] rounded-full bg-black px-3 py-2 text-sm font-medium text-white duration-300 ease-in-out"
                     :class="[peekingIn ? 'text-lg text-green' : 'text-white']"
                 >
                     {{ $t(shown ? 'Hide' : 'Tap to check the code') }}
@@ -38,9 +38,9 @@
             </div>
         </div>
 
-        <div class="bg-black border-black border-y-2 content-center gap-[2px] grid grid-cols-3">
+        <div class="grid grid-cols-3 content-center gap-[2px] border-y-2 border-black bg-black">
             <CircleButton
-                class="bg-white border-0"
+                class="border-0 bg-white"
                 v-for="position in code.length"
                 :is-checked="code[position - 1]"
                 @click="code[position - 1] = (code[position - 1] + 1) % 2"
@@ -52,7 +52,7 @@
             <button
                 @click="verifyCode"
                 :disabled="!active"
-                class="bg-white py-2 rounded-xl text-xl w-full"
+                class="w-full rounded-xl bg-white py-2 text-xl"
                 :class="[active ? 'bg-black text-white' : 'opacity-30', wrong ? 'bg-red' : null]"
             >
                 {{ $t(wrong ? 'Try again' : 'Check the code') }}

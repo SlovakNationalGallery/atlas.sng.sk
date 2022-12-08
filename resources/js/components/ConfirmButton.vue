@@ -1,6 +1,7 @@
 <template>
     <button
-        class="border-black rounded-xl border-2 py-3 w-full font-bold active:bg-black active:text-white flex items-center justify-center text-lg">
+        class="flex w-full items-center justify-center rounded-xl border-2 border-black py-3 text-lg font-medium active:bg-black active:text-white"
+    >
         <slot></slot>
     </button>
 </template>
