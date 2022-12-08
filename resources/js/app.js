@@ -33,18 +33,18 @@ const routes = [
     },
     {
         name: 'section_detail',
-        path: '/section/:id',
+        path: '/group/:id',
         component: SectionDetail,
         meta: {
-            title: 'Section detail',
+            title: 'Artwork group detail',
         },
     },
     {
         name: 'section_item_detail',
-        path: '/section/:section_id/:id',
+        path: '/group/:section_id/:id',
         component: ItemDetail,
         meta: {
-            title: 'Section › Artwork detail',
+            title: 'Group › Artwork detail',
         },
     },
     {

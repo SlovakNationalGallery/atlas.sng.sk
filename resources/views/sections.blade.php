@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
 @section('title')
-    {{ trans('Sections') }} | @parent
+    Sekcie | @parent
 @endsection
 
 @section('content')
     <div class="mx-12 my-12">
-        <h1 class="font-bold mb-8 pl-8 text-2xl">{{ trans('Sections') }}</h1>
+        <h1 class="font-bold mb-8 pl-8 text-2xl">Sekcie</h1>
 
         <table class="table-auto border-collapse w-full">
             <thead>

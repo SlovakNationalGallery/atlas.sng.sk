@@ -1,5 +1,5 @@
 <template>
-    <InteractionItem :icon="SvgHeart" iconClass="fill-current" :label="$t('Collected')" v-bind="props" />
+    <InteractionItem :icon="SvgHeart" iconClass="fill-current" :label="$t('Saved')" v-bind="props" />
 </template>
 
 <script setup>

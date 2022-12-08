@@ -15,7 +15,11 @@
                     </div>
                     <div class="mx-3 self-center">
                         <div class="font-bold">
-                            {{ $t('Exhibition trail containing the artwork') }}
+                            {{
+                                $t(
+                                    'The exhibition trail containing this artwork'
+                                )
+                            }}
                         </div>
                         <div class="text-sm">{{ $t('Go to the trail') }}</div>
                     </div>
