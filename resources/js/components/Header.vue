@@ -1,11 +1,19 @@
 <template>
-    <div class="border-black border-y-2 flex items-center h-12 sticky top-0 w-full z-20 bg-white">
+    <div
+        class="sticky top-0 z-20 flex h-12 w-full items-center border-y-2 border-black bg-white"
+    >
         <HistoryBack v-slot="{ back }">
             <div
-                @click="$route.name === 'home' ? (openedAbout = !openedAbout) : back()"
-                class="cursor-pointer p-2 h-full border-r-2 flex items-center"
+                @click="
+                    $route.name === 'home'
+                        ? (openedAbout = !openedAbout)
+                        : back()
+                "
+                class="flex h-full cursor-pointer items-center border-r-2 p-2"
                 :class="[
-                    $route.name === 'home' ? 'bg-green border-r-black' : 'border-r-transparent',
+                    $route.name === 'home'
+                        ? 'border-r-black bg-green'
+                        : 'border-r-transparent',
                     $route.name === 'my_collection' ? 'flex-1' : '',
                 ]"
             >
@@ -14,17 +22,32 @@
                 <SvgLogo v-else />
             </div>
         </HistoryBack>
-        <h1 class="grow px-2 text-1.5xl" :class="{ 'text-center': $route.name !== 'home' }">
+        <h1
+            class="grow px-2 text-1.5xl"
+            :class="{ 'text-center': $route.name !== 'home' }"
+        >
             {{ $t(openedAbout ? 'About the App' : $route.meta.title) }}
-            <span v-if="$route.name === 'my_collection'">({{ itemStore.favouritesCount }})</span>
+            <span v-if="$route.name === 'my_collection'"
+                >({{ itemStore.favouritesCount }})</span
+            >
         </h1>
-        <div class="flex-1 px-3 border-l-2 border-transparent text-right" v-if="$route.name === 'my_collection'">
-            <button class="bg-green rounded-xl text-sm px-3 py-1 font-bold" @click="scroll('share')">
+        <div
+            class="flex-1 border-l-2 border-transparent px-3 text-right"
+            v-if="$route.name === 'my_collection'"
+        >
+            <button
+                class="rounded-xl bg-green px-3 py-1 text-sm font-bold"
+                @click="scroll('share')"
+            >
                 {{ $t('Share') }}
             </button>
         </div>
         <LanguageSwitcher v-else-if="$route.name === 'home'" />
-        <FavouritesCount v-else class="border-l-2 border-l-transparent px-4 py-2" :show-tooltip="isActive" />
+        <FavouritesCount
+            v-else
+            class="border-l-2 border-l-transparent px-4 py-2"
+            :show-tooltip="isActive"
+        />
     </div>
 
     <About :opened="openedAbout" />
@@ -61,7 +84,7 @@ const scroll = (id) => {
 }
 
 itemStore.$onAction(({ name: actionName }) => {
-    if (actionName === 'add') {
+    if (actionName === 'addFavourite') {
         displayTooltip()
     }
 })
