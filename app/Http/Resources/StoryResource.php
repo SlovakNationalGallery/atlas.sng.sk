@@ -18,7 +18,7 @@ class StoryResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'text' => str($this->text)->markdown(),
+            'text' => str($this->text)->markdownWithLineBreaks(),
             'links' => StoryLinkResource::collection($this->links),
             'images' => ImageResource::collection(
                 $this->getMedia()->filter(fn(Media $media) => $media->hasResponsiveImages())
