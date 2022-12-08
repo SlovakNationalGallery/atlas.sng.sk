@@ -27,7 +27,7 @@
             <div class="grow text-center">
                 <button
                     @click="shown = !shown"
-                    class="bg-black duration-300 ease-in-out my-2 px-3 py-2 rounded-full text-sm text-white"
+                    class="bg-black duration-300 ease-in-out my-2 px-3 py-2 rounded-full text-sm text-white min-w-[120px]"
                     :class="[peekingIn ? 'text-lg text-green' : 'text-white']"
                 >
                     {{ $t(shown ? 'Hide' : 'Tap to check the code') }}
