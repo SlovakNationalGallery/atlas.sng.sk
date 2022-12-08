@@ -5,7 +5,6 @@ use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Default Log Channel
@@ -48,6 +47,12 @@ return [
     */
 
     'channels' => [
+        'import' => [
+            'driver' => 'slack',
+            'url' => env('LOG_IMPORT_WEBHOOK'),
+            'level' => 'info',
+        ],
+
         'stack' => [
             'driver' => 'stack',
             'channels' => ['single'],
@@ -114,5 +119,4 @@ return [
             'path' => storage_path('logs/laravel.log'),
         ],
     ],
-
 ];
