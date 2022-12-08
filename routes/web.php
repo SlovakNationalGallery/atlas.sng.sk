@@ -49,10 +49,14 @@ Route::get('/img/{code}.svg', function (Request $request, $code) {
         ->header('Cache-Control', 'max-age=15552000');
 })->where('code', '[0-1]{9}');
 
+Route::get('/import', function () {
+    return view('import');
+});
+
 Route::get('/import/{type}', function (string $type) {
     ImportJob::dispatch($type);
     return response(sprintf('Queued at %s', now()->toDateTimeString()));
-});
+})->name('import_type');
 
 Route::get('/{any}', function () {
     return view('app');
