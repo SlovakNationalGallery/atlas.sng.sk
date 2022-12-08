@@ -109,7 +109,7 @@
     <Survey />
     <CardModal @close="toggleModal" :visible="modalActive">
         <h3 class="font-bold text-2xl my-4">{{ $t('Remove all artworks?') }}</h3>
-        <div class="text-lg">{{ $t('This cannot be undone') }}</div>
+        <div class="text-lg">{{ $t('This is irreversible') }}</div>
         <div class="flex space-x-3">
             <ConfirmButton class="bg-black text-white my-4" @click="removeCollection">{{ $t('Remove') }}</ConfirmButton>
             <ConfirmButton class="my-4" @click="toggleModal">{{ $t('Close') }}</ConfirmButton>

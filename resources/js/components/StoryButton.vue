@@ -30,9 +30,9 @@
     </div>
     <CardModal @close="toggleModal" :visible="modalActive">
         <h3 class="my-4 text-2xl font-bold">
-            {{ $t('Do you want to interrupt your current trail?') }}
+            {{ $t('Would you like to abort the current trail?') }}
         </h3>
-        <div class="text-lg">{{ $t('This cannot be undone') }}</div>
+        <div class="text-lg">{{ $t('This is irreversible') }}</div>
         <div class="flex space-x-3">
             <ConfirmButton
                 class="my-4 bg-black text-white"
