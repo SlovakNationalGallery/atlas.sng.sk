@@ -18,7 +18,7 @@ class SectionResource extends JsonResource
         return [
             'id' => $this['section']->id,
             'title' => $this['section']->title,
-            'description' => str($this['section']->description)->markdown(),
+            'description' => str($this['section']->description)->markdownWithLineBreaks(),
             'code' => $this['section']->code->code,
             'items' => ItemResource::collection($this->items()),
         ];

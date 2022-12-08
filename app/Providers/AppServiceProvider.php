@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
+use Illuminate\Support\Stringable;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -51,5 +53,17 @@ class AppServiceProvider extends ServiceProvider
             'item' => Item::class,
             'section' => Section::class,
         ]);
+
+        Str::macro('markdownWithLineBreaks', function ($value) {
+            return str($value)->markdown([
+                'renderer' => [
+                    'soft_break' => '<br />',
+                ],
+            ]);
+        });
+
+        Stringable::macro('markdownWithLineBreaks', function () {
+            return Str::markdownWithLineBreaks($this->value);
+        });
     }
 }
