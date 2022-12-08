@@ -48,8 +48,9 @@ return [
 
     'channels' => [
         'import' => [
-            'driver' => 'single',
-            'path' => storage_path('app/public/import.log'),
+            'driver' => 'slack',
+            'url' => env('LOG_IMPORT_WEBHOOK'),
+            'level' => 'info',
         ],
 
         'stack' => [
