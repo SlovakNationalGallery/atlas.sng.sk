@@ -3,18 +3,15 @@
         <HistoryBack v-slot="{ back }">
             <div
                 @click="$route.name === 'home' ? (openedAbout = !openedAbout) : back()"
-                class="flex h-full cursor-pointer items-center border-r-2 p-2"
-                :class="[
-                    $route.name === 'home' ? 'border-r-black bg-green' : 'border-r-transparent',
-                    $route.name === 'my_collection' ? 'flex-1' : '',
-                ]"
+                class="flex h-full cursor-pointer items-center border-r-2"
+                :class="[$route.name === 'home' ? 'border-r-black bg-green p-2.5' : 'flex-1 border-r-transparent p-4']"
             >
-                <SvgBack v-if="$route.name !== 'home'" class="ml-2" />
+                <SvgBack v-if="$route.name !== 'home'" />
                 <SvgClose v-else-if="openedAbout" />
                 <SvgLogo v-else />
             </div>
         </HistoryBack>
-        <h1 class="grow px-2 text-1.5xl font-medium" :class="{ 'text-center': $route.name !== 'home' }">
+        <h1 class="grow px-2.5 text-1.5xl font-medium" :class="{ 'text-center': $route.name !== 'home' }">
             {{ $t(openedAbout ? 'About the App' : $route.meta.title) }}
             <span v-if="$route.name === 'my_collection'">({{ itemStore.favouritesCount }})</span>
         </h1>
@@ -24,7 +21,7 @@
             </button>
         </div>
         <LanguageSwitcher v-else-if="$route.name === 'home'" />
-        <FavouritesCount v-else class="border-l-2 border-l-transparent px-4 py-2" :show-tooltip="isActive" />
+        <FavouritesCount v-else class="flex-1 border-l-2 border-l-transparent px-4 py-2" :show-tooltip="isActive" />
     </div>
 
     <About :opened="openedAbout" />
