@@ -4,11 +4,8 @@ use App\Models\Item;
 use App\Models\Story;
 use App\Models\Section;
 use Illuminate\Http\Request;
-use App\Jobs\ImportStoriesJob;
-use App\Jobs\ImportAuthoritiesJob;
-use App\Jobs\ImportExhibitionsJob;
+use App\Jobs\ImportJob;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,21 +49,9 @@ Route::get('/img/{code}.svg', function (Request $request, $code) {
         ->header('Cache-Control', 'max-age=15552000');
 })->where('code', '[0-1]{9}');
 
-Route::get('/import', function () {
-    $output = "Import Stories \n";
-    ImportStoriesJob::dispatchSync();
-    $output .= "Import Exhibitions \n";
-    ImportExhibitionsJob::dispatchSync();
-    Artisan::call('import:items');
-    $output .= "Import Items \n";
-    $output .= Artisan::output();
-    Artisan::call('import:sections');
-    $output .= "Import Sections \n";
-    $output .= Artisan::output();
-    $output .= "Import Authorities \n";
-    ImportAuthoritiesJob::dispatchSync();
-    $output .= 'Done 🎉';
-    return '<pre>' . $output . '</pre>';
+Route::get('/import/{type}', function (string $type) {
+    ImportJob::dispatch($type);
+    return response(sprintf('Queued at %s', now()->toDateTimeString()));
 });
 
 Route::get('/{any}', function () {
