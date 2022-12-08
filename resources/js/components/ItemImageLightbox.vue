@@ -1,7 +1,9 @@
 <template>
     <div role="link" class="relative" @click="visible = true">
         <ItemImage :item="item" :offset-top="item.offset_top"></ItemImage>
-        <button class="absolute bottom-3 right-3 flex items-center rounded-xl bg-black/70 py-1 px-2 text-sm text-white">
+        <button
+            class="absolute bottom-3 right-3 flex items-center rounded-xl bg-black/70 py-1 px-2 text-sm font-medium text-white"
+        >
             <SvgArrowsOut class="mr-2" />
             <span>{{ $t('Enlarge') }}</span>
         </button>

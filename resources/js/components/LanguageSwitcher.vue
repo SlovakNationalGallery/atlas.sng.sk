@@ -1,5 +1,5 @@
 <template>
-    <div class="mx-2.5 flex items-center rounded-full bg-black px-1 py-0.5 text-white">
+    <div class="mx-2.5 flex items-center rounded-full bg-black px-1 py-0.5 font-medium text-white">
         <button
             @click="switchLanguage('sk')"
             class="px-1 uppercase"

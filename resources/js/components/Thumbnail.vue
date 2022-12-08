@@ -5,7 +5,7 @@
         </div>
         <div class="min-w-0 grow border-l-2 border-black p-3">
             <div class="mb-1 flex items-center">
-                <h2 class="mr-2 grow truncate text-lg">
+                <h2 class="mr-2 grow truncate text-lg font-medium">
                     <slot name="title"></slot>
                 </h2>
                 <svg class="mr-1 h-[18px] w-[10px] shrink-0 fill-none">
