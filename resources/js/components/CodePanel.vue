@@ -52,7 +52,7 @@
             <button
                 @click="verifyCode"
                 :disabled="!active"
-                class="w-full rounded-xl bg-white py-2 text-xl"
+                class="w-full rounded-xl bg-white py-2 text-xl font-medium"
                 :class="[active ? 'bg-black text-white' : 'opacity-30', wrong ? 'bg-red' : null]"
             >
                 {{ $t(wrong ? 'Try again' : 'Check the code') }}
