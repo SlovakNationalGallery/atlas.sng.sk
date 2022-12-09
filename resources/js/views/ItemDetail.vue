@@ -50,7 +50,7 @@
             <div class="pointer-events-auto flex space-x-4">
                 <HistoryBack v-slot="{ back }">
                     <ConfirmButton class="group bg-white" @click="back">
-                        <SvgBack class="mr-4 group-active:stroke-white" />
+                        <SvgBack class="mr-2 group-active:stroke-white" />
                         {{ $t('Back') }}
                     </ConfirmButton>
                 </HistoryBack>
