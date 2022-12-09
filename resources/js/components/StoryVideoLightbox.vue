@@ -20,7 +20,7 @@
                 :height="story.video_aspect_ratio.height"
             />
             <button
-                class="absolute top-0 right-0 cursor-pointer rounded-tr-xl bg-white p-1"
+                class="absolute top-0 right-0 cursor-pointer rounded-tr-xl bg-white p-3"
                 @click.stop="visible = false"
             >
                 <SvgClose />
