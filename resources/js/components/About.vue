@@ -80,6 +80,7 @@
                             <li>Michaela Kováčová: {{ $t('Content') }}</li>
                             <li>Igor Rjabinin: {{ $t('Development') }}</li>
                             <li>Filip Ruisl: {{ $t('UX design, graphic design') }}</li>
+                            <li>František Sebestyén: {{ $t('Development') }}</li>
                             <li>Lukáš Štepanovský: {{ $t('Content, UX design, concept') }}</li>
                             <li>Jana Šuchová: {{ $t('Artist research') }}</li>
                             <li>Barbora Tribulová: {{ $t('Content') }}</li>
