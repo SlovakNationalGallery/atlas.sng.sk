@@ -1,12 +1,12 @@
 <template>
     <Transition :duration="300">
-        <div class="fixed inset-0 overflow-hidden md:max-w-lg md:mx-auto z-10" v-if="opened">
-            <div class="bg-white duration-300 h-full overflow-y-auto pt-[48px]">
-                <div class="border-b-2 border-gray-softest">
-                    <div class="flex justify-between items-end my-8">
-                        <div class="mx-4 self-items-end">
-                            <SvgLogo class="!h-[48px] !w-[48px] mb-[14px] ml-[-5.25px]" viewBox="0 0 32 32" />
-                            <h1 class="font-bold leading-[1]">
+        <div class="fixed inset-0 z-10 overflow-hidden md:mx-auto md:max-w-lg" v-if="opened">
+            <div class="h-full overflow-y-auto bg-white pt-[48px] duration-300">
+                <div class="border-b-1 border-gray-softest">
+                    <div class="my-8 flex items-end justify-between">
+                        <div class="self-items-end mx-4">
+                            <SvgLogo class="mb-7 !h-[46px] !w-[46px]" viewBox="0 0 26 26" />
+                            <h1 class="font-bold leading-10">
                                 <span class="text-[52px]">Atlas</span><br />
                                 <span class="text-[42px]">SNG</span>
                             </h1>
@@ -22,7 +22,7 @@
                     </p>
                 </div>
 
-                <AboutCollapsible :open="true" class="border-b-2 border-gray-softest">
+                <AboutCollapsible :open="true" class="border-b-1 border-gray-softest">
                     <template v-slot:summary>Ako na to?</template>
                     <template v-slot:content>
                         <ul>
@@ -41,7 +41,7 @@
                         </p>
                     </template>
                 </AboutCollapsible>
-                <AboutCollapsible class="border-b-2 border-gray-softest">
+                <AboutCollapsible class="border-b-1 border-gray-softest">
                     <template v-slot:summary>Projekt</template>
                     <template v-slot:content></template>
                 </AboutCollapsible>
