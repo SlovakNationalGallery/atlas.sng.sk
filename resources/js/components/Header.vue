@@ -1,53 +1,27 @@
 <template>
-    <div
-        class="sticky top-0 z-20 flex h-12 w-full items-center border-y-2 border-black bg-white"
-    >
+    <div class="sticky top-0 z-20 flex w-full items-center whitespace-nowrap border-y-2 border-black bg-white">
         <HistoryBack v-slot="{ back }">
-            <div
-                @click="
-                    $route.name === 'home'
-                        ? (openedAbout = !openedAbout)
-                        : back()
-                "
-                class="flex h-full cursor-pointer items-center border-r-2 p-2"
-                :class="[
-                    $route.name === 'home'
-                        ? 'border-r-black bg-green'
-                        : 'border-r-transparent',
-                    $route.name === 'my_collection' ? 'flex-1' : '',
-                ]"
+            <button
+                @click="$route.name === 'home' ? (openedAbout = !openedAbout) : back()"
+                class="border-r-2"
+                :class="[$route.name === 'home' ? 'border-r-black bg-green p-2' : 'flex-1 border-r-transparent p-3']"
             >
-                <SvgBack v-if="$route.name !== 'home'" class="ml-2" />
+                <SvgBack v-if="$route.name !== 'home'" />
                 <SvgClose v-else-if="openedAbout" />
                 <SvgLogo v-else />
-            </div>
+            </button>
         </HistoryBack>
-        <h1
-            class="grow px-2 text-1.5xl"
-            :class="{ 'text-center': $route.name !== 'home' }"
-        >
+        <h1 class="grow px-2.5 text-1.5xl font-medium" :class="{ 'text-center': $route.name !== 'home' }">
             {{ $t(openedAbout ? 'About the App' : $route.meta.title) }}
-            <span v-if="$route.name === 'my_collection'"
-                >({{ itemStore.favouritesCount }})</span
-            >
+            <span v-if="$route.name === 'my_collection'">({{ itemStore.favouritesCount }})</span>
         </h1>
-        <div
-            class="flex-1 border-l-2 border-transparent px-3 text-right"
-            v-if="$route.name === 'my_collection'"
-        >
-            <button
-                class="rounded-xl bg-green px-3 py-1 text-sm font-bold"
-                @click="scroll('share')"
-            >
+        <div class="flex-1 border-l-2 border-transparent px-3 text-right" v-if="$route.name === 'my_collection'">
+            <button class="rounded-xl bg-green px-3 py-1 text-sm font-bold" @click="scroll('share')">
                 {{ $t('Share') }}
             </button>
         </div>
         <LanguageSwitcher v-else-if="$route.name === 'home'" />
-        <FavouritesCount
-            v-else
-            class="border-l-2 border-l-transparent px-4 py-2"
-            :show-tooltip="isActive"
-        />
+        <FavouritesCount v-else class="flex-1 border-l-2 border-l-transparent px-4 py-2" :show-tooltip="isActive" />
     </div>
 
     <About :opened="openedAbout" />

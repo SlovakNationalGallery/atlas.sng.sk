@@ -2,11 +2,11 @@
     <Transition :duration="300">
         <div class="fixed inset-0 z-10 overflow-hidden md:mx-auto md:max-w-lg" v-if="opened">
             <div class="h-full overflow-y-auto bg-white pt-[48px] duration-300">
-                <div class="border-b-2 border-gray-softest">
+                <div class="border-b-1 border-gray-softest">
                     <div class="my-8 flex items-end justify-between">
                         <div class="self-items-end mx-4">
-                            <SvgLogo class="mb-[14px] ml-[-5.25px] !h-[48px] !w-[48px]" viewBox="0 0 32 32" />
-                            <h1 class="font-bold leading-[1]">
+                            <SvgLogo class="mb-7 !h-[46px] !w-[46px]" viewBox="3.3 3.3 28.7 28.7" />
+                            <h1 class="font-bold leading-10">
                                 <span class="text-[52px]">Atlas</span><br />
                                 <span class="text-[42px]">SNG</span>
                             </h1>
@@ -22,7 +22,7 @@
                     </div>
                 </div>
 
-                <AboutCollapsible :initialOpen="true" class="scroll-mt-12 border-b-2 border-gray-softest">
+                <AboutCollapsible :initialOpen="true" class="scroll-mt-12 border-b-1 border-gray-softest">
                     <template v-slot:summary>Ako na to?</template>
                     <template v-slot:content>
                         <div class="space-y-4">
@@ -44,7 +44,7 @@
                         </div>
                     </template>
                 </AboutCollapsible>
-                <AboutCollapsible class="scroll-mt-12 border-b-2 border-gray-softest">
+                <AboutCollapsible class="scroll-mt-12 border-b-1 border-gray-softest">
                     <template v-slot:summary>Projekt</template>
                     <template v-slot:content>
                         <div class="space-y-4">
@@ -67,7 +67,7 @@
                         />
                     </template>
                 </AboutCollapsible>
-                <AboutCollapsible class="scroll-mt-12 border-b-2 border-gray-softest">
+                <AboutCollapsible class="scroll-mt-12 border-b-1 border-gray-softest">
                     <template v-slot:summary>Vyrobil lab.SNG</template>
                     <template v-slot:content>
                         <ul>

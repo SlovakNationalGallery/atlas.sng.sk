@@ -1,19 +1,28 @@
 <template>
     <div role="link" class="relative" @click="visible = true">
-        <ResponsiveImage class="rounded-xl w-full object-cover cursor-pointer" :image="story.video_thumbnail" />
+        <ResponsiveImage class="w-full cursor-pointer rounded-xl object-cover" :image="story.video_thumbnail" />
         <button
-            class="bg-green rounded-xl px-3 py-2 bottom-3 right-3 absolute flex items-center appearance-none text-base text-black font-medium">
+            class="absolute bottom-3 right-3 flex appearance-none items-center rounded-xl bg-green px-3 py-2 text-base font-medium text-black"
+        >
             <SvgPlay class="mr-2" />
             {{ $t('Play video') }} ({{ story.video_duration }})
         </button>
     </div>
-    <div class="fixed inset-0 z-50 flex justify-center items-center bg-black/70 p-4" v-if="visible"
-        @click="visible = false">
+    <div
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
+        v-if="visible"
+        @click="visible = false"
+    >
         <div class="relative max-h-full w-full md:max-w-sm">
-            <ResponsiveVideoEmbed :src="story.video_embed" :width="story.video_aspect_ratio.width"
-                :height="story.video_aspect_ratio.height" />
-            <button class="absolute cursor-pointer p-1 top-0 right-0 bg-white rounded-tr-xl"
-                @click.stop="visible = false">
+            <ResponsiveVideoEmbed
+                :src="story.video_embed"
+                :width="story.video_aspect_ratio.width"
+                :height="story.video_aspect_ratio.height"
+            />
+            <button
+                class="absolute top-0 right-0 cursor-pointer rounded-tr-xl bg-white p-1.5"
+                @click.stop="visible = false"
+            >
                 <SvgClose />
             </button>
         </div>
