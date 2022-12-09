@@ -9,7 +9,7 @@
     >
         <div class="absolute bottom-full flex w-full items-center rounded-t-xl bg-white">
             <div class="flex-1 px-3">
-                <svg @click="shownOnboarding = true" class="h-[32px] w-[32px] cursor-pointer">
+                <svg @click="shownHelp = true" class="h-[32px] w-[32px] cursor-pointer">
                     <path
                         d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z"
                         class="fill-black"
@@ -59,7 +59,7 @@
             </button>
         </div>
     </div>
-    <OnboardingModal @close="shownOnboarding = false" :visible="shownOnboarding"></OnboardingModal>
+    <HelpModal @close="shownHelp = false" :visible="shownHelp"></HelpModal>
 </template>
 
 <script setup>
@@ -68,7 +68,7 @@ import { onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import CircleButton from '../components/CircleButton.vue'
 import FavouritesCount from '../components/FavouritesCount.vue'
-import OnboardingModal from '../components/OnboardingModal.vue'
+import HelpModal from '../components/HelpModal.vue'
 import { useInteractionStore } from '../stores/InteractionStore'
 
 const interactionStore = useInteractionStore()
@@ -77,7 +77,7 @@ const route = useRoute()
 const code = reactive(Array(9).fill(0))
 const wrong = ref(false)
 const shown = ref(false)
-const shownOnboarding = ref(false)
+const shownHelp = ref(false)
 const peekingIn = ref(false)
 const peekingOut = ref(false)
 
