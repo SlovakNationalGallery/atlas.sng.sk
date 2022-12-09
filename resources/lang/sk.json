@@ -23,7 +23,7 @@
     "Let us know in the brief survey below!": "Daj nám vedieť v krátkom prieskume!",
     "Give feedback": "Spustiť prieskum",
     "Next": "Ďalej",
-    "Start collecting": "Začni zbierať",
+    "I'm in!": "Idem na to!",
     "Delve deeper into the Gothic art": "Nazri pod povrch",
     "Find simple codes near artworks in the Gothic Art exhibition.": "Vo výstave Gotické umenie nájdeš pri vybraných dielach jednoduché kódy.",
     "Insert the code into the grid on the main screen of the app and press Verify. You will discover more about the artwork's story, function or technique.": "<b>Kód zadaj do mriežky</b> v aplikácii a stlač tlačidlo <b>overiť</b>. Objavíš viac o funkcii, technike alebo príbehu diela.",
@@ -69,5 +69,14 @@
     "UX design, graphic design": "UX dizajn, grafický dizajn",
     "Content, UX design, concept": "Obsah, UX dizajn, koncept",
     "Artist research": "Rešerš",
-    "User research": "Používateľský výskum"
+    "User research": "Používateľský výskum",
+    "help_title_1": "Nechaj sa viesť",
+    "help_body1_1": "V každej miestnosti nájdeš kód <strong>na stene</strong>, <strong>na papieri v stojane</strong> alebo priamo pri diele.",
+    "help_body2_1": "<strong>Zadaj ho do mriežky</strong> v aplikácii a stlač tlačidlo Overiť kód.",
+    "help_title_2": "Čítaj kedykoľvek",
+    "help_body1_2": "Dozvieš sa príbehy diel, ich autorov a autoriek, ako aj to, prečo sú vystavené spolu.",
+    "help_body2_2": "Najobľúbenejšie z nich si pomocou tlačidla <strong>Uložiť</strong> zapamätáš vo svojej kolekcii, kde ich nájdeš aj po zatvorení aplikácie.",
+    "help_title_3": "Podeľ sa o vedomosti",
+    "help_body1_3": "Svoju kolekciu si môžeš <strong>poslať na email</strong> alebo ju <strong>zdieľať</strong> na sociálnych sieťach.",
+    "help_body2_3": "Odkaz na kolekciu nikdy nevyprší."
 }

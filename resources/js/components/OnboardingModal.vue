@@ -1,37 +1,37 @@
 <template>
     <div
-        class="md:max-w-lg md:mx-auto fixed inset-0 z-50 flex justify-center items-center overflow-hidden"
+        class="fixed inset-0 z-50 flex items-center justify-center overflow-hidden md:mx-auto md:max-w-lg"
         v-if="visible"
     >
-        <div class="bg-black opacity-70 absolute inset-0 cursor-zoom-out" @click="close" />
+        <div class="absolute inset-0 cursor-zoom-out bg-black opacity-70" @click="close" />
         <Carousel :items-to-show="2.1" :wrap-around="true" class="min-w-[calc(190%)]" ref="myCarousel">
             <Slide :key="0">
                 <OnboardingStep
                     :btnFn="next"
-                    :title="'Delve deeper into the Gothic art'"
-                    :body1="'Find simple codes near artworks in the Gothic Art exhibition.'"
-                    :body2="'Insert the code into the grid on the main screen of the app and press Verify. You will discover more about the artwork\'s story, function or technique.'"
-                    :btnText="'Next'"
+                    title="help_title_1"
+                    body1="help_body1_1"
+                    body2="help_body2_1"
+                    btnText="Next"
                     :active-step="1"
                 />
             </Slide>
             <Slide :key="1">
                 <OnboardingStep
                     :btnFn="next"
-                    :title="'Read anywhere'"
-                    :body1="'Press the Save button to collect the artwork. You can find all saved artworks in your collection.'"
-                    :body2="'The collection will persist even after you close the application.'"
-                    :btnText="'Next'"
+                    title="help_title_2"
+                    body1="help_body1_2"
+                    body2="help_body2_2"
+                    btnText="Next"
                     :active-step="2"
                 />
             </Slide>
             <Slide :key="3">
                 <OnboardingStep
                     :btnFn="close"
-                    :title="'Share the knowledge'"
-                    :body1="'Tap the Share button in your collection, and send the link to your e-mail or share it with friends.'"
-                    :body2="'The shared link never expires.'"
-                    :btnText="'Start collecting'"
+                    title="help_title_3"
+                    body1="help_body1_3"
+                    body2="help_body2_3"
+                    btnText="I'm in!"
                     :active-step="3"
                 />
             </Slide>
