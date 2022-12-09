@@ -1,13 +1,15 @@
 <template>
-    <div class="bg-black grow px-4 pb-bar text-lg text-white">
+    <div class="grow bg-black px-4 pb-bar text-lg text-white">
         <template v-for="(interaction, i) in interactionStore.interactions" :key="i">
             <InteractionStory
+                :ref="(component) => setStoryRef(component, interaction)"
                 v-if="interaction.type === 'story'"
                 :story="storyStore.get(interaction.id)"
                 :linkId="interaction.linkId"
                 :active="interaction === interactionStore.active"
                 :first="i === 0"
-                @navigate="navigate"
+                @navigate="(link) => navigate(interaction, link)"
+                @undo="undo"
                 class="my-8"
             />
             <InteractionItemFavourited
@@ -32,7 +34,7 @@
 </template>
 
 <script setup>
-import { nextTick, onMounted, ref } from 'vue'
+import { nextTick, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import CodePanel from '../components/CodePanel.vue'
 import InteractionItemFavourited from '../components/InteractionItemFavourited.vue'
@@ -49,10 +51,31 @@ const itemStore = useItemStore()
 const sectionStore = useSectionStore()
 const storyStore = useStoryStore()
 const route = useRoute()
+const storyMap = new Map()
 
-const navigate = (link) => {
-    interactionStore.selectLink(link.id)
+const navigate = (interaction, link) => {
+    interactionStore.selectLink(interaction, link)
     loadStory(link.story_id)
+}
+
+const undo = () => {
+    const current = interactionStore.active
+    const previous = interactionStore.setPreviousActive(current)
+    nextTick(() => {
+        storyMap.get(previous).scrollIntoView({
+            behavior: 'smooth',
+            block: 'end',
+        })
+    })
+    setTimeout(() => {
+        interactionStore.remove(current)
+    }, 600)
+}
+
+const setStoryRef = (component, interaction) => {
+    if (component.$el) {
+        storyMap.set(interaction, component.$el)
+    }
 }
 
 const scrollActiveIntoView = () => {

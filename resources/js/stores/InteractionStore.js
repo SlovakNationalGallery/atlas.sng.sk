@@ -61,9 +61,30 @@ export const useInteractionStore = defineStore('InteractionStore', {
                 id,
             })
         },
-        selectLink(id) {
-            this.active.linkId = id
+        selectLink(interaction, link) {
+            const index = this.interactions.indexOf(interaction)
+            this.interactions[index].linkId = link.id
             this.cursor = -1
+        },
+        lastStoryIndex(from) {
+            let index = typeof from !== 'undefined' ? from : this.cursor
+            while (this.interactions[index].type !== 'story' && index > 0) {
+                index--
+            }
+            return index
+        },
+        setPreviousActive(interaction) {
+            const index = this.interactions.indexOf(interaction)
+            this.cursor = this.lastStoryIndex(index - 1)
+            this.active.linkId = undefined
+            return this.active
+        },
+        remove(interaction) {
+            const toDelete = this.interactions.indexOf(interaction)
+            this.interactions.splice(toDelete, 1)
+            if (toDelete <= this.cursor) {
+                this.cursor = this.lastStoryIndex(this.cursor - 1)
+            }
         },
         clear() {
             this.interactions = []
