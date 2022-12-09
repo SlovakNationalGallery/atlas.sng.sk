@@ -6,7 +6,7 @@
         <div class="absolute inset-0 cursor-zoom-out bg-black opacity-70" @click="close" />
         <Carousel :items-to-show="2.1" :wrap-around="true" class="min-w-[calc(190%)]" ref="myCarousel">
             <Slide :key="0">
-                <OnboardingStep
+                <HelpStep
                     :btnFn="next"
                     title="help_title_1"
                     body1="help_body1_1"
@@ -16,7 +16,7 @@
                 />
             </Slide>
             <Slide :key="1">
-                <OnboardingStep
+                <HelpStep
                     :btnFn="next"
                     title="help_title_2"
                     body1="help_body1_2"
@@ -26,7 +26,7 @@
                 />
             </Slide>
             <Slide :key="3">
-                <OnboardingStep
+                <HelpStep
                     :btnFn="close"
                     title="help_title_3"
                     body1="help_body1_3"
@@ -43,7 +43,7 @@
 import { ref } from 'vue'
 import { Carousel, Slide } from 'vue3-carousel'
 import 'vue3-carousel/dist/carousel.css'
-import OnboardingStep from '../components/OnboardingStep.vue'
+import HelpStep from '../components/HelpStep.vue'
 
 const props = defineProps({
     visible: Boolean,
