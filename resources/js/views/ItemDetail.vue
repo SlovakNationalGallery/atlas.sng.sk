@@ -61,7 +61,7 @@
                     >{{ $t('Remove') }}</ConfirmButton
                 >
                 <ConfirmButton v-else class="group bg-green" @click="addItemFavourited(item)">
-                    <SvgHeart class="mr-2 fill-green group-active:fill-none" />
+                    <SvgHeartSmall class="mr-2 fill-green group-active:fill-none" />
                     {{ $t('Save') }}
                 </ConfirmButton>
             </div>
@@ -85,7 +85,7 @@ import VideoSummary from '../components/VideoSummary.vue'
 import HistoryBack from '../components/HistoryBack.vue'
 import ResponsiveVideoEmbed from '../components/ResponsiveVideoEmbed.vue'
 import SvgBack from '../components/svg/Back.vue'
-import SvgHeart from '../components/svg/Heart.vue'
+import SvgHeartSmall from '../components/svg/HeartSmall.vue'
 import { useInteractionStore } from '../stores/InteractionStore'
 import AuthorSummary from '../components/AuthorSummary.vue'
 import AuthorDetails from '../components/AuthorDetails.vue'
