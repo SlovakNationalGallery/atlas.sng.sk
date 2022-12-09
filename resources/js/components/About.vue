@@ -5,7 +5,7 @@
                 <div class="border-b-1 border-gray-softest">
                     <div class="my-8 flex items-end justify-between">
                         <div class="self-items-end mx-4">
-                            <SvgLogo class="mb-7 !h-[46px] !w-[46px]" viewBox="0 0 26 26" />
+                            <SvgLogo class="mb-7 !h-[46px] !w-[46px]" viewBox="3.3 3.3 28.7 28.7" />
                             <h1 class="font-bold leading-10">
                                 <span class="text-[52px]">Atlas</span><br />
                                 <span class="text-[42px]">SNG</span>

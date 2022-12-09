@@ -1,14 +1,10 @@
 <template>
-    <div class="sticky top-0 z-20 flex h-12 w-full items-center border-y-2 border-black bg-white">
+    <div class="sticky top-0 z-20 flex w-full items-center whitespace-nowrap border-y-2 border-black bg-white">
         <HistoryBack v-slot="{ back }">
             <div
                 @click="$route.name === 'home' ? (openedAbout = !openedAbout) : back()"
-                class="flex h-full cursor-pointer items-center border-r-2"
-                :class="[
-                    $route.name === 'home'
-                        ? 'w-12 justify-center border-r-black bg-green p-2.5'
-                        : 'flex-1 border-r-transparent p-4',
-                ]"
+                class="cursor-pointer border-r-2"
+                :class="[$route.name === 'home' ? 'border-r-black bg-green p-2' : 'flex-1 border-r-transparent p-3']"
             >
                 <SvgBack v-if="$route.name !== 'home'" />
                 <SvgClose v-else-if="openedAbout" />

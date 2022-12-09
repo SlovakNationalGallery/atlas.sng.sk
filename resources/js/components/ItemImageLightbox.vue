@@ -16,7 +16,7 @@
         <div class="relative max-h-full md:max-w-lg" @click.stop="visible = false">
             <img :src="item.image_src" class="rounded-xl object-contain" />
             <button
-                class="absolute top-0 right-0 cursor-pointer rounded-tr-xl bg-white p-3"
+                class="absolute top-0 right-0 cursor-pointer rounded-tr-xl bg-white p-1.5"
                 @click.stop="visible = false"
             >
                 <SvgClose />

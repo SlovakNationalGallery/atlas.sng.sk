@@ -1,6 +1,6 @@
 <template>
-    <svg class="h-[20px] w-[20px] stroke-black stroke-2 [stroke-linecap:round] [stroke-linejoin:round]">
-        <path d="M19 1L1 19" />
-        <path d="M19 19L1 1" />
+    <svg class="h-[32px] w-[32px] stroke-2 stroke-black [stroke-linecap:round]">
+        <path d="M25 7L7 25" />
+        <path d="M25 25L7 7" />
     </svg>
 </template>
