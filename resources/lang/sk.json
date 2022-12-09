@@ -53,5 +53,21 @@
     "About the App": "O aplikácii",
     "Viewed": "Zobrazené",
     "Saved": "Uložené",
-    "Tap to check the code": "Zadať kód diela"
+    "Tap to check the code": "Zadať kód diela",
+    "about_perex_1": "Vydaj sa na výstavy s digitálnou sprievodkyňou <span class='font-bold text-red-pastel'>Ester</span>, ktorá ťa vezme do zákulisia a ukáže ti pohľady na diela od umelcov a umelkýň či návštevníkov a návštevníčok. Po ceste stretneš aj ľudí zo SNG a zažiješ neočakávané situácie.",
+    "about_perex_2": "Kódy, ktoré nájdeš pri dielach zadávaj do mriežky. Spoznávaj, zbieraj a tvor svoj vlastný atlas umenia. Diela, ktoré si počas návštevy pridáš do vlastnej kolekcie, môžeš neskôr zdieľať so známymi, alebo odoslať na e-mail.",
+    "about_project_1": "Aplikácia bola vytvorená v rámci projektu <em>Ako porozumieť digitálnym zbierkam</em>, ktorý skúma ako môžu digitálne technológie rozšíriť zážitok z návštevy galérie a využíva princípy digitálneho storytellingu v práci s online zbierkami.",
+    "about_project_2": "Projekt Ako porozumieť digitálnym zbierkam získal grant z Islandu, Lichtenštajnska a Nórska v sume 199 925 eur prostredníctvom Grantov EHP. Projekt je spolufinancovaný v sume 29 988,75 eur z prostriedkov štátneho rozpočtu Slovenskej republiky.",
+    "about_project_more_label": "Viac o projekte",
+    "about_project_more_url": "https://www.sng.sk/sk/vyskum/projekty/ako-porozumiet-digitalnym-zbierkam",
+    "Production": "Produkcia",
+    "Project lead": "Vedúci projektu",
+    "Video": "Tvorba videí",
+    "Development": "Vývoj",
+    "Content, English translation": "Obsah, anglický preklad",
+    "Content": "Obsah",
+    "UX design, graphic design": "UX dizajn, grafický dizajn",
+    "Content, UX design, concept": "Obsah, UX dizajn, koncept",
+    "Artist research": "Rešerš",
+    "User research": "Používateľský výskum"
 }
