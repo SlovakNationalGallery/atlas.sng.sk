@@ -1,15 +1,15 @@
 <template>
     <div class="sticky top-0 z-20 flex w-full items-center whitespace-nowrap border-y-2 border-black bg-white">
         <HistoryBack v-slot="{ back }">
-            <div
+            <button
                 @click="$route.name === 'home' ? (openedAbout = !openedAbout) : back()"
-                class="cursor-pointer border-r-2"
+                class="border-r-2"
                 :class="[$route.name === 'home' ? 'border-r-black bg-green p-2' : 'flex-1 border-r-transparent p-3']"
             >
                 <SvgBack v-if="$route.name !== 'home'" />
                 <SvgClose v-else-if="openedAbout" />
                 <SvgLogo v-else />
-            </div>
+            </button>
         </HistoryBack>
         <h1 class="grow px-2.5 text-1.5xl font-medium" :class="{ 'text-center': $route.name !== 'home' }">
             {{ $t(openedAbout ? 'About the App' : $route.meta.title) }}
