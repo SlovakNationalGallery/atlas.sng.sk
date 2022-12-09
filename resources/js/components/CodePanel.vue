@@ -76,7 +76,7 @@ const router = useRouter()
 const route = useRoute()
 const code = reactive(Array(9).fill(0))
 const wrong = ref(false)
-const shown = ref(false)
+const shown = ref(route.hash === '#code')
 const shownOnboarding = ref(false)
 const peekingIn = ref(false)
 const peekingOut = ref(false)
@@ -85,8 +85,7 @@ const active = computed(() => {
     return code.some((bit) => bit)
 })
 
-watch(shown, (value) => {
-    router.replace({ hash: value ? '#code' : undefined })
+watch(shown, () => {
     interactionStore.peekCodePanel = false
 })
 
@@ -121,7 +120,7 @@ watch(code, () => {
 
 onMounted(() => {
     if (route.hash === '#code') {
-        shown.value = true
+        router.replace({ hash: undefined })
     } else if (interactionStore.peekCodePanel) {
         const delay = (duration) => {
             return new Promise((resolve) => {
