@@ -5,9 +5,9 @@
         :class="{ '!border-l-black bg-green': showTooltip, 'opacity-40': !itemStore.favouritesCount }"
     >
         <div class="flex h-full justify-end">
-            <div class="font-bold text-lg pr-1">{{ itemStore.favouritesCount }}</div>
+            <div class="pr-1 text-lg font-bold">{{ itemStore.favouritesCount }}</div>
             <svg
-                class="stroke-black stroke-2 w-[29px] h-[25px]"
+                class="h-[25px] w-[29px] stroke-black stroke-2"
                 :class="[itemStore.favouritesCount ? 'fill-green' : 'fill-white']"
             >
                 <path
@@ -24,10 +24,10 @@
         >
             <div
                 v-if="showTooltip"
-                class="tooltip absolute right-4 top-[52px] z-50 shadow-lg bg-black border-black border-2"
+                class="tooltip absolute right-4 top-[52px] z-50 border-2 border-black bg-black shadow-lg"
             >
-                <div class="absolute w-3 h-3 top-0 right-2.5 -mt-2 rotate-45 bg-black z-0"></div>
-                <div class="w-full h-full bg-green relative p-2 whitespace-nowrap">
+                <div class="absolute top-0 right-2.5 z-0 -mt-2 h-3 w-3 rotate-45 bg-black"></div>
+                <div class="relative h-full w-full whitespace-nowrap bg-green p-2">
                     {{ $t('Saved! Tap this icon to view your collection.') }}
                 </div>
             </div>
