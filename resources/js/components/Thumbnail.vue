@@ -1,21 +1,21 @@
 <template>
-    <div class="border-2 border-black box-content flex h-24 overflow-hidden rounded-xl">
-        <div class="flex-none w-24">
+    <div class="box-content flex h-24 overflow-hidden rounded-xl border-2 border-black">
+        <div class="w-24 flex-none">
             <slot name="image"></slot>
         </div>
-        <div class="border-black border-l-2 grow min-w-0 p-3">
-            <div class="flex mb-1 items-center">
-                <h2 class="grow mr-2 text-lg truncate">
+        <div class="min-w-0 grow border-l-2 border-black p-3">
+            <div class="mb-1 flex items-center">
+                <h2 class="mr-2 grow truncate text-lg">
                     <slot name="title"></slot>
                 </h2>
-                <svg class="fill-none h-[18px] mr-1 shrink-0 w-[10px]">
+                <svg class="mr-1 h-[18px] w-[10px] shrink-0 fill-none">
                     <path
-                        class="stroke-2 stroke-black [stroke-linecap:round] [stroke-linejoin:round]"
+                        class="stroke-black stroke-2 [stroke-linecap:round] [stroke-linejoin:round]"
                         d="M0.999999 1.47168L8.5 8.97168L1 16.4717"
                     />
                 </svg>
             </div>
-            <div class="text-gray-dark text-sm" :class="{ truncate: truncateDescription }">
+            <div class="text-sm text-gray-dark" :class="{ truncate: truncateDescription }">
                 <slot name="description"></slot>
             </div>
         </div>
