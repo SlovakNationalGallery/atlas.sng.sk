@@ -42,20 +42,16 @@
                     <template v-slot:content>
                         <div class="space-y-4">
                             <ul class="ml-6 list-disc">
-                                <li class="pl-2.5">Prihláste sa na SNG WIFI (heslo: welcometosng)</li>
+                                <li class="pl-2.5">Kód pri diele vyťukaj do mriežky v aplikácii.</li>
+                                <li class="pl-2.5">Diela si môžeš uložiť do svojej kolekcie a poslať na e-mail.</li>
                                 <li class="pl-2.5">
-                                    Vyberte si jednu z výstav a preskúmajte diela, na ktoré počas návštevy narazíte.
+                                    Ester ti pri putovaní výstavou ponúkne videá zo zákulisia a originálne pohľady na
+                                    diela od vystavujúcich osobností, alebo návštevníkov a návštevníčok.
                                 </li>
-                                <li class="pl-2.5">Kód pri diele vyťukajte do mriežky v aplikácii.</li>
                                 <li class="pl-2.5">
-                                    Diela si môžete uložiť do svojej kolekcie a poslať na e-mail a vrátiť sa k nim doma
-                                    s rozšírenými informáciami z archívu.
+                                    Ako sa Ester dostala do SNG sa dočítaš v knihe Moniky Kompaníkovej Kde je Ester N?
                                 </li>
                             </ul>
-                            <p>
-                                Ester vám pri putovaní výstavou ponúkne videá zo zákulisia a originálne pohľady na diela
-                                od vystavujúcich osobností, alebo návštevníkov a návštevníčok.
-                            </p>
                         </div>
                     </template>
                 </AboutCollapsible>
