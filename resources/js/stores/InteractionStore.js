@@ -5,7 +5,7 @@ import { useStoryStore } from './StoryStore'
 export const useInteractionStore = defineStore('InteractionStore', {
     state: () => ({
         interactions: useStorage('interactions', []),
-        peekCodePanel: useStorage('peekCodePanel', false),
+        peekCodePanel: useStorage('peekCodePanel', true),
         cursor: useStorage('cursor', -1),
     }),
     getters: {
