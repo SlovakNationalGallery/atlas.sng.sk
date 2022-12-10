@@ -17,6 +17,21 @@
                     </div>
 
                     <div class="m-4 space-y-4 text-xl">
+                        <div class="flex rounded-xl border-2 border-black bg-green/30 p-2.5">
+                            <div class="shrink-0">
+                                <SvgInfo />
+                            </div>
+                            <div class="pl-2">
+                                {{
+                                    $t(
+                                        'The development of the app is ongoing, we are improving it according to feedback. Do you want to help us?'
+                                    )
+                                }}
+                                <a href="#" class="underline" @click="getFeedback">{{
+                                    $t('Fill out a brief survey!')
+                                }}</a>
+                            </div>
+                        </div>
                         <p v-html="$t('about_perex_1')"></p>
                         <p v-html="$t('about_perex_2')"></p>
                     </div>
@@ -27,20 +42,16 @@
                     <template v-slot:content>
                         <div class="space-y-4">
                             <ul class="ml-6 list-disc">
-                                <li class="pl-2.5">Prihláste sa na SNG WIFI (heslo: welcometosng)</li>
+                                <li class="pl-2.5">Kód pri diele vyťukaj do mriežky v aplikácii.</li>
+                                <li class="pl-2.5">Diela si môžeš uložiť do svojej kolekcie a poslať na e-mail.</li>
                                 <li class="pl-2.5">
-                                    Vyberte si jednu z výstav a preskúmajte diela, na ktoré počas návštevy narazíte.
+                                    Ester ti pri putovaní výstavou ponúkne videá zo zákulisia a originálne pohľady na
+                                    diela od vystavujúcich osobností, alebo návštevníkov a návštevníčok.
                                 </li>
-                                <li class="pl-2.5">Kód pri diele vyťukajte do mriežky v aplikácii.</li>
                                 <li class="pl-2.5">
-                                    Diela si môžete uložiť do svojej kolekcie a poslať na e-mail a vrátiť sa k nim doma
-                                    s rozšírenými informáciami z archívu.
+                                    Ako sa Ester dostala do SNG sa dočítaš v knihe Moniky Kompaníkovej Kde je Ester N?
                                 </li>
                             </ul>
-                            <p>
-                                Ester vám pri putovaní výstavou ponúkne videá zo zákulisia a originálne pohľady na diela
-                                od vystavujúcich osobností, alebo návštevníkov a návštevníčok.
-                            </p>
                         </div>
                     </template>
                 </AboutCollapsible>
@@ -105,6 +116,19 @@
 <script setup>
 import AboutCollapsible from './AboutCollapsible.vue'
 import SvgLogo from './svg/Logo.vue'
+import SvgInfo from './svg/Info.vue'
+import { useSurveyStore } from '../stores/SurveyStore'
+import { getActiveLanguage } from 'laravel-vue-i18n'
 
 const props = defineProps(['opened'])
+const surveyStore = useSurveyStore()
+
+const getFeedback = () => {
+    surveyStore.done()
+    if (getActiveLanguage() == 'sk') {
+        window.open(import.meta.env.VITE_SURVEY_SK, '_blank').focus()
+    } else {
+        window.open(import.meta.env.VITE_SURVEY_EN, '_blank').focus()
+    }
+}
 </script>
