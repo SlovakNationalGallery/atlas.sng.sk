@@ -17,6 +17,21 @@
                     </div>
 
                     <div class="m-4 space-y-4 text-xl">
+                        <div class="flex rounded-xl border-2 border-black bg-green/30 p-2.5">
+                            <div class="shrink-0">
+                                <SvgInfo />
+                            </div>
+                            <div class="pl-2">
+                                {{
+                                    $t(
+                                        'The development of the app is ongoing, we are improving it according to feedback. Do you want to help us?'
+                                    )
+                                }}
+                                <a href="#" class="underline" @click="getFeedback">{{
+                                    $t('Fill out a brief survey!')
+                                }}</a>
+                            </div>
+                        </div>
                         <p v-html="$t('about_perex_1')"></p>
                         <p v-html="$t('about_perex_2')"></p>
                     </div>
@@ -105,6 +120,19 @@
 <script setup>
 import AboutCollapsible from './AboutCollapsible.vue'
 import SvgLogo from './svg/Logo.vue'
+import SvgInfo from './svg/Info.vue'
+import { useSurveyStore } from '../stores/SurveyStore'
+import { getActiveLanguage } from 'laravel-vue-i18n'
 
 const props = defineProps(['opened'])
+const surveyStore = useSurveyStore()
+
+const getFeedback = () => {
+    surveyStore.done()
+    if (getActiveLanguage() == 'sk') {
+        window.open(import.meta.env.VITE_SURVEY_SK, '_blank').focus()
+    } else {
+        window.open(import.meta.env.VITE_SURVEY_EN, '_blank').focus()
+    }
+}
 </script>
