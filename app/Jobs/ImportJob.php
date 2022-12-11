@@ -35,15 +35,20 @@ class ImportJob implements ShouldQueue
 
     public function handle()
     {
-        $start = now();
+        try {
+            $start = now();
 
-        $this->resolveChain($this->type)
-            ->map(fn($type) => new ($this->jobs[$type])())
-            ->each->dispatchSync();
+            $this->resolveChain($this->type)
+                ->map(fn($type) => new ($this->jobs[$type])())
+                ->each->dispatchSync();
 
-        $end = $start->diffInMilliseconds(now()) / 1000;
-        $message = sprintf('Import of %s took %.1f seconds', $this->type, $end);
-        Log::channel('import')->info($message);
+            $end = $start->diffInMilliseconds(now()) / 1000;
+            $message = sprintf('Import of %s took %.1f seconds', $this->type, $end);
+            Log::channel('import')->info($message);
+        } catch (\Exception $e) {
+            Log::channel('import')->error($e);
+            throw $e;
+        }
     }
 
     protected function resolveChain(string $type)
