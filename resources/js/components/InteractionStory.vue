@@ -32,17 +32,19 @@
         <button
             :disabled="!active"
             v-show="(transitioning || active) && !first"
-            class="my-4 block flex w-full items-center gap-x-2 rounded-xl border-1 border-white/10 p-3 text-left font-bold leading-8 text-white"
+            class="my-4 block flex w-full items-center gap-x-2 rounded-xl text-left text-base leading-8 text-green"
             @click="emit('undo')"
         >
-            {{ $t('Undo') }}
+            <SvgArrowUp class="flex-none" />
+            {{ $t('Back to the previous step') }}
         </button>
     </div>
 </template>
 
 <script setup>
 import ResponsiveImageWithSizes from './ResponsiveImageWithSizes.vue'
-import StoryVideoLightbox from '../components/StoryVideoLightbox.vue'
+import StoryVideoLightbox from './StoryVideoLightbox.vue'
+import SvgArrowUp from './svg/ArrowUp.vue'
 import SvgChatCircle from './svg/ChatCircle.vue'
 import { ref } from 'vue'
 
