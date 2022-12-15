@@ -38,25 +38,24 @@
                 </div>
 
                 <AboutCollapsible :initialOpen="true" class="scroll-mt-12 border-b-1 border-gray-softest">
-                    <template v-slot:summary>Ako na to?</template>
+                    <template v-slot:summary>{{ $t('How to?')}} </template>
                     <template v-slot:content>
                         <div class="space-y-4">
                             <ul class="ml-6 list-disc">
-                                <li class="pl-2.5">Kód pri diele vyťukaj do mriežky v aplikácii.</li>
-                                <li class="pl-2.5">Diela si môžeš uložiť do svojej kolekcie a poslať na e-mail.</li>
+                                <li class="pl-2.5">{{ $t('Tap the code next to the artwork into the grid in the app.') }}</li>
+                                <li class="pl-2.5">{{ $t('You can save the artwork to your collection and send it to your email.') }}</li>
                                 <li class="pl-2.5">
-                                    Ester ti pri putovaní výstavou ponúkne videá zo zákulisia a originálne pohľady na
-                                    diela od vystavujúcich osobností, alebo návštevníkov a návštevníčok.
+                                    {{ $t('As you explore the exhibition, Ester will offer you behind-the-scenes videos and original insights on the artworks from the artists or visitors.') }}
                                 </li>
                                 <li class="pl-2.5">
-                                    Ako sa Ester dostala do SNG sa dočítaš v knihe Moniky Kompaníkovej Kde je Ester N?
+                                    {{ $t('You can read about how Ester came to the SNG in Monika Kompaníková\'s book Where is Ester N?')}}
                                 </li>
                             </ul>
                         </div>
                     </template>
                 </AboutCollapsible>
                 <AboutCollapsible class="scroll-mt-12 border-b-1 border-gray-softest">
-                    <template v-slot:summary>Projekt</template>
+                    <template v-slot:summary>{{ $t('About the project') }}</template>
                     <template v-slot:content>
                         <div class="space-y-4">
                             <p v-html="$t('about_project_1')"></p>
@@ -64,9 +63,9 @@
                             <p>
                                 <a
                                     class="underline hover:no-underline"
-                                    :href="$t('about_project_more_url')"
+                                    href="https://www.sng.sk/sk/vyskum/projekty/ako-porozumiet-digitalnym-zbierkam"
                                     target="_blank"
-                                    >{{ $t('about_project_more_label') }}</a
+                                    >{{ $t('More about the project') }}</a
                                 >
                             </p>
                         </div>
@@ -79,7 +78,7 @@
                     </template>
                 </AboutCollapsible>
                 <AboutCollapsible class="scroll-mt-12 border-b-1 border-gray-softest">
-                    <template v-slot:summary>Vyrobil lab.SNG</template>
+                    <template v-slot:summary>{{ $t('Made by') }} lab.SNG</template>
                     <template v-slot:content>
                         <ul>
                             <li>Gabriel Balkó: {{ $t('Production') }}</li>
