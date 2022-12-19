@@ -63,7 +63,8 @@ class AppServiceProvider extends ServiceProvider
                     'renderer' => [
                         'soft_break' => '<br />',
                     ],
-                ]);
+                ])
+                ->remove('**');
         });
 
         Stringable::macro('markdownWithLineBreaks', function () {
