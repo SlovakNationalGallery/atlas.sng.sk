@@ -33,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
         foreach ([Http::class, PendingRequest::class] as $class) {
             $class::macro(
                 'webumenia',
-                fn() => $class
+                fn () => $class
                     ::withHeaders([
                         'Accept-Language' => app()->getLocale(),
                     ])
@@ -43,7 +43,7 @@ class AppServiceProvider extends ServiceProvider
 
         Http::macro(
             'vimeo',
-            fn() => Http::withHeaders([
+            fn () => Http::withHeaders([
                 'Authorization' => sprintf('bearer %s', config('services.vimeo.access_token')),
                 'Accept' => sprintf('application/vnd.vimeo.*+json;version=%s', config('services.vimeo.api_version')),
             ])->baseUrl(config('services.vimeo.api'))
@@ -55,11 +55,15 @@ class AppServiceProvider extends ServiceProvider
         ]);
 
         Str::macro('markdownWithLineBreaks', function ($value) {
-            return str($value)->markdown([
-                'renderer' => [
-                    'soft_break' => '<br />',
-                ],
-            ]);
+            return Str::of($value)
+                ->replaceMatches('/\*\*(\s*)(.*?)(\s*)\*\*/', '$1**$2**$3')
+                ->replaceMatches('/_(\s*)(.*?)(\s*)_/', '$1_$2_$3')
+                ->replaceMatches('/~~(\s*)(.*?)(\s*)~~/', '$1~~$2~~$3')
+                ->markdown([
+                    'renderer' => [
+                        'soft_break' => '<br />',
+                    ],
+                ]);
         });
 
         Stringable::macro('markdownWithLineBreaks', function () {
