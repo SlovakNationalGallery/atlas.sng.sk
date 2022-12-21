@@ -1,16 +1,16 @@
 <template>
-    <div class="h-full border-black pb-24 relative" v-if="section">
+    <div class="relative h-full border-black pb-24" v-if="section">
         <div class="h-full bg-black p-4">
             <img class="h-9 w-9" :src="`/img/${section.code}.svg`" :alt="section.code" />
-            <p class="font-bold mb-2 mt-4 text-green">
+            <p class="mb-2 mt-4 font-bold text-green">
                 {{ $t('Group of :count artworks', { count: section.items.length }) }}
             </p>
-            <h2 class="font-bold text-white text-1.5xl">{{ section.title }}</h2>
+            <h2 class="text-1.5xl font-bold text-white">{{ section.title }}</h2>
         </div>
         <div class="px-4">
-            <div class="py-4 space-y-4" v-html="section.description"></div>
+            <div class="space-y-4 py-4" v-html="section.description"></div>
 
-            <p class="font-bold mb-2">{{ $t('More about artworks in the group') }}</p>
+            <p class="mb-2 font-bold">{{ $t('More about artworks in the group') }}</p>
             <div class="flex flex-col space-y-3">
                 <router-link
                     v-for="item in section.items"
@@ -37,6 +37,6 @@ const section = ref(null)
 
 onMounted(async () => {
     const id = route.params.id
-    section.value = sectionStore.get(id) || (await sectionStore.load(id))
+    section.value = await sectionStore.load(id)
 })
 </script>
