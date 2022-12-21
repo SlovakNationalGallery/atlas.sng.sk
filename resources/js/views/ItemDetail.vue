@@ -102,6 +102,6 @@ const addItemFavourited = (item) => {
 
 onMounted(async () => {
     const id = route.params.id
-    item.value = itemStore.get(id) || (await itemStore.load(id))
+    item.value = await itemStore.load(id)
 })
 </script>
