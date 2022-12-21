@@ -1,10 +1,9 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
-import { useStorage } from '@vueuse/core'
 
 export const useSectionStore = defineStore('SectionStore', {
     state: () => ({
-        sections: useStorage('sections', {}),
+        sections: {},
     }),
     actions: {
         get(id) {

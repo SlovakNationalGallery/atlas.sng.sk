@@ -5,7 +5,7 @@ import axios from 'axios'
 export const useItemStore = defineStore('ItemStore', {
     state: () => ({
         favouriteItemIds: useStorage('favouriteItemIds', []),
-        items: useStorage('items', {}),
+        items: {},
         collectionLink: useStorage('collectionLink', null),
     }),
     getters: {
