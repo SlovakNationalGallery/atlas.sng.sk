@@ -19,12 +19,15 @@ class ImportItemsJob implements ShouldQueue
     public function handle()
     {
         $exhibition_ids = Exhibition::all()->pluck('id');
+        $item_ids = [];
         $records = Airtable::table('items')
             ->where('ID', '!=', '')
             ->all();
-        $records->each(function ($record) use ($exhibition_ids) {
+        $records->each(function ($record) use ($exhibition_ids, &$item_ids) {
+            $item_ids[] = $record['fields']['ID'];
+
             $item = Item::unguarded(
-                fn() => Item::firstOrNew([
+                fn () => Item::firstOrNew([
                     'id' => $record['fields']['ID'],
                 ])
             );
@@ -80,5 +83,8 @@ class ImportItemsJob implements ShouldQueue
                 ]);
             }
         });
+
+        $missing_ids = Item::whereNotIn('id', $item_ids)->get()->pluck('id');
+        Item::destroy($missing_ids);
     }
 }
