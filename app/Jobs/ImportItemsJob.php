@@ -83,6 +83,8 @@ class ImportItemsJob implements ShouldQueue
                 ]);
             }
         });
-        Item::whereNotIn('id', $item_ids)->delete();
+
+        $missing_ids = Item::whereNotIn('id', $item_ids)->get()->pluck('id');
+        Item::destroy($missing_ids);
     }
 }
