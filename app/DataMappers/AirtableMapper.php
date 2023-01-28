@@ -37,6 +37,29 @@ class AirtableMapper
         'exhibitions' => [
             'name' => 'Name',
         ],
+        'places' => [
+            'title' => [
+                'sk' => 'Názov SK',
+                'en' => 'Názov EN',
+            ],
+            'description' => [
+                'sk' => 'Text SK',
+                'en' => 'Text EN',
+            ],
+            'media' => 'Media',
+            'video_title' => [
+                'sk' => 'Video title SK',
+                'en' => 'Video title EN',
+            ],
+            'video_subtitle' => [
+                'sk' => 'Video subtitle SK',
+                'en' => 'Video subtitle EN',
+            ],
+            'video' => [
+                'sk' => 'Video URL SK',
+                'en' => 'Video URL EN',
+            ],
+        ],
     ];
 
     public function getField(string $field)
@@ -55,7 +78,7 @@ class AirtableMapper
             $mappedFields = collect(self::$tables[$tableName])->map(function ($source) use ($record) {
                 if (is_array($source)) {
                     return collect($source)
-                        ->map(fn($source) => Arr::get($record, "fields.$source"))
+                        ->map(fn ($source) => Arr::get($record, "fields.$source"))
                         ->toJson();
                 } else {
                     return Arr::get($record, "fields.$source");

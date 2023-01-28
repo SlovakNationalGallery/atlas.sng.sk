@@ -23,8 +23,6 @@ return new class extends Migration
             $table->integer('offset_top')->default(0);
             $table->string('story_id')->nullable();
             $table->foreign('story_id')->references('id')->on('stories');
-            $table->string('exhibition_id')->nullable();
-            $table->foreign('exhibition_id')->references('id')->on('exhibitions');
             $table->timestamps();
         });
     }
