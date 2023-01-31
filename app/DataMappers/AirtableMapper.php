@@ -73,14 +73,14 @@ class AirtableMapper
         return collect($tables)->map([$this, 'mapTable']);
     }
 
-    public function mapTable($records, string $tableName)
+    public function mapTable($records, string $tableName, bool $encodeJson = true)
     {
-        return $records->map(function ($record) use ($tableName) {
-            $mappedFields = collect(self::$tables[$tableName])->map(function ($source) use ($record) {
+        return $records->map(function ($record) use ($tableName, $encodeJson) {
+            $mappedFields = collect(self::$tables[$tableName])->map(function ($source) use ($record, $encodeJson) {
                 if (is_array($source)) {
-                    return collect($source)
-                        ->map(fn ($source) => Arr::get($record, "fields.$source"))
-                        ->toJson();
+                    $data = collect($source)
+                        ->map(fn ($source) => Arr::get($record, "fields.$source"));
+                    return ($encodeJson) ? $data->toJson() : $data->toArray();
                 } else {
                     return Arr::get($record, "fields.$source");
                 }

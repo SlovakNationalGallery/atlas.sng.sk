@@ -31,7 +31,7 @@ class ImportPlacesJob implements ShouldQueue
 
         $places = \Airtable::table('places')
             ->all()
-            ->pipe(fn ($places) => $mapper->mapTable($places, 'places'));
+            ->pipe(fn ($places) => $mapper->mapTable($places, 'places', false));
 
         DB::transaction(function () use ($places, $exhibition_ids) {
             $missing_ids = Place::whereNotIn('id', $places->pluck('id'))->get()->pluck('id');
