@@ -1,10 +1,11 @@
 <?php
 
 use App\Models\Item;
+use App\Models\Place;
 use App\Models\Story;
+use App\Jobs\ImportJob;
 use App\Models\Section;
 use Illuminate\Http\Request;
-use App\Jobs\ImportJob;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,7 +37,17 @@ Route::get('/sections', function () {
     return response()->view('sections', compact('sections'));
 });
 
+Route::get('/places', function () {
+    $places = Place::with('code', 'code.exhibition')
+        ->get()
+        ->sortBy(function ($section) {
+            return $section->code->exhibition_id;
+        });
+    return response()->view('places', compact('places'));
+});
+
 Route::get('/stories', function () {
+    // dd(env('VITE_DEFAULT_STORY'));
     $stories = Story::with('links')->get();
     return response()->view('stories', compact('stories'));
 });
