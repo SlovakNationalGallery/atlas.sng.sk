@@ -47,7 +47,6 @@ Route::get('/places', function () {
 });
 
 Route::get('/stories', function () {
-    // dd(env('VITE_DEFAULT_STORY'));
     $stories = Story::with('links')->get();
     return response()->view('stories', compact('stories'));
 });
