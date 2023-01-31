@@ -16,6 +16,7 @@ class ImportJob implements ShouldQueue
     protected $dependencies = [
         'items' => ['stories', 'exhibitions'],
         'sections' => ['items'],
+        'places' => ['stories', 'exhibitions'],
     ];
 
     protected $jobs = [
@@ -23,6 +24,7 @@ class ImportJob implements ShouldQueue
         'exhibitions' => ImportExhibitionsJob::class,
         'items' => ImportItemsJob::class,
         'sections' => ImportSectionsJob::class,
+        'places' => ImportPlacesJob::class,
         'authorities' => ImportAuthoritiesJob::class,
     ];
 
@@ -39,7 +41,7 @@ class ImportJob implements ShouldQueue
             $start = now();
 
             $this->resolveChain($this->type)
-                ->map(fn($type) => new ($this->jobs[$type])())
+                ->map(fn ($type) => new ($this->jobs[$type])())
                 ->each->dispatchSync();
 
             $end = $start->diffInMilliseconds(now()) / 1000;
@@ -54,7 +56,7 @@ class ImportJob implements ShouldQueue
     protected function resolveChain(string $type)
     {
         return collect($this->dependencies[$type] ?? [])
-            ->flatMap(fn($dependency) => $this->resolveChain($dependency))
+            ->flatMap(fn ($dependency) => $this->resolveChain($dependency))
             ->push($type);
     }
 }

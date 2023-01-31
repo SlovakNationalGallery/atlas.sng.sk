@@ -14,6 +14,7 @@
             <a class="underline hover:no-underline" target="_blank" href="{{ route('import_type', ['type' => 'exhibitions']) }}">exhibitions</a><br />
             <a class="underline hover:no-underline" target="_blank" href="{{ route('import_type', ['type' => 'authorities']) }}">authorities</a><br />
             <a class="underline hover:no-underline" target="_blank" href="{{ route('import_type', ['type' => 'stories']) }}">stories</a><br />
+            <a class="underline hover:no-underline" target="_blank" href="{{ route('import_type', ['type' => 'places']) }}">places (w/ exhibitions, stories)</a><br />
         </div>
     </div>
 @endsection

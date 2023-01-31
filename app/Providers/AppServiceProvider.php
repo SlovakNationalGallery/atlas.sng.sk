@@ -3,13 +3,14 @@
 namespace App\Providers;
 
 use App\Models\Item;
+use App\Models\Place;
 use App\Models\Section;
-use Illuminate\Database\Eloquent\Relations\Relation;
-use Illuminate\Http\Client\PendingRequest;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Http\Client\PendingRequest;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -52,6 +53,7 @@ class AppServiceProvider extends ServiceProvider
         Relation::morphMap([
             'item' => Item::class,
             'section' => Section::class,
+            'place' => Place::class,
         ]);
 
         Str::macro('markdownWithLineBreaks', function ($value) {
