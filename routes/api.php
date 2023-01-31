@@ -1,19 +1,21 @@
 <?php
 
 use App\Models\Code;
+use App\Models\Item;
+use App\Models\Place;
+use App\Models\Story;
+use App\Models\Section;
 use App\Models\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Http\Client\Pool;
 use App\Http\Resources\CodeResource;
 use App\Http\Resources\ItemResource;
-use App\Http\Resources\SectionResource;
-use App\Http\Resources\StoryResource;
-use App\Models\Item;
-use App\Models\Section;
-use App\Models\Story;
-use Illuminate\Http\Client\Pool;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
+use App\Http\Resources\PlaceResource;
+use App\Http\Resources\StoryResource;
 use Illuminate\Support\Facades\Route;
+use App\Http\Resources\SectionResource;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -51,8 +53,8 @@ Route::get('/sections/{id}', function (string $id) {
     $section = Section::findOrFail($id);
 
     $responses = Http::pool(
-        fn(Pool $pool) => $section->items->map(
-            fn(Item $item) => $pool
+        fn (Pool $pool) => $section->items->map(
+            fn (Item $item) => $pool
                 ->as($item->id)
                 ->webumenia()
                 ->get("/v2/items/{$item->id}")
@@ -61,7 +63,7 @@ Route::get('/sections/{id}', function (string $id) {
 
     return new SectionResource([
         'section' => $section,
-        'webumenia_items' => collect($responses)->map(fn(Response $response) => $response->object()->data),
+        'webumenia_items' => collect($responses)->map(fn (Response $response) => $response->object()->data),
     ]);
 });
 
@@ -89,4 +91,9 @@ Route::get('/collections/{hashid}', function ($hashid) {
 Route::get('/stories/{id}', function (string $id) {
     $story = Story::findOrFail($id);
     return new StoryResource($story);
+});
+
+Route::get('/places/{id}', function (string $id) {
+    $place = Place::findOrFail($id);
+    return new PlaceResource($place);
 });
