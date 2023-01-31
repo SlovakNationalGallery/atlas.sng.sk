@@ -3,6 +3,8 @@
 namespace App\Jobs;
 
 use App\Models\Place;
+use App\Models\Exhibition;
+use Illuminate\Support\Arr;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\DB;
 use App\DataMappers\AirtableMapper;
@@ -25,16 +27,29 @@ class ImportPlacesJob implements ShouldQueue
     {
         $mapper = app(AirtableMapper::class);
 
+        $exhibition_ids = Exhibition::all()->pluck('id');
+
         $places = \Airtable::table('places')
             ->all()
             ->pipe(fn ($places) => $mapper->mapTable($places, 'places'));
 
-        DB::transaction(function () use ($places) {
-            Place::whereNotIn('id', $places->pluck('id'))->delete();
-            Place::upsert($places->map->except(['media'])->toArray(), ['id']);
+        DB::transaction(function () use ($places, $exhibition_ids) {
+            $missing_ids = Place::whereNotIn('id', $places->pluck('id'))->get()->pluck('id');
+            Place::destroy($missing_ids);
 
-            $places->each(function ($upstreamPlace) {
-                $place = Place::find($upstreamPlace['id']);
+            $places->each(function ($upstreamPlace) use ($exhibition_ids) {
+                $place = Place::updateOrCreate(
+                    ['id' => $upstreamPlace['id']],
+                    $upstreamPlace->except(['media', 'exhibition'])->toArray()
+                );
+
+                $place->save();
+
+                // save exhibition
+                if ($place->code && $exhibition_ids->contains(Arr::get($upstreamPlace, 'exhibition.0'))) {
+                    $place->code->exhibition_id = Arr::get($upstreamPlace, 'exhibition.0');
+                    $place->code->save();
+                }
 
                 $importedAirtableIds = $place
                     ->media()

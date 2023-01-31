@@ -29,4 +29,15 @@ class Place extends Model implements HasMedia
     protected $attributes = [
         'offset_top' => 0,
     ];
+
+    protected $fillable = [
+        'id',
+        'title',
+        'description',
+        'video',
+        'video_title',
+        'video_subtitle',
+        'offset_top',
+        'story_id',
+    ];
 }
