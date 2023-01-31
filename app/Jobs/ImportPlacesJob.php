@@ -46,8 +46,8 @@ class ImportPlacesJob implements ShouldQueue
                 $place->save();
 
                 // save exhibition
-                if ($place->code && $exhibition_ids->contains(Arr::get($upstreamPlace, 'exhibition.0'))) {
-                    $place->code->exhibition_id = Arr::get($upstreamPlace, 'exhibition.0');
+                if ($place->code && $exhibition_ids->contains($upstreamPlace['exhibition'])) {
+                    $place->code->exhibition_id = $upstreamPlace['exhibition'];
                     $place->code->save();
                 }
 
