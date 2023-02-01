@@ -7,6 +7,7 @@ export const useInteractionStore = defineStore('InteractionStore', {
         interactions: useStorage('interactions', []),
         peekCodePanel: useStorage('peekCodePanel', true),
         cursor: useStorage('cursor', -1),
+        visited: useStorage('interaction.visited', []),
     }),
     getters: {
         active() {
@@ -37,6 +38,9 @@ export const useInteractionStore = defineStore('InteractionStore', {
                 id,
             })
             this.cursor = length - 1
+            if (!this.isVisited(id)) {
+                this.visited.push(id)
+            }
         },
         addItemViewed(id) {
             this.interactions.push({
@@ -92,8 +96,12 @@ export const useInteractionStore = defineStore('InteractionStore', {
                 this.cursor = this.lastStoryIndex(this.cursor - 1)
             }
         },
+        isVisited(id) {
+            return this.visited.includes(id)
+        },
         clear() {
             this.interactions = []
+            this.visited = []
         },
     },
 })
