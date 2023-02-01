@@ -11,6 +11,7 @@ import Collection from './views/Collection.vue'
 import Interaction from './views/Interaction.vue'
 import ItemDetail from './views/ItemDetail.vue'
 import SectionDetail from './views/SectionDetail.vue'
+import PlaceDetail from './views/PlaceDetail.vue'
 import { useHistoryStore } from './stores/HistoryStore'
 import { useLocaleStore } from './stores/LocaleStore'
 
@@ -78,6 +79,14 @@ const routes = [
         component: Collection,
         meta: {
             title: 'My collection',
+        },
+    },
+    {
+        name: 'place_detail',
+        path: '/place/:id',
+        component: PlaceDetail,
+        meta: {
+            title: 'Place detail',
         },
     },
 ]

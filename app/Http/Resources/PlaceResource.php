@@ -18,6 +18,7 @@ class PlaceResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'code' => $this->code ? $this->code->code : null,
             'title' => $this->title,
             'description' => str($this->description)->markdownWithLineBreaks(),
             'images' => ImageResource::collection(

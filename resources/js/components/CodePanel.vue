@@ -95,18 +95,29 @@ const verifyCode = () => {
         .get('/api/verify/' + digit)
         .then(({ data }) => {
             const id = data.data.codeable_id
-            if (data.data.codeable_type === 'item') {
-                interactionStore.addItemViewed(id)
-                router.push({
-                    name: 'item_detail',
-                    params: { id },
-                })
-            } else if (data.data.codeable_type === 'section') {
-                interactionStore.addSectionViewed(id)
-                router.push({
-                    name: 'section_detail',
-                    params: { id },
-                })
+            switch (data.data.codeable_type) {
+                case 'item':
+                    interactionStore.addItemViewed(id)
+                    router.push({
+                        name: 'item_detail',
+                        params: { id },
+                    })
+                    break
+                case 'section':
+                    interactionStore.addSectionViewed(id)
+                    router.push({
+                        name: 'section_detail',
+                        params: { id },
+                    })
+                    break
+                case 'place':
+                    console.log(id)
+                    interactionStore.addPlaceViewed(id)
+                    router.push({
+                        name: 'place_detail',
+                        params: { id },
+                    })
+                    break
             }
         })
         .catch(() => {

@@ -61,6 +61,12 @@ export const useInteractionStore = defineStore('InteractionStore', {
                 id,
             })
         },
+        addPlaceViewed(id) {
+            this.interactions.push({
+                type: 'placeViewed',
+                id,
+            })
+        },
         selectLink(interaction, link) {
             const index = this.interactions.indexOf(interaction)
             this.interactions[index].linkId = link.id
