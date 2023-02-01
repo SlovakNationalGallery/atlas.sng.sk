@@ -26,6 +26,18 @@
         </Collapsible>
         <StoryButton :storyId="place.story_id" class="my-4" v-if="place.story_id" />
     </div>
+    <div class="pointer-events-none fixed bottom-0 h-24 w-full bg-gradient-to-t from-white to-transparent md:max-w-lg">
+        <div class="p-4 pt-8">
+            <div class="pointer-events-auto flex space-x-4">
+                <HistoryBack v-slot="{ back }">
+                    <ConfirmButton class="group bg-white" @click="back">
+                        <SvgBack class="mr-2 group-active:stroke-white" />
+                        {{ $t('Back') }}
+                    </ConfirmButton>
+                </HistoryBack>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script setup>
