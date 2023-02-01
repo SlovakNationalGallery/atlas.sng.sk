@@ -1,7 +1,19 @@
 <template>
     <div class="relative w-full border-b-2 border-black bg-gray-softest" v-if="item">
-        <ItemImageMovable v-if="$route.meta.edit" :item="item"></ItemImageMovable>
-        <ItemImageLightbox v-else :item="item"></ItemImageLightbox>
+        <ImageMovable
+            v-if="route.query.edit"
+            :alt="`${item.author}: ${item.title}`"
+            :src="item.image_src"
+            :srcset="item.image_srcset"
+            :offset-top="item.offset_top"
+        />
+        <ImageLightbox
+            v-else
+            :alt="`${item.author}: ${item.title}`"
+            :src="item.image_src"
+            :srcset="item.image_srcset"
+            :offset-top="item.offset_top"
+        />
     </div>
     <div class="relative h-full border-black px-4 pb-24 pt-8" v-if="item">
         <div class="absolute -top-8 inline-block rounded-md bg-black p-1.5" v-if="item.code">
@@ -77,8 +89,8 @@ import AuthorityDetails from '../components/AuthorityDetails.vue'
 import AuthoritySummary from '../components/AuthoritySummary.vue'
 import Collapsible from '../components/Collapsible.vue'
 import ConfirmButton from '../components/ConfirmButton.vue'
-import ItemImageLightbox from '../components/ItemImageLightbox.vue'
-import ItemImageMovable from '../components/ItemImageMovable.vue'
+import ImageLightbox from '../components/ImageLightbox.vue'
+import ImageMovable from '../components/ImageMovable.vue'
 import WebumeniaButton from '../components/WebumeniaButton.vue'
 import StoryButton from '../components/StoryButton.vue'
 import VideoSummary from '../components/VideoSummary.vue'

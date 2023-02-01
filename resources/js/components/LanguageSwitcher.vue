@@ -27,6 +27,7 @@ import { useItemStore } from '../stores/ItemStore'
 import { useLocaleStore } from '../stores/LocaleStore'
 import { useSectionStore } from '../stores/SectionStore'
 import { useStoryStore } from '../stores/StoryStore'
+import { usePlaceStore } from '../stores/PlaceStore'
 
 const router = useRouter()
 const interactionStore = useInteractionStore()
@@ -34,12 +35,14 @@ const itemStore = useItemStore()
 const localeStore = useLocaleStore()
 const sectionStore = useSectionStore()
 const storyStore = useStoryStore()
+const placeStore = usePlaceStore()
 
 const switchLanguage = (locale) => {
     interactionStore.clear()
     itemStore.clearCache()
     sectionStore.clearCache()
     storyStore.clearCache()
+    placeStore.clearCache()
     localeStore.locale = locale
     router.go()
 }
