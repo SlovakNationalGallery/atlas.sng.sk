@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Video\VimeoApi;
+use App\Http\Resources\ImageResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
@@ -21,9 +22,7 @@ class PlaceResource extends JsonResource
             'code' => $this->code ? $this->code->code : null,
             'title' => $this->title,
             'description' => str($this->description)->markdownWithLineBreaks(),
-            'images' => ImageResource::collection(
-                $this->getMedia()->filter(fn (Media $media) => $media->hasResponsiveImages())
-            ),
+            'image' => new ImageResource($this->getFirstMedia()),
             'video_thumbnail' => $this->video_thumbnail,
             'video_duration' => $this->video_duration ? gmdate('i:s', $this->video_duration) : null,
             'video_embed' => $this->video_embed,

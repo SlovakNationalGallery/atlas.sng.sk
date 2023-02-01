@@ -1,6 +1,6 @@
 <template>
     <div class="relative w-full border-b-2 border-black bg-gray-softest" v-if="place">
-        <ItemImageLightbox :place="place"></ItemImageLightbox>
+        <ImageLightbox :alt="place.title" :src="place.image.src" :srcset="place.image.srcset" />
     </div>
     <div class="relative h-full border-black px-4 pb-24 pt-8" v-if="place">
         <div class="absolute -top-8 inline-block rounded-md bg-black p-1.5" v-if="place.code">
@@ -33,7 +33,7 @@ import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import Collapsible from '../components/Collapsible.vue'
 import ConfirmButton from '../components/ConfirmButton.vue'
-import ItemImageLightbox from '../components/ItemImageLightbox.vue'
+import ImageLightbox from '../components/ImageLightbox.vue'
 import ItemImageMovable from '../components/ItemImageMovable.vue'
 import StoryButton from '../components/StoryButton.vue'
 import VideoSummary from '../components/VideoSummary.vue'

@@ -1,6 +1,6 @@
 <template>
     <div role="link" class="relative" @click="visible = true">
-        <ItemImage :item="item" :offset-top="item.offset_top"></ItemImage>
+        <ItemImage :offset-top="offset_top" :alt="alt" :src="src" :srcset="srcset"></ItemImage>
         <button
             class="absolute bottom-3 right-3 flex items-center rounded-xl bg-black/70 py-1 px-2 text-sm font-medium text-white"
         >
@@ -14,7 +14,7 @@
         @click="visible = false"
     >
         <div class="relative max-h-full md:max-w-lg" @click.stop="visible = false">
-            <img :src="item.image_src" class="rounded-xl object-contain" />
+            <img :src="src" class="rounded-xl object-contain" />
             <button
                 class="absolute top-0 right-0 cursor-pointer rounded-tr-xl bg-white p-1.5"
                 @click.stop="visible = false"
@@ -31,6 +31,6 @@ import ItemImage from './ItemImage.vue'
 import SvgArrowsOut from './svg/ArrowsOut.vue'
 import SvgClose from './svg/Close.vue'
 
-const props = defineProps(['item'])
+const props = defineProps(['alt', 'offsetTop', 'src', 'srcset'])
 const visible = ref(false)
 </script>
