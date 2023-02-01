@@ -38,17 +38,29 @@
                 </div>
 
                 <AboutCollapsible :initialOpen="true" class="scroll-mt-12 border-b-1 border-gray-softest">
-                    <template v-slot:summary>{{ $t('How to?')}} </template>
+                    <template v-slot:summary>{{ $t('How to?') }} </template>
                     <template v-slot:content>
                         <div class="space-y-4">
                             <ul class="ml-6 list-disc">
-                                <li class="pl-2.5">{{ $t('Tap the code next to the artwork into the grid in the app.') }}</li>
-                                <li class="pl-2.5">{{ $t('You can save the artwork to your collection and send it to your email.') }}</li>
                                 <li class="pl-2.5">
-                                    {{ $t('As you explore the exhibition, Ester will offer you behind-the-scenes videos and original insights on the artworks from the artists or visitors.') }}
+                                    {{ $t('Tap the code next to the artwork into the grid in the app.') }}
                                 </li>
                                 <li class="pl-2.5">
-                                    {{ $t('You can read about how Ester came to the SNG in Monika Kompaníková\'s book Where is Ester N?')}}
+                                    {{ $t('You can save the artwork to your collection and send it to your email.') }}
+                                </li>
+                                <li class="pl-2.5">
+                                    {{
+                                        $t(
+                                            'As you explore the exhibition, Ester will offer you behind-the-scenes videos and original insights on the artworks from the artists or visitors.'
+                                        )
+                                    }}
+                                </li>
+                                <li class="pl-2.5">
+                                    {{
+                                        $t(
+                                            "You can read about how Ester came to the SNG in Monika Kompaníková's book Where is Ester N?"
+                                        )
+                                    }}
                                 </li>
                             </ul>
                         </div>
@@ -100,9 +112,38 @@
                         </ul>
                     </template>
                 </AboutCollapsible>
+                <AboutCollapsible class="scroll-mt-12 border-b-1 border-gray-softest">
+                    <template v-slot:summary>Nastavenia</template>
+                    <template v-slot:content>
+                        <div class="align-center flex">
+                            <div class="grow">Spustiť konverzáciu od začiatku</div>
+                            <button
+                                @click="shownResetModal = true"
+                                class="flex-none rounded-xl bg-black py-1.75 px-3 text-sm font-medium leading-4.5 text-white"
+                            >
+                                Resetuj
+                            </button>
+                        </div>
+                    </template>
+                </AboutCollapsible>
             </div>
         </div>
     </Transition>
+
+    <CardModal @close="shownResetModal = false" :visible="shownResetModal">
+        <h3 class="my-4 text-2xl font-bold">Resetuj konverzáciu</h3>
+        <div class="text-lg leading-7">
+            <p>
+                Naozaj chceš resetovať tvoju konverzáciu s Ester? Začneš tak od úplného začiatku. Tento krok nejde
+                vrátiť.
+            </p>
+            <p class="mt-7 font-bold">Tvoja kolekcia zostáva uložená!</p>
+        </div>
+        <div class="flex space-x-3">
+            <ConfirmButton class="my-4 bg-black text-white" @click="resetInteraction">Resetuj</ConfirmButton>
+            <ConfirmButton class="my-4" @click="shownResetModal = false">{{ $t('Close') }}</ConfirmButton>
+        </div>
+    </CardModal>
 </template>
 
 <style scoped>
@@ -113,14 +154,27 @@
 </style>
 
 <script setup>
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import AboutCollapsible from './AboutCollapsible.vue'
+import CardModal from '../components/CardModal.vue'
+import ConfirmButton from '../components/ConfirmButton.vue'
 import SvgLogo from './svg/Logo.vue'
 import SvgInfo from './svg/Info.vue'
-import { useSurveyStore } from '../stores/SurveyStore'
 import { getActiveLanguage } from 'laravel-vue-i18n'
+import { useInteractionStore } from '../stores/InteractionStore'
+import { useSurveyStore } from '../stores/SurveyStore'
 
 const props = defineProps(['opened'])
+const router = useRouter()
+const interactionStore = useInteractionStore()
 const surveyStore = useSurveyStore()
+const shownResetModal = ref(false)
+
+const resetInteraction = () => {
+    interactionStore.clear()
+    router.go()
+}
 
 const getFeedback = () => {
     surveyStore.done()

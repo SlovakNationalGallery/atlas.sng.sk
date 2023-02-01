@@ -5,10 +5,16 @@ module.exports = {
             borderWidth: {
                 1: '1px',
             },
+            lineHeight: {
+                4.5: '1.125rem',
+            },
             padding: (theme) => ({
                 bar: `calc(1.5 * ${theme('fontSize.sm')} + ${theme('spacing.8')})`,
                 full: '100%',
             }),
+            spacing: {
+                1.75: '0.4375rem',
+            },
             strokeWidth: {
                 3: '3',
             },
