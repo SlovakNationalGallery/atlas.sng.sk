@@ -52,7 +52,6 @@ import VideoSummary from '../components/VideoSummary.vue'
 import HistoryBack from '../components/HistoryBack.vue'
 import ResponsiveVideoEmbed from '../components/ResponsiveVideoEmbed.vue'
 import SvgBack from '../components/svg/Back.vue'
-import SvgHeartSmall from '../components/svg/HeartSmall.vue'
 import { usePlaceStore } from '../stores/PlaceStore'
 
 const route = useRoute()

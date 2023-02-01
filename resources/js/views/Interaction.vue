@@ -28,6 +28,11 @@
                     :section="sectionStore.get(interaction.id)"
                     class="my-4"
                 />
+                <InteractionPlaceViewed
+                    v-else-if="interaction.type === 'placeViewed'"
+                    :place="placeStore.get(interaction.id)"
+                    class="my-4"
+                />
             </template>
         </TransitionGroup>
     </div>
@@ -53,16 +58,19 @@ import CodePanel from '../components/CodePanel.vue'
 import InteractionItemFavourited from '../components/InteractionItemFavourited.vue'
 import InteractionItemViewed from '../components/InteractionItemViewed.vue'
 import InteractionSectionViewed from '../components/InteractionSectionViewed.vue'
+import InteractionPlaceViewed from '../components/InteractionPlaceViewed.vue'
 import InteractionStory from '../components/InteractionStory.vue'
 import { useInteractionStore } from '../stores/InteractionStore'
 import { useItemStore } from '../stores/ItemStore'
 import { useSectionStore } from '../stores/SectionStore'
 import { useStoryStore } from '../stores/StoryStore'
+import { usePlaceStore } from '../stores/PlaceStore'
 
 const interactionStore = useInteractionStore()
 const itemStore = useItemStore()
 const sectionStore = useSectionStore()
 const storyStore = useStoryStore()
+const placeStore = usePlaceStore()
 const route = useRoute()
 const storyMap = new Map()
 

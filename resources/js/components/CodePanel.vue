@@ -111,7 +111,6 @@ const verifyCode = () => {
                     })
                     break
                 case 'place':
-                    console.log(id)
                     interactionStore.addPlaceViewed(id)
                     router.push({
                         name: 'place_detail',
