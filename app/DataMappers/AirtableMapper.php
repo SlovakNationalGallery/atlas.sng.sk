@@ -47,6 +47,7 @@ class AirtableMapper
                 'en' => 'Text EN',
             ],
             'media' => 'Media',
+            'offset_top' => 'offsetTop',
             'exhibition' => 'Výstava.0',
             'video_title' => [
                 'sk' => 'Video title SK',
