@@ -64,7 +64,7 @@
     "Tap the code next to the artwork into the grid in the app.": "Kód pri diele vyťukaj do mriežky v aplikácii.",
     "You can save the artwork to your collection and send it to your email.": "Diela si môžeš uložiť do svojej kolekcie a poslať na e-mail.",
     "As you explore the exhibition, Ester will offer you behind-the-scenes videos and original insights on the artworks from the artists or visitors.": "Ester ti pri putovaní výstavou ponúkne videá zo zákulisia a originálne pohľady na diela od vystavujúcich osobností, alebo návštevníkov a návštevníčok.",
-    "You can read about how Ester came to the SNG in Monika Kompaníková's book Where is Ester N?" : "Ako sa Ester dostala do SNG sa dočítaš v knihe Moniky Kompaníkovej Kde je Ester N?",
+    "You can read about how Ester came to the SNG in Monika Kompaníková's book Where is Ester N?": "Ako sa Ester dostala do SNG sa dočítaš v knihe Moniky Kompaníkovej Kde je Ester N?",
     "About the project": "O projekte",
     "Made by": "Vyrobil",
     "Production": "Produkcia",
@@ -87,5 +87,6 @@
     "help_body1_3": "Svoju kolekciu si môžeš <strong>poslať na email</strong> alebo ju <strong>zdieľať</strong> na sociálnych sieťach.",
     "help_body2_3": "Odkaz na kolekciu nikdy nevyprší.",
     "The development of the app is ongoing, we are improving it according to feedback. Do you want to help us?": "Aplikácia je aktuálne vo vývoji a vylepšujeme ju na základe odozvy. Chceš nám pomôcť?",
-    "Fill out a brief survey!": "Vyplň krátky dotazník!"
+    "Fill out a brief survey!": "Vyplň krátky dotazník!",
+    "Place detail": "Detail miesta"
 }
