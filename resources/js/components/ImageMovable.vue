@@ -1,6 +1,6 @@
 <template>
     <ItemImage
-        :offset-top="offsetTop"
+        :offset-top="currentOffsetTop"
         :alt="alt"
         :src="src"
         :srcset="srcset"
@@ -8,12 +8,12 @@
         @mousemove.stop.prevent="move"
         @mousedown.stop.prevent="moveStart"
         draggable="false"
-    ></ItemImage>
+    />
     <div
         class="absolute bottom-0 right-0 h-10 w-12 border-1 border-black bg-white px-2 py-1 text-right"
         :class="{ 'bg-red': ratioImg <= 0.75 && offsetTop != 0 }"
     >
-        {{ offsetTop }}
+        {{ currentOffsetTop }}
     </div>
 </template>
 
@@ -25,12 +25,12 @@ const props = defineProps(['alt', 'offsetTop', 'src', 'srcset'])
 const isMoving = ref(false)
 const startPosY = ref(0)
 const startOffsetTop = ref(0)
-const offsetTop = ref(0)
+const currentOffsetTop = ref(0)
 const ratioImg = ref(1)
 
 const move = (event) => {
     if (isMoving.value) {
-        offsetTop.value = startOffsetTop.value + (event.pageY - startPosY.value)
+        currentOffsetTop.value = startOffsetTop.value + (event.pageY - startPosY.value)
     }
 }
 
@@ -41,11 +41,11 @@ const moveStart = (event) => {
 
 const moveEnd = (event) => {
     isMoving.value = false
-    startOffsetTop.value = offsetTop.value
+    startOffsetTop.value = currentOffsetTop.value
 }
 
 onMounted(async () => {
-    offsetTop.value = props.offsetTop
+    currentOffsetTop.value = props.offsetTop
     startOffsetTop.value = props.offsetTop
     let img = new Image()
     img.src = props.src

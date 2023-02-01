@@ -1,12 +1,26 @@
 <template>
     <div class="relative w-full border-b-2 border-black bg-gray-softest" v-if="place">
-        <ImageLightbox :alt="place.title" :src="place.image.src" :srcset="place.image.srcset" />
+        <ImageMovable
+            v-if="route.query.edit"
+            :alt="place.title"
+            :src="place.image.src"
+            :srcset="place.image.srcset"
+            :offset-top="place.offset_top"
+        />
+        <ImageLightbox
+            v-else
+            :alt="place.title"
+            :src="place.image.src"
+            :srcset="place.image.srcset"
+            :offset-top="place.offset_top"
+        />
     </div>
     <div class="relative h-full border-black px-4 pb-24 pt-8" v-if="place">
         <div class="absolute -top-8 inline-block rounded-md bg-black p-1.5" v-if="place.code">
             <img class="h-9 w-9" :src="`/img/${place.code}.svg`" :alt="place.code" />
         </div>
         <h2 class="text-1.5xl font-bold">{{ place.title }}</h2>
+        <div>aha: {{ route.query.edit }}</div>
         <div class="my-4 space-y-4" v-html="place.description"></div>
         <Collapsible v-if="place.video_embed" :open="true" class="my-4">
             <template v-slot:summary>
@@ -46,7 +60,7 @@ import { useRoute } from 'vue-router'
 import Collapsible from '../components/Collapsible.vue'
 import ConfirmButton from '../components/ConfirmButton.vue'
 import ImageLightbox from '../components/ImageLightbox.vue'
-import ItemImageMovable from '../components/ItemImageMovable.vue'
+import ImageMovable from '../components/ImageMovable.vue'
 import StoryButton from '../components/StoryButton.vue'
 import VideoSummary from '../components/VideoSummary.vue'
 import HistoryBack from '../components/HistoryBack.vue'

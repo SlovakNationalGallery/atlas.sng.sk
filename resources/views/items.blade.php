@@ -17,6 +17,7 @@
                     <th class="border-b font-bold p-4 pl-8 pt-0 pb-3 text-left">Názov</th>
                     <th class="border-b font-bold p-4 pl-8 pt-0 pb-3 text-left">Autor</th>
                     <th class="border-b font-bold p-4 pl-8 pt-0 pb-3 text-left">Výstava</th>
+                    <th class="border-b font-bold p-4 pl-8 pt-0 pb-3 text-left"></th>
                 </tr>
             </thead>
             <tbody class="bg-white">
@@ -28,6 +29,10 @@
                     <td class="border-b border-gray-soft p-4 pl-8">{{ $item->title }}</td>
                     <td class="border-b border-gray-soft p-4 pl-8">{{ $item->author_name }}</td>
                     <td class="border-b border-gray-soft p-4 pl-8">{{ $item->code->exhibition->name ?? '' }}</td>
+                    <td class="border-b border-gray-soft p-4 pl-8">
+                        <x-button href="/detail/{{ $item->id }}">zobraziť</x-button>
+                        <x-button href="/detail/{{ $item->id }}?edit=1">upraviť</x-button>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>

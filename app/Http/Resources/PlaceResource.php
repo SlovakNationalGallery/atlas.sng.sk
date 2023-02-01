@@ -23,6 +23,7 @@ class PlaceResource extends JsonResource
             'title' => $this->title,
             'description' => str($this->description)->markdownWithLineBreaks(),
             'image' => new ImageResource($this->getFirstMedia()),
+            'offset_top' => $this->offset_top,
             'video_thumbnail' => $this->video_thumbnail,
             'video_duration' => $this->video_duration ? gmdate('i:s', $this->video_duration) : null,
             'video_embed' => $this->video_embed,

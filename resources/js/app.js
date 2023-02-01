@@ -49,15 +49,6 @@ const routes = [
         },
     },
     {
-        name: 'item_edit',
-        path: '/edit/:id',
-        component: ItemDetail,
-        meta: {
-            edit: true,
-            title: 'Artwork detail',
-        },
-    },
-    {
         name: 'story',
         path: '/story/:id',
         component: Interaction,
