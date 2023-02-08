@@ -67,6 +67,20 @@
                     </template>
                 </AboutCollapsible>
                 <AboutCollapsible class="scroll-mt-12 border-b-1 border-gray-softest">
+                    <template v-slot:summary>{{ $t('Settings') }}</template>
+                    <template v-slot:content>
+                        <div class="align-center flex">
+                            <div class="grow">{{ $t('Reload the conversation from the beginning') }}</div>
+                            <button
+                                @click="shownResetModal = true"
+                                class="flex-none rounded-xl bg-black py-1.75 px-3 text-sm font-medium leading-4.5 text-white"
+                            >
+                                {{ $t('Reset') }}
+                            </button>
+                        </div>
+                    </template>
+                </AboutCollapsible>
+                <AboutCollapsible class="scroll-mt-12 border-b-1 border-gray-softest">
                     <template v-slot:summary>{{ $t('About the project') }}</template>
                     <template v-slot:content>
                         <div class="space-y-4">
@@ -110,20 +124,6 @@
                             <li>Karin Vicianová: {{ $t('Content') }}</li>
                             <li>Ernest Walzel: {{ $t('Development') }}</li>
                         </ul>
-                    </template>
-                </AboutCollapsible>
-                <AboutCollapsible class="scroll-mt-12 border-b-1 border-gray-softest">
-                    <template v-slot:summary>{{ $t('Settings') }}</template>
-                    <template v-slot:content>
-                        <div class="align-center flex">
-                            <div class="grow">{{ $t('Reload the conversation from the beginning') }}</div>
-                            <button
-                                @click="shownResetModal = true"
-                                class="flex-none rounded-xl bg-black py-1.75 px-3 text-sm font-medium leading-4.5 text-white"
-                            >
-                                {{ $t('Reset') }}
-                            </button>
-                        </div>
                     </template>
                 </AboutCollapsible>
             </div>
