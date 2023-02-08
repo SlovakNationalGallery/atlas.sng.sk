@@ -140,7 +140,7 @@
                     )
                 }}
             </p>
-            <p class="mt-7 font-bold">{{ $t('Your collection remains saved!') }}</p>
+            <p class="mt-2 font-bold">{{ $t('Your collection remains saved!') }}</p>
         </div>
         <div class="flex space-x-3">
             <ConfirmButton class="my-4 bg-black text-white" @click="resetInteraction">{{ $t('Reset') }}</ConfirmButton>
