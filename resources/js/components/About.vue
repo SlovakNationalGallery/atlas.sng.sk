@@ -69,7 +69,7 @@
                 <AboutCollapsible class="scroll-mt-12 border-b-1 border-gray-softest">
                     <template v-slot:summary>{{ $t('Settings') }}</template>
                     <template v-slot:content>
-                        <div class="align-center flex">
+                        <div class="items-center flex">
                             <div class="grow">{{ $t('Reload the conversation from the beginning') }}</div>
                             <button
                                 @click="shownResetModal = true"
