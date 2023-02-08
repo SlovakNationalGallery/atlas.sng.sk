@@ -8,12 +8,9 @@ export const useStoryStore = defineStore('StoryStore', {
     }),
     actions: {
         get(id) {
-            if (this.has(id)) {
+            if (id in this.stories) {
                 return this.stories[id]
             }
-        },
-        has(id) {
-            return id in this.stories
         },
         async load(id) {
             const response = await axios.get(`/api/stories/${id}`)
