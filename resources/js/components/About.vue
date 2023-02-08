@@ -67,6 +67,20 @@
                     </template>
                 </AboutCollapsible>
                 <AboutCollapsible class="scroll-mt-12 border-b-1 border-gray-softest">
+                    <template v-slot:summary>{{ $t('Settings') }}</template>
+                    <template v-slot:content>
+                        <div class="items-center flex">
+                            <div class="grow">{{ $t('Reload the conversation from the beginning') }}</div>
+                            <button
+                                @click="shownResetModal = true"
+                                class="flex-none rounded-xl bg-black py-2 px-3 text-sm font-medium leading-4.5 text-white"
+                            >
+                                {{ $t('Reset') }}
+                            </button>
+                        </div>
+                    </template>
+                </AboutCollapsible>
+                <AboutCollapsible class="scroll-mt-12 border-b-1 border-gray-softest">
                     <template v-slot:summary>{{ $t('About the project') }}</template>
                     <template v-slot:content>
                         <div class="space-y-4">
@@ -112,35 +126,24 @@
                         </ul>
                     </template>
                 </AboutCollapsible>
-                <AboutCollapsible class="scroll-mt-12 border-b-1 border-gray-softest">
-                    <template v-slot:summary>Nastavenia</template>
-                    <template v-slot:content>
-                        <div class="align-center flex">
-                            <div class="grow">Spustiť konverzáciu od začiatku</div>
-                            <button
-                                @click="shownResetModal = true"
-                                class="flex-none rounded-xl bg-black py-1.75 px-3 text-sm font-medium leading-4.5 text-white"
-                            >
-                                Resetuj
-                            </button>
-                        </div>
-                    </template>
-                </AboutCollapsible>
             </div>
         </div>
     </Transition>
 
     <CardModal @close="shownResetModal = false" :visible="shownResetModal">
-        <h3 class="my-4 text-2xl font-bold">Resetuj konverzáciu</h3>
+        <h3 class="my-4 text-2xl font-bold">{{ $t('Reset the conversation') }}</h3>
         <div class="text-lg leading-7">
             <p>
-                Naozaj chceš resetovať tvoju konverzáciu s Ester? Začneš tak od úplného začiatku. Tento krok nejde
-                vrátiť.
+                {{
+                    $t(
+                        'Are you sure you want to reset your conversation with Ester? It will start from the very beginning. This step can not be undone.'
+                    )
+                }}
             </p>
-            <p class="mt-7 font-bold">Tvoja kolekcia zostáva uložená!</p>
+            <p class="mt-2 font-bold">{{ $t('Your collection remains saved!') }}</p>
         </div>
         <div class="flex space-x-3">
-            <ConfirmButton class="my-4 bg-black text-white" @click="resetInteraction">Resetuj</ConfirmButton>
+            <ConfirmButton class="my-4 bg-black text-white" @click="resetInteraction">{{ $t('Reset') }}</ConfirmButton>
             <ConfirmButton class="my-4" @click="shownResetModal = false">{{ $t('Close') }}</ConfirmButton>
         </div>
     </CardModal>

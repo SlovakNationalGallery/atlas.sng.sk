@@ -12,9 +12,6 @@ module.exports = {
                 bar: `calc(1.5 * ${theme('fontSize.sm')} + ${theme('spacing.8')})`,
                 full: '100%',
             }),
-            spacing: {
-                1.75: '0.4375rem',
-            },
             strokeWidth: {
                 3: '3',
             },
