@@ -88,5 +88,11 @@
     "help_body2_3": "Odkaz na kolekciu nikdy nevyprší.",
     "The development of the app is ongoing, we are improving it according to feedback. Do you want to help us?": "Aplikácia je aktuálne vo vývoji a vylepšujeme ju na základe odozvy. Chceš nám pomôcť?",
     "Fill out a brief survey!": "Vyplň krátky dotazník!",
-    "Place detail": "Detail miesta"
+    "Place detail": "Detail miesta",
+    "Settings": "Nastavenia",
+    "Reload the conversation from the beginning": "Spustiť konverzáciu od začiatku",
+    "Reset": "Resetuj",
+    "Reset the conversation": "Resetuj konverzáciu",
+    "Are you sure you want to reset your conversation with Ester? It will start from the very beginning. This step can not be undone.": "Naozaj chceš resetovať tvoju konverzáciu s Ester? Začneš tak od úplného začiatku. Tento krok nejde vrátiť.",
+    "Your collection remains saved!": "Tvoja kolekcia zostáva uložená!"
 }
