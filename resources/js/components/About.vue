@@ -73,7 +73,7 @@
                             <div class="grow">{{ $t('Reload the conversation from the beginning') }}</div>
                             <button
                                 @click="shownResetModal = true"
-                                class="flex-none rounded-xl bg-black py-1.75 px-3 text-sm font-medium leading-4.5 text-white"
+                                class="flex-none rounded-xl bg-black py-2 px-3 text-sm font-medium leading-4.5 text-white"
                             >
                                 {{ $t('Reset') }}
                             </button>
