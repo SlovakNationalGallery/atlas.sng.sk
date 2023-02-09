@@ -2,7 +2,7 @@
     <div class="scroll-my-20" :id="active ? 'active-story' : undefined">
         <img v-if="first" class="mx-auto mb-8 h-40" src="../../img/interaction-intro-ester.svg" alt="Ester" />
         <img
-            v-else-if="transitioning || active"
+            v-else-if="activeOrTransitioning"
             class="h-12 w-12 rounded-xl object-cover"
             src="../../img/avatar-ester.png"
             alt="Avatar"
@@ -20,18 +20,26 @@
 
         <button
             :disabled="!active"
-            v-show="transitioning || active || linkId === link.id"
+            v-show="activeOrTransitioning || linkId === link.id"
             class="my-4 block flex w-full items-center gap-x-2 rounded-xl border-1 p-3 text-left font-bold leading-8"
-            :class="[transitioning || active ? 'border-green bg-green text-black' : 'border-white/10 text-white']"
+            :class="{
+                'border-green bg-green': activeOrTransitioning,
+                'bg-opacity-20 text-green': activeOrTransitioning && interactionStore.isVisited(link.story_id),
+                'text-black': activeOrTransitioning && !interactionStore.isVisited(link.story_id),
+                'border-white/10 text-white': !activeOrTransitioning,
+            }"
             @click="emit('navigate', link)"
             v-for="link in story.links"
         >
-            <SvgChatCircle class="flex-none" v-if="!active && !transitioning" />
+            <SvgChatCircle
+                class="flex-none"
+                v-if="!activeOrTransitioning || interactionStore.isVisited(link.story_id)"
+            />
             {{ link.title }}
         </button>
         <button
             :disabled="!active"
-            v-show="(transitioning || active) && !first"
+            v-show="activeOrTransitioning && !first"
             class="my-4 block flex w-full items-center gap-x-2 rounded-xl text-left text-base leading-8 text-green"
             @click="emit('undo')"
         >
@@ -42,16 +50,22 @@
 </template>
 
 <script setup>
+import { computed, ref } from 'vue'
 import ResponsiveImageWithSizes from './ResponsiveImageWithSizes.vue'
 import StoryVideoLightbox from './StoryVideoLightbox.vue'
 import SvgArrowUp from './svg/ArrowUp.vue'
 import SvgChatCircle from './svg/ChatCircle.vue'
-import { ref } from 'vue'
+import { useInteractionStore } from '../stores/InteractionStore'
+
+const interactionStore = useInteractionStore()
 
 const props = defineProps(['story', 'active', 'linkId', 'first'])
 const emit = defineEmits(['navigate', 'undo'])
 
 const transitioning = ref(false)
+const activeOrTransitioning = computed(() => {
+    return transitioning.value || props.active
+})
 
 defineExpose({
     transitioning,
