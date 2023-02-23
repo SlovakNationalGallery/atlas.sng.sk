@@ -49,6 +49,7 @@ class ItemResource extends JsonResource
             'video_title' => $this['item']->video_title,
             'video_subtitle' => $this['item']->video_subtitle,
             'story_id' => $this['item']->story_id,
+            'location_formatted' => $this['item']->location?->__toString(),
         ];
     }
 

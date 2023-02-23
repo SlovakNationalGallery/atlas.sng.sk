@@ -20,6 +20,9 @@
             <img class="h-9 w-9" :src="`/img/${place.code}.svg`" :alt="place.code" />
         </div>
         <h2 class="text-1.5xl font-bold">{{ place.title }}</h2>
+        <div class="text-lg text-gray-dark" v-if="place.location_formatted">
+            {{ $t('Location') }}: {{ place.location_formatted }}
+        </div>
         <div class="my-4 space-y-4" v-html="place.description"></div>
         <Collapsible v-if="place.video_embed" :open="true" class="my-4">
             <template v-slot:summary>

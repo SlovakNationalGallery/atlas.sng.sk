@@ -8,7 +8,10 @@
             <h2 class="text-1.5xl font-bold text-white">{{ section.title }}</h2>
         </div>
         <div class="px-4">
-            <div class="space-y-4 py-4" v-html="section.description"></div>
+            <div class="my-4 text-lg text-gray-dark" v-if="section.location_formatted">
+                {{ $t('Location') }}: {{ section.location_formatted }}
+            </div>
+            <div class="my-4 space-y-4" v-html="section.description"></div>
 
             <p class="mb-2 font-bold">{{ $t('More about artworks in the group') }}</p>
             <div class="flex flex-col space-y-3">
