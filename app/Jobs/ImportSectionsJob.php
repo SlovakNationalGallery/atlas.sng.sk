@@ -38,6 +38,7 @@ class ImportSectionsJob implements ShouldQueue
                 'en' => Arr::get($record, 'fields.Text sekcie EN'),
             ];
 
+            $section->location_id = Arr::get($record, 'fields.Lokácia.0');
             $section->save();
 
             $airtableIds = Arr::get($record, 'fields.Diela sekcie', []);

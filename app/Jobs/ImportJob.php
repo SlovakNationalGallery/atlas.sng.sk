@@ -14,9 +14,9 @@ class ImportJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected $dependencies = [
-        'items' => ['stories', 'exhibitions'],
-        'sections' => ['items'],
-        'places' => ['stories', 'exhibitions'],
+        'items' => ['stories', 'exhibitions', 'locations'],
+        'sections' => ['items', 'locations'],
+        'places' => ['stories', 'exhibitions', 'locations'],
     ];
 
     protected $jobs = [
@@ -26,6 +26,7 @@ class ImportJob implements ShouldQueue
         'sections' => ImportSectionsJob::class,
         'places' => ImportPlacesJob::class,
         'authorities' => ImportAuthoritiesJob::class,
+        'locations' => ImportLocationsJob::class,
     ];
 
     public function __construct(protected string $type)
@@ -41,7 +42,7 @@ class ImportJob implements ShouldQueue
             $start = now();
 
             $this->resolveChain($this->type)
-                ->map(fn ($type) => new ($this->jobs[$type])())
+                ->map(fn($type) => new ($this->jobs[$type])())
                 ->each->dispatchSync();
 
             $end = $start->diffInMilliseconds(now()) / 1000;
@@ -56,7 +57,7 @@ class ImportJob implements ShouldQueue
     protected function resolveChain(string $type)
     {
         return collect($this->dependencies[$type] ?? [])
-            ->flatMap(fn ($dependency) => $this->resolveChain($dependency))
+            ->flatMap(fn($dependency) => $this->resolveChain($dependency))
             ->push($type);
     }
 }

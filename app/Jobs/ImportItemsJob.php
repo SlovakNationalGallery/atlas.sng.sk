@@ -27,7 +27,7 @@ class ImportItemsJob implements ShouldQueue
             $item_ids[] = $record['fields']['ID'];
 
             $item = Item::unguarded(
-                fn () => Item::firstOrNew([
+                fn() => Item::firstOrNew([
                     'id' => $record['fields']['ID'],
                 ])
             );
@@ -65,6 +65,7 @@ class ImportItemsJob implements ShouldQueue
             ];
 
             $item->story_id = Arr::get($record, 'fields.Story node.0');
+            $item->location_id = Arr::get($record, 'fields.Lokácia.0');
 
             $item->save();
 
@@ -84,7 +85,9 @@ class ImportItemsJob implements ShouldQueue
             }
         });
 
-        $missing_ids = Item::whereNotIn('id', $item_ids)->get()->pluck('id');
+        $missing_ids = Item::whereNotIn('id', $item_ids)
+            ->get()
+            ->pluck('id');
         Item::destroy($missing_ids);
     }
 }

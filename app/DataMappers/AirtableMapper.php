@@ -61,6 +61,19 @@ class AirtableMapper
                 'sk' => 'Video URL SK',
                 'en' => 'Video URL EN',
             ],
+            'location_id' => 'Lokácia.0',
+        ],
+        'locations' => [
+            'name' => [
+                'sk' => 'Lokácia SK',
+                'en' => 'Lokácia EN',
+            ],
+            'title' => [
+                'sk' => 'Názov SK',
+                'en' => 'Názov EN',
+            ],
+            'floor' => 'Podlažie',
+            'building' => 'Budova',
         ],
     ];
 
@@ -79,9 +92,8 @@ class AirtableMapper
         return $records->map(function ($record) use ($tableName, $encodeJson) {
             $mappedFields = collect(self::$tables[$tableName])->map(function ($source) use ($record, $encodeJson) {
                 if (is_array($source)) {
-                    $data = collect($source)
-                        ->map(fn ($source) => Arr::get($record, "fields.$source"));
-                    return ($encodeJson) ? $data->toJson() : $data->toArray();
+                    $data = collect($source)->map(fn($source) => Arr::get($record, "fields.$source"));
+                    return $encodeJson ? $data->toJson() : $data->toArray();
                 } else {
                     return Arr::get($record, "fields.$source");
                 }

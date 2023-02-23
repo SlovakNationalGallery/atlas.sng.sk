@@ -31,10 +31,12 @@ class ImportPlacesJob implements ShouldQueue
 
         $places = \Airtable::table('places')
             ->all()
-            ->pipe(fn ($places) => $mapper->mapTable($places, 'places', false));
+            ->pipe(fn($places) => $mapper->mapTable($places, 'places', false));
 
         DB::transaction(function () use ($places, $exhibition_ids) {
-            $missing_ids = Place::whereNotIn('id', $places->pluck('id'))->get()->pluck('id');
+            $missing_ids = Place::whereNotIn('id', $places->pluck('id'))
+                ->get()
+                ->pluck('id');
             Place::destroy($missing_ids);
 
             $places->each(function ($upstreamPlace) use ($exhibition_ids) {
@@ -43,6 +45,7 @@ class ImportPlacesJob implements ShouldQueue
                     $upstreamPlace->except(['media', 'exhibition'])->toArray()
                 );
 
+                $place->location_id = Arr::get($record, 'fields.Lokácia.0');
                 $place->save();
 
                 // save exhibition
@@ -64,7 +67,7 @@ class ImportPlacesJob implements ShouldQueue
 
                 // Inserts
                 collect($upstreamPlace['media'])
-                    ->reject(fn ($media) => $importedAirtableIds->contains($media['id']))
+                    ->reject(fn($media) => $importedAirtableIds->contains($media['id']))
                     ->each(function ($media) use ($place) {
                         $place
                             ->addMediaFromUrl($media['url'])
