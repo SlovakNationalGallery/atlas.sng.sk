@@ -21,6 +21,7 @@ class SectionResource extends JsonResource
             'description' => str($this['section']->description)->markdownWithLineBreaks(),
             'code' => $this['section']->code->code,
             'items' => ItemResource::collection($this->items()),
+            'location_formatted' => $this['section']->location?->__toString(),
         ];
     }
 
