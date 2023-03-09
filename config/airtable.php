@@ -66,6 +66,9 @@ return [
         'places' => [
             'name' => env('AIRTABLE_PLACE_TABLE'),
         ],
+        'locations' => [
+            'name' => env('AIRTABLE_LOCATION_TABLE'),
+        ],
     ],
 
     /*

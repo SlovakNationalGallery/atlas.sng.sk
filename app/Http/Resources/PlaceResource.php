@@ -31,6 +31,7 @@ class PlaceResource extends JsonResource
             'video_title' => $this->video_title,
             'video_subtitle' => $this->video_subtitle,
             'story_id' => $this->story_id,
+            'location_formatted' => $this->location?->__toString(),
         ];
     }
 }

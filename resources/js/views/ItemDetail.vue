@@ -21,6 +21,9 @@
         </div>
         <h2 class="text-1.5xl font-bold">{{ item.title }}</h2>
         <h3 class="text-lg text-gray-dark">{{ item.author }} · {{ item.dating }}</h3>
+        <div class="text-lg text-gray-dark" v-if="item.location_formatted">
+            {{ $t('Location') }}: {{ item.location_formatted }}
+        </div>
         <div class="my-4 space-y-4" v-html="item.description"></div>
         <Collapsible :open="i === 0" v-for="(authority, i) in item.authorities" :key="authority.id" class="my-4">
             <template v-slot:summary>
