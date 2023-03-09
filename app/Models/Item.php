@@ -6,7 +6,6 @@ use App\Models\Concerns\HasCode;
 use App\Traits\HasLocation;
 use App\Traits\HasVideo;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\Translatable\HasTranslations;
 
 class Item extends Model

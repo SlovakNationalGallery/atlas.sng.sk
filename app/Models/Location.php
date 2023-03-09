@@ -41,7 +41,7 @@ class Location extends Model
             $formatter = new NumberFormatter(app()->getLocale(), NumberFormatter::ORDINAL);
             $floor = $formatter->format($this->floor);
 
-            return __('location_floor_formatted', compact('floor'));
+            return $floor . ' ' . __('floor');
         });
     }
 }
