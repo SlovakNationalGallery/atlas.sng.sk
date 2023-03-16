@@ -17,4 +17,4 @@ jobs:
               with:
                   private-key: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
                   deployer-version: '7.0.2'
-                  dep: deploy
+                  dep: deploy production
