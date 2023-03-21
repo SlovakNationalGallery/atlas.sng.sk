@@ -24,8 +24,8 @@
             class="my-4 block flex w-full items-center gap-x-2 rounded-xl border-1 p-3 text-left font-bold leading-8"
             :class="{
                 'border-green bg-green': activeOrTransitioning,
-                'bg-opacity-20 text-green': activeOrTransitioning && interactionStore.isVisited(link.story_id),
-                'text-black': activeOrTransitioning && !interactionStore.isVisited(link.story_id),
+                'bg-opacity-20 text-green': activeOrTransitioning && interactionStore.hasVisitedAllLinks(link.story_id),
+                'text-black': activeOrTransitioning && !interactionStore.hasVisitedAllLinks(link.story_id),
                 'border-white/10 text-white': !activeOrTransitioning,
             }"
             @click="emit('navigate', link)"
@@ -33,7 +33,7 @@
         >
             <SvgChatCircle
                 class="flex-none"
-                v-if="!activeOrTransitioning || interactionStore.isVisited(link.story_id)"
+                v-if="!activeOrTransitioning || interactionStore.hasVisitedAllLinks(link.story_id)"
             />
             {{ link.title }}
         </button>
