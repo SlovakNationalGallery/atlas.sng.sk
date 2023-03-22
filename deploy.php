@@ -18,17 +18,22 @@ add('shared_dirs', ['resources/fonts']);
 set('allow_anonymous_stats', false);
 
 // Hosts
-host('lab_sng@webumenia.sk')
-    ->set('deploy_path', '/var/www/atlas.sng.sk')
-    ->set('user', 'lab_sng');
+host('test')
+    ->set('hostname', 'webumenia.sk')
+    ->set('remote_user', 'lab_sng')
+    ->set('deploy_path', '/var/www/test.atlas.sng.sk');
+
+host('production')
+    ->set('hostname', 'webumenia.sk')
+    ->set('remote_user', 'lab_sng')
+    ->set('branch', 'master')
+    ->set('deploy_path', '/var/www/atlas.sng.sk');
 
 // Tasks
 task('build', function () {
     cd('{{release_path}}');
 
-    run(
-        'source "$HOME/.nvm/nvm.sh" && nvm use 16.16.0 && npm ci && npm run build'
-    );
+    run('source "$HOME/.nvm/nvm.sh" && nvm use 16.16.0 && npm ci && npm run build');
 });
 
 // Hooks
