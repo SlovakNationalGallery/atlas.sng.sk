@@ -24,19 +24,25 @@
         })(window, document, "clarity", "script", "etpn9t949w");
         </script>
         {{-- /Clarity --}}
-        {{-- GA --}}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-PEB9HHLHHY"></script>
-        <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-PEB9HHLHHY');
-        </script>
-        {{-- /GA --}}
+        {{-- GTM --}}
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-MWBNRRS');</script>
+        <!-- End Google Tag Manager -->
+        {{-- /GTM --}}
     @endif
 </head>
 
 <body>
+    {{-- GTM--}}
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MWBNRRS"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    {{-- /GTM --}}
     <div id="app" class="md:max-w-lg md:mx-auto md:my-auto bg-white min-h-screen flex flex-col"></div>
 </body>
 
