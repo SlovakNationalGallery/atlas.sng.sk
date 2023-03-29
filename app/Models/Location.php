@@ -27,7 +27,7 @@ class Location extends Model
             ->join(', ');
 
         return str($this->title)
-            ->when($parts, fn($title) => $title->append(" ($parts)"))
+            ->when($parts, fn ($title) => $title->append($parts))
             ->toString();
     }
 
