@@ -43,17 +43,13 @@
                         <div class="space-y-4">
                             <ul class="ml-6 list-disc">
                                 <li class="pl-2.5">
-                                    {{ $t('Tap the code next to the artwork into the grid in the app.') }}
+                                    {{ $t('Enter the code next to the artwork into the grid in the app. Feel free to try a random one.') }}
                                 </li>
                                 <li class="pl-2.5">
-                                    {{ $t('You can save the artwork to your collection and send it to your email.') }}
+                                    {{ $t('You\'ll also find a link to other works by the artist in the artwork\'s profile.') }}
                                 </li>
                                 <li class="pl-2.5">
-                                    {{
-                                        $t(
-                                            'As you explore the exhibition, Ester will offer you behind-the-scenes videos and original insights on the artworks from the artists or visitors.'
-                                        )
-                                    }}
+                                    {{ $t('You can come back to your artworks later, Atlas remembers them.') }}
                                 </li>
                                 <li class="pl-2.5">
                                     {{
