@@ -9,8 +9,8 @@
                         </div>
                     </div>
                     <div class="mx-3 self-center">
-                        <div class="font-bold">{{ $t('More about this artwork') }}</div>
-                        <div class="text-sm">{{ $t('in the Web umenia online catalogue') }}</div>
+                        <div class="font-bold">{{ $t('Zoom on the artwork') }}</div>
+                        <div class="text-sm">{{ $t('or find more works from the artist') }}</div>
                     </div>
                 </div>
             </div>
