@@ -22,13 +22,9 @@ class Location extends Model
 
     public function __toString(): string
     {
-        $parts = collect([$this->name, $this->floor_formatted, $this->building])
+        return collect([$this->title, $this->name, $this->floor_formatted, $this->building])
             ->filter()
             ->join(', ');
-
-        return str($this->title)
-            ->when($parts, fn ($title) => $title->append($parts))
-            ->toString();
     }
 
     protected function floorFormatted(): Attribute

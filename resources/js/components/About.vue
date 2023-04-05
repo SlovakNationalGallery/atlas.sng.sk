@@ -51,13 +51,6 @@
                                 <li class="pl-2.5">
                                     {{ $t('You can come back to your artworks later, Atlas remembers them.') }}
                                 </li>
-                                <li class="pl-2.5">
-                                    {{
-                                        $t(
-                                            "You can read about how Ester came to the SNG in Monika Kompaníková's book Where is Ester N?"
-                                        )
-                                    }}
-                                </li>
                             </ul>
                         </div>
                     </template>
