@@ -44,6 +44,7 @@
     <!-- End Google Tag Manager (noscript) -->
     {{-- /GTM --}}
     <div id="app" class="md:max-w-lg md:mx-auto md:my-auto bg-white min-h-screen flex flex-col"></div>
+    <script src="//embed.typeform.com/next/embed.js"></script>
 </body>
 
 </html>

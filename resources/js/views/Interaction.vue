@@ -65,6 +65,7 @@ import { useItemStore } from '../stores/ItemStore'
 import { useSectionStore } from '../stores/SectionStore'
 import { useStoryStore } from '../stores/StoryStore'
 import { usePlaceStore } from '../stores/PlaceStore'
+import { useSurveyStore } from '../stores/SurveyStore'
 
 const interactionStore = useInteractionStore()
 const itemStore = useItemStore()
@@ -73,10 +74,13 @@ const storyStore = useStoryStore()
 const placeStore = usePlaceStore()
 const route = useRoute()
 const storyMap = new Map()
+const surveyStore = useSurveyStore()
 
 const navigate = (interaction, link) => {
     interactionStore.selectLink(interaction, link)
     loadStory(link.story_id)
+    // event interactionNavigated
+    surveyStore.interactionNavigated()
 }
 
 const undo = (interaction) => {

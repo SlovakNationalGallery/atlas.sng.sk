@@ -66,12 +66,14 @@
 import { computed } from '@vue/reactivity'
 import { onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useInteractionStore } from '../stores/InteractionStore'
+import { useSurveyStore } from '../stores/SurveyStore'
 import CircleButton from '../components/CircleButton.vue'
 import FavouritesCount from '../components/FavouritesCount.vue'
 import HelpModal from '../components/HelpModal.vue'
-import { useInteractionStore } from '../stores/InteractionStore'
 
 const interactionStore = useInteractionStore()
+const surveyStore = useSurveyStore()
 const router = useRouter()
 const route = useRoute()
 const code = reactive(Array(9).fill(0))
@@ -118,6 +120,7 @@ const verifyCode = () => {
                     })
                     break
             }
+            surveyStore.codeVerified()
         })
         .catch(() => {
             wrong.value = true

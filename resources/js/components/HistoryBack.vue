@@ -8,6 +8,7 @@ import { useHistoryStore } from '../stores/HistoryStore'
 
 const router = useRouter()
 const historyStore = useHistoryStore()
+const surveyStore = useSurveyStore()
 
 const back = () => {
     if (historyStore.getState().back) {
@@ -15,5 +16,7 @@ const back = () => {
     } else {
         router.push({ name: 'home' })
     }
+
+    surveyStore.backNavigated()
 }
 </script>
