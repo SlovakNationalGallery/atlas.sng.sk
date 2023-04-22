@@ -69,6 +69,9 @@ return [
         'locations' => [
             'name' => env('AIRTABLE_LOCATION_TABLE'),
         ],
+        'bucketlists' => [
+            'name' => env('AIRTABLE_BUCKETLIST_TABLE'),
+        ],
     ],
 
     /*

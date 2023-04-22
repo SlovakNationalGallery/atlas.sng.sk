@@ -15,8 +15,9 @@ class ImportJob implements ShouldQueue
 
     protected $dependencies = [
         'items' => ['stories', 'exhibitions', 'locations'],
-        'sections' => ['items', 'locations'],
+        'sections' => ['items'],
         'places' => ['stories', 'exhibitions', 'locations'],
+        'bucketlists' => ['items'],
     ];
 
     protected $jobs = [
@@ -27,6 +28,7 @@ class ImportJob implements ShouldQueue
         'places' => ImportPlacesJob::class,
         'authorities' => ImportAuthoritiesJob::class,
         'locations' => ImportLocationsJob::class,
+        'bucketlists' => ImportBucketlistsJob::class,
     ];
 
     public function __construct(protected string $type)
