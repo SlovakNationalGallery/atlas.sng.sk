@@ -36,7 +36,6 @@
             </template>
         </TransitionGroup>
     </div>
-
     <CodePanel />
 </template>
 

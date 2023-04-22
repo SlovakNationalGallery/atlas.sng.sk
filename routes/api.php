@@ -53,8 +53,8 @@ Route::get('/sections/{id}', function (string $id) {
     $section = Section::findOrFail($id);
 
     $responses = Http::pool(
-        fn (Pool $pool) => $section->items->map(
-            fn (Item $item) => $pool
+        fn(Pool $pool) => $section->items->map(
+            fn(Item $item) => $pool
                 ->as($item->id)
                 ->webumenia()
                 ->get("/v2/items/{$item->id}")
@@ -63,13 +63,14 @@ Route::get('/sections/{id}', function (string $id) {
 
     return new SectionResource([
         'section' => $section,
-        'webumenia_items' => collect($responses)->map(fn (Response $response) => $response->object()->data),
+        'webumenia_items' => collect($responses)->map(fn(Response $response) => $response->object()->data),
     ]);
 });
 
 Route::post('/collections', function (Request $request) {
     $validator = Validator::make($request->all(), [
-        'items' => 'required|array|distinct',
+        'items' => ['required', 'array'],
+        'items.*' => ['required', 'exists:items,id', 'distinct'],
     ]);
 
     if ($validator->fails()) {
