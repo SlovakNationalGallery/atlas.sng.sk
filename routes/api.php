@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Resources\BucketlistResource;
 use App\Models\Code;
 use App\Models\Item;
 use App\Models\Place;
@@ -16,6 +17,7 @@ use App\Http\Resources\PlaceResource;
 use App\Http\Resources\StoryResource;
 use Illuminate\Support\Facades\Route;
 use App\Http\Resources\SectionResource;
+use App\Models\Bucketlist;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -97,4 +99,22 @@ Route::get('/stories/{id}', function (string $id) {
 Route::get('/places/{id}', function (string $id) {
     $place = Place::findOrFail($id);
     return new PlaceResource($place);
+});
+
+Route::get('/bucketlists/{id}', function (string $id) {
+    $bucketlist = Bucketlist::findOrFail($id);
+
+    $responses = Http::pool(
+        fn(Pool $pool) => $bucketlist->items->map(
+            fn(Item $item) => $pool
+                ->as($item->id)
+                ->webumenia()
+                ->get("/v2/items/{$item->id}")
+        )
+    );
+
+    return new BucketlistResource([
+        'bucketlist' => $bucketlist,
+        'webumenia_items' => collect($responses)->map(fn(Response $response) => $response->object()->data),
+    ]);
 });
