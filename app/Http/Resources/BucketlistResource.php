@@ -18,7 +18,9 @@ class BucketlistResource extends JsonResource
         return [
             'id' => $this['bucketlist']->id,
             'title' => $this['bucketlist']->title,
-            'items' => ItemResource::collection($this->items()),
+            'items' => ItemResource::collection(
+                $this->when($this['bucketlist']->relationLoaded('items'), fn() => $this->items())
+            ),
         ];
     }
 
