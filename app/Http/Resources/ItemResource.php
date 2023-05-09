@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\Authority;
+use App\Models\Bucketlist;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ItemResource extends JsonResource
@@ -50,6 +51,10 @@ class ItemResource extends JsonResource
             'video_subtitle' => $this['item']->video_subtitle,
             'story_id' => $this['item']->story_id,
             'location_formatted' => $this['item']->location?->__toString(),
+            'exhibition' => new ExhibitionResource($this['item']->code->exhibition ?? null),
+            'bucketlists' => BucketlistResource::collection(
+                $this['item']->bucketlists->map(fn(Bucketlist $bucketlist) => ['bucketlist' => $bucketlist])
+            ),
         ];
     }
 

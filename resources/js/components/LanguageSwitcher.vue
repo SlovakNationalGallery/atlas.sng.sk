@@ -28,6 +28,7 @@ import { useLocaleStore } from '../stores/LocaleStore'
 import { useSectionStore } from '../stores/SectionStore'
 import { useStoryStore } from '../stores/StoryStore'
 import { usePlaceStore } from '../stores/PlaceStore'
+import { useBucketlistStore } from '../stores/BucketlistStore'
 
 const router = useRouter()
 const interactionStore = useInteractionStore()
@@ -36,6 +37,7 @@ const localeStore = useLocaleStore()
 const sectionStore = useSectionStore()
 const storyStore = useStoryStore()
 const placeStore = usePlaceStore()
+const bucketlistStore = useBucketlistStore()
 
 const switchLanguage = (locale) => {
     interactionStore.clear()
@@ -43,6 +45,7 @@ const switchLanguage = (locale) => {
     sectionStore.clearCache()
     storyStore.clearCache()
     placeStore.clearCache()
+    bucketlistStore.clearCache()
     localeStore.locale = locale
     router.go()
 }

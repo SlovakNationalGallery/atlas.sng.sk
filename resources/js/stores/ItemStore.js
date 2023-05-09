@@ -26,8 +26,11 @@ export const useItemStore = defineStore('ItemStore', {
         clearCollectionLink() {
             this.collectionLink = null
         },
+        isViewed(id) {
+            return this.viewedIds.includes(id)
+        },
         addViewed(id) {
-            if (!this.viewedIds.includes(id)) {
+            if (!this.isViewed(id)) {
                 this.viewedIds.unshift(id)
                 this.clearCollectionLink()
             }
