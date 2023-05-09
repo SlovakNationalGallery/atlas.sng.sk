@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Bucketlist :id="bucketlistId" />
+        <Bucketlist :id="bucketlistId" v-if="bucketlistId" />
         <Timeline class="m-4" />
     </div>
 </template>
