@@ -12,7 +12,7 @@
                     </template>
                     <template #title>{{ $t('Hidden artworks') }}</template>
                     <template #description
-                        >{{ found.length }}/{{ bucketlist.items.length }} collected. Tap to show the full list</template
+                        >{{ found.length }}/{{ bucketlist.items.length }} {{ $t('collected') }}. {{ $t('Tap to show the full list') }}</template
                     >
                 </Thumbnail>
             </router-link>
