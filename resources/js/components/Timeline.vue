@@ -1,17 +1,17 @@
 <template>
-    <div>
-        <div class="flex items-center justify-between gap-x-2 text-1.5xl font-medium leading-6">
+    <article class="mt-8 mb-6 px-4">
+        <h3 class="flex items-center justify-between gap-x-2 text-1.5xl font-medium leading-6">
             <span class="grow">{{ $t('Your timeline') }}</span>
             <span>{{ itemStore.viewedCount }}</span>
             <SvgEye />
-        </div>
+        </h3>
         <template v-if="itemStore.viewedCount">
-            <ShareCollection class="mt-5" />
+            <ShareCollection class="mt-4" />
             <div class="mt-3">
                 {{ $t('Save this link and study the artworks in depth even after you leave the museum') }}
             </div>
         </template>
-        <div class="mt-5 flex flex-col gap-y-3">
+        <div class="mt-6 flex flex-col gap-y-3">
             <router-link :to="{ name: 'home', hash: '#code' }">
                 <Thumbnail :truncate-description="false">
                     <template #image>
@@ -29,7 +29,7 @@
                 </router-link>
             </ItemLoader>
         </div>
-    </div>
+    </article>
 </template>
 
 <script setup>
