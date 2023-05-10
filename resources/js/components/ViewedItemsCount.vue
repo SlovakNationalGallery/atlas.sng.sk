@@ -2,11 +2,11 @@
     <router-link
         :to="{ name: 'my_collection' }"
         class="relative transition-colors"
-        :class="{ '!border-l-black bg-green': showTooltip, 'opacity-40': !itemStore.favouritesCount }"
+        :class="{ '!border-l-black bg-green': showTooltip, 'opacity-40': !itemStore.viewedCount }"
     >
         <div class="flex h-full items-center justify-end">
-            <div class="text-lg font-bold">{{ itemStore.favouritesCount }}</div>
-            <SvgHeart :class="[itemStore.favouritesCount ? 'fill-green' : 'fill-none']" />
+            <div class="text-lg font-bold">{{ itemStore.viewedCount }}</div>
+            <SvgEye />
         </div>
         <Transition
             enter-active-class="transition-all bg-green"
@@ -19,7 +19,7 @@
             >
                 <div class="absolute top-0 right-2.5 z-0 -mt-2 h-3 w-3 rotate-45 bg-black"></div>
                 <div class="relative h-full w-full whitespace-nowrap bg-green p-2">
-                    {{ $t('Saved! Tap this icon to view your collection.') }}
+                    {{ $t('We added this item to your timeline') }}
                 </div>
             </div>
         </Transition>
@@ -28,7 +28,7 @@
 
 <script setup>
 import { useItemStore } from '../stores/ItemStore'
-import SvgHeart from './svg/Heart.vue'
+import SvgEye from './svg/Eye.vue'
 
 const props = defineProps(['showTooltip'])
 const itemStore = useItemStore()

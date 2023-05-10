@@ -13,7 +13,7 @@
         </HistoryBack>
         <h1 class="grow px-2.5 text-1.5xl font-medium" :class="{ 'text-center': $route.name !== 'home' }">
             {{ $t(openedAbout ? 'About the App' : $route.meta.title) }}
-            <span v-if="$route.name === 'my_collection'">({{ itemStore.favouritesCount }})</span>
+            <span v-if="$route.name === 'my_collection'">({{ itemStore.viewedCount }})</span>
         </h1>
         <div class="flex-1 border-l-2 border-transparent px-3 text-right" v-if="$route.name === 'my_collection'">
             <button class="rounded-xl bg-green px-3 py-1 text-sm font-bold" @click="scroll('share')">
@@ -21,27 +21,25 @@
             </button>
         </div>
         <LanguageSwitcher v-else-if="$route.name === 'home'" />
-        <FavouritesCount v-else class="flex-1 border-l-2 border-l-transparent px-4 py-2" :show-tooltip="isActive" />
+        <ViewedItemsCount v-else class="flex-1 border-l-2 border-l-transparent px-4 py-2" :show-tooltip="isActive" />
     </div>
 
     <About :opened="openedAbout" />
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import { useItemStore } from '../stores/ItemStore'
 import About from './About.vue'
-import FavouritesCount from './FavouritesCount.vue'
 import HistoryBack from './HistoryBack.vue'
 import LanguageSwitcher from './LanguageSwitcher.vue'
+import ViewedItemsCount from './ViewedItemsCount.vue'
 import SvgBack from './svg/Back.vue'
 import SvgClose from './svg/Close.vue'
 import SvgLogo from './svg/Logo.vue'
 
 const openedAbout = ref(false)
-
 const itemStore = useItemStore()
-
 const isActive = ref(false)
 
 const displayTooltip = () => {
@@ -57,8 +55,8 @@ const scroll = (id) => {
     })
 }
 
-itemStore.$onAction(({ name: actionName }) => {
-    if (actionName === 'addFavourite') {
+itemStore.$onAction(({ name }) => {
+    if (name === 'addViewed' && !itemStore.viewedCount) {
         displayTooltip()
     }
 })

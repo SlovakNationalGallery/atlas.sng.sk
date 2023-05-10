@@ -4,13 +4,13 @@ import axios from 'axios'
 
 export const useItemStore = defineStore('ItemStore', {
     state: () => ({
-        favouriteItemIds: useStorage('favouriteItemIds', []),
         items: useStorage('items', {}),
         collectionLink: useStorage('collectionLink', null),
+        viewedIds: useStorage('item.viewedIds', []),
     }),
     getters: {
-        favouritesCount() {
-            return this.favouriteItemIds.length
+        viewedCount() {
+            return this.viewedIds.length
         },
     },
     actions: {
@@ -19,9 +19,6 @@ export const useItemStore = defineStore('ItemStore', {
                 return this.items[id]
             }
         },
-        isFavourite(id) {
-            return this.favouriteItemIds.includes(id)
-        },
         async load(id) {
             const response = await axios.get(`/api/items/${id}`)
             return (this.items[id] = response.data.data)
@@ -29,19 +26,14 @@ export const useItemStore = defineStore('ItemStore', {
         clearCollectionLink() {
             this.collectionLink = null
         },
-        addFavourite(id) {
-            if (!this.favouriteItemIds.includes(id)) {
-                this.favouriteItemIds.push(id)
+        isViewed(id) {
+            return this.viewedIds.includes(id)
+        },
+        addViewed(id) {
+            if (!this.isViewed(id)) {
+                this.viewedIds.unshift(id)
                 this.clearCollectionLink()
             }
-        },
-        removeFavourite(id) {
-            this.favouriteItemIds = this.favouriteItemIds.filter((favouriteItemId) => favouriteItemId !== id)
-            this.clearCollectionLink()
-        },
-        removeFavourites() {
-            this.favouriteItemIds = []
-            this.clearCollectionLink()
         },
         clearCache() {
             this.items = {}
@@ -52,7 +44,7 @@ export const useItemStore = defineStore('ItemStore', {
             } else {
                 const response = await axios
                     .post('/api/collections', {
-                        items: this.favouriteItemIds,
+                        items: this.viewedIds,
                     })
                     .catch((err) => {
                         console.log(err)
@@ -65,7 +57,7 @@ export const useItemStore = defineStore('ItemStore', {
         async fetch(collectionId) {
             this.clearCollectionLink()
             this.items = {}
-            this.favouriteItemIds = (await axios.get(`/api/collections/${collectionId}`)).data
+            this.viewedIds = (await axios.get(`/api/collections/${collectionId}`)).data
         },
     },
 })

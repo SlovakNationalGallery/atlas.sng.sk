@@ -75,6 +75,13 @@ class AirtableMapper
             'floor' => 'Podlažie',
             'building' => 'Budova',
         ],
+        'bucketlists' => [
+            'title' => [
+                'sk' => 'Name',
+                'en' => 'Name',
+            ],
+            'items' => 'Diela',
+        ],
     ];
 
     public function getField(string $field)

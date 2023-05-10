@@ -34,7 +34,7 @@
                 </button>
             </div>
             <div class="flex-1 px-3">
-                <FavouritesCount />
+                <ViewedItemsCount />
             </div>
         </div>
 
@@ -66,10 +66,10 @@
 import { computed } from '@vue/reactivity'
 import { onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import CircleButton from '../components/CircleButton.vue'
-import FavouritesCount from '../components/FavouritesCount.vue'
-import HelpModal from '../components/HelpModal.vue'
 import { useInteractionStore } from '../stores/InteractionStore'
+import CircleButton from '../components/CircleButton.vue'
+import HelpModal from '../components/HelpModal.vue'
+import ViewedItemsCount from '../components/ViewedItemsCount.vue'
 
 const interactionStore = useInteractionStore()
 const router = useRouter()
