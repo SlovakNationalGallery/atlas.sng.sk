@@ -18,6 +18,8 @@ class BucketlistResource extends JsonResource
         return [
             'id' => $this['bucketlist']->id,
             'title' => $this['bucketlist']->title,
+            'text' => str($this['bucketlist']->text)->markdownWithLineBreaks(),
+            'image' => new ImageResource($this['bucketlist']->getFirstMedia()),
             'items' => ItemResource::collection(
                 $this->when($this['bucketlist']->relationLoaded('items'), fn() => $this->items())
             ),

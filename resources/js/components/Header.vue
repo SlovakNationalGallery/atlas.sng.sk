@@ -11,7 +11,7 @@
                 <SvgLogo v-else />
             </button>
         </HistoryBack>
-        <h1 class="grow px-2.5 text-1.5xl font-medium" :class="{ 'text-center': $route.name !== 'home' }">
+        <h1 class="grow px-2.5 text-1.5xl font-medium" :class="{ 'text-center': $route.name !== 'home' }" id="title">
             {{ $t(openedAbout ? 'About the App' : $route.meta.title) }}
             <span v-if="$route.name === 'my_collection'">({{ itemStore.viewedCount }})</span>
         </h1>

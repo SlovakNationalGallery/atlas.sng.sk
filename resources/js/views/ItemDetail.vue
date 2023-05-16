@@ -1,19 +1,23 @@
 <template>
     <div v-if="item">
         <article class="bg-green/20 p-4 pb-5" v-if="bucketlist">
-            <h3 class="text-1.5xl font-medium">{{ $t('You’ve found a hidden artwork!') }}</h3>
-            <p class="mt-2 leading-snug">{{ $t('Keep collecting hidden artworks to unlock a bonus story!') }}</p>
+            <h3 class="text-1.5xl font-medium">{{ $t('You’ve found a special artwork') }}</h3>
+            <p class="mt-2 leading-snug">{{ $t('Collect all artworks in the set to unlock a reward') }}</p>
             <router-link :to="{ name: 'my_collection' }" class="mt-3 block">
                 <Thumbnail class="bg-white">
                     <template #image>
-                        <div class="flex h-full items-center justify-center bg-green">
-                            <SvgQuestion />
-                        </div>
+                        <ResponsiveImageWithSizes
+                            class="h-full w-full object-cover"
+                            :image="{ src: bucketlist.image.src, srcset: bucketlist.image.srcset }"
+                        />
                     </template>
-                    <template #title>{{ $t('Hidden artworks') }}</template>
-                    <template #description
-                        >{{ found.length }}/{{ bucketlist.items.length }} {{ $t('collected') }}. {{ $t('Tap to show the full list') }}</template
-                    >
+                    <template #title>{{ bucketlist.title }}</template>
+                    <template #description>
+                        <span class="leading-6 text-black">
+                            <strong>{{ found.length }}/{{ bucketlist.items.length }} {{ $t('artworks found') }}</strong>
+                            <br />{{ $t('Tap to find more') }}
+                        </span>
+                    </template>
                 </Thumbnail>
             </router-link>
         </article>
@@ -99,6 +103,7 @@ import AuthorSummary from '../components/AuthorSummary.vue'
 import AuthorDetails from '../components/AuthorDetails.vue'
 import Thumbnail from '../components/Thumbnail.vue'
 import SvgQuestion from '../components/svg/Question.vue'
+import ResponsiveImageWithSizes from '../components/ResponsiveImageWithSizes.vue'
 
 const route = useRoute()
 const bucketlistStore = useBucketlistStore()

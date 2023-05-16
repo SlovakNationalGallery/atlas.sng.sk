@@ -8,7 +8,7 @@
         <template v-if="itemStore.viewedCount">
             <ShareCollection class="mt-4" />
             <div class="mt-3">
-                {{ $t('Save this link and study the artworks in depth even after you leave the museum') }}
+                {{ $t('Save the link to your artworks and return to them anywhere') }}
             </div>
         </template>
         <div class="mt-6 flex flex-col gap-y-3">
@@ -19,8 +19,8 @@
                             <SvgCode />
                         </div>
                     </template>
-                    <template #title>{{ $t('Add new artwork') }}</template>
-                    <template #description>{{ $t('Enter the artwork code and add it to your collection') }}</template>
+                    <template #title>{{ $t('Insert artwork code') }}</template>
+                    <template #description>{{ $t('The artwork will be saved to your history') }}</template>
                 </Thumbnail>
             </router-link>
             <ItemLoader :id="id" v-slot="{ item }" v-for="id in itemStore.viewedIds" :key="id">

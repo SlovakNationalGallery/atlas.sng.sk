@@ -8,6 +8,9 @@ module.exports = {
             lineHeight: {
                 4.5: '1.125rem',
             },
+            opacity: {
+                15: '.15',
+            },
             padding: (theme) => ({
                 bar: `calc(1.5 * ${theme('fontSize.sm')} + ${theme('spacing.8')})`,
                 full: '100%',
