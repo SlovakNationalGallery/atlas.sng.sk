@@ -2,10 +2,10 @@
     <article class="mt-8 mb-6 px-4">
         <h3 class="flex items-center justify-between gap-x-2 text-1.5xl font-medium leading-6">
             <span class="grow">{{ $t('Your timeline') }}</span>
-            <span>{{ itemStore.viewedCount }}</span>
+            <span>{{ interactionStore.viewedItemsCount }}</span>
             <SvgEye />
         </h3>
-        <template v-if="itemStore.viewedCount">
+        <template v-if="interactionStore.viewedItemsCount">
             <ShareCollection class="mt-4" />
             <div class="mt-3">
                 {{ $t('Save this link and study the artworks in depth even after you leave the museum') }}
@@ -23,7 +23,7 @@
                     <template #description>{{ $t('Enter the artwork code and add it to your collection') }}</template>
                 </Thumbnail>
             </router-link>
-            <ItemLoader :id="id" v-slot="{ item }" v-for="id in itemStore.viewedIds" :key="id">
+            <ItemLoader :id="id" v-slot="{ item }" v-for="id in interactionStore.viewedItemIds" :key="id">
                 <router-link :to="{ name: 'item_detail', params: { id } }">
                     <ItemThumbnail :item="item" />
                 </router-link>
@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-import { useItemStore } from '../stores/ItemStore'
+import { useInteractionStore } from '../stores/InteractionStore'
 import ItemLoader from './ItemLoader.vue'
 import ItemThumbnail from './ItemThumbnail.vue'
 import ShareCollection from './ShareCollection.vue'
@@ -41,5 +41,5 @@ import Thumbnail from './Thumbnail.vue'
 import SvgCode from './svg/Code.vue'
 import SvgEye from './svg/Eye.vue'
 
-const itemStore = useItemStore()
+const interactionStore = useInteractionStore()
 </script>

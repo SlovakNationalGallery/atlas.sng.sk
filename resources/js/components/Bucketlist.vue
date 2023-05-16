@@ -2,7 +2,9 @@
     <article v-if="bucketlist">
         <div class="bg-green/20 p-4">
             <h2 class="mt-2 text-xl font-medium leading-6">{{ $t('Hidden artworks') }}</h2>
-            <p class="mt-4 text-3xl font-bold leading-8">{{ found.length }}/{{ bucketlist.items.length }} {{ $t('collected') }}</p>
+            <p class="mt-4 text-3xl font-bold leading-8">
+                {{ found.length }}/{{ bucketlist.items.length }} {{ $t('collected') }}
+            </p>
             <p class="mt-4">{{ $t('Nájdi všetky diela v zozname nižšie a odhalíš ich tajomstvo') }}</p>
         </div>
         <div class="mt-6 px-4" v-if="found.length">

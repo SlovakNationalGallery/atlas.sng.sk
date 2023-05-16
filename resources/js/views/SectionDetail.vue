@@ -31,15 +31,18 @@
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import ItemThumbnail from '../components/ItemThumbnail.vue'
+import { useInteractionStore } from '../stores/InteractionStore'
 import { useSectionStore } from '../stores/SectionStore'
 
 const route = useRoute()
 const props = defineProps(['section'])
+const interactionStore = useInteractionStore()
 const sectionStore = useSectionStore()
 const section = ref(null)
 
 onMounted(async () => {
     const id = route.params.id
     section.value = await sectionStore.load(id)
+    interactionStore.addSectionViewed(item.value.id)
 })
 </script>

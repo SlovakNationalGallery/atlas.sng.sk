@@ -2,10 +2,10 @@
     <router-link
         :to="{ name: 'my_collection' }"
         class="relative transition-colors"
-        :class="{ '!border-l-black bg-green': showTooltip, 'opacity-40': !itemStore.viewedCount }"
+        :class="{ '!border-l-black bg-green': showTooltip, 'opacity-40': !interactionStore.viewedItemsCount }"
     >
         <div class="flex h-full items-center justify-end">
-            <div class="text-lg font-bold">{{ itemStore.viewedCount }}</div>
+            <div class="text-lg font-bold">{{ interactionStore.viewedItemsCount }}</div>
             <SvgEye />
         </div>
         <Transition
@@ -27,9 +27,11 @@
 </template>
 
 <script setup>
+import { useInteractionStore } from '../stores/InteractionStore'
 import { useItemStore } from '../stores/ItemStore'
 import SvgEye from './svg/Eye.vue'
 
 const props = defineProps(['showTooltip'])
+const interactionStore = useInteractionStore()
 const itemStore = useItemStore()
 </script>

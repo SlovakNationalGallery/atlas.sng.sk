@@ -13,7 +13,7 @@
         </HistoryBack>
         <h1 class="grow px-2.5 text-1.5xl font-medium" :class="{ 'text-center': $route.name !== 'home' }">
             {{ $t(openedAbout ? 'About the App' : $route.meta.title) }}
-            <span v-if="$route.name === 'my_collection'">({{ itemStore.viewedCount }})</span>
+            <span v-if="$route.name === 'my_collection'">({{ interactionStore.viewedItemsCount }})</span>
         </h1>
         <div class="flex-1 border-l-2 border-transparent px-3 text-right" v-if="$route.name === 'my_collection'">
             <button class="rounded-xl bg-green px-3 py-1 text-sm font-bold" @click="scroll('share')">
@@ -29,7 +29,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useItemStore } from '../stores/ItemStore'
+import { useInteractionStore } from '../stores/InteractionStore'
 import About from './About.vue'
 import HistoryBack from './HistoryBack.vue'
 import LanguageSwitcher from './LanguageSwitcher.vue'
@@ -39,7 +39,7 @@ import SvgClose from './svg/Close.vue'
 import SvgLogo from './svg/Logo.vue'
 
 const openedAbout = ref(false)
-const itemStore = useItemStore()
+const interactionStore = useInteractionStore()
 const isActive = ref(false)
 
 const displayTooltip = () => {
@@ -55,8 +55,8 @@ const scroll = (id) => {
     })
 }
 
-itemStore.$onAction(({ name }) => {
-    if (name === 'addViewed' && !itemStore.viewedCount) {
+interactionStore.$onAction(({ name }) => {
+    if (name === 'addItemViewed' && !interactionStore.viewedItemsCount) {
         displayTooltip()
     }
 })

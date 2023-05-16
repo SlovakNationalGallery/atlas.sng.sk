@@ -6,13 +6,7 @@ export const useItemStore = defineStore('ItemStore', {
     state: () => ({
         items: useStorage('items', {}),
         collectionLink: useStorage('collectionLink', null),
-        viewedIds: useStorage('item.viewedIds', []),
     }),
-    getters: {
-        viewedCount() {
-            return this.viewedIds.length
-        },
-    },
     actions: {
         get(id) {
             if (id in this.items) {
@@ -25,15 +19,6 @@ export const useItemStore = defineStore('ItemStore', {
         },
         clearCollectionLink() {
             this.collectionLink = null
-        },
-        isViewed(id) {
-            return this.viewedIds.includes(id)
-        },
-        addViewed(id) {
-            if (!this.isViewed(id)) {
-                this.viewedIds.unshift(id)
-                this.clearCollectionLink()
-            }
         },
         clearCache() {
             this.items = {}
