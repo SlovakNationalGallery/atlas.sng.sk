@@ -22,7 +22,7 @@
         <div class="mt-6 px-4" v-if="notFound.length">
             <h3 class="text-1.5xl font-medium leading-6">{{ $t('Not found yet') }}</h3>
             <div class="mt-4 flex flex-col gap-y-4">
-                <LockedItemThumbnail class="bg-black/10" :item="item" v-for="item in notFound" :key="item.id" />
+                <LockedItemThumbnail :item="item" v-for="item in notFound" :key="item.id" />
             </div>
         </div>
     </article>
