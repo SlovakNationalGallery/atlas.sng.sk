@@ -29,6 +29,18 @@ export const useInteractionStore = defineStore('InteractionStore', {
                 .filter((interaction) => interaction.type === 'story')
                 .map((interaction) => storiesStore.get(interaction.id))
         },
+        viewedItemIds() {
+            return new Set(
+                this.interactions
+                    .filter((interaction) => interaction.type === 'itemViewed')
+                    .map((interaction) => interaction.id)
+                    .slice()
+                    .reverse()
+            )
+        },
+        viewedItemsCount() {
+            return this.viewedItemIds.size
+        },
     },
     actions: {
         addStory(id) {
@@ -41,17 +53,6 @@ export const useInteractionStore = defineStore('InteractionStore', {
         addItemViewed(id) {
             this.interactions.push({
                 type: 'itemViewed',
-                id,
-            })
-        },
-        addItemFavourited(id) {
-            const lastInteraction = this.interactions[this.interactions.length - 1]
-            if (lastInteraction.type === 'itemViewed' && lastInteraction.id === id) {
-                this.interactions.pop()
-            }
-
-            this.interactions.push({
-                type: 'itemFavourited',
                 id,
             })
         },

@@ -97,21 +97,18 @@ const verifyCode = () => {
             const id = data.data.codeable_id
             switch (data.data.codeable_type) {
                 case 'item':
-                    interactionStore.addItemViewed(id)
                     router.push({
                         name: 'item_detail',
                         params: { id },
                     })
                     break
                 case 'section':
-                    interactionStore.addSectionViewed(id)
                     router.push({
                         name: 'section_detail',
                         params: { id },
                     })
                     break
                 case 'place':
-                    interactionStore.addPlaceViewed(id)
                     router.push({
                         name: 'place_detail',
                         params: { id },

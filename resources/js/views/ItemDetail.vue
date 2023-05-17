@@ -12,7 +12,8 @@
                     </template>
                     <template #title>{{ $t('Hidden artworks') }}</template>
                     <template #description
-                        >{{ found.length }}/{{ bucketlist.items.length }} {{ $t('collected') }}. {{ $t('Tap to show the full list') }}</template
+                        >{{ found.length }}/{{ bucketlist.items.length }} {{ $t('collected') }}.
+                        {{ $t('Tap to show the full list') }}</template
                     >
                 </Thumbnail>
             </router-link>
@@ -85,6 +86,7 @@
 import { computed, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useBucketlistStore } from '../stores/BucketlistStore'
+import { useInteractionStore } from '../stores/InteractionStore'
 import { useItemStore } from '../stores/ItemStore'
 import AuthorityDetails from '../components/AuthorityDetails.vue'
 import AuthoritySummary from '../components/AuthoritySummary.vue'
@@ -102,6 +104,7 @@ import SvgQuestion from '../components/svg/Question.vue'
 
 const route = useRoute()
 const bucketlistStore = useBucketlistStore()
+const interactionStore = useInteractionStore()
 const itemStore = useItemStore()
 const item = ref(null)
 const bucketlist = ref(null)
@@ -110,7 +113,7 @@ const found = computed(() => bucketlist.value.items.filter((item) => itemStore.i
 onMounted(async () => {
     const id = route.params.id
     item.value = await itemStore.load(id)
-    itemStore.addViewed(id)
+    interactionStore.addItemViewed(item.value.id)
     const defaultBucketlist = item.value.bucketlists.find(
         (bucketlist) => bucketlist.id === import.meta.env.VITE_DEFAULT_BUCKETLIST
     )
