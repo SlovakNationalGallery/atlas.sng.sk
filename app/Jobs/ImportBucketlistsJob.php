@@ -13,6 +13,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class ImportBucketlistsJob implements ShouldQueue
 {
@@ -74,19 +75,23 @@ class ImportBucketlistsJob implements ShouldQueue
         }
 
         // Inserts
-        collect($upstream['media'])
+        $media = collect($upstream['media'])
             ->reject(fn($media) => $importedAirtableIds->contains($media['id']))
-            ->each(function ($media) use ($model) {
-                $model
-                    ->addMediaFromUrl($media['url'])
+            ->map(function ($upstreamMediaItem) use ($model) {
+                return $model
+                    ->addMediaFromUrl($upstreamMediaItem['url'])
                     ->withCustomProperties([
-                        'airtable_id' => $media['id'],
+                        'airtable_id' => $upstreamMediaItem['id'],
                     ])
                     ->withResponsiveImages()
                     ->toMediaCollection();
             });
 
-        // TODO Deletes
+        // Deletes
+        $model
+            ->getMedia()
+            ->reject(fn(Media $item) => $upstreamAirtableIds->contains($item->getCustomProperty('airtable_id')))
+            ->each(fn(Media $media) => $media->delete());
 
         // Sorting
         $upstreamAirtableIds->each(function ($airtableId, $index) use ($model) {

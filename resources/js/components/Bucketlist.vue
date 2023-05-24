@@ -78,6 +78,7 @@ const notFound = computed(() => {
 const unlocked = computed(() => !notFound.value.length)
 
 onMounted(async () => {
-    bucketlist.value = bucketlistStore.get(props.id) || (await bucketlistStore.load(props.id))
+    bucketlist.value = bucketlistStore.get(props.id)
+    bucketlist.value = await bucketlistStore.load(props.id)
 })
 </script>
