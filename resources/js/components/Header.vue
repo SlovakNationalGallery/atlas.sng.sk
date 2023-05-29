@@ -16,9 +16,9 @@
             <span v-if="$route.name === 'my_collection'">({{ interactionStore.viewedItemsCount }})</span>
         </h1>
         <div class="flex-1 border-l-2 border-transparent px-3 text-right" v-if="$route.name === 'my_collection'">
-            <button class="rounded-xl bg-green px-3 py-1 text-sm font-bold" @click="scroll('share')">
+            <!-- <button class="rounded-xl bg-green px-3 py-1 text-sm font-bold" @click="scroll('share')">
                 {{ $t('Share') }}
-            </button>
+            </button> -->
         </div>
         <LanguageSwitcher v-else-if="$route.name === 'home'" />
         <ViewedItemsCount v-else class="flex-1 border-l-2 border-l-transparent px-4 py-2" :show-tooltip="isActive" />
