@@ -55,7 +55,7 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 import { useBucketlistStore } from '../stores/BucketlistStore'
-import { useItemStore } from '../stores/ItemStore'
+import { useInteractionStore } from '../stores/InteractionStore'
 import LockedItemThumbnail from './LockedItemThumbnail.vue'
 import ItemThumbnail from './ItemThumbnail.vue'
 import Thumbnail from './Thumbnail.vue'
@@ -63,16 +63,16 @@ import ResponsiveImageWithSizes from './ResponsiveImageWithSizes.vue'
 import SvgLock from './svg/Lock.vue'
 
 const bucketlistStore = useBucketlistStore()
-const itemStore = useItemStore()
+const interactionStore = useInteractionStore()
 const props = defineProps(['id'])
 const bucketlist = ref(null)
 
 const found = computed(() => {
-    return bucketlist.value?.items.filter((item) => itemStore.isViewed(item.id))
+    return bucketlist.value?.items.filter((item) => interactionStore.isItemViewed(item.id))
 })
 
 const notFound = computed(() => {
-    return bucketlist.value?.items.filter((item) => !itemStore.isViewed(item.id))
+    return bucketlist.value?.items.filter((item) => !interactionStore.isItemViewed(item.id))
 })
 
 const unlocked = computed(() => !notFound.value.length)

@@ -22,14 +22,14 @@
 import { computed, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useBucketlistStore } from '../stores/BucketlistStore'
-import { useItemStore } from '../stores/ItemStore'
+import { useInteractionStore } from '../stores/InteractionStore'
 import ImageLightbox from '../components/ImageLightbox.vue'
 
 const route = useRoute()
 const bucketlistStore = useBucketlistStore()
-const itemStore = useItemStore()
+const interactionStore = useInteractionStore()
 const bucketlist = ref(null)
-const unlocked = computed(() => bucketlist.value?.items.every((item) => itemStore.isViewed(item.id)))
+const unlocked = computed(() => bucketlist.value?.items.every((item) => interactionStore.isItemViewed(item.id)))
 
 onMounted(async () => {
     const id = route.params.id

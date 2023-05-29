@@ -112,7 +112,7 @@ const interactionStore = useInteractionStore()
 const itemStore = useItemStore()
 const item = ref(null)
 const bucketlist = ref(null)
-const found = computed(() => bucketlist.value.items.filter((item) => itemStore.isViewed(item.id)))
+const found = computed(() => bucketlist.value.items.filter((item) => interactionStore.isItemViewed(item.id)))
 
 onMounted(async () => {
     const id = route.params.id
