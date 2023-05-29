@@ -43,6 +43,9 @@ export const useInteractionStore = defineStore('InteractionStore', {
         },
     },
     actions: {
+        isItemViewed(id) {
+            return this.viewedItemIds.has(id)
+        },
         addStory(id) {
             const length = this.interactions.push({
                 type: 'story',

@@ -7,11 +7,13 @@ use App\Models\Bucketlist;
 use App\Models\Item;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class ImportBucketlistsJob implements ShouldQueue
 {
@@ -33,7 +35,7 @@ class ImportBucketlistsJob implements ShouldQueue
                 ->pluck('id');
             Bucketlist::destroy($missing_ids);
 
-            Bucketlist::upsert($records->map->except(['items'])->toArray(), ['id']);
+            Bucketlist::upsert($records->map->except(['media', 'items'])->toArray(), ['id']);
 
             $airtableIds = $records
                 ->pluck('items')
@@ -54,6 +56,51 @@ class ImportBucketlistsJob implements ShouldQueue
                         )
                     )
             );
+        });
+
+        $records->each(fn($record) => $this->syncMedia(Bucketlist::find($record['id']), $record));
+    }
+
+    protected function syncMedia(Model $model, Collection $upstream): void
+    {
+        $importedAirtableIds = $model
+            ->media()
+            ->pluck('custom_properties')
+            ->pluck('airtable_id');
+
+        $upstreamAirtableIds = collect($upstream['media'])->pluck('id');
+
+        if ($importedAirtableIds == $upstreamAirtableIds) {
+            return;
+        }
+
+        // Inserts
+        $media = collect($upstream['media'])
+            ->reject(fn($media) => $importedAirtableIds->contains($media['id']))
+            ->map(function ($upstreamMediaItem) use ($model) {
+                return $model
+                    ->addMediaFromUrl($upstreamMediaItem['url'])
+                    ->withCustomProperties([
+                        'airtable_id' => $upstreamMediaItem['id'],
+                    ])
+                    ->withResponsiveImages()
+                    ->toMediaCollection();
+            });
+
+        // Deletes
+        $model
+            ->getMedia()
+            ->reject(fn(Media $item) => $upstreamAirtableIds->contains($item->getCustomProperty('airtable_id')))
+            ->each(fn(Media $media) => $media->delete());
+
+        // Sorting
+        $upstreamAirtableIds->each(function ($airtableId, $index) use ($model) {
+            $model
+                ->media()
+                ->where('custom_properties->airtable_id', $airtableId)
+                ->update([
+                    'order_column' => $index + 1, // medialibrary sorts from 1 by default
+                ]);
         });
     }
 }

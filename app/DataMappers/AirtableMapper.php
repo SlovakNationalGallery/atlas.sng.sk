@@ -77,9 +77,14 @@ class AirtableMapper
         ],
         'bucketlists' => [
             'title' => [
-                'sk' => 'Name',
-                'en' => 'Name',
+                'sk' => 'Názov',
+                'en' => 'Názov EN',
             ],
+            'text' => [
+                'sk' => 'Text',
+                'en' => 'Text EN',
+            ],
+            'media' => 'Image',
             'items' => 'Diela',
         ],
     ];
