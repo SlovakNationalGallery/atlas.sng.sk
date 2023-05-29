@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { useStorage } from '@vueuse/core'
 import axios from 'axios'
+import { useInteractionStore } from './InteractionStore'
 
 export const useItemStore = defineStore('ItemStore', {
     state: () => ({
@@ -24,12 +25,14 @@ export const useItemStore = defineStore('ItemStore', {
             this.items = {}
         },
         async getCollectionLink() {
+            const interactionStore = useInteractionStore()
+
             if (this.collectionLink) {
                 return this.collectionLink
             } else {
                 const response = await axios
                     .post('/api/collections', {
-                        items: this.viewedIds,
+                        items: [...interactionStore.viewedItemIds],
                     })
                     .catch((err) => {
                         console.log(err)
@@ -42,7 +45,8 @@ export const useItemStore = defineStore('ItemStore', {
         async fetch(collectionId) {
             this.clearCollectionLink()
             this.items = {}
-            this.viewedIds = (await axios.get(`/api/collections/${collectionId}`)).data
+            // todo
+            // this.viewedIds = (await axios.get(`/api/collections/${collectionId}`)).data
         },
     },
 })

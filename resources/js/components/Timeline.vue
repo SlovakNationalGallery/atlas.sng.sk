@@ -5,12 +5,12 @@
             <span>{{ interactionStore.viewedItemsCount }}</span>
             <SvgEye />
         </h3>
-        <template v-if="interactionStore.viewedItemsCount">
+        <!-- <template v-if="interactionStore.viewedItemsCount">
             <ShareCollection class="mt-4" />
             <div class="mt-3">
                 {{ $t('Save the link to your artworks and return to them anywhere') }}
             </div>
-        </template>
+        </template> -->
         <div class="mt-6 flex flex-col gap-y-3">
             <router-link :to="{ name: 'home', hash: '#code' }">
                 <Thumbnail :truncate-description="false">
