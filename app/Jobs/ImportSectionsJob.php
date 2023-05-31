@@ -20,7 +20,7 @@ class ImportSectionsJob implements ShouldQueue
     public function handle()
     {
         $exhibition_ids = Exhibition::all()->pluck('id');
-        $records = Airtable::table('sections')->all();
+        $records = Airtable::table('sections')->where('Publikovať', true)->get();
         $records->each(function ($record) use ($exhibition_ids) {
             $section = Section::unguarded(
                 fn() => Section::firstOrNew([
