@@ -23,7 +23,7 @@ class ImportSectionsJob implements ShouldQueue
         $records = Airtable::table('sections')->where('Publikovať', true)->get();
         $records->each(function ($record) use ($exhibition_ids) {
             $section = Section::unguarded(
-                fn() => Section::firstOrNew([
+                fn () => Section::firstOrNew([
                     'id' => $record['id'],
                 ])
             );
@@ -45,7 +45,7 @@ class ImportSectionsJob implements ShouldQueue
             $itemsLookup = Item::whereIn('airtable_id', $airtableIds)->pluck('id', 'airtable_id');
             $section->items()->sync(
                 collect($airtableIds)->mapWithKeys(
-                    fn($airtableId, $index) => [
+                    fn ($airtableId, $index) => [
                         $itemsLookup[$airtableId] => [
                             'ord' => $index,
                         ],
@@ -57,13 +57,14 @@ class ImportSectionsJob implements ShouldQueue
                 $section->code->exhibition_id = Arr::get($record, 'fields.Výstava.0');
                 $section->code->save();
             }
-
-            if (
-                \App::environment('production') &&
-                (empty($record['fields']['code']) || $record['fields']['code'] != $section->code->code)
-            ) {
-                Airtable::table('sections')->patch($record['id'], ['code' => $section->code->code]);
-            }
         });
+
+        // remove the remaining sections and detach relations with related items
+        $missing_ids = Section::whereNotIn('id', $records->pluck('id'))->get()->pluck('id');
+        $sections = Section::whereIn('id', $missing_ids)->get();
+        foreach ($sections as $section) {
+            $section->items()->detach();
+        }
+        Section::destroy($missing_ids);
     }
 }
