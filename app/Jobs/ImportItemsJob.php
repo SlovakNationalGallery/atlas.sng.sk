@@ -73,16 +73,6 @@ class ImportItemsJob implements ShouldQueue
                 $item->code->exhibition_id = Arr::get($record, 'fields.Výstava.0');
                 $item->code->save();
             }
-
-            // update code in airtable
-            if (
-                \App::environment('production') &&
-                (empty($record['fields']['code']) || $record['fields']['code'] != $item->code->code)
-            ) {
-                Airtable::table('items')->patch($record['id'], [
-                    'code' => $item->code->code,
-                ]);
-            }
         });
 
         $missing_ids = Item::whereNotIn('id', $item_ids)
