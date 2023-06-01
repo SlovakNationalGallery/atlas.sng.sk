@@ -61,10 +61,6 @@ class ImportSectionsJob implements ShouldQueue
 
         // remove the remaining sections and detach relations with related items
         $missing_ids = Section::whereNotIn('id', $records->pluck('id'))->get()->pluck('id');
-        $sections = Section::whereIn('id', $missing_ids)->get();
-        foreach ($sections as $section) {
-            $section->items()->detach();
-        }
         Section::destroy($missing_ids);
     }
 }
