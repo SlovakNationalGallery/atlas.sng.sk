@@ -21,8 +21,8 @@ class ImportItemsJob implements ShouldQueue
         $exhibition_ids = Exhibition::all()->pluck('id');
         $item_ids = [];
         $records = Airtable::table('items')
-            ->where('ID', '!=', '')
-            ->all();
+            ->where('Publikovať', true)
+            ->get();
         $records->each(function ($record) use ($exhibition_ids, &$item_ids) {
             $item_ids[] = $record['fields']['ID'];
 
@@ -72,16 +72,6 @@ class ImportItemsJob implements ShouldQueue
             if ($item->code && $exhibition_ids->contains(Arr::get($record, 'fields.Výstava.0'))) {
                 $item->code->exhibition_id = Arr::get($record, 'fields.Výstava.0');
                 $item->code->save();
-            }
-
-            // update code in airtable
-            if (
-                \App::environment('production') &&
-                (empty($record['fields']['code']) || $record['fields']['code'] != $item->code->code)
-            ) {
-                Airtable::table('items')->patch($record['id'], [
-                    'code' => $item->code->code,
-                ]);
             }
         });
 
