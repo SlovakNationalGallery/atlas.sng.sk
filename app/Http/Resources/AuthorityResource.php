@@ -19,6 +19,7 @@ class AuthorityResource extends JsonResource
             'birth_date' => $this['webumenia_authority']->birth_date,
             'death_date' => $this['webumenia_authority']->death_date,
             'image_url' => $this->getImageUrl($this['webumenia_authority']->image_path),
+            'related_items' => $this['authority']->related_items,
         ];
     }
 
