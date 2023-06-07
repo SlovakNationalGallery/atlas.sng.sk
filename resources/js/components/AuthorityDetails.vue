@@ -2,16 +2,26 @@
     <div class="whitespace-pre-line">{{ authority.biography }}</div>
     <div v-if="authority.related_items">
         <div class="font-bold my-3">{{ $t('Other works by the artist') }}</div>
-        <ul>
-            <li v-for="item in relatedItems" :key="item.id">
-                <div class="text-sm">{{ item.title }}</div>
-            </li>
-        </ul>
+        <Carousel :items-to-show="2.3" :snap-align="start">
+            <slide v-for="item in relatedItems" :key="item.id" class="self-start">
+                <div class="pr-2 min-w-full">
+                    <ItemImage class="rounded-lg" :offset-top="item.offset_top" :alt="item.title" :src="item.image_src" :srcset="item.image_srcset"></ItemImage>
+                    <div class="text-left">
+                        <h5 class="font-bold text-sm truncate">
+                            {{ item.title }}
+                        </h5>
+                        <div class="text-xs text-gray-dark">{{ item.dating_short }}</div>
+                    </div>
+                </div>
+            </slide>
+        </Carousel>
     </div>
 </template>
 
 <script setup>
 import { defineProps, ref, onMounted } from 'vue'
+import { Carousel, Slide } from 'vue3-carousel'
+import ItemImage from './ItemImage.vue'
 
 const props = defineProps(['authority'])
 const relatedItems = ref([])
