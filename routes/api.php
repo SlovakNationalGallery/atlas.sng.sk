@@ -97,3 +97,16 @@ Route::get('/places/{id}', function (string $id) {
     $place = Place::findOrFail($id);
     return new PlaceResource($place);
 });
+
+Route::get('/related_items/{ids}', function (string $ids) {
+    $idArray = explode(',', $ids);
+    $related_items = collect([]);
+    foreach ($idArray as $item_id) {
+        $response = Http::webumenia()->get("/v2/items/$item_id");
+        $related_items[] = [
+            'item' => new Item(),
+            'webumenia_item' => $response->object()->data  
+        ];
+    }
+    return ItemResource::collection($related_items);
+});
