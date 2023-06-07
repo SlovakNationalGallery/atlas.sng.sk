@@ -23,7 +23,13 @@ class ImportAuthoritiesJob implements ShouldQueue
         $authorities = \Airtable::table('authorities')
             ->where($idField, '!=', '')
             ->all()
-            ->pipe(fn($authorities) => $mapper->mapTable($authorities, 'authorities'));
+            ->pipe(fn($authorities) => $mapper->mapTable($authorities, 'authorities'))
+            // json encode array values to enable 'upsert' on json field(s)
+            ->each(function ($authority) {
+                $authority->transform(function ($value) {
+                    return is_array($value) ? json_encode($value) : $value;
+                });
+            });
 
         DB::transaction(function () use ($authorities) {
             Authority::whereNotIn('id', $authorities->pluck('id'))->delete();

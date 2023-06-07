@@ -14,6 +14,7 @@ class AirtableMapper
                 'sk' => 'Text SK',
                 'en' => 'Text EN',
             ],
+            'related_items' => 'Odporúčané diela',
         ],
         'stories' => [
             'text' => [

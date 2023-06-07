@@ -12,4 +12,8 @@ class Authority extends Model
     public $incrementing = false;
 
     protected $translatable = ['biography'];
+
+    protected $casts = [
+        'related_items' => 'array',
+    ];
 }
