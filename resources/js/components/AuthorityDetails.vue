@@ -4,7 +4,7 @@
         <div class="font-bold my-3">{{ $t('Other works by the artist') }}</div>
         <Carousel :items-to-show="2.3" :snap-align="start">
             <slide v-for="item in relatedItems" :key="item.id" class="self-start">
-                <div class="pr-2 min-w-full">
+                <div class="pr-2 min-w-full" @click="openPreview(item)">
                     <ItemImage class="rounded-lg" :offset-top="item.offset_top" :alt="item.title" :src="item.image_src" :srcset="item.image_srcset"></ItemImage>
                     <div class="text-left">
                         <h5 class="font-bold text-sm truncate">
@@ -15,6 +15,7 @@
                 </div>
             </slide>
         </Carousel>
+        <ItemPreview v-if="previewItem" :item="previewItem" @close="closePreview" />
     </div>
 </template>
 
@@ -22,9 +23,11 @@
 import { defineProps, ref, onMounted } from 'vue'
 import { Carousel, Slide } from 'vue3-carousel'
 import ItemImage from './ItemImage.vue'
+import ItemPreview from './ItemPreview.vue'
 
 const props = defineProps(['authority'])
 const relatedItems = ref([])
+const previewItem = ref(null)
 
 onMounted(async () => {
   if (props.authority.related_items.length > 0) {
@@ -36,4 +39,13 @@ onMounted(async () => {
     }
   }
 });
+
+const openPreview = (item) => {
+    previewItem.value = item;
+}
+
+const closePreview = () => {
+    previewItem.value = null;
+}
+
 </script>
