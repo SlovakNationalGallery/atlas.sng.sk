@@ -15,15 +15,15 @@
                 <h2 class="text-1.5xl font-bold">{{ item.title }}</h2>
                 <h3 class="text-lg text-gray-dark">{{ item.author }}<br />{{ item.dating }}</h3>
                 <div class="my-4 space-y-4" v-html="item.description"></div>
-
+                <ConfirmButton class="mt-4" @click="emit('close')">{{ $t('Close') }}</ConfirmButton>
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { defineProps, defineEmits } from 'vue';
 import SvgClose from './svg/Close.vue'
+import ConfirmButton from './ConfirmButton.vue'
 
 const props = defineProps(['item'])
 const emit = defineEmits(['close'])
