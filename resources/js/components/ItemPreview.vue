@@ -1,6 +1,6 @@
 <template>
     <div
-        class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 overflow-x-hidden overflow-y-auto w-full h-full outline-none "
+        class="fixed inset-0 z-50 flex h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden bg-black/70 p-4 outline-none"
         @click="emit('close')"
     >
         <div class="relative max-h-full md:max-w-lg" @click="emit('close')">
@@ -11,7 +11,7 @@
             >
                 <SvgClose />
             </button>
-            <div class="px-4 py-6 bg-white rounded-b-xl">
+            <div class="rounded-b-xl bg-white px-4 py-6">
                 <h2 class="text-1.5xl font-bold">{{ item.title }}</h2>
                 <h3 class="text-lg text-gray-dark">{{ item.author }}<br />{{ item.dating }}</h3>
                 <WebumeniaButton :url="item.webumenia_url" class="my-4" />
