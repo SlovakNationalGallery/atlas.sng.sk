@@ -42,6 +42,7 @@ class ItemResource extends JsonResource
             'image_srcset' => collect([220, 300, 600, 800])
                 ->map(fn($width) => $this->getImageRoute($width) . " ${width}w")
                 ->join(', '),
+            'image_aspect_ratio' => $this['webumenia_item']->image_ratio,
             'webumenia_url' => config('services.webumenia.url') . '/dielo/' . $this['webumenia_item']->id,
             'code' => $this['item']->code ? $this['item']->code->code : null,
             'offset_top' => $this['item']->offset_top,
