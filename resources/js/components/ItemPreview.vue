@@ -3,9 +3,24 @@
         class="fixed inset-0 z-50 flex h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden bg-black/70 p-4 outline-none"
         @click="emit('close')"
     >
-        <div :class="{'bg-white': isLoading }" class="relative max-h-full w-full md:max-w-lg rounded-xl" @click="emit('close')">
-            <div  :class="{'hidden': !isLoading }" class="w-full animate-pulse rounded-t-xl bg-gray-soft" :style="{ aspectRatio: item.image_aspect_ratio }"></div>
-            <img :class="{'hidden': isLoading }" class="w-full rounded-t-xl" :alt="item.title" :src="item.image_src" :srcset="item.image_srcset" @load="imageLoaded" />
+        <div
+            :class="{ 'bg-white': isLoading }"
+            class="relative max-h-full w-full rounded-xl md:max-w-lg"
+            @click="emit('close')"
+        >
+            <div
+                :class="{ hidden: !isLoading }"
+                class="w-full animate-pulse rounded-t-xl bg-gray-soft"
+                :style="{ aspectRatio: item.image_aspect_ratio }"
+            ></div>
+            <img
+                :class="{ hidden: isLoading }"
+                class="w-full rounded-t-xl"
+                :alt="item.title"
+                :src="item.image_src"
+                :srcset="item.image_srcset"
+                @load="imageLoaded"
+            />
             <button
                 class="absolute top-0 right-0 cursor-pointer rounded-tr-xl bg-white p-1.5"
                 @click.stop="emit('close')"
@@ -33,6 +48,6 @@ const emit = defineEmits(['close'])
 const isLoading = ref(true)
 
 const imageLoaded = () => {
-  isLoading.value = false;
+    isLoading.value = false
 }
 </script>
