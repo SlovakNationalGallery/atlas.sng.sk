@@ -5,6 +5,7 @@ use App\Models\Place;
 use App\Models\Story;
 use App\Jobs\ImportJob;
 use App\Models\Section;
+use App\Models\Exhibition;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -44,6 +45,11 @@ Route::get('/places', function () {
             return $section->code->exhibition_id;
         });
     return response()->view('places', compact('places'));
+});
+
+Route::get('/exhibitions', function () {
+    $exhibitions = Exhibition::withCount('codes')->get();
+    return response()->view('exhibitions', compact('exhibitions'));
 });
 
 Route::get('/stories', function () {
