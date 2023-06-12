@@ -24,11 +24,13 @@ return new class extends Migration {
             $table
                 ->foreign('bucketlist_id')
                 ->references('id')
-                ->on('bucketlists');
+                ->on('bucketlists')
+                ->onDelete('cascade');
             $table
                 ->foreign('item_id')
                 ->references('id')
-                ->on('items');
+                ->on('items')
+                ->onDelete('cascade');
             $table->integer('ord');
         });
     }
