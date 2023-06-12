@@ -33,7 +33,7 @@ class Code extends Model
     public static function randomCode()
     {
         $code = str_repeat('0', self::ROWS * self::COLS);
-        $dots_count = rand(1, 6);
+        $dots_count = rand(1, 5);
         for ($i = 0; $i < $dots_count; $i++) {
             $randomPos = rand(0, self::ROWS * self::COLS - 1);
             $code[$randomPos] = '1';

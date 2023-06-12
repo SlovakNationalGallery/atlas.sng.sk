@@ -32,7 +32,7 @@ class ImportPlacesJob implements ShouldQueue
         $places = \Airtable::table('places')
             ->all()
             ->pipe(fn($places) => $mapper->mapTable($places, 'places', false));
-
+            
         DB::transaction(function () use ($places, $exhibition_ids) {
             $missing_ids = Place::whereNotIn('id', $places->pluck('id'))
                 ->get()
@@ -44,8 +44,6 @@ class ImportPlacesJob implements ShouldQueue
                     ['id' => $upstreamPlace['id']],
                     $upstreamPlace->except(['media', 'exhibition'])->toArray()
                 );
-
-                $place->location_id = Arr::get($record, 'fields.Lokácia.0');
                 $place->save();
 
                 // save exhibition
