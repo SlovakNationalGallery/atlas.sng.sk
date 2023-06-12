@@ -40,8 +40,8 @@
     "Group of :count artworks": "Skupina :count diel",
     "More about artworks in the group": "Viac o dielach v skupine",
     "Group › Artwork detail": "Skupina › Detail diela",
-    "Zoom on the artwork": "Zoom na dielo",
-    "or find more works from the artist": "alebo ďalšie ukážky z tvorby",
+    "Explore the artwork": "Preskúmaj dielo",
+    "in the webumenia.sk catalogue": "v katalógu webumenia.sk",
     "Play video": "Prehraj video",
     "The exhibition trail containing this artwork": "Trasa výstavou obsahujúca toto dielo",
     "Go to the trail": "Prejsť na trasu",
@@ -95,5 +95,6 @@
     "Are you sure you want to reset your conversation with Ester? It will start from the very beginning. This step can not be undone.": "Naozaj chceš resetovať tvoju konverzáciu s Ester? Začneš tak od úplného začiatku. Tento krok nejde vrátiť.",
     "Your collection remains saved!": "Tvoja kolekcia zostáva uložená!",
     "Location": "Lokácia",
-    "floor": "podlažie"
+    "floor": "podlažie",
+    "Other works by the artist": "Ďalšie diela od autora"
 }
