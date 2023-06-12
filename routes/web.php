@@ -21,12 +21,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/items', function (Request $request) {
-    $items = Item::with('code', 'code.exhibition')
-        ->get()
-        ->sortBy(function ($item) {
-            return $item->code->exhibition_id;
+    $exhibition = null;
+    $query = Item::with('code', 'code.exhibition');
+    if ($request->has('exhibition_id')) {
+        $exhibition = Exhibition::findOrFail($request->get('exhibition_id'));
+        $query->whereHas('code.exhibition', function ($query) use ($request) {
+            $query->where('id', $request->get('exhibition_id'));
         });
-    return response()->view('items', compact('items'));
+    }
+    $items = $query->get()
+        ->sortBy(function ($item) {
+            return $item->code?->exhibition_id;
+        });
+    return response()->view('items', compact('items', 'exhibition'));
 });
 
 Route::get('/sections', function () {
