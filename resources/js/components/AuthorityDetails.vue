@@ -58,9 +58,11 @@ onMounted(async () => {
 
 const openPreview = (item) => {
     previewItem.value = item
+    document.body.style.overflow = 'hidden'
 }
 
 const closePreview = () => {
     previewItem.value = null
+    document.body.style.overflow = 'auto'
 }
 </script>
