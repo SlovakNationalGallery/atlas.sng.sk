@@ -10,7 +10,10 @@
                     {{ found.length }}/{{ bucketlist.items.length }} {{ $t('artworks found') }}
                 </template>
             </p>
-            <router-link class="block" :to="{ name: 'reward_detail', params: { id: bucketlist.id } }">
+            <router-link
+                :class="[{ 'pointer-events-none': !unlocked }, 'block']"
+                :to="{ name: 'reward_detail', params: { id: bucketlist.id } }"
+            >
                 <Thumbnail :class="[unlocked ? 'bg-white' : 'bg-gray-dark/15']" :truncate-description="false">
                     <template #image>
                         <ResponsiveImageWithSizes
