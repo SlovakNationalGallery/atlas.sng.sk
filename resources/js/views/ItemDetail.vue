@@ -81,12 +81,18 @@
             </Collapsible>
             <StoryButton :storyId="item.story_id" class="my-4" v-if="item.story_id" />
             <WebumeniaButton :url="item.webumenia_url" class="my-4" />
-            <HistoryBack v-slot="{ back }">
-                <ConfirmButton class="group bg-white" @click="back">
-                    <SvgBack class="mr-2 group-active:stroke-white" />
-                    {{ $t('Back') }}
-                </ConfirmButton>
-            </HistoryBack>
+        </div>
+        <div
+            class="pointer-events-none fixed bottom-0 h-24 w-full bg-gradient-to-t from-white to-transparent md:max-w-lg"
+        >
+            <div class="p-4 pt-8">
+                <HistoryBack v-slot="{ back }">
+                    <ConfirmButton class="group bg-white" @click="back">
+                        <SvgBack class="mr-2 group-active:stroke-white" />
+                        {{ $t('Back') }}
+                    </ConfirmButton>
+                </HistoryBack>
+            </div>
         </div>
     </div>
 </template>
