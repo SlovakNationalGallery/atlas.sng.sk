@@ -22,7 +22,7 @@ class ImportItemsJob implements ShouldQueue
         $item_ids = [];
         $records = Airtable::table('items')
             ->where('Publikovať', true)
-            ->get();
+            ->all();
         $records->each(function ($record) use ($exhibition_ids, &$item_ids) {
             $item_ids[] = $record['fields']['ID'];
 
