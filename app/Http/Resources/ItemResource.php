@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use App\Models\Authority;
 use App\Models\Bucketlist;
+use Illuminate\Support\Str;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ItemResource extends JsonResource
@@ -34,13 +35,15 @@ class ItemResource extends JsonResource
             'title' => $this['webumenia_item']->title,
             'author' => $this->getAuthor(),
             'author_description' => $this['item']->author_description,
-            'dating' => $this['webumenia_item']->dating,
+            'dating' =>$this['webumenia_item']->dating,
+            'dating_short' => Str::afterLast($this['webumenia_item']->dating, ','),
             'description' => $this->getDescription(),
             'authorities' => AuthorityResource::collection($authorities),
             'image_src' => $this->getImageRoute(),
             'image_srcset' => collect([220, 300, 600, 800])
                 ->map(fn($width) => $this->getImageRoute($width) . " ${width}w")
                 ->join(', '),
+            'image_aspect_ratio' => $this['webumenia_item']->image_ratio,
             'webumenia_url' => config('services.webumenia.url') . '/dielo/' . $this['webumenia_item']->id,
             'code' => $this['item']->code ? $this['item']->code->code : null,
             'offset_top' => $this['item']->offset_top,

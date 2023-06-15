@@ -41,8 +41,8 @@
     "Group of :count artworks": "Skupina :count diel",
     "More about artworks in the group": "Viac o dielach v skupine",
     "Group › Artwork detail": "Skupina › Detail diela",
-    "Zoom on the artwork": "Zoom na dielo",
-    "or find more works from the artist": "alebo ďalšie ukážky z tvorby",
+    "Explore the artwork": "Preskúmaj dielo",
+    "in the webumenia.sk catalogue": "v katalógu webumenia.sk",
     "Play video": "Prehraj video",
     "The exhibition trail containing this artwork": "Trasa výstavou obsahujúca toto dielo",
     "Go to the trail": "Prejsť na trasu",
@@ -111,5 +111,6 @@
     "The artwork will be saved to your history": "Preskúmané dielo sa uloží do tvojej histórie",
     ":title set": "Séria :title",
     "Location": "Lokácia",
-    "floor": "podlažie"
+    "floor": "podlažie",
+    "Other works by the artist": "Ďalšie diela od autora"
 }

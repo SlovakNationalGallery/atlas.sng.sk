@@ -118,3 +118,16 @@ Route::get('/bucketlists/{id}', function (string $id) {
         'webumenia_items' => collect($responses)->map(fn(Response $response) => $response->object()->data),
     ]);
 });
+
+Route::get('/related_items/{ids}', function (string $ids) {
+    $idArray = explode(',', $ids);
+    $related_items = collect([]);
+    foreach ($idArray as $item_id) {
+        $response = Http::webumenia()->get("/v2/items/$item_id");
+        $related_items[] = [
+            'item' => new Item(),
+            'webumenia_item' => $response->object()->data  
+        ];
+    }
+    return ItemResource::collection($related_items);
+});
