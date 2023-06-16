@@ -85,7 +85,7 @@
         <div
             class="pointer-events-none fixed bottom-0 h-24 w-full bg-gradient-to-t from-white to-transparent md:max-w-lg"
         >
-            <div class="p-4 pt-8">
+            <div class="pointer-events-auto p-4 pt-8">
                 <HistoryBack v-slot="{ back }">
                     <ConfirmButton class="group bg-white" @click="back">
                         <SvgBack class="mr-2 group-active:stroke-white" />
