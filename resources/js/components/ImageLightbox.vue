@@ -1,6 +1,6 @@
 <template>
     <div role="link" class="relative" @click="visible = true">
-        <ItemImage :offset-top="offset_top" :alt="alt" :src="src" :srcset="srcset"></ItemImage>
+        <ItemImage :offset-top="offsetTop" :alt="alt" :src="src" :srcset="srcset"></ItemImage>
         <button
             class="absolute bottom-3 right-3 flex items-center rounded-xl bg-black/70 py-1 px-2 text-sm font-medium text-white"
         >
