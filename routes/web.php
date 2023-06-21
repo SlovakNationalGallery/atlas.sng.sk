@@ -5,6 +5,7 @@ use App\Models\Place;
 use App\Models\Story;
 use App\Jobs\ImportJob;
 use App\Models\Section;
+use App\Models\Exhibition;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,12 +21,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/items', function (Request $request) {
-    $items = Item::with('code', 'code.exhibition')
-        ->get()
-        ->sortBy(function ($item) {
-            return $item->code->exhibition_id;
+    $exhibition = null;
+    $query = Item::with('code', 'code.exhibition');
+    if ($request->has('exhibition_id')) {
+        $exhibition = Exhibition::findOrFail($request->get('exhibition_id'));
+        $query->whereHas('code.exhibition', function ($query) use ($request) {
+            $query->where('id', $request->get('exhibition_id'));
         });
-    return response()->view('items', compact('items'));
+    }
+    $items = $query->get()
+        ->sortBy(function ($item) {
+            return $item->code?->exhibition_id;
+        });
+    return response()->view('items', compact('items', 'exhibition'));
 });
 
 Route::get('/sections', function () {
@@ -44,6 +52,11 @@ Route::get('/places', function () {
             return $section->code->exhibition_id;
         });
     return response()->view('places', compact('places'));
+});
+
+Route::get('/exhibitions', function () {
+    $exhibitions = Exhibition::withCount('codes')->get();
+    return response()->view('exhibitions', compact('exhibitions'));
 });
 
 Route::get('/stories', function () {

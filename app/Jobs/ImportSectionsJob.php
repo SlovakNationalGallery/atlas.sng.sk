@@ -44,7 +44,9 @@ class ImportSectionsJob implements ShouldQueue
             $airtableIds = Arr::get($record, 'fields.Diela sekcie', []);
             $itemsLookup = Item::whereIn('airtable_id', $airtableIds)->pluck('id', 'airtable_id');
             $section->items()->sync(
-                collect($airtableIds)->mapWithKeys(
+                collect($airtableIds)
+                ->filter(fn($airtableId) => $itemsLookup->has($airtableId))                
+                ->mapWithKeys(
                     fn ($airtableId, $index) => [
                         $itemsLookup[$airtableId] => [
                             'ord' => $index,
