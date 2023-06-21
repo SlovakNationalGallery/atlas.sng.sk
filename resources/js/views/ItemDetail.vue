@@ -1,9 +1,16 @@
 <template>
     <div v-if="item">
-        <article class="bg-green/20 p-4 pb-5" v-if="bucketlist">
-            <h3 class="text-1.5xl font-medium">{{ $t('You’ve found a special artwork') }}</h3>
-            <p class="mt-2 leading-snug">{{ $t('Collect all artworks in the set to unlock a reward') }}</p>
-            <router-link :to="{ name: 'my_collection' }" class="mt-3 block">
+        <article :class="`${unlocked ? 'bg-green/80' : 'bg-green/20'} p-4 pb-5`" v-if="bucketlist">
+            <h3 class="text-1.5xl font-medium">
+                {{ $t(unlocked ? "You've found all artworks from the series" : 'You’ve found a special artwork') }}
+            </h3>
+            <p class="mt-2 leading-snug">
+                {{ $t(unlocked ? 'Check out the reward' : 'Collect all artworks in the set to unlock a reward') }}
+            </p>
+            <router-link
+                :to="unlocked ? { name: 'reward_detail', params: { id: bucketlist.id }} : { name: 'my_collection' }"
+                class="mt-3 block"
+            >
                 <Thumbnail class="bg-white">
                     <template #image>
                         <ResponsiveImageWithSizes
@@ -15,7 +22,8 @@
                     <template #description>
                         <span class="leading-6 text-black">
                             <strong>{{ found.length }}/{{ bucketlist.items.length }} {{ $t('artworks found') }}</strong>
-                            <br />{{ $t('Tap to find more') }}
+                            <br />
+                            {{ $t(unlocked ? 'Explore the topic and claim your reward' : 'Tap to find more') }}
                         </span>
                     </template>
                 </Thumbnail>
@@ -127,6 +135,7 @@ const itemStore = useItemStore()
 const item = ref(null)
 const bucketlist = ref(null)
 const found = computed(() => bucketlist.value.items.filter((item) => interactionStore.isItemViewed(item.id)))
+const unlocked = computed(() => found.value.length === bucketlist.value.items.length)
 
 onMounted(async () => {
     const id = route.params.id
