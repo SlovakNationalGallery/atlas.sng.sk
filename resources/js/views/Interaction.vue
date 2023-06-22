@@ -51,8 +51,9 @@
 </style>
 
 <script setup>
-import { nextTick, onMounted } from 'vue'
+import { nextTick, onMounted, watch, onUnmounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
+import { storeToRefs } from 'pinia'
 import CodePanel from '../components/CodePanel.vue'
 import InteractionItemFavourited from '../components/InteractionItemFavourited.vue'
 import InteractionItemViewed from '../components/InteractionItemViewed.vue'
@@ -64,6 +65,8 @@ import { useItemStore } from '../stores/ItemStore'
 import { useSectionStore } from '../stores/SectionStore'
 import { useStoryStore } from '../stores/StoryStore'
 import { usePlaceStore } from '../stores/PlaceStore'
+import { useSurveyStore } from '../stores/SurveyStore'
+import { useSurvey } from '../composables/Survey'
 
 const interactionStore = useInteractionStore()
 const itemStore = useItemStore()
@@ -123,4 +126,21 @@ onMounted(async () => {
 
     nextTick(scrollActiveIntoView)
 })
+const surveyTimeoutId = ref()
+
+onUnmounted(() => {
+    clearTimeout(surveyTimeoutId.value)
+})
+
+const store = useSurveyStore()
+const { toggle: toggleSurvey } = useSurvey()
+const { shouldLaunch } = storeToRefs(store)
+
+watch(shouldLaunch, () => {
+    if (shouldLaunch.value) {
+        surveyTimeoutId.value = setTimeout(toggleSurvey, 1000)
+    }
+}, { immediate: true })
+
+
 </script>
