@@ -17,7 +17,7 @@
                     </div>
 
                     <div class="m-4 space-y-4 text-xl">
-                        <div class="flex rounded-xl border-2 border-black bg-green/30 p-2.5" v-if="!isDone">
+                        <div class="flex rounded-xl border-2 border-black bg-green/30 p-2.5" v-if="!isSurveyDone">
                             <div class="shrink-0">
                                 <SvgInfo />
                             </div>
@@ -153,16 +153,13 @@ import CardModal from '../components/CardModal.vue'
 import ConfirmButton from '../components/ConfirmButton.vue'
 import SvgLogo from './svg/Logo.vue'
 import SvgInfo from './svg/Info.vue'
-import { useSurveyStore } from '../stores/SurveyStore'
 import { useInteractionStore } from '../stores/InteractionStore'
 import { useSurvey } from '../composables/Survey'
-import { storeToRefs } from 'pinia'
 
 const props = defineProps(['opened'])
 const router = useRouter()
 const interactionStore = useInteractionStore()
-const { isDone } = storeToRefs(useSurveyStore())
-const { toggle: toggleSurvey } = useSurvey()
+const { toggle: toggleSurvey, isDone: isSurveyDone } = useSurvey()
 
 const shownResetModal = ref(false)
 
