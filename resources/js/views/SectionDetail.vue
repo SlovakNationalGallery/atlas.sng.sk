@@ -1,7 +1,6 @@
 <template>
-    <div class="relative w-full border-b-2 border-black bg-gray-softest">
-        <ImageLightbox
-            v-if="section.image"
+    <div class="relative w-full border-b-2 border-black bg-gray-softest" v-if="section">
+        <ImageLightbox v-if="section.image"
             :alt="section.title"
             :src="section.image.image_src"
             :srcset="section.image.image_srcset"
@@ -46,7 +45,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref, computed } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useSectionStore } from '../stores/SectionStore'
 import { useInteractionStore } from '../stores/InteractionStore'
