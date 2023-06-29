@@ -2,8 +2,8 @@
     <div class="relative w-full border-b-2 border-black bg-gray-softest" v-if="section">
         <ImageLightbox v-if="section.image"
             :alt="section.title"
-            :src="section.image.image_src"
-            :srcset="section.image.image_srcset"
+            :src="section.image.src"
+            :srcset="section.image.srcset"
         />
         <!-- Add space if section image is missing -->
         <div v-else class="h-12 w-full" />
