@@ -67,6 +67,6 @@ class ImportStoriesJob implements ShouldQueue
             );
         });
 
-        $mapped['stories']->each(fn($record) => $this->syncMedia(Story::find($record['id']), $record));
+        $mapped['stories']->each(fn($record) => self::syncMedia(Story::find($record['id']), $record));
     }
 }

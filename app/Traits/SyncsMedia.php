@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 
 trait SyncsMedia
 {
-    protected function syncMedia(Model $model, Collection $upstream, String $field_name = 'media'): void
+    protected static function syncMedia(Model $model, Collection $upstream, String $field_name = 'media'): void
     {
         $importedAirtableIds = $model
             ->media()

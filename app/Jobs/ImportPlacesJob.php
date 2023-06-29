@@ -52,7 +52,7 @@ class ImportPlacesJob implements ShouldQueue
                 }
 
                 // sync media
-                $this->syncMedia($place, $upstreamPlace);
+                self::syncMedia($place, $upstreamPlace);
             });
         });
     }

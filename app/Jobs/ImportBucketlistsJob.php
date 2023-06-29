@@ -55,7 +55,7 @@ class ImportBucketlistsJob implements ShouldQueue
             );
         });
 
-        $records->each(fn($record) => $this->syncMedia(Bucketlist::find($record['id']), $record));
+        $records->each(fn($record) => self::syncMedia(Bucketlist::find($record['id']), $record));
     }
 
 }

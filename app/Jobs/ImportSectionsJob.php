@@ -54,7 +54,7 @@ class ImportSectionsJob implements ShouldQueue
                 $section->code->save();
             }
 
-            $this->syncMedia($section, $record);
+            self::syncMedia($section, $record);
         });
 
         // remove the remaining sections and detach relations with related items
