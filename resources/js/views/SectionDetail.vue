@@ -1,11 +1,13 @@
 <template>
-    <div class="relative w-full border-b-2 border-black bg-gray-softest" v-if="header">
+    <div class="relative w-full border-b-2 border-black bg-gray-softest">
         <ImageLightbox
-            :alt="`${header.author}: ${header.title}`"
-            :src="header.image_src"
-            :srcset="header.image_srcset"
-            :offset-top="header.offset_top"
+            v-if="section.image"
+            :alt="section.title"
+            :src="section.image.image_src"
+            :srcset="section.image.image_srcset"
         />
+        <!-- Add space if section image is missing -->
+        <div v-else class="h-12 w-full" />
     </div>
 
     <div class="relative h-full border-black px-4 pb-24 pt-8" v-if="section">
@@ -46,19 +48,19 @@
 <script setup>
 import { onMounted, ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
+import { useSectionStore } from '../stores/SectionStore'
 import { useInteractionStore } from '../stores/InteractionStore'
 import HistoryBack from '../components/HistoryBack.vue'
 import ConfirmButton from '../components/ConfirmButton.vue'
 import ItemThumbnail from '../components/ItemThumbnail.vue'
 import ImageLightbox from '../components/ImageLightbox.vue'
-import { useSectionStore } from '../stores/SectionStore'
+import SvgBack from '../components/svg/Back.vue'
 
 const route = useRoute()
 const props = defineProps(['section'])
 const interactionStore = useInteractionStore()
 const sectionStore = useSectionStore()
 const section = ref(null)
-const header = computed(() => section.value.items[0])
 
 onMounted(async () => {
     const id = route.params.id
