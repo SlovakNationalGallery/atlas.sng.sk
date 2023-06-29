@@ -2,20 +2,21 @@
 
 namespace App\Jobs;
 
-use App\DataMappers\AirtableMapper;
 use App\Models\Story;
 use App\Models\StoryLink;
+use App\Traits\SyncsMedia;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use App\DataMappers\AirtableMapper;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
 
 class ImportStoriesJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, SyncsMedia;
 
     public function handle()
     {
@@ -66,42 +67,6 @@ class ImportStoriesJob implements ShouldQueue
             );
         });
 
-        $mapped['stories']->each(function ($upstreamStory) {
-            $story = Story::find($upstreamStory['id']);
-
-            $importedAirtableIds = $story
-                ->media()
-                ->pluck('custom_properties')
-                ->pluck('airtable_id');
-
-            $upstreamAirtableIds = collect($upstreamStory['media'])->pluck('id');
-
-            if ($importedAirtableIds == $upstreamAirtableIds) {
-                return;
-            }
-
-            // Inserts
-            collect($upstreamStory['media'])
-                ->reject(fn($media) => $importedAirtableIds->contains($media['id']))
-                ->each(function ($media) use ($story) {
-                    $story
-                        ->addMediaFromUrl($media['url'])
-                        ->withCustomProperties([
-                            'airtable_id' => $media['id'],
-                        ])
-                        ->withResponsiveImages()
-                        ->toMediaCollection();
-                });
-
-            // Sorting
-            $upstreamAirtableIds->each(function ($airtableId, $index) use ($story) {
-                $story
-                    ->media()
-                    ->where('custom_properties->airtable_id', $airtableId)
-                    ->update([
-                        'order_column' => $index + 1, // medialibrary sorts from 1 by default
-                    ]);
-            });
-        });
+        $mapped['stories']->each(fn($record) => self::syncMedia(Story::find($record['id']), $record));
     }
 }

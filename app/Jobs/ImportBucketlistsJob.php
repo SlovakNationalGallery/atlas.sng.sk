@@ -7,17 +7,14 @@ use App\Models\Bucketlist;
 use App\Models\Item;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
-
+use App\Traits\SyncsMedia;
 class ImportBucketlistsJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, SyncsMedia;
 
     public function handle()
     {
@@ -58,49 +55,7 @@ class ImportBucketlistsJob implements ShouldQueue
             );
         });
 
-        $records->each(fn($record) => $this->syncMedia(Bucketlist::find($record['id']), $record));
+        $records->each(fn($record) => self::syncMedia(Bucketlist::find($record['id']), $record));
     }
 
-    protected function syncMedia(Model $model, Collection $upstream): void
-    {
-        $importedAirtableIds = $model
-            ->media()
-            ->pluck('custom_properties')
-            ->pluck('airtable_id');
-
-        $upstreamAirtableIds = collect($upstream['media'])->pluck('id');
-
-        if ($importedAirtableIds == $upstreamAirtableIds) {
-            return;
-        }
-
-        // Inserts
-        $media = collect($upstream['media'])
-            ->reject(fn($media) => $importedAirtableIds->contains($media['id']))
-            ->map(function ($upstreamMediaItem) use ($model) {
-                return $model
-                    ->addMediaFromUrl($upstreamMediaItem['url'])
-                    ->withCustomProperties([
-                        'airtable_id' => $upstreamMediaItem['id'],
-                    ])
-                    ->withResponsiveImages()
-                    ->toMediaCollection();
-            });
-
-        // Deletes
-        $model
-            ->getMedia()
-            ->reject(fn(Media $item) => $upstreamAirtableIds->contains($item->getCustomProperty('airtable_id')))
-            ->each(fn(Media $media) => $media->delete());
-
-        // Sorting
-        $upstreamAirtableIds->each(function ($airtableId, $index) use ($model) {
-            $model
-                ->media()
-                ->where('custom_properties->airtable_id', $airtableId)
-                ->update([
-                    'order_column' => $index + 1, // medialibrary sorts from 1 by default
-                ]);
-        });
-    }
 }

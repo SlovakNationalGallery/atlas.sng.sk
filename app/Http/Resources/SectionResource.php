@@ -19,6 +19,7 @@ class SectionResource extends JsonResource
             'id' => $this['section']->id,
             'title' => $this['section']->title,
             'description' => str($this['section']->description)->markdownWithLineBreaks(),
+            'image' => new ImageResource($this['section']->getFirstMedia()),
             'code' => $this['section']->code->code,
             'items' => ItemResource::collection($this->items()),
             'location_formatted' => $this['section']->location?->__toString(),
