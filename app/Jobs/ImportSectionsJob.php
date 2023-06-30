@@ -19,9 +19,8 @@ class ImportSectionsJob implements ShouldQueue
 
     public function handle()
     {
-        $exhibition_ids = Exhibition::all()->pluck('id');
         $records = Airtable::table('sections')->where('Publikovať', true)->get();
-        $records->each(function ($record) use ($exhibition_ids) {
+        $records->each(function ($record) {
             $section = Section::unguarded(
                 fn () => Section::firstOrNew([
                     'id' => $record['id'],
@@ -55,7 +54,7 @@ class ImportSectionsJob implements ShouldQueue
                 )
             );
 
-            if ($section->code && $exhibition_ids->contains(Arr::get($record, 'fields.Výstava.0'))) {
+            if ($section->code) {
                 $section->code->exhibition_id = Arr::get($record, 'fields.Výstava.0');
                 $section->code->save();
             }
