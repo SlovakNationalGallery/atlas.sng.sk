@@ -1,33 +1,24 @@
 <template>
     <div v-if="item">
-        <article :class="`${unlocked ? 'bg-green/80' : 'bg-green/20'} p-4 pb-5`" v-if="bucketlist">
-            <h3 class="text-1.5xl font-medium">
-                {{ $t(unlocked ? "You've found all artworks from the series" : 'You’ve found a special artwork') }}
-            </h3>
-            <p class="mt-2 leading-snug">
-                {{ $t(unlocked ? 'Check out the reward' : 'Collect all artworks in the set to unlock a reward') }}
-            </p>
-            <router-link
-                :to="unlocked ? { name: 'reward_detail', params: { id: bucketlist.id }} : { name: 'my_collection' }"
-                class="mt-3 block"
-            >
-                <Thumbnail class="bg-white">
-                    <template #image>
-                        <ResponsiveImageWithSizes
-                            class="h-full w-full object-cover"
-                            :image="{ src: bucketlist.image.src, srcset: bucketlist.image.srcset }"
-                        />
-                    </template>
-                    <template #title>{{ bucketlist.title }}</template>
-                    <template #description>
-                        <span class="leading-6 text-black">
-                            <strong>{{ found.length }}/{{ bucketlist.items.length }} {{ $t('artworks found') }}</strong>
-                            <br />
-                            {{ $t(unlocked ? 'Explore the topic and claim your reward' : 'Tap to find more') }}
-                        </span>
-                    </template>
-                </Thumbnail>
-            </router-link>
+        <article class="flex justify-between border-b-2 bg-green/20 p-4 pb-5" v-if="bucketlist">
+            <div>
+                <h3 class="font-medium">
+                    {{ $t('Scavenger hunt:') }} <span class="italic">{{ bucketlist.title }}</span>
+                </h3>
+                <p class="mt-1 text-2xl font-medium leading-snug">
+                    {{ $t(':found of :all artworks found', { found: found.length, all: bucketlist.items.length }) }}
+                </p>
+            </div>
+            <div class="flex items-center">
+                <router-link
+                    tag="button"
+                    :to="
+                        unlocked ? { name: 'reward_detail', params: { id: bucketlist.id } } : { name: 'my_collection' }
+                    "
+                    class="rounded-xl border-2 bg-green px-4 py-3 text-center font-bold capitalize leading-none"
+                    >{{ $t(unlocked ? 'reward' : 'list') }}</router-link
+                >
+            </div>
         </article>
         <div class="relative w-full border-b-2 border-black bg-gray-softest">
             <ImageMovable
