@@ -1,7 +1,7 @@
 <template>
     <router-link :to="{ name: 'my_collection' }" class="relative">
         <div class="flex h-full items-center justify-end">
-            <div class="text-lg font-bold">{{ interactionStore.viewedItemsCount }}</div>
+            <div class="mr-1 text-lg font-bold">{{ interactionStore.viewedItemsCount }}</div>
             <SvgEye :class="{ '!fill-green': interactionStore.viewedItemsCount }" />
         </div>
         <Transition

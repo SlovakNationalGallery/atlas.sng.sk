@@ -1,6 +1,7 @@
 <template>
     <div>
-        <Bucketlist :id="bucketlistId" v-if="bucketlistId" />
+        <Bucketlist :id="bucketlistId" v-if="bucketlistId" class="px-4 py-6" />
+        <hr class="border border-gray-soft" />
         <Timeline />
     </div>
 </template>
