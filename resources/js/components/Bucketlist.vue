@@ -2,7 +2,7 @@
     <article v-if="bucketlist" class="space-y-6">
         <div class="space-y-4">
             <h2 class="text-2xl font-medium leading-6">
-                {{ $t('Scavenger hunt:') }} <span class="italic">{{ bucketlist.title }}</span>
+                {{ $t('Scavenger hunt:') }} {{ bucketlist.title }}
             </h2>
             <p class="text-3xl font-bold leading-snug">
                 {{ $t(':found of :all artworks found', { found: found.length, all: bucketlist.items.length }) }}
