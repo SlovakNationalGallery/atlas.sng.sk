@@ -95,9 +95,8 @@
     "Reset the conversation": "Resetuj konverzáciu",
     "Are you sure you want to reset your conversation with Ester? It will start from the very beginning. This step can not be undone.": "Naozaj chceš resetovať tvoju konverzáciu s Ester? Začneš tak od úplného začiatku. Tento krok nejde vrátiť.",
     "Your collection remains saved!": "Tvoja kolekcia zostáva uložená!",
-    "Set of the month": "Séria mesiaca",
     "Collect all artworks to unlock this story": "Nájdi všetky diela a odomkneš tento príbeh",
-    "Found artworks": "Nájdené diela série",
+    "Found": "Nájdené diela",
     "Not found yet": "Zostávajúce diela",
     "You’ve found a special artwork": "Dielo je súčasťou série mesiaca",
     "Collect all artworks in the set to unlock a reward": "Nájdi všetky diela série a odomkneš odmenu",
@@ -118,5 +117,7 @@
     "reward": "odmena",
     "Location": "Lokácia",
     "floor": "podlažie",
-    "Other works by the artist": "Ďalšie diela od autora"
+    "Other works by the artist": "Ďalšie diela od autora",
+    "Find and explore all the works in the list. Discover what they have in common and unlock your reward.": "Nájdi a preskúmaj všetky diela v zozname. Zistíš, čo majú spoločné a odomkneš odmenu.",
+    "The story unlocks when all artworks have been found": "Príbeh sa odomkne po nájdení všetkých diel"
 }

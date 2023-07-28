@@ -2,7 +2,7 @@
     <Thumbnail>
         <template #image>
             <ResponsiveImageWithSizes
-                class="h-full object-cover w-full"
+                class="h-full w-full rounded-xl object-cover"
                 :image="{ src: item.image_src, srcset: item.image_srcset }"
             />
         </template>
@@ -12,7 +12,6 @@
 </template>
 
 <script setup>
-import ResponsiveImage from './ResponsiveImage.vue'
 import ResponsiveImageWithSizes from './ResponsiveImageWithSizes.vue'
 import Thumbnail from './Thumbnail.vue'
 
