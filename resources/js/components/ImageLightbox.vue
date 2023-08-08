@@ -13,8 +13,9 @@
         v-if="visible"
         @click="visible = false"
     >
-        <div class="relative max-h-full md:max-w-lg" @click.stop="visible = false">
-            <img :src="src" class="rounded-xl object-contain" />
+        <div :class="[images.length ? 'h-full' : 'max-h-full', 'relative rounded-xl bg-gray-soft w-full max-w-lg']" :style="{ aspectRatio: imageAspectRatio}" @click.stop>
+            <img v-if="!images.length" :src="src" class="rounded-xl object-contain" />
+            <ZoomViewer v-else :tileSources="images" />
             <button
                 class="absolute top-0 right-0 cursor-pointer rounded-tr-xl bg-white p-1.5"
                 @click.stop="visible = false"
@@ -30,7 +31,9 @@ import { ref } from 'vue'
 import ItemImage from './ItemImage.vue'
 import SvgArrowsOut from './svg/ArrowsOut.vue'
 import SvgClose from './svg/Close.vue'
+import ZoomViewer from './ZoomViewer.vue'
 
-const props = defineProps(['alt', 'offsetTop', 'src', 'srcset'])
+const props = defineProps(['alt', 'offsetTop', 'src', 'srcset', 'images', 'imageAspectRatio'])
+
 const visible = ref(false)
 </script>

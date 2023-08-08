@@ -13,6 +13,8 @@
             :src="item.image_src"
             :srcset="item.image_srcset"
             :offset-top="item.offset_top"
+            :images="item.images"
+            :image-aspect-ratio="item.image_aspect_ratio"
         />
     </div>
     <div class="relative h-full border-black px-4 pb-24 pt-8" v-if="item">
