@@ -13,7 +13,7 @@
         v-if="visible"
         @click="visible = false"
     >
-        <div class="relative max-h-full rounded-xl bg-gray-soft md:max-w-lg w-full" :style="{ aspectRatio: imageAspectRatio}" @click.stop>
+        <div :class="[images.length ? 'h-full' : 'max-h-full', 'relative rounded-xl bg-gray-soft w-full max-w-lg']" :style="{ aspectRatio: imageAspectRatio}" @click.stop>
             <img v-if="!images.length" :src="src" class="rounded-xl object-contain" />
             <ZoomViewer v-else :tileSources="images" />
             <button
