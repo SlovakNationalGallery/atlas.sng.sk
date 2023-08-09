@@ -18,12 +18,11 @@ class ImportItemsJob implements ShouldQueue
 
     public function handle()
     {
-        $exhibition_ids = Exhibition::all()->pluck('id');
         $item_ids = [];
         $records = Airtable::table('items')
             ->where('Publikovať', true)
             ->all();
-        $records->each(function ($record) use ($exhibition_ids, &$item_ids) {
+        $records->each(function ($record) use (&$item_ids) {
             $item_ids[] = $record['fields']['ID'];
 
             $item = Item::unguarded(
@@ -69,7 +68,7 @@ class ImportItemsJob implements ShouldQueue
 
             $item->save();
 
-            if ($item->code && $exhibition_ids->contains(Arr::get($record, 'fields.Výstava.0'))) {
+            if ($item->code) {
                 $item->code->exhibition_id = Arr::get($record, 'fields.Výstava.0');
                 $item->code->save();
             }

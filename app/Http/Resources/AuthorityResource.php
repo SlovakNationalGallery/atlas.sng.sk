@@ -16,8 +16,8 @@ class AuthorityResource extends JsonResource
             'biography' => $this->getBiography(),
             'birth_place' => $this['webumenia_authority']->birth_place,
             'death_place' => $this['webumenia_authority']->death_place,
-            'birth_date' => $this['webumenia_authority']->birth_date,
-            'death_date' => $this['webumenia_authority']->death_date,
+            'birth_date' => Str::afterLast($this['webumenia_authority']->birth_date,'.'),
+            'death_date' => Str::afterLast($this['webumenia_authority']->death_date, '.'),
             'image_url' => $this->getImageUrl($this['webumenia_authority']->image_path),
             'related_items' => $this['authority']->related_items ?? null,
         ];

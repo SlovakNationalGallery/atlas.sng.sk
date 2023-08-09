@@ -21,14 +21,12 @@ class ImportSectionsJob implements ShouldQueue
     public function handle()
     {
         $mapper = app(AirtableMapper::class);
-        $exhibition_ids = Exhibition::all()->pluck('id');
-
         $records = \Airtable::table('sections')
             ->where('Publikovať', true)
             ->all()
             ->pipe(fn($sections) => $mapper->mapTable($sections, 'sections', false));
 
-        $records->each(function ($record) use ($exhibition_ids) {
+        $records->each(function ($record) {
             $section = Section::updateOrCreate(
                 ['id' => $record['id']],
                 $record->except(['media', 'exhibition'])->toArray()
@@ -49,7 +47,7 @@ class ImportSectionsJob implements ShouldQueue
                 )
             );
 
-            if ($section->code && $exhibition_ids->contains($record['exhibition'])) {
+            if ($section->code) {
                 $section->code->exhibition_id = $record['exhibition'];
                 $section->code->save();
             }
