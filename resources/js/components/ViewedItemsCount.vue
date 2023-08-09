@@ -13,7 +13,7 @@
                 v-if="showTooltip"
                 class="absolute right-0.5 top-[52px] z-50 whitespace-nowrap border-2 border-black bg-green p-2 p-2 font-medium shadow-lg"
             >
-                {{ $t('We added this item to your timeline') }}
+                {{ $t('Artworks you explore are saved to your timeline') }}
             </div>
         </Transition>
     </router-link>
