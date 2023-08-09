@@ -17,7 +17,7 @@
                     </div>
 
                     <div class="m-4 space-y-4 text-xl">
-                        <div class="flex rounded-xl border-2 border-black bg-green/30 p-2.5">
+                        <div class="flex rounded-xl border-2 border-black bg-green/30 p-2.5" v-if="!isSurveyDone">
                             <div class="shrink-0">
                                 <SvgInfo />
                             </div>
@@ -27,7 +27,7 @@
                                         'The development of the app is ongoing, we are improving it according to feedback. Do you want to help us?'
                                     )
                                 }}
-                                <a href="#" class="underline" @click="getFeedback">{{
+                                <a href="#" class="underline" @click="toggleSurvey">{{
                                     $t('Fill out a brief survey!')
                                 }}</a>
                             </div>
@@ -153,27 +153,18 @@ import CardModal from '../components/CardModal.vue'
 import ConfirmButton from '../components/ConfirmButton.vue'
 import SvgLogo from './svg/Logo.vue'
 import SvgInfo from './svg/Info.vue'
-import { getActiveLanguage } from 'laravel-vue-i18n'
 import { useInteractionStore } from '../stores/InteractionStore'
-import { useSurveyStore } from '../stores/SurveyStore'
+import { useSurvey } from '../composables/Survey'
 
 const props = defineProps(['opened'])
 const router = useRouter()
 const interactionStore = useInteractionStore()
-const surveyStore = useSurveyStore()
+const { toggle: toggleSurvey, isDone: isSurveyDone } = useSurvey()
+
 const shownResetModal = ref(false)
 
 const resetInteraction = () => {
     interactionStore.clear()
     router.go()
-}
-
-const getFeedback = () => {
-    surveyStore.done()
-    if (getActiveLanguage() == 'sk') {
-        window.open(import.meta.env.VITE_SURVEY_SK, '_blank').focus()
-    } else {
-        window.open(import.meta.env.VITE_SURVEY_EN, '_blank').focus()
-    }
 }
 </script>

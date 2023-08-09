@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use App\Models\Item;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class SectionResource extends JsonResource
+class BucketlistResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,19 +16,19 @@ class SectionResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this['section']->id,
-            'title' => $this['section']->title,
-            'description' => str($this['section']->description)->markdownWithLineBreaks(),
-            'image' => new ImageResource($this['section']->getFirstMedia()),
-            'code' => $this['section']->code->code,
-            'items' => ItemResource::collection($this->items()),
-            'location_formatted' => $this['section']->location?->__toString(),
+            'id' => $this['bucketlist']->id,
+            'title' => $this['bucketlist']->title,
+            'text' => str($this['bucketlist']->text)->markdownWithLineBreaks(),
+            'image' => new ImageResource($this['bucketlist']->getFirstMedia()),
+            'items' => ItemResource::collection(
+                $this->when($this['bucketlist']->relationLoaded('items'), fn() => $this->items())
+            ),
         ];
     }
 
     protected function items()
     {
-        return $this['section']->items->map(
+        return $this['bucketlist']->items->map(
             fn(Item $item) => [
                 'item' => $item,
                 'webumenia_item' => $this['webumenia_items'][$item->id],

@@ -1,26 +1,18 @@
 import { defineStore } from 'pinia'
 import { useStorage } from '@vueuse/core'
 import axios from 'axios'
+import { useInteractionStore } from './InteractionStore'
 
 export const useItemStore = defineStore('ItemStore', {
     state: () => ({
-        favouriteItemIds: useStorage('favouriteItemIds', []),
         items: useStorage('items', {}),
         collectionLink: useStorage('collectionLink', null),
     }),
-    getters: {
-        favouritesCount() {
-            return this.favouriteItemIds.length
-        },
-    },
     actions: {
         get(id) {
             if (id in this.items) {
                 return this.items[id]
             }
-        },
-        isFavourite(id) {
-            return this.favouriteItemIds.includes(id)
         },
         async load(id) {
             const response = await axios.get(`/api/items/${id}`)
@@ -29,30 +21,18 @@ export const useItemStore = defineStore('ItemStore', {
         clearCollectionLink() {
             this.collectionLink = null
         },
-        addFavourite(id) {
-            if (!this.favouriteItemIds.includes(id)) {
-                this.favouriteItemIds.push(id)
-                this.clearCollectionLink()
-            }
-        },
-        removeFavourite(id) {
-            this.favouriteItemIds = this.favouriteItemIds.filter((favouriteItemId) => favouriteItemId !== id)
-            this.clearCollectionLink()
-        },
-        removeFavourites() {
-            this.favouriteItemIds = []
-            this.clearCollectionLink()
-        },
         clearCache() {
             this.items = {}
         },
         async getCollectionLink() {
+            const interactionStore = useInteractionStore()
+
             if (this.collectionLink) {
                 return this.collectionLink
             } else {
                 const response = await axios
                     .post('/api/collections', {
-                        items: this.favouriteItemIds,
+                        items: [...interactionStore.viewedItemIds],
                     })
                     .catch((err) => {
                         console.log(err)
@@ -65,7 +45,8 @@ export const useItemStore = defineStore('ItemStore', {
         async fetch(collectionId) {
             this.clearCollectionLink()
             this.items = {}
-            this.favouriteItemIds = (await axios.get(`/api/collections/${collectionId}`)).data
+            // todo
+            // this.viewedIds = (await axios.get(`/api/collections/${collectionId}`)).data
         },
     },
 })

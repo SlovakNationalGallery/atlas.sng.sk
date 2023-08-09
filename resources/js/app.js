@@ -12,6 +12,7 @@ import Interaction from './views/Interaction.vue'
 import ItemDetail from './views/ItemDetail.vue'
 import SectionDetail from './views/SectionDetail.vue'
 import PlaceDetail from './views/PlaceDetail.vue'
+import RewardDetail from './views/RewardDetail.vue'
 import { useHistoryStore } from './stores/HistoryStore'
 import { useLocaleStore } from './stores/LocaleStore'
 
@@ -79,6 +80,11 @@ const routes = [
         meta: {
             title: 'Place detail',
         },
+    },
+    {
+        name: 'reward_detail',
+        path: '/reward/:id',
+        component: RewardDetail,
     },
 ]
 

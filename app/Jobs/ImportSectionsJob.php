@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\DataMappers\AirtableMapper;
 use Airtable;
 use App\Models\Item;
 use App\Models\Section;
@@ -12,35 +13,27 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Support\Arr;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-
+use App\Traits\SyncsMedia;
 class ImportSectionsJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, SyncsMedia;
 
     public function handle()
     {
-        $records = Airtable::table('sections')->where('Publikovať', true)->get();
+        $mapper = app(AirtableMapper::class);
+        $records = \Airtable::table('sections')
+            ->where('Publikovať', true)
+            ->all()
+            ->pipe(fn($sections) => $mapper->mapTable($sections, 'sections', false));
+
         $records->each(function ($record) {
-            $section = Section::unguarded(
-                fn () => Section::firstOrNew([
-                    'id' => $record['id'],
-                ])
+            $section = Section::updateOrCreate(
+                ['id' => $record['id']],
+                $record->except(['media', 'exhibition'])->toArray()
             );
-
-            $section->title = [
-                'sk' => Arr::get($record, 'fields.Názov sekcie'),
-                'en' => Arr::get($record, 'fields.Názov sekcie EN'),
-            ];
-
-            $section->description = [
-                'sk' => Arr::get($record, 'fields.Text sekcie'),
-                'en' => Arr::get($record, 'fields.Text sekcie EN'),
-            ];
-
-            $section->location_id = Arr::get($record, 'fields.Lokácia.0');
             $section->save();
 
-            $airtableIds = Arr::get($record, 'fields.Diela sekcie', []);
+            $airtableIds = $record['items'];
             $itemsLookup = Item::whereIn('airtable_id', $airtableIds)->pluck('id', 'airtable_id');
             $section->items()->sync(
                 collect($airtableIds)
@@ -55,9 +48,11 @@ class ImportSectionsJob implements ShouldQueue
             );
 
             if ($section->code) {
-                $section->code->exhibition_id = Arr::get($record, 'fields.Výstava.0');
+                $section->code->exhibition_id = $record['exhibition'];
                 $section->code->save();
             }
+
+            self::syncMedia($section, $record);
         });
 
         // remove the remaining sections and detach relations with related items

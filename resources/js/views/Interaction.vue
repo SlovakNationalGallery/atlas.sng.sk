@@ -36,7 +36,6 @@
             </template>
         </TransitionGroup>
     </div>
-
     <CodePanel />
 </template>
 
@@ -53,6 +52,7 @@
 
 <script setup>
 import { nextTick, onMounted } from 'vue'
+import { watchDebounced } from '@vueuse/core'
 import { useRoute } from 'vue-router'
 import CodePanel from '../components/CodePanel.vue'
 import InteractionItemFavourited from '../components/InteractionItemFavourited.vue'
@@ -65,6 +65,7 @@ import { useItemStore } from '../stores/ItemStore'
 import { useSectionStore } from '../stores/SectionStore'
 import { useStoryStore } from '../stores/StoryStore'
 import { usePlaceStore } from '../stores/PlaceStore'
+import { useSurvey } from '../composables/Survey'
 
 const interactionStore = useInteractionStore()
 const itemStore = useItemStore()
@@ -124,4 +125,16 @@ onMounted(async () => {
 
     nextTick(scrollActiveIntoView)
 })
+
+const { toggle: toggleSurvey, shouldLaunch: shouldSurveyLaunch } = useSurvey()
+
+watchDebounced(
+    shouldSurveyLaunch,
+    () => {
+        if (shouldSurveyLaunch.value) {
+            toggleSurvey()
+        }
+    },
+    { immediate: true, debounce: 1000 }
+)
 </script>

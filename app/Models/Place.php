@@ -33,5 +33,6 @@ class Place extends Model implements HasMedia
         'video_subtitle',
         'offset_top',
         'story_id',
+        'location_id',
     ];
 }

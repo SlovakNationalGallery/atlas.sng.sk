@@ -8,6 +8,9 @@ module.exports = {
             lineHeight: {
                 4.5: '1.125rem',
             },
+            opacity: {
+                15: '.15',
+            },
             padding: (theme) => ({
                 bar: `calc(1.5 * ${theme('fontSize.sm')} + ${theme('spacing.8')})`,
                 full: '100%',
@@ -48,6 +51,7 @@ module.exports = {
             xl: ['20px'],
             '1.5xl': ['22px'],
             '2xl': ['24px'],
+            '3xl': ['30px'],
         },
         fontWeight: {
             normal: '400',

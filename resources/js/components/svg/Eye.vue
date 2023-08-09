@@ -1,10 +1,8 @@
 <template>
-    <svg class="h-[24px] w-[24px] fill-none stroke-2 stroke-current [stroke-linecap:round] [stroke-linejoin:round]">
+    <svg class="h-8 w-8 fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]">
+        <path d="M16 7C6 7 2 16 2 16C2 16 6 25 16 25C26 25 30 16 30 16C30 16 26 7 16 7Z" />
         <path
-            d="M12 5.25C4.5 5.25 1.5 12 1.5 12C1.5 12 4.5 18.75 12 18.75C19.5 18.75 22.5 12 22.5 12C22.5 12 19.5 5.25 12 5.25Z"
-        />
-        <path
-            d="M12 15.75C14.0711 15.75 15.75 14.0711 15.75 12C15.75 9.92893 14.0711 8.25 12 8.25C9.92893 8.25 8.25 9.92893 8.25 12C8.25 14.0711 9.92893 15.75 12 15.75Z"
+            d="M16 21C18.7614 21 21 18.7614 21 16C21 13.2386 18.7614 11 16 11C13.2386 11 11 13.2386 11 16C11 18.7614 13.2386 21 16 21Z"
         />
     </svg>
 </template>

@@ -1,6 +1,6 @@
 <template>
     <div role="link" class="relative" @click="visible = true">
-        <ItemImage :offset-top="offsetTop" :alt="alt" :src="src" :srcset="srcset"></ItemImage>
+        <ItemImage :class="imgClass" :offset-top="offsetTop" :alt="alt" :src="src" :srcset="srcset"></ItemImage>
         <button
             class="absolute bottom-3 right-3 flex items-center rounded-xl bg-black/70 py-1 px-2 text-sm font-medium text-white"
         >
@@ -33,7 +33,7 @@ import SvgArrowsOut from './svg/ArrowsOut.vue'
 import SvgClose from './svg/Close.vue'
 import ZoomViewer from './ZoomViewer.vue'
 
-const props = defineProps(['alt', 'offsetTop', 'src', 'srcset', 'images', 'imageAspectRatio'])
+const props = defineProps(['alt', 'offsetTop', 'src', 'srcset', 'images', 'imageAspectRatio', 'imgClass'])
 
 const visible = ref(false)
 </script>

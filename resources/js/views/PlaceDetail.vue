@@ -69,13 +69,16 @@ import HistoryBack from '../components/HistoryBack.vue'
 import ResponsiveVideoEmbed from '../components/ResponsiveVideoEmbed.vue'
 import SvgBack from '../components/svg/Back.vue'
 import { usePlaceStore } from '../stores/PlaceStore'
+import { useInteractionStore } from '../stores/InteractionStore'
 
 const route = useRoute()
+const interactionStore = useInteractionStore()
 const placeStore = usePlaceStore()
 const place = ref(null)
 
 onMounted(async () => {
     const id = route.params.id
     place.value = await placeStore.load(id)
+    interactionStore.addPlaceViewed(place.value.id)
 })
 </script>

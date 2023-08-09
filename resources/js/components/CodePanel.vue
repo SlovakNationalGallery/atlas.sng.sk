@@ -34,7 +34,7 @@
                 </button>
             </div>
             <div class="flex-1 px-3">
-                <FavouritesCount />
+                <ViewedItemsCount />
             </div>
         </div>
 
@@ -66,10 +66,10 @@
 import { computed } from '@vue/reactivity'
 import { onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import CircleButton from '../components/CircleButton.vue'
-import FavouritesCount from '../components/FavouritesCount.vue'
-import HelpModal from '../components/HelpModal.vue'
 import { useInteractionStore } from '../stores/InteractionStore'
+import CircleButton from '../components/CircleButton.vue'
+import HelpModal from '../components/HelpModal.vue'
+import ViewedItemsCount from '../components/ViewedItemsCount.vue'
 
 const interactionStore = useInteractionStore()
 const router = useRouter()
@@ -97,21 +97,18 @@ const verifyCode = () => {
             const id = data.data.codeable_id
             switch (data.data.codeable_type) {
                 case 'item':
-                    interactionStore.addItemViewed(id)
                     router.push({
                         name: 'item_detail',
                         params: { id },
                     })
                     break
                 case 'section':
-                    interactionStore.addSectionViewed(id)
                     router.push({
                         name: 'section_detail',
                         params: { id },
                     })
                     break
                 case 'place':
-                    interactionStore.addPlaceViewed(id)
                     router.push({
                         name: 'place_detail',
                         params: { id },

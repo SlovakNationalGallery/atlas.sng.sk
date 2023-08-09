@@ -76,6 +76,32 @@ class AirtableMapper
             'floor' => 'Podlažie',
             'building' => 'Budova',
         ],
+        'bucketlists' => [
+            'title' => [
+                'sk' => 'Názov',
+                'en' => 'Názov EN',
+            ],
+            'text' => [
+                'sk' => 'Text',
+                'en' => 'Text EN',
+            ],
+            'media' => 'Image',
+            'items' => 'Diela',
+        ],
+        'sections' => [
+            'title' => [
+                'sk' => 'Názov sekcie',
+                'en' => 'Názov sekcie EN',
+            ],
+            'description' => [
+                'sk' => 'Text sekcie',
+                'en' => 'Text sekcie EN',
+            ],
+            'media' => 'Media',
+            'location_id' => 'Lokácia.0',
+            'exhibition' => 'Výstava.0',
+            'items' => 'Diela sekcie',
+        ],
     ];
 
     public function getField(string $field)

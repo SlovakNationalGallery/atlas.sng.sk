@@ -1,21 +1,16 @@
 <template>
-    <div class="box-content flex h-24 overflow-hidden rounded-xl border-2 border-black">
+    <div class="relative box-content flex h-24 overflow-hidden rounded-xl">
         <div class="w-24 flex-none">
             <slot name="image"></slot>
         </div>
-        <div class="min-w-0 grow border-l-2 border-black p-3">
+        <div class="min-w-0 grow p-3">
             <div class="mb-1 flex items-center">
-                <h2 class="mr-2 grow truncate text-lg font-medium">
+                <h2 class="mr-2 grow truncate text-lg font-medium leading-6">
                     <slot name="title"></slot>
                 </h2>
-                <svg class="mr-1 h-[18px] w-[10px] shrink-0 fill-none">
-                    <path
-                        class="stroke-black stroke-2 [stroke-linecap:round] [stroke-linejoin:round]"
-                        d="M0.999999 1.47168L8.5 8.97168L1 16.4717"
-                    />
-                </svg>
+                <slot name="icon"> </slot>
             </div>
-            <div class="text-sm text-gray-dark" :class="{ truncate: truncateDescription }">
+            <div class="text-sm" :class="{ truncate: truncateDescription }">
                 <slot name="description"></slot>
             </div>
         </div>
