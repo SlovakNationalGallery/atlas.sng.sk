@@ -85,12 +85,11 @@ class ItemResource extends JsonResource
             return $this['item']->author_name;
         }
 
-        $x = collect($this['webumenia_item']->authorities)
+        return collect($this['webumenia_item']->authorities)
             ->map(
                 fn(object $authority) => formatName($authority->name) .
                     ($authority->role ? ' - ' . $authority->role : '')
             )
             ->join(', ');
-        return $x;
     }
 }
