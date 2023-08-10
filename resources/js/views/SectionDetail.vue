@@ -1,6 +1,6 @@
 <template>
     <div class="relative w-full border-b-2 border-black bg-gray-softest" v-if="section">
-        <ImageLightbox v-if="section.image"
+        <ItemImage v-if="section.image"
             :alt="section.title"
             :src="section.image.src"
             :srcset="section.image.srcset"
@@ -52,8 +52,8 @@ import { useInteractionStore } from '../stores/InteractionStore'
 import HistoryBack from '../components/HistoryBack.vue'
 import ConfirmButton from '../components/ConfirmButton.vue'
 import ItemThumbnail from '../components/ItemThumbnail.vue'
-import ImageLightbox from '../components/ImageLightbox.vue'
 import SvgBack from '../components/svg/Back.vue'
+import ItemImage from '../components/ItemImage.vue'
 
 const route = useRoute()
 const props = defineProps(['section'])
