@@ -1,7 +1,7 @@
 <template>
     <article class="mt-8 mb-6 px-4">
         <h3 class="flex items-center justify-between gap-x-1 text-1.5xl font-medium leading-6">
-            <span class="grow">{{ $t('Your timeline') }}</span>
+            <span class="grow">{{ $t('Explored artworks') }}</span>
             <span>{{ interactionStore.viewedItemsCount }}</span>
             <SvgEye :class="{ '!fill-green': interactionStore.viewedItemsCount }" />
         </h3>
