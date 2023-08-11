@@ -62,7 +62,7 @@ const routes = [
         path: '/collection',
         component: Collection,
         meta: {
-            title: 'My collection',
+            title: 'My timeline',
         },
     },
     {
@@ -70,7 +70,7 @@ const routes = [
         path: '/:id?',
         component: Collection,
         meta: {
-            title: 'My collection',
+            title: 'My timeline',
         },
     },
     {
