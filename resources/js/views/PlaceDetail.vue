@@ -23,7 +23,7 @@
         <div class="text-lg text-gray-dark" v-if="place.location_formatted">
             {{ $t('Location') }}: {{ place.location_formatted }}
         </div>
-        <div class="my-4 space-y-4" v-html="place.description"></div>
+        <div class="my-4 space-y-4 markdown" v-html="place.description"></div>
         <Collapsible v-if="place.video_embed" :open="true" class="my-4">
             <template v-slot:summary>
                 <VideoSummary
