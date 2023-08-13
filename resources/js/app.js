@@ -13,6 +13,7 @@ import ItemDetail from './views/ItemDetail.vue'
 import SectionDetail from './views/SectionDetail.vue'
 import PlaceDetail from './views/PlaceDetail.vue'
 import RewardDetail from './views/RewardDetail.vue'
+import LockedItemDetail from './views/LockedItemDetail.vue'
 import { useHistoryStore } from './stores/HistoryStore'
 import { useLocaleStore } from './stores/LocaleStore'
 
@@ -24,6 +25,14 @@ const routes = [
         meta: {
             title: 'Atlas SNG',
         },
+    },
+    {
+        name: 'locked_item_detail',
+        path: '/locked_item_detail/:id',
+        component: LockedItemDetail,
+        meta: {
+            title: 'Locked artwork detail'
+        }
     },
     {
         name: 'item_detail',
