@@ -18,9 +18,6 @@ export const useItemStore = defineStore('ItemStore', {
             const response = await axios.get(`/api/items/${id}`)
             return (this.items[id] = response.data.data)
         },
-        clearCollectionLink() {
-            this.collectionLink = null
-        },
         clearCache() {
             this.items = {}
         },
@@ -42,11 +39,5 @@ export const useItemStore = defineStore('ItemStore', {
                 return collectionLink
             }
         },
-        async fetch(collectionId) {
-            this.clearCollectionLink()
-            this.items = {}
-            // todo
-            // this.viewedIds = (await axios.get(`/api/collections/${collectionId}`)).data
-        },
-    },
+    }
 })

@@ -127,10 +127,14 @@ const item = ref(null)
 const bucketlist = ref(null)
 const found = computed(() => bucketlist.value.items.filter((item) => interactionStore.isItemViewed(item.id)))
 const unlocked = computed(() => found.value.length === bucketlist.value.items.length)
+const props = defineProps(['isGuest'])
 
 onMounted(async () => {
     const id = route.params.id
     item.value = await itemStore.load(id)
+    if (props.isGuest) {
+        return
+    }
     interactionStore.addItemViewed(item.value.id)
     const defaultBucketlist = item.value.bucketlists.find(
         (bucketlist) => bucketlist.id === import.meta.env.VITE_DEFAULT_BUCKETLIST
