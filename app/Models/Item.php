@@ -17,7 +17,7 @@ class Item extends Model
 
     protected $keyType = 'string';
 
-    protected $translatable = ['description', 'author_name', 'author_description', 'video_title', 'video_subtitle'];
+    protected $translatable = ['description', 'author_name', 'author_description', 'video_title', 'video_subtitle', 'locked_bucketlist_description'];
 
     protected $attributes = [
         'offset_top' => 0,

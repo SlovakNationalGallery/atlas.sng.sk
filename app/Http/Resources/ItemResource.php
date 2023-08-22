@@ -36,6 +36,7 @@ class ItemResource extends JsonResource
             'author' => $this->getAuthor(),
             'author_description' => $this['item']->author_description,
             'dating' =>$this['webumenia_item']->dating,
+            'locked_bucketlist_description' => str($this['item']->locked_bucketlist_description)->markdownWithLineBreaks(),
             'dating_short' => Str::afterLast($this['webumenia_item']->dating, ','),
             'description' => $this->getDescription(),
             'authorities' => AuthorityResource::collection($authorities),

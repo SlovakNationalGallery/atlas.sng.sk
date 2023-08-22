@@ -1,9 +1,7 @@
 <template>
     <article v-if="bucketlist" class="space-y-6">
         <div class="space-y-4">
-            <h2 class="text-2xl font-medium leading-6">
-                {{ $t('Scavenger hunt:') }} {{ bucketlist.title }}
-            </h2>
+            <h2 class="text-2xl font-medium leading-6">{{ $t('Scavenger hunt:') }} {{ bucketlist.title }}</h2>
             <p class="text-3xl font-bold leading-snug">
                 {{ $t(':found of :all artworks found', { found: found.length, all: bucketlist.items.length }) }}
             </p>
@@ -58,7 +56,11 @@
         <div>
             <h3 class="text-1.5xl font-medium leading-6">{{ $t('Not found yet') }}</h3>
             <div class="mt-4 flex flex-col gap-y-4">
-                <router-link v-for="item in notFound" :key="item.id" :to="{ name: 'home', hash: '#code' }">
+                <router-link
+                    v-for="item in notFound"
+                    :key="item.id"
+                    :to="{ name: 'locked_item_detail', params: { id: item.id } }"
+                >
                     <LockedItemThumbnail :item="item" />
                 </router-link>
             </div>

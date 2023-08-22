@@ -7,7 +7,7 @@
             shown || peekingIn ? (shown ? '-translate-y-full' : 'translate-y-peeking') : 'translate-y-0',
         ]"
     >
-        <div class="absolute bottom-full flex w-full items-center rounded-t-xl bg-white">
+        <div class="absolute bottom-full flex w-full items-center border-t-2 rounded-t-xl bg-white">
             <div class="flex-1 px-3">
                 <svg @click="shownHelp = true" class="h-[32px] w-[32px] cursor-pointer">
                     <path

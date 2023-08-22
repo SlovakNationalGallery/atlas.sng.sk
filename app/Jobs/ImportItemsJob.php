@@ -4,7 +4,6 @@ namespace App\Jobs;
 
 use Airtable;
 use App\Models\Item;
-use App\Models\Exhibition;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -48,6 +47,11 @@ class ImportItemsJob implements ShouldQueue
             $item->author_description = [
                 'sk' => Arr::get($record, 'fields.Autor text SK'),
                 'en' => Arr::get($record, 'fields.Autor text EN'),
+            ];
+
+            $item->locked_bucketlist_description = [
+                'sk' => Arr::get($record, 'fields.Bucketlist locked text SK'),
+                'en' => Arr::get($record, 'fields.Bucketlist locked text EN'),
             ];
 
             $item->offset_top = Arr::get($record, 'fields.offsetTop', 0);
