@@ -20,7 +20,7 @@
         <div class="text-lg text-gray-dark" v-if="section.location_formatted">
             {{ $t('Location') }}: {{ section.location_formatted }}
         </div>
-        <div class="my-4 space-y-4" v-html="section.description"></div>
+        <div class="my-4 space-y-4 markdown" v-html="section.description"></div>
         <p class="mb-2 font-bold">{{ $t('More about artworks in the group') }}</p>
         <div class="flex flex-col space-y-3">
             <router-link
