@@ -35,8 +35,10 @@ class ItemResource extends JsonResource
             'title' => $this['webumenia_item']->title,
             'author' => $this->getAuthor(),
             'author_description' => $this['item']->author_description,
-            'dating' =>$this['webumenia_item']->dating,
-            'locked_bucketlist_description' => str($this['item']->locked_bucketlist_description)->markdownWithLineBreaks(),
+            'dating' => $this['webumenia_item']->dating,
+            'locked_bucketlist_description' => str(
+                $this['item']->locked_bucketlist_description
+            )->markdownWithLineBreaks(),
             'dating_short' => Str::afterLast($this['webumenia_item']->dating, ','),
             'description' => $this->getDescription(),
             'authorities' => AuthorityResource::collection($authorities),
@@ -83,8 +85,11 @@ class ItemResource extends JsonResource
             return $this['item']->author_name;
         }
 
-        return collect($this['webumenia_item']->authors)
-            ->map(fn(string $author) => formatName($author))
+        return collect($this['webumenia_item']->authorities)
+            ->map(
+                fn(object $authority) => formatName($authority->name) .
+                    (isset($authority->role) && $authority->role ? ' - ' . $authority->role : '')
+            )
             ->join(', ');
     }
 }
