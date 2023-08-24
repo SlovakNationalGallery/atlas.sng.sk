@@ -1,11 +1,11 @@
 <template>
     <div class="grow bg-black px-4 pb-bar text-lg text-white">
         <TransitionGroup name="interactions">
-            <template v-for="(interaction, i) in interactionStore.interactions" :key="i">
+            <template v-for="(interaction, i) in interactionStore.interactions" :key="interaction.id">
                 <InteractionStory
                     :ref="(component) => setStoryRef(component, interaction)"
                     v-if="interaction.type === 'story'"
-                    :story="storyStore.get(interaction.id)"
+                    :id="interaction.id"
                     :linkId="interaction.linkId"
                     :active="interaction === interactionStore.active"
                     :first="i === 0"
@@ -13,24 +13,28 @@
                     @undo="undo(interaction)"
                     class="my-8"
                 />
-                <InteractionItemFavourited
+                <InteractionItem
                     v-else-if="interaction.type === 'itemFavourited'"
-                    :item="itemStore.get(interaction.id)"
-                    class="my-4"
+                    :id="interaction.id"
+                    :icon="SvgHeartSmall"
+                    label="Saved"
+                    iconClass="fill-current"
                 />
-                <InteractionItemViewed
+                <InteractionItem
                     v-else-if="interaction.type === 'itemViewed'"
-                    :item="itemStore.get(interaction.id)"
-                    class="my-4"
+                    :id="interaction.id"
+                    :icon="SvgEye"
+                    label="Viewed"
+                    iconClass="my-4"
                 />
                 <InteractionSectionViewed
                     v-else-if="interaction.type === 'sectionViewed'"
-                    :section="sectionStore.get(interaction.id)"
+                    :id="interaction.id"
                     class="my-4"
                 />
                 <InteractionPlaceViewed
                     v-else-if="interaction.type === 'placeViewed'"
-                    :place="placeStore.get(interaction.id)"
+                    :id="interaction.id"
                     class="my-4"
                 />
             </template>
@@ -55,23 +59,16 @@ import { nextTick, onMounted } from 'vue'
 import { watchDebounced } from '@vueuse/core'
 import { useRoute } from 'vue-router'
 import CodePanel from '../components/CodePanel.vue'
-import InteractionItemFavourited from '../components/InteractionItemFavourited.vue'
-import InteractionItemViewed from '../components/InteractionItemViewed.vue'
-import InteractionSectionViewed from '../components/InteractionSectionViewed.vue'
-import InteractionPlaceViewed from '../components/InteractionPlaceViewed.vue'
+import InteractionItem from '../components/InteractionItem.vue'
 import InteractionStory from '../components/InteractionStory.vue'
 import { useInteractionStore } from '../stores/InteractionStore'
-import { useItemStore } from '../stores/ItemStore'
-import { useSectionStore } from '../stores/SectionStore'
+import SvgEye from '../components/svg/Eye.vue'
+import SvgHeartSmall from '../components/svg/HeartSmall.vue'
 import { useStoryStore } from '../stores/StoryStore'
-import { usePlaceStore } from '../stores/PlaceStore'
 import { useSurvey } from '../composables/Survey'
 
 const interactionStore = useInteractionStore()
-const itemStore = useItemStore()
-const sectionStore = useSectionStore()
 const storyStore = useStoryStore()
-const placeStore = usePlaceStore()
 const route = useRoute()
 const storyMap = new Map()
 

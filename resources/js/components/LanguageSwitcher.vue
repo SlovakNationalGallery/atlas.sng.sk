@@ -40,7 +40,6 @@ const placeStore = usePlaceStore()
 const bucketlistStore = useBucketlistStore()
 
 const switchLanguage = (locale) => {
-    interactionStore.clear()
     itemStore.clearCache()
     sectionStore.clearCache()
     storyStore.clearCache()

@@ -16,6 +16,15 @@
 
 <script setup>
 import SvgEye from './svg/Eye.vue'
+import { useSectionStore } from '../stores/SectionStore'
+import { onMounted, ref } from 'vue'
+
+const sectionStore = useSectionStore()
+const section = ref()
+
+onMounted(async () => {
+    section.value = sectionStore.get(props.id) || await sectionStore.load(props.id)
+})
 
 const props = defineProps(['section'])
 </script>

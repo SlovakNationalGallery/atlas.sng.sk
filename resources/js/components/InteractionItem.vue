@@ -4,7 +4,7 @@
             <component :is="icon" :class="iconClass" />
         </div>
         <span>
-            {{ label }}
+            {{ $t(label) }}
             <router-link class="underline hover:no-underline" :to="{ name: 'item_detail', params: { id: item.id } }"
                 >{{ item.author }} &mdash; {{ item.title }}</router-link
             >
@@ -13,5 +13,15 @@
 </template>
 
 <script setup>
-const props = defineProps(['item', 'label', 'icon', 'iconClass'])
+import { onMounted, ref } from 'vue'
+import { useItemStore } from '../stores/ItemStore'
+
+const props = defineProps(['id', 'label', 'icon', 'iconClass'])
+const itemStore = useItemStore()
+const item = ref()
+
+onMounted(async () => {
+    item.value = itemStore.get(props.id) || await itemStore.load(props.id)
+})
+
 </script>

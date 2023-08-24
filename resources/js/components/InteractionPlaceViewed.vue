@@ -16,6 +16,15 @@
 
 <script setup>
 import SvgEye from './svg/Eye.vue'
+import { usePlaceStore } from '../stores/PlaceStore'
+import { onMounted, ref } from 'vue'
+
+const placeStore = usePlaceStore()
+const place = ref()
+
+onMounted(async () => {
+    place.value = placeStore.get(props.id) || await placeStore.load(props.id)
+})
 
 const props = defineProps(['place'])
 </script>
