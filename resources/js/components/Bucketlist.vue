@@ -3,19 +3,25 @@
         <div class="space-y-4">
             <h2 class="text-2xl font-medium leading-6">{{ $t('Scavenger hunt:') }} {{ bucketlist.title }}</h2>
             <p class="text-3xl font-bold leading-snug">
-                {{ $t(':found of :all artworks found', { found: found.length, all: bucketlist.items.length }) }}
+                {{
+                    unlocked
+                        ? $t('All artworks found')
+                        : $t(':found of :all artworks found', { found: found.length, all: bucketlist.items.length })
+                }}
             </p>
             <p class="text-2xl">
                 {{
-                    $t(
-                        'Find and explore all the works in the list. Discover what they have in common and unlock your reward.'
-                    )
+                    unlocked
+                        ? $t('Check out the reward!')
+                        : $t(
+                              'Find and explore all the works in the list. Discover what they have in common and unlock your reward.'
+                          )
                 }}
             </p>
         </div>
         <div>
             <h3 class="text-1.5xl font-medium capitalize leading-6">{{ $t('reward') }}</h3>
-            <p class="pt-1">{{ $t('The story unlocks when all artworks have been found') }}</p>
+            <p v-if="!unlocked" class="pt-1">{{ $t('The story unlocks when all artworks have been found') }}</p>
             <router-link
                 :class="[{ 'pointer-events-none': !unlocked }, 'block']"
                 :to="{ name: 'reward_detail', params: { id: bucketlist.id } }"
