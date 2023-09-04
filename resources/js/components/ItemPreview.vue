@@ -29,7 +29,7 @@
             </button>
             <div class="rounded-b-xl bg-white px-4 py-6">
                 <h2 class="text-1.5xl font-bold">{{ item.title }}</h2>
-                <h3 class="text-lg text-gray-dark">{{ item.author }}<br />{{ item.dating }}</h3>
+                <h3 class="text-lg text-gray-dark">{{ item.author }}<br />{{ getItemDating(item) }}</h3>
                 <WebumeniaButton :url="item.webumenia_url" class="my-4" />
                 <ConfirmButton class="mt-4" @click="emit('close')">{{ $t('Close') }}</ConfirmButton>
             </div>
@@ -42,7 +42,7 @@ import { defineProps, ref } from 'vue'
 import SvgClose from './svg/Close.vue'
 import ConfirmButton from './ConfirmButton.vue'
 import WebumeniaButton from './WebumeniaButton.vue'
-
+import { getItemDating } from '../helpers'
 const props = defineProps(['item'])
 const emit = defineEmits(['close'])
 const isLoading = ref(true)

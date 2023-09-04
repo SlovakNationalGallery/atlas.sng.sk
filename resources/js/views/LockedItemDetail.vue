@@ -13,11 +13,11 @@
         </div>
         <div class="relative h-full border-black px-4 pb-24 pt-8">
             <h2 class="text-1.5xl font-bold">{{ item.title }}</h2>
-            <h3 class="text-lg text-gray-dark">{{ item.author }} · {{ item.dating }}</h3>
+            <h3 class="text-lg text-gray-dark">{{ item.author }} · {{ getItemDating(item) }}</h3>
             <div class="text-lg text-gray-dark" v-if="item.location_formatted">
                 {{ $t('Location') }}: {{ item.location_formatted }}
             </div>
-            <div class="my-4 space-y-4 markdown" v-html="item.locked_bucketlist_description"></div>
+            <div class="markdown my-4 space-y-4" v-html="item.locked_bucketlist_description"></div>
         </div>
         <CodePanel />
     </div>
@@ -30,6 +30,7 @@ import { useBucketlistStore } from '../stores/BucketlistStore'
 import { useItemStore } from '../stores/ItemStore'
 import ItemImage from '../components/ItemImage.vue'
 import CodePanel from '../components/CodePanel.vue'
+import { getItemDating } from '../helpers'
 
 const route = useRoute()
 const bucketlistStore = useBucketlistStore()

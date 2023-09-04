@@ -7,13 +7,13 @@
             />
         </template>
         <template #title>{{ item.title }}</template>
-        <template #description>{{ item.author }}<br />{{ item.dating }}</template>
+        <template #description>{{ item.author }}<br />{{ getItemDating(item) }}</template>
     </Thumbnail>
 </template>
 
 <script setup>
 import ResponsiveImageWithSizes from './ResponsiveImageWithSizes.vue'
 import Thumbnail from './Thumbnail.vue'
-
+import { getItemDating } from '../helpers'
 const props = defineProps(['item'])
 </script>

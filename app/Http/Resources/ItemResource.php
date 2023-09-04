@@ -40,6 +40,10 @@ class ItemResource extends JsonResource
                 $this['item']->locked_bucketlist_description
             )->markdownWithLineBreaks(),
             'dating_short' => Str::afterLast($this['webumenia_item']->dating, ','),
+            'dating_raw' =>
+                $this['webumenia_item']->date_earliest === $this['webumenia_item']->date_latest
+                    ? $this['webumenia_item']->date_earliest
+                    : $this['webumenia_item']->date_earliest . '–' . $this['webumenia_item']->date_latest,
             'description' => $this->getDescription(),
             'authorities' => AuthorityResource::collection($authorities),
             'image_src' => $this->getImageRoute(),

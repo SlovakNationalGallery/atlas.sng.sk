@@ -26,7 +26,9 @@
                             <h5 class="truncate text-sm font-bold">
                                 {{ item.title }}
                             </h5>
-                            <div class="text-xs text-gray-dark">{{ item.dating_short }}</div>
+                            <div class="text-xs text-gray-dark">
+                                {{ getActiveLanguage() === 'sk' ? item.dating_short : item.dating_raw }}
+                            </div>
                         </div>
                     </div>
                 </slide>
@@ -41,7 +43,7 @@ import { defineProps, ref, onMounted } from 'vue'
 import { Carousel, Slide } from 'vue3-carousel'
 import ItemImage from './ItemImage.vue'
 import ItemPreview from './ItemPreview.vue'
-
+import { getActiveLanguage } from 'laravel-vue-i18n'
 const props = defineProps(['authority'])
 const relatedItems = ref([])
 const previewItem = ref(null)
