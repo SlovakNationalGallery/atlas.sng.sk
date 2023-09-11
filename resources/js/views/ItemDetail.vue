@@ -118,6 +118,7 @@ import AuthorDetails from '../components/AuthorDetails.vue'
 import HistoryBack from '../components/HistoryBack.vue'
 import ConfirmButton from '../components/ConfirmButton.vue'
 import SvgBack from '../components/svg/Back.vue'
+
 const route = useRoute()
 const bucketlistStore = useBucketlistStore()
 const interactionStore = useInteractionStore()

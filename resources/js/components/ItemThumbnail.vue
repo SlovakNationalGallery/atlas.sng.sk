@@ -14,5 +14,6 @@
 <script setup>
 import ResponsiveImageWithSizes from './ResponsiveImageWithSizes.vue'
 import Thumbnail from './Thumbnail.vue'
+
 const props = defineProps(['item'])
 </script>
