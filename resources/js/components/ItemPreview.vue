@@ -42,7 +42,6 @@ import { defineProps, ref } from 'vue'
 import SvgClose from './svg/Close.vue'
 import ConfirmButton from './ConfirmButton.vue'
 import WebumeniaButton from './WebumeniaButton.vue'
-import { getItemDating } from '../helpers'
 const props = defineProps(['item'])
 const emit = defineEmits(['close'])
 const isLoading = ref(true)

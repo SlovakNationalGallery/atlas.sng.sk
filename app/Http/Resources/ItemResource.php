@@ -35,15 +35,11 @@ class ItemResource extends JsonResource
             'title' => $this['webumenia_item']->title,
             'author' => $this->getAuthor(),
             'author_description' => $this['item']->author_description,
-            'dating' => $this['webumenia_item']->dating,
+            'dating' => $this->getDating(),
             'locked_bucketlist_description' => str(
                 $this['item']->locked_bucketlist_description
             )->markdownWithLineBreaks(),
-            'dating_short' => Str::afterLast($this['webumenia_item']->dating, ','),
-            'dating_raw' =>
-                $this['webumenia_item']->date_earliest === $this['webumenia_item']->date_latest
-                    ? $this['webumenia_item']->date_earliest
-                    : $this['webumenia_item']->date_earliest . '–' . $this['webumenia_item']->date_latest,
+            'dating_short' => $this->getDatingShort(),
             'description' => $this->getDescription(),
             'authorities' => AuthorityResource::collection($authorities),
             'image_src' => $this->getImageRoute(),
@@ -83,6 +79,29 @@ class ItemResource extends JsonResource
         return $this['webumenia_item']->description;
     }
 
+    private function getDatingRaw() {
+        return $this['webumenia_item']->date_earliest === $this['webumenia_item']->date_latest
+        ? $this['webumenia_item']->date_earliest
+        : $this['webumenia_item']->date_earliest . '–' . $this['webumenia_item']->date_latest;
+    }
+
+    private function getDating()
+    {
+        if (\App::currentLocale() == 'sk') {
+            return $this['webumenia_item']->dating;
+        }
+        
+        return $this->getDatingRaw();
+    }
+
+    private function getDatingShort()
+    {
+        if (\App::currentLocale() == 'sk') {
+            return $this['webumenia_item']->dating->afterLast(',')->squish();
+        }
+
+        return $this->getDatingRaw();
+    }
     private function getAuthor()
     {
         if ($this['item']->author_name) {

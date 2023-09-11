@@ -43,7 +43,7 @@
                 <img class="h-9 w-9" :src="`/img/${item.code}.svg`" :alt="item.code" />
             </div>
             <h2 class="text-1.5xl font-bold">{{ item.title }}</h2>
-            <h3 class="text-lg text-gray-dark">{{ item.author }} · {{ getItemDating(item) }}</h3>
+            <h3 class="text-lg text-gray-dark">{{ item.author }} · {{ item.dating }}</h3>
             <div class="text-lg text-gray-dark" v-if="item.location_formatted">
                 {{ $t('Location') }}: {{ item.location_formatted }}
             </div>
@@ -118,7 +118,6 @@ import AuthorDetails from '../components/AuthorDetails.vue'
 import HistoryBack from '../components/HistoryBack.vue'
 import ConfirmButton from '../components/ConfirmButton.vue'
 import SvgBack from '../components/svg/Back.vue'
-import { getItemDating } from '../helpers'
 const route = useRoute()
 const bucketlistStore = useBucketlistStore()
 const interactionStore = useInteractionStore()
