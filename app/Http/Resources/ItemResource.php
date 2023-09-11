@@ -79,10 +79,11 @@ class ItemResource extends JsonResource
         return $this['webumenia_item']->description;
     }
 
-    private function getDatingRaw() {
+    private function getDatingRaw()
+    {
         return $this['webumenia_item']->date_earliest === $this['webumenia_item']->date_latest
-        ? $this['webumenia_item']->date_earliest
-        : $this['webumenia_item']->date_earliest . '–' . $this['webumenia_item']->date_latest;
+            ? $this['webumenia_item']->date_earliest
+            : $this['webumenia_item']->date_earliest . '–' . $this['webumenia_item']->date_latest;
     }
 
     private function getDating()
@@ -90,14 +91,16 @@ class ItemResource extends JsonResource
         if (\App::currentLocale() == 'sk') {
             return $this['webumenia_item']->dating;
         }
-        
+
         return $this->getDatingRaw();
     }
 
     private function getDatingShort()
     {
         if (\App::currentLocale() == 'sk') {
-            return $this['webumenia_item']->dating->afterLast(',')->squish();
+            return Str($this['webumenia_item']->dating)
+                ->afterLast(',')
+                ->squish();
         }
 
         return $this->getDatingRaw();
