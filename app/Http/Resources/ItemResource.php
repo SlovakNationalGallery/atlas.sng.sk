@@ -82,23 +82,20 @@ class ItemResource extends JsonResource
     private function getAuthor()
     {
         $localAuthoritiesNames = explode(', ', $this['item']->author_name);
-        $webumeniaAuthoritiesNames = collect($this['webumenia_item']->authorities)->map(
-            fn(object $authority) => formatName($authority->name)
-        );
-        $filteredLocalAuthoritiesNames = collect($localAuthoritiesNames)->filter(
-            fn($name) => !$webumeniaAuthoritiesNames->contains($name)
+        $webumeniaAuthorities = collect($this['webumenia_item']->authorities);
+        $webumeniaAuthoritiesNames = $webumeniaAuthorities->map(fn(object $authority) => formatName($authority->name));
+
+        $filteredLocalAuthoritiesNames = collect($localAuthoritiesNames)->reject(
+            fn($name) => $webumeniaAuthoritiesNames->contains(formatName($name))
         );
 
-        $webumeniaAuthoritiesRoles = collect($this['webumenia_item']->authorities)->map(
+        $webumeniaAuthoritiesRoles = $webumeniaAuthorities->map(
             fn(object $authority) => formatName($authority->name) .
-                (isset($authority->role) &&
-                $authority->role &&
-                $authority->role !== 'autor' &&
-                $authority->role !== 'author'
+                (!empty($authority->role) && !in_array($authority->role, ['autor', 'author'])
                     ? ' - ' . $authority->role
                     : '')
         );
 
-        return $webumeniaAuthoritiesRoles->merge($filteredLocalAuthoritiesNames)->join(', ');
+        return $webumeniaAuthoritiesRoles->concat($filteredLocalAuthoritiesNames)->join(', ');
     }
 }
