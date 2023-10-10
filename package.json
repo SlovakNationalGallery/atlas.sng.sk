@@ -18,7 +18,7 @@
     },
     "dependencies": {
         "@sentry/vue": "^7.73.0",
-        "@typeform/embed": "^2.12.1",
+        "@typeform/embed": "^4.0.0",
         "@vitejs/plugin-vue": "^3.2.0",
         "@vueuse/core": "^10.5.0",
         "laravel-vue-i18n": "^1.2.0",
