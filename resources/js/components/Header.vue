@@ -12,7 +12,7 @@
             </button>
         </HistoryBack>
         <h1 class="grow px-2.5 text-1.5xl font-medium" :class="{ 'text-center': $route.name !== 'home' }" id="title">
-            {{ $t(openedAbout ? 'About the App' : $route.meta.title) }}
+            {{ $t(openedAbout ? 'About the App' : title) }}
             <span v-if="$route.name === 'my_collection'">({{ interactionStore.viewedItemsCount }})</span>
         </h1>
         <div class="flex-1 border-l-2 border-transparent px-3 text-right" v-if="$route.name === 'my_collection'">
@@ -28,7 +28,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useInteractionStore } from '../stores/InteractionStore'
 import About from './About.vue'
 import HistoryBack from './HistoryBack.vue'
@@ -48,6 +48,8 @@ const displayTooltip = () => {
         isActive.value = false
     }, 3000)
 }
+
+const title = computed(() => this?.$route?.meta?.title ? this.$route.meta.title : 'Atlas SNG')
 
 const scroll = (id) => {
     document.getElementById(id).scrollIntoView({
