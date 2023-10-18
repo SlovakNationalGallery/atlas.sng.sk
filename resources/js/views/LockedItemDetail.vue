@@ -17,7 +17,7 @@
             <div class="text-lg text-gray-dark" v-if="item.location_formatted">
                 {{ $t('Location') }}: {{ item.location_formatted }}
             </div>
-            <div class="my-4 space-y-4 markdown" v-html="item.locked_bucketlist_description"></div>
+            <div class="markdown my-4 space-y-4" v-html="item.locked_bucketlist_description"></div>
         </div>
         <CodePanel />
     </div>
