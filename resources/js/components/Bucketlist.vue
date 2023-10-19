@@ -14,7 +14,7 @@
                     unlocked
                         ? $t('Check out the reward!')
                         : $t(
-                              'Find and explore all the works in the list. Discover what they have in common and unlock your reward.'
+                              'The artworks in Scavanger hunt share a common motif. Find all the works on the list and get a discount at the Ex Libris bookstore or a free coffee at the SNG Café.'
                           )
                 }}
             </p>
@@ -40,7 +40,7 @@
                         $t(
                             unlocked
                                 ? 'Explore the topic and claim your reward'
-                                : 'Collect all artworks to unlock this story'
+                                : 'Unlock the story and get a discount'
                         )
                     }}</template>
                     <template #icon><SvgLock v-if="!unlocked" /></template>
