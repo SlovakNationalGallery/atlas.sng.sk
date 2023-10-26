@@ -3,8 +3,8 @@ import axios from 'axios'
 
 window.axios = axios
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+window.axios.defaults.headers['X-Requested-With'] = 'XMLHttpRequest'
 window.axios.interceptors.request.use((config) => {
-    config.headers.common['X-locale'] = getActiveLanguage()
+    config.headers['X-locale'] = getActiveLanguage()
     return config
 })
