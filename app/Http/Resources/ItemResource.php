@@ -35,11 +35,11 @@ class ItemResource extends JsonResource
             'title' => $this['webumenia_item']->title,
             'author' => $this->getAuthor(),
             'author_description' => $this['item']->author_description,
-            'dating' => $this['webumenia_item']->dating,
+            'dating' => $this->getDating(),
             'locked_bucketlist_description' => str(
                 $this['item']->locked_bucketlist_description
             )->markdownWithLineBreaks(),
-            'dating_short' => Str::afterLast($this['webumenia_item']->dating, ','),
+            'dating_short' => $this->getDatingShort(),
             'description' => $this->getDescription(),
             'authorities' => AuthorityResource::collection($authorities),
             'image_src' => $this->getImageRoute(),
@@ -79,17 +79,49 @@ class ItemResource extends JsonResource
         return $this['webumenia_item']->description;
     }
 
-    private function getAuthor()
+    private function getDatingRaw()
     {
-        if ($this['item']->author_name) {
-            return $this['item']->author_name;
+        return $this['webumenia_item']->date_earliest === $this['webumenia_item']->date_latest
+            ? $this['webumenia_item']->date_earliest
+            : $this['webumenia_item']->date_earliest . '–' . $this['webumenia_item']->date_latest;
+    }
+
+    private function getDating()
+    {
+        if (\App::currentLocale() == 'sk') {
+            return $this['webumenia_item']->dating;
         }
 
-        return collect($this['webumenia_item']->authorities)
-            ->map(
-                fn(object $authority) => formatName($authority->name) .
-                    (isset($authority->role) && $authority->role ? ' - ' . $authority->role : '')
-            )
-            ->join(', ');
+        return $this->getDatingRaw();
+    }
+
+    private function getDatingShort()
+    {
+        if (\App::currentLocale() == 'sk') {
+            return Str($this['webumenia_item']->dating)
+                ->afterLast(',')
+                ->squish();
+        }
+
+        return $this->getDatingRaw();
+    }
+    private function getAuthor()
+    {
+        $localAuthoritiesNames = explode(', ', $this['item']->author_name);
+        $webumeniaAuthorities = collect($this['webumenia_item']->authorities);
+        $webumeniaAuthoritiesNames = $webumeniaAuthorities->map(fn(object $authority) => formatName($authority->name));
+
+        $filteredLocalAuthoritiesNames = collect($localAuthoritiesNames)->reject(
+            fn($name) => $webumeniaAuthoritiesNames->contains(formatName($name))
+        );
+
+        $webumeniaAuthoritiesRoles = $webumeniaAuthorities->map(
+            fn(object $authority) => formatName($authority->name) .
+                (!empty($authority->role) && !in_array($authority->role, ['autor', 'author'])
+                    ? ' - ' . $authority->role
+                    : '')
+        );
+
+        return $webumeniaAuthoritiesRoles->concat($filteredLocalAuthoritiesNames)->join(', ');
     }
 }
