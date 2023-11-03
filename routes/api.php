@@ -32,10 +32,28 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 |
 */
 
+/**
+ * GET /api/verify/{code}
+ *
+ * Checks if the typed code is valid. If it is valid, the response will contain the code's data (related object type + ID)
+ *
+ * Otherwise, the request will fail with a 404.
+ *
+ * @urlParam code integer required Example: 17
+ * 
+ * @response status=404 scenario="Code not found" {"message": "Record not found."}
+ */
 Route::get('/verify/{code}', function ($code) {
     return new CodeResource(Code::where('code', $code)->firstOrFail());
 });
 
+/**
+ * GET api/items/{id}
+ *
+ * Gets the item with the given ID. If it is found, the response will contain the item's data.
+ *
+ * @urlParam id string required Example: SVK:SNG.O_1405
+ */
 Route::get('/items/{id}', function (string $id) {
     $item = Item::find($id) ?: new Item();
     $response = Http::webumenia()->get("/v2/items/$id");
@@ -51,6 +69,13 @@ Route::get('/items/{id}', function (string $id) {
     ]);
 });
 
+/**
+ * GET api/sections/{id}s
+ *
+ * Gets the section for the given ID. If it is, the response will contain the section's data.
+ *
+ * @urlParam id string required Example: rec8or1MegfsJY2CO
+ */
 Route::get('/sections/{id}', function (string $id) {
     $section = Section::findOrFail($id);
 
@@ -69,6 +94,13 @@ Route::get('/sections/{id}', function (string $id) {
     ]);
 });
 
+/**
+ * POST api/collections
+ *
+ * Saves the user collection. Returns the URL to the saved collection.
+ * 
+ * @bodyParam items string[] The list of item IDs. Example: ["SVK:SNG.IM_101","SVK:SNG.IM_304"]
+ */
 Route::post('/collections', function (Request $request) {
     $validator = Validator::make($request->all(), [
         'items' => ['required', 'array'],
@@ -86,21 +118,49 @@ Route::post('/collections', function (Request $request) {
     ]);
 });
 
+/**
+ * GET api/collections/{hashid}
+ *
+ * Gets the saved user collection by hashid. Returns the array of item IDs.
+ *
+ * @urlParam hashid string required Example: n2m
+ */
 Route::get('/collections/{hashid}', function ($hashid) {
     $collection = Collection::findByHashidOrFail($hashid);
     return $collection->items;
 });
 
+/**
+ * GET api/stories/{id}
+ *
+ * Gets the story with the given ID. If it is, the response will contain the story's data.
+ *
+ * @urlParam id string required Example: rec2Cq3jSUmcpveKf
+ */
 Route::get('/stories/{id}', function (string $id) {
     $story = Story::findOrFail($id);
     return new StoryResource($story);
 });
 
+/**
+ * GET api/places/{id}
+ *
+ * Gets the place with the given ID. If it is, the response will contain the place's data.
+ *
+ * @urlParam id string required Example: SVK:SNG.O_1405
+ */
 Route::get('/places/{id}', function (string $id) {
     $place = Place::findOrFail($id);
     return new PlaceResource($place);
 });
 
+/**
+ * GET api/bucketlists/{id}
+ *
+ * Gets the items for the bucketlist/scavenger hunt. Returns the list of items and their data.
+ *
+ * @urlParam id string required Example: recUBMv1RNstZ2lLO
+ */
 Route::get('/bucketlists/{id}', function (string $id) {
     $bucketlist = Bucketlist::findOrFail($id);
 
@@ -119,6 +179,13 @@ Route::get('/bucketlists/{id}', function (string $id) {
     ]);
 });
 
+/**
+ * GET api/related_items/{ids}
+ *
+ * Gets the data for the related items. Returns the list of items and their data.
+ *
+ * @urlParam ids comma separated string required Example: SVK:SNG.O_6833,SVK:SNG.O_2807
+ */
 Route::get('/related_items/{ids}', function (string $ids) {
     $idArray = explode(',', $ids);
     $related_items = collect([]);
