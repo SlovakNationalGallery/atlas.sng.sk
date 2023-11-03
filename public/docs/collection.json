@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Atlas SNG",
-        "_postman_id": "cad9821a-772a-4b18-94fb-25798042566b",
+        "_postman_id": "bee1fd43-2a21-4b78-b350-b89ca2c4b6ec",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -39,8 +39,8 @@
                         "method": "GET",
                         "header": [
                             {
-                                "key": "Content-Type",
-                                "value": "application\/json"
+                                "key": "X-locale",
+                                "value": "sk"
                             },
                             {
                                 "key": "Accept",
@@ -78,7 +78,7 @@
                                 }
                             ],
                             "code": 200,
-                            "body": "{\"codeable_id\":\"SVK:SNG.O_3095\",\"codeable_type\":\"item\"}",
+                            "body": "{\"data\":{\"codeable_id\":\"SVK:SNG.O_3095\",\"codeable_type\":\"item\"}}",
                             "name": ""
                         },
                         {
@@ -109,8 +109,8 @@
                         "method": "GET",
                         "header": [
                             {
-                                "key": "Content-Type",
-                                "value": "application\/json"
+                                "key": "X-locale",
+                                "value": "sk"
                             },
                             {
                                 "key": "Accept",
@@ -173,8 +173,8 @@
                         "method": "GET",
                         "header": [
                             {
-                                "key": "Content-Type",
-                                "value": "application\/json"
+                                "key": "X-locale",
+                                "value": "sk"
                             },
                             {
                                 "key": "Accept",
@@ -229,6 +229,10 @@
                         "method": "POST",
                         "header": [
                             {
+                                "key": "X-locale",
+                                "value": "sk"
+                            },
+                            {
                                 "key": "Content-Type",
                                 "value": "application\/json"
                             },
@@ -271,7 +275,7 @@
                                 }
                             ],
                             "code": 200,
-                            "body": "{\"success\":true,\"url\":\"https:\\\/\\\/atlas.sng.sk\\\/eA1\"}",
+                            "body": "{\"success\":true,\"url\":\"https:\\\/\\\/atlas.sng.sk\\\/88A\"}",
                             "name": ""
                         }
                     ]
@@ -296,8 +300,8 @@
                         "method": "GET",
                         "header": [
                             {
-                                "key": "Content-Type",
-                                "value": "application\/json"
+                                "key": "X-locale",
+                                "value": "sk"
                             },
                             {
                                 "key": "Accept",
@@ -360,8 +364,8 @@
                         "method": "GET",
                         "header": [
                             {
-                                "key": "Content-Type",
-                                "value": "application\/json"
+                                "key": "X-locale",
+                                "value": "sk"
                             },
                             {
                                 "key": "Accept",
@@ -424,8 +428,8 @@
                         "method": "GET",
                         "header": [
                             {
-                                "key": "Content-Type",
-                                "value": "application\/json"
+                                "key": "X-locale",
+                                "value": "sk"
                             },
                             {
                                 "key": "Accept",
@@ -488,8 +492,8 @@
                         "method": "GET",
                         "header": [
                             {
-                                "key": "Content-Type",
-                                "value": "application\/json"
+                                "key": "X-locale",
+                                "value": "sk"
                             },
                             {
                                 "key": "Accept",
@@ -552,8 +556,8 @@
                         "method": "GET",
                         "header": [
                             {
-                                "key": "Content-Type",
-                                "value": "application\/json"
+                                "key": "X-locale",
+                                "value": "sk"
                             },
                             {
                                 "key": "Accept",

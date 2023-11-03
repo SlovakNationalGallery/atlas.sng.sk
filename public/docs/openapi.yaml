@@ -12,7 +12,14 @@ paths:
       summary: 'GET /api/verify/{code}'
       operationId: gETapiverifycode
       description: "Checks if the typed code is valid. If it is valid, the response will contain the code's data (related object type + ID)\n\nOtherwise, the request will fail with a 404."
-      parameters: []
+      parameters:
+        -
+          in: header
+          name: X-locale
+          description: ''
+          example: sk
+          schema:
+            type: string
       responses:
         200:
           description: ''
@@ -21,15 +28,19 @@ paths:
               schema:
                 type: object
                 example:
-                  codeable_id: 'SVK:SNG.O_3095'
-                  codeable_type: item
+                  data:
+                    codeable_id: 'SVK:SNG.O_3095'
+                    codeable_type: item
                 properties:
-                  codeable_id:
-                    type: string
-                    example: 'SVK:SNG.O_3095'
-                  codeable_type:
-                    type: string
-                    example: item
+                  data:
+                    type: object
+                    properties:
+                      codeable_id:
+                        type: string
+                        example: 'SVK:SNG.O_3095'
+                      codeable_type:
+                        type: string
+                        example: item
         404:
           description: 'Code not found'
           content:
@@ -59,7 +70,14 @@ paths:
       summary: 'GET api/items/{id}'
       operationId: gETApiitemsid
       description: "Gets the item with the given ID. If it is found, the response will contain the item's data."
-      parameters: []
+      parameters:
+        -
+          in: header
+          name: X-locale
+          description: ''
+          example: sk
+          schema:
+            type: string
       responses:
         200:
           description: ''
@@ -263,7 +281,14 @@ paths:
       summary: 'GET api/sections/{id}s'
       operationId: gETApisectionsids
       description: "Gets the section for the given ID. If it is, the response will contain the section's data."
-      parameters: []
+      parameters:
+        -
+          in: header
+          name: X-locale
+          description: ''
+          example: sk
+          schema:
+            type: string
       responses:
         200:
           description: ''
@@ -1050,7 +1075,14 @@ paths:
       summary: 'POST api/collections'
       operationId: pOSTApicollections
       description: 'Saves the user collection. Returns the URL to the saved collection.'
-      parameters: []
+      parameters:
+        -
+          in: header
+          name: X-locale
+          description: ''
+          example: sk
+          schema:
+            type: string
       responses:
         200:
           description: ''
@@ -1060,14 +1092,14 @@ paths:
                 type: object
                 example:
                   success: true
-                  url: 'https://atlas.sng.sk/eA1'
+                  url: 'https://atlas.sng.sk/88A'
                 properties:
                   success:
                     type: boolean
                     example: true
                   url:
                     type: string
-                    example: 'https://atlas.sng.sk/eA1'
+                    example: 'https://atlas.sng.sk/88A'
       tags:
         - Endpoints
       requestBody:
@@ -1091,7 +1123,14 @@ paths:
       summary: 'GET api/collections/{hashid}'
       operationId: gETApicollectionshashid
       description: 'Gets the saved user collection by hashid. Returns the array of item IDs.'
-      parameters: []
+      parameters:
+        -
+          in: header
+          name: X-locale
+          description: ''
+          example: sk
+          schema:
+            type: string
       responses:
         200:
           description: ''
@@ -1133,7 +1172,14 @@ paths:
       summary: 'GET api/stories/{id}'
       operationId: gETApistoriesid
       description: "Gets the story with the given ID. If it is, the response will contain the story's data."
-      parameters: []
+      parameters:
+        -
+          in: header
+          name: X-locale
+          description: ''
+          example: sk
+          schema:
+            type: string
       responses:
         200:
           description: ''
@@ -1265,7 +1311,14 @@ paths:
       summary: 'GET api/places/{id}'
       operationId: gETApiplacesid
       description: "Gets the place with the given ID. If it is, the response will contain the place's data."
-      parameters: []
+      parameters:
+        -
+          in: header
+          name: X-locale
+          description: ''
+          example: sk
+          schema:
+            type: string
       responses:
         404:
           description: ''
@@ -1296,7 +1349,14 @@ paths:
       summary: 'GET api/bucketlists/{id}'
       operationId: gETApibucketlistsid
       description: 'Gets the items for the bucketlist/scavenger hunt. Returns the list of items and their data.'
-      parameters: []
+      parameters:
+        -
+          in: header
+          name: X-locale
+          description: ''
+          example: sk
+          schema:
+            type: string
       responses:
         200:
           description: ''
@@ -2175,7 +2235,14 @@ paths:
       summary: 'GET api/related_items/{ids}'
       operationId: gETApirelatedItemsids
       description: 'Gets the data for the related items. Returns the list of items and their data.'
-      parameters: []
+      parameters:
+        -
+          in: header
+          name: X-locale
+          description: ''
+          example: sk
+          schema:
+            type: string
       responses:
         200:
           description: ''
