@@ -1,0 +1,2371 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Atlas SNG Documentation</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../docs/css/theme-default.style.css" media="screen">
+    <link rel="stylesheet" href="../docs/css/theme-default.print.css" media="print">
+
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
+
+    <link rel="stylesheet"
+          href="https://unpkg.com/@highlightjs/cdn-assets@11.6.0/styles/obsidian.min.css">
+    <script src="https://unpkg.com/@highlightjs/cdn-assets@11.6.0/highlight.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jets/0.14.1/jets.min.js"></script>
+
+    <style id="language-style">
+        /* starts out as display none and is replaced with js later  */
+                    body .content .bash-example code { display: none; }
+                    body .content .javascript-example code { display: none; }
+            </style>
+
+    <script>
+        var tryItOutBaseUrl = "https://atlas.sng.sk.test";
+        var useCsrf = Boolean();
+        var csrfUrl = "/sanctum/csrf-cookie";
+    </script>
+    <script src="../docs/js/tryitout-4.25.0.js"></script>
+
+    <script src="../docs/js/theme-default-4.25.0.js"></script>
+
+</head>
+
+<body data-languages="[&quot;bash&quot;,&quot;javascript&quot;]">
+
+<a href="#" id="nav-button">
+    <span>
+        MENU
+        <img src="../docs/images/navbar.png" alt="navbar-image"/>
+    </span>
+</a>
+<div class="tocify-wrapper">
+    
+            <div class="lang-selector">
+                                            <button type="button" class="lang-button" data-language-name="bash">bash</button>
+                                            <button type="button" class="lang-button" data-language-name="javascript">javascript</button>
+                    </div>
+    
+    <div class="search">
+        <input type="text" class="search" id="input-search" placeholder="Search">
+    </div>
+
+    <div id="toc">
+                    <ul id="tocify-header-introduction" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="introduction">
+                    <a href="#introduction">Introduction</a>
+                </li>
+                            </ul>
+                    <ul id="tocify-header-authenticating-requests" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="authenticating-requests">
+                    <a href="#authenticating-requests">Authenticating requests</a>
+                </li>
+                            </ul>
+                    <ul id="tocify-header-endpoints" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="endpoints">
+                    <a href="#endpoints">Endpoints</a>
+                </li>
+                                    <ul id="tocify-subheader-endpoints" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="endpoints-GETapi-verify--code-">
+                                <a href="#endpoints-GETapi-verify--code-">GET /api/verify/{code}</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-items--id-">
+                                <a href="#endpoints-GETapi-items--id-">GET api/items/{id}</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-sections--id-">
+                                <a href="#endpoints-GETapi-sections--id-">GET api/sections/{id}s</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-collections">
+                                <a href="#endpoints-POSTapi-collections">POST api/collections</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-collections--hashid-">
+                                <a href="#endpoints-GETapi-collections--hashid-">GET api/collections/{hashid}</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-stories--id-">
+                                <a href="#endpoints-GETapi-stories--id-">GET api/stories/{id}</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-places--id-">
+                                <a href="#endpoints-GETapi-places--id-">GET api/places/{id}</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-bucketlists--id-">
+                                <a href="#endpoints-GETapi-bucketlists--id-">GET api/bucketlists/{id}</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-related_items--ids-">
+                                <a href="#endpoints-GETapi-related_items--ids-">GET api/related_items/{ids}</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
+            </div>
+
+    <ul class="toc-footer" id="toc-footer">
+                    <li style="padding-bottom: 5px;"><a href="../docs/collection.json">View Postman collection</a></li>
+                            <li style="padding-bottom: 5px;"><a href="../docs/openapi.yaml">View OpenAPI spec</a></li>
+                <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
+    </ul>
+
+    <ul class="toc-footer" id="last-updated">
+        <li>Last updated: November 3, 2023</li>
+    </ul>
+</div>
+
+<div class="page-wrapper">
+    <div class="dark-box"></div>
+    <div class="content">
+        <h1 id="introduction">Introduction</h1>
+<aside>
+    <strong>Base URL</strong>: <code>https://atlas.sng.sk</code>
+</aside>
+<p>This documentation aims to provide all the information you need to work with our API.</p>
+<aside>As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile).
+You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).</aside>
+
+        <h1 id="authenticating-requests">Authenticating requests</h1>
+<p>This API is not authenticated.</p>
+
+        <h1 id="endpoints">Endpoints</h1>
+
+    
+
+                                <h2 id="endpoints-GETapi-verify--code-">GET /api/verify/{code}</h2>
+
+<p>
+</p>
+
+<p>Checks if the typed code is valid. If it is valid, the response will contain the code's data (related object type + ID)</p>
+<p>Otherwise, the request will fail with a 404.</p>
+
+<span id="example-requests-GETapi-verify--code-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://atlas.sng.sk/api/verify/17" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://atlas.sng.sk/api/verify/17"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-verify--code-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 59
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;codeable_id&quot;: &quot;SVK:SNG.O_3095&quot;,
+    &quot;codeable_type&quot;: &quot;item&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, Code not found):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Record not found.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-verify--code-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-verify--code-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-verify--code-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-verify--code-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-verify--code-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-verify--code-" data-method="GET"
+      data-path="api/verify/{code}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-verify--code-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-verify--code-"
+                    onclick="tryItOut('GETapi-verify--code-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-verify--code-"
+                    onclick="cancelTryOut('GETapi-verify--code-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-verify--code-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/verify/{code}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-verify--code-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-verify--code-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>code</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="code"                data-endpoint="GETapi-verify--code-"
+               value="17"
+               data-component="url">
+    <br>
+<p>Example: <code>17</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-items--id-">GET api/items/{id}</h2>
+
+<p>
+</p>
+
+<p>Gets the item with the given ID. If it is found, the response will contain the item's data.</p>
+
+<span id="example-requests-GETapi-items--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://atlas.sng.sk/api/items/SVK:SNG.O_1405" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://atlas.sng.sk/api/items/SVK:SNG.O_1405"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-items--id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 58
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: {
+        &quot;id&quot;: &quot;SVK:SNG.O_1405&quot;,
+        &quot;title&quot;: &quot;Žena s červen&yacute;m koh&uacute;tom&quot;,
+        &quot;author&quot;: &quot;Ester &Scaron;imerov&aacute;-Martinčekov&aacute;&quot;,
+        &quot;author_description&quot;: &quot;&quot;,
+        &quot;dating&quot;: &quot;1938&quot;,
+        &quot;locked_bucketlist_description&quot;: &quot;&quot;,
+        &quot;dating_short&quot;: &quot;1938&quot;,
+        &quot;description&quot;: &quot;&lt;p&gt;&lt;em&gt;Žena s červen&yacute;m koh&uacute;tom&lt;/em&gt; poch&aacute;dza zo s&eacute;rie predvojnov&yacute;ch obrazov, v ktor&yacute;ch sa autorka in&scaron;pirovala v&yacute;hľadom na trhovisko priamo z okna svojho ateli&eacute;ru pri Avione. Svojsky sa vyrovnala s franc&uacute;zskymi in&scaron;pir&aacute;ciami kubizmu a z&aacute;roveň s vplyvom kolegov Mikul&aacute;&scaron;a Galandu či Janka Alexyho.&lt;/p&gt;\n&lt;p&gt;Dielo možno interpretovať ako &scaron;t&uacute;diu farieb a tvarov, ako erotick&yacute; odkaz či predzvesť bl&iacute;žiacej sa druhej svetovej vojny. Kontrast agres&iacute;vnej farby a polohy koh&uacute;ta s nežn&yacute;m ochrann&yacute;m gestom ženy m&ocirc;že naznačovať, že vo vojne s&uacute; vždy dve strany &ndash; t&aacute; ktor&aacute; konflikt poh&aacute;ňa, a t&aacute;, ktor&aacute; proti svojej v&ocirc;li zn&aacute;&scaron;a jeho n&aacute;sledky.&lt;/p&gt;\n&quot;,
+        &quot;authorities&quot;: [
+            {
+                &quot;id&quot;: &quot;10511&quot;,
+                &quot;name&quot;: &quot;Ester &Scaron;imerov&aacute;-Martinčekov&aacute;&quot;,
+                &quot;has_image&quot;: true,
+                &quot;biography&quot;: &quot;Ester absolvovala kr&aacute;tky kurz v maliarskej &scaron;kole Gust&aacute;va Mall&eacute;ho a hneď po maturite na gymn&aacute;ziu v Bratislave pokračovala v &scaron;t&uacute;diu v Par&iacute;ži, čo v tom čase pre mestsk&eacute; dievča nebolo v&ocirc;bec obvykl&eacute;. Umelec si podľa nej mal vyberať z pr&iacute;rody to, čo považuje za zauj&iacute;mav&eacute;, a nemus&iacute; sa držať striktne toho, čo vid&iacute;. &bdquo;Nechcem byť doma cudzorod&yacute;m umelcom. To, čo som si zo sveta priniesla, chcem priviesť k rozkvetu tu doma.&ldquo;&quot;,
+                &quot;birth_place&quot;: &quot;Bratislava&quot;,
+                &quot;death_place&quot;: &quot;Liptovsk&yacute; Mikul&aacute;&scaron;&quot;,
+                &quot;birth_date&quot;: &quot;1909&quot;,
+                &quot;death_date&quot;: &quot;2005&quot;,
+                &quot;image_url&quot;: &quot;https://www.webumenia.sk/images/autori/1/98/10511/10511.jpeg&quot;,
+                &quot;related_items&quot;: null
+            }
+        ],
+        &quot;image_src&quot;: &quot;https://www.webumenia.sk/dielo/nahlad/SVK:SNG.O_1405/600&quot;,
+        &quot;image_srcset&quot;: &quot;https://www.webumenia.sk/dielo/nahlad/SVK:SNG.O_1405/220 220w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.O_1405/300 300w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.O_1405/600 600w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.O_1405/800 800w&quot;,
+        &quot;images&quot;: [
+            {
+                &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGTMG%2FX1500%2FSNG--O_1405--1_1--2013_10_24--L2_WEB.jp2.dzi&quot;
+            }
+        ],
+        &quot;image_aspect_ratio&quot;: 0.6275,
+        &quot;webumenia_url&quot;: &quot;https://www.webumenia.sk/dielo/SVK:SNG.O_1405&quot;,
+        &quot;code&quot;: &quot;011001000&quot;,
+        &quot;offset_top&quot;: -111,
+        &quot;video_thumbnail&quot;: null,
+        &quot;video_embed&quot;: null,
+        &quot;video_aspect_ratio&quot;: null,
+        &quot;video_title&quot;: &quot;&quot;,
+        &quot;video_subtitle&quot;: &quot;&quot;,
+        &quot;story_id&quot;: &quot;rec0EynktJy9zcICY&quot;,
+        &quot;location_formatted&quot;: &quot;Spoločenstvo žien, s&aacute;la V, 2. podlažie, Vodn&eacute; kas&aacute;rne&quot;,
+        &quot;exhibition&quot;: {
+            &quot;id&quot;: &quot;recKd1Y0FnQmmFbwW&quot;,
+            &quot;name&quot;: &quot;V&yacute;stava Prol&oacute;g: 12 farieb reality&quot;
+        },
+        &quot;bucketlists&quot;: []
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-items--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-items--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-items--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-items--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-items--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-items--id-" data-method="GET"
+      data-path="api/items/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-items--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-items--id-"
+                    onclick="tryItOut('GETapi-items--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-items--id-"
+                    onclick="cancelTryOut('GETapi-items--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-items--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/items/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-items--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-items--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="GETapi-items--id-"
+               value="SVK:SNG.O_1405"
+               data-component="url">
+    <br>
+<p>Example: <code>SVK:SNG.O_1405</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-sections--id-">GET api/sections/{id}s</h2>
+
+<p>
+</p>
+
+<p>Gets the section for the given ID. If it is, the response will contain the section's data.</p>
+
+<span id="example-requests-GETapi-sections--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://atlas.sng.sk/api/sections/rec8or1MegfsJY2CO" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://atlas.sng.sk/api/sections/rec8or1MegfsJY2CO"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-sections--id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 57
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: {
+        &quot;id&quot;: &quot;rec8or1MegfsJY2CO&quot;,
+        &quot;title&quot;: &quot;Verejn&eacute; telo&quot;,
+        &quot;description&quot;: &quot;&lt;p&gt;Mot&iacute;v Piety vyz&yacute;va k ľ&uacute;tosti. Smutn&yacute;m tich&yacute;m gestom ukazuje: &bdquo;Pozrite, čo ste dopustili.&ldquo; Pr&iacute;beh nepoch&aacute;dza zo Sv&auml;t&eacute;ho p&iacute;sma, Eur&oacute;pou sa zo severu &scaron;&iacute;ril sk&ocirc;r ako &bdquo;urb&aacute;nna legenda&ldquo;.&lt;/p&gt;\n&lt;p&gt;Kr&aacute;sa Piety spoč&iacute;va aj v jej jednoduchosti. Pokojn&aacute; sc&eacute;na s dvoma postavami toho obsahuje veľa &ndash; obetavosť, matersk&uacute; l&aacute;sku aj v&ocirc;ľu prikryť a chr&aacute;niť.&nbsp;&nbsp;&lt;/p&gt;\n&lt;p&gt;Sc&eacute;na s Pannou M&aacute;riou a Kristom dostala stovky profesion&aacute;lnych umeleck&yacute;ch aj ľudov&yacute;ch remeseln&yacute;ch stv&aacute;rnen&iacute;. Pieta prežila &uacute;stup kresťanstva ako &uacute;strednej t&eacute;my vo v&yacute;tvarnom umen&iacute;. Jej dne&scaron;n&aacute; podoba v podan&iacute; J&aacute;na Zelinku tak trochu odr&aacute;ža drsn&uacute; povahu chaotick&eacute;ho a neust&aacute;le pochybuj&uacute;ceho sveta s&uacute;časnosti.&lt;/p&gt;\n&quot;,
+        &quot;image&quot;: null,
+        &quot;code&quot;: &quot;110001010&quot;,
+        &quot;items&quot;: [
+            {
+                &quot;id&quot;: &quot;SVK:SNG.P_2858&quot;,
+                &quot;title&quot;: &quot;Obrazoborectvo / oddelen&eacute; s&uacute;vislosti&quot;,
+                &quot;author&quot;: &quot;J&aacute;n Zelinka&quot;,
+                &quot;author_description&quot;: &quot;&quot;,
+                &quot;dating&quot;: &quot;21. storočie, 2010&quot;,
+                &quot;locked_bucketlist_description&quot;: &quot;&quot;,
+                &quot;dating_short&quot;: &quot;2010&quot;,
+                &quot;description&quot;: &quot;&lt;p&gt;&lt;em&gt;&bdquo;Pom&ocirc;žem si cit&aacute;tom od Elisabeth Frink: ,K soche, ako je t&aacute;to, sa človek dost&aacute;va postupne a e&scaron;te dlho potom, ako na ňu prv&yacute;kr&aacute;t pomyslel. Uvid&iacute;te niečo, zap&aacute;či sa v&aacute;m nejak&aacute; tv&aacute;r alebo postava a naozaj ju chcete zachytiť, chcete pre ňu n&aacute;jsť d&ocirc;vod vo svojej mysli...&#039; S&uacute;so&scaron;ie vytv&aacute;ra vlastn&uacute; mytol&oacute;giu osobn&yacute;ch z&aacute;žitkov a možno sa len t&yacute;mto sp&ocirc;sobom liečim z reality.&amp;quot;&lt;/em&gt;&lt;/p&gt;\n&lt;p&gt;Hroziv&eacute; s&uacute;so&scaron;ie z bet&oacute;nu, kameňa, hrdzav&eacute;ho kovu a vrecoviny vzniklo technikou tzv. negat&iacute;vneho modelovania. Materi&aacute;l pokr&yacute;va povrch formy, zatiaľ čo vn&uacute;tro sochy je takmer dut&eacute;. Podoba piety s Ježi&scaron;om ležiacim na zemi poch&aacute;dza z čias renesancie, keď bola poloha v matkinom lone považovan&aacute; za nerealistick&uacute;.&lt;/p&gt;\n&lt;p&gt;Autor dielo vytvoril po nepr&iacute;jemnej sk&uacute;senosti s predstaviteľmi cirkvi a chcel sa takto z negat&iacute;vneho z&aacute;žitku &bdquo;vyrozpr&aacute;vať&ldquo;. Postavy bez tv&aacute;r&iacute; v&scaron;ak naznačuj&uacute; až takmer univerz&aacute;lne posolstvo. Socha m&ocirc;že pripom&iacute;nať matku s dieťaťom utekaj&uacute;cu z vojnovej z&oacute;ny, obeť at&oacute;movej bomby či sopečn&eacute;ho v&yacute;buchu.&lt;/p&gt;\n&quot;,
+                &quot;authorities&quot;: [
+                    {
+                        &quot;id&quot;: &quot;1503529&quot;,
+                        &quot;name&quot;: &quot;J&aacute;n Zelinka&quot;,
+                        &quot;has_image&quot;: true,
+                        &quot;biography&quot;: &quot;Zelinka je soch&aacute;r filozof, ktor&yacute; sk&uacute;ma realitu a snaž&iacute; sa ju uchopiť prostredn&iacute;ctvom vlastnej osobitej interpret&aacute;cie cez nev&scaron;edn&eacute; pracovn&eacute; postupy a technol&oacute;gie. Snaž&iacute; sa vzbudzovať v ľuďoch zvedavosť, in&scaron;pirovať ich, ukazovať smer a pom&aacute;hať im vidieť veci ist&yacute;m sp&ocirc;sobom. Hoci použ&iacute;va netradičn&eacute; materi&aacute;ly, jeho dielo je z hľadiska formy klasick&aacute; socha.&quot;,
+                        &quot;birth_place&quot;: &quot;Vranov nad Topľou&quot;,
+                        &quot;death_place&quot;: null,
+                        &quot;birth_date&quot;: &quot;1978&quot;,
+                        &quot;death_date&quot;: &quot;&quot;,
+                        &quot;image_url&quot;: &quot;https://www.webumenia.sk/images/autori/529/1/1503529/1503529.jpeg&quot;,
+                        &quot;related_items&quot;: null
+                    }
+                ],
+                &quot;image_src&quot;: &quot;https://www.webumenia.sk/dielo/nahlad/SVK:SNG.P_2858/600&quot;,
+                &quot;image_srcset&quot;: &quot;https://www.webumenia.sk/dielo/nahlad/SVK:SNG.P_2858/220 220w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.P_2858/300 300w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.P_2858/600 600w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.P_2858/800 800w&quot;,
+                &quot;images&quot;: [
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX2900%2FSNG--P_2858--1_1--2023_02_21--L2_WEB.jp2.dzi&quot;
+                    }
+                ],
+                &quot;image_aspect_ratio&quot;: 1.5009380863039,
+                &quot;webumenia_url&quot;: &quot;https://www.webumenia.sk/dielo/SVK:SNG.P_2858&quot;,
+                &quot;code&quot;: &quot;100100001&quot;,
+                &quot;offset_top&quot;: 0,
+                &quot;video_thumbnail&quot;: {
+                    &quot;src&quot;: &quot;https://i.vimeocdn.com/video/1565142997-9edde2e9e3455ac6118814c35d71c4a0b6e15e3b8f4244d6af6b28e40748097d-d_1920x1080&quot;,
+                    &quot;srcset&quot;: &quot;https://i.vimeocdn.com/video/1565142997-9edde2e9e3455ac6118814c35d71c4a0b6e15e3b8f4244d6af6b28e40748097d-d_100x75 100w, https://i.vimeocdn.com/video/1565142997-9edde2e9e3455ac6118814c35d71c4a0b6e15e3b8f4244d6af6b28e40748097d-d_200x150 200w, https://i.vimeocdn.com/video/1565142997-9edde2e9e3455ac6118814c35d71c4a0b6e15e3b8f4244d6af6b28e40748097d-d_295x166 295w, https://i.vimeocdn.com/video/1565142997-9edde2e9e3455ac6118814c35d71c4a0b6e15e3b8f4244d6af6b28e40748097d-d_640x360 640w, https://i.vimeocdn.com/video/1565142997-9edde2e9e3455ac6118814c35d71c4a0b6e15e3b8f4244d6af6b28e40748097d-d_960x540 960w, https://i.vimeocdn.com/video/1565142997-9edde2e9e3455ac6118814c35d71c4a0b6e15e3b8f4244d6af6b28e40748097d-d_1280x720 1280w, https://i.vimeocdn.com/video/1565142997-9edde2e9e3455ac6118814c35d71c4a0b6e15e3b8f4244d6af6b28e40748097d-d_1920x1080 1920w&quot;,
+                    &quot;width&quot;: 1920,
+                    &quot;height&quot;: 1080
+                },
+                &quot;video_embed&quot;: &quot;https://player.vimeo.com/video/779850353?h=c42461091d&quot;,
+                &quot;video_aspect_ratio&quot;: {
+                    &quot;width&quot;: 9,
+                    &quot;height&quot;: 16
+                },
+                &quot;video_title&quot;: &quot;Video&quot;,
+                &quot;video_subtitle&quot;: &quot;Dielo v e&scaron;te zabalenom stave&quot;,
+                &quot;story_id&quot;: &quot;reciw1Gq3J5A9hsM9&quot;,
+                &quot;location_formatted&quot;: &quot;Expoz&iacute;cia Sakr&aacute;lne umenie, s&aacute;la VIII, 2. podlažie, Vodn&eacute; kas&aacute;rne&quot;,
+                &quot;exhibition&quot;: {
+                    &quot;id&quot;: &quot;recCHJJNWWDgMSfd2&quot;,
+                    &quot;name&quot;: &quot;Expoz&iacute;cia Sacra&quot;
+                },
+                &quot;bucketlists&quot;: []
+            },
+            {
+                &quot;id&quot;: &quot;SVK:SNG.NL_67&quot;,
+                &quot;title&quot;: &quot;Pieta&quot;,
+                &quot;author&quot;: &quot;Nezn&aacute;my autor&quot;,
+                &quot;author_description&quot;: &quot;&quot;,
+                &quot;dating&quot;: &quot;1801&ndash;1900&quot;,
+                &quot;locked_bucketlist_description&quot;: &quot;&quot;,
+                &quot;dating_short&quot;: &quot;1801&ndash;1900&quot;,
+                &quot;description&quot;: &quot;&lt;p&gt;Mal&eacute; dreven&eacute; so&scaron;ky Piety vyrez&aacute;vali z dreva nielen vyučen&iacute; rezb&aacute;ri a stol&aacute;ri, ale aj samoukovia. Tvorili d&ocirc;ležit&uacute; s&uacute;časť kresťansk&yacute;ch pr&iacute;bytkov aj u t&yacute;ch najchudobnej&scaron;&iacute;ch, ktor&iacute; si nemohli na ochranu zadov&aacute;žiť kvalitnej&scaron;&iacute; obraz či so&scaron;ku sv&auml;tca alebo sv&auml;tice.&nbsp;&lt;/p&gt;\n&lt;p&gt;Piety tohto typu sa často umiestňovali v mal&yacute;ch v&yacute;klenkoch na &scaron;t&iacute;toch a priečeliach domov alebo v kultovom k&uacute;te izby. Neposv&auml;covali sa a aj po zmene majiteľa už zost&aacute;vali s&uacute;časťou domov.&lt;/p&gt;\n&lt;p&gt;So&scaron;ky Madony a Piety obľubovalo najm&auml; katol&iacute;cke obyvateľstvo z&aacute;padn&eacute;ho Slovenska, severnej Oravy a okolia bansk&yacute;ch miest. Koncom 19. storočia začali p&ocirc;vodn&eacute; dreven&eacute; so&scaron;ky postupne nahr&aacute;dzať so&scaron;ky z porcel&aacute;nu alebo zo sadry.&nbsp;&lt;/p&gt;\n&quot;,
+                &quot;authorities&quot;: [],
+                &quot;image_src&quot;: &quot;https://www.webumenia.sk/dielo/nahlad/SVK:SNG.NL_67/600&quot;,
+                &quot;image_srcset&quot;: &quot;https://www.webumenia.sk/dielo/nahlad/SVK:SNG.NL_67/220 220w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.NL_67/300 300w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.NL_67/600 600w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.NL_67/800 800w&quot;,
+                &quot;images&quot;: [
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX100%2FSNG--NL_67--1_6--2022_10_19--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX100%2FSNG--NL_67--2_6--2022_10_19--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX100%2FSNG--NL_67--3_6--2022_10_19--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX100%2FSNG--NL_67--4_6--2022_10_19--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX100%2FSNG--NL_67--5_6--2022_10_19--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX100%2FSNG--NL_67--6_6--2022_10_19--L2_WEB.jp2.dzi&quot;
+                    }
+                ],
+                &quot;image_aspect_ratio&quot;: 0.74875,
+                &quot;webumenia_url&quot;: &quot;https://www.webumenia.sk/dielo/SVK:SNG.NL_67&quot;,
+                &quot;code&quot;: &quot;111000011&quot;,
+                &quot;offset_top&quot;: -115,
+                &quot;video_thumbnail&quot;: null,
+                &quot;video_embed&quot;: null,
+                &quot;video_aspect_ratio&quot;: null,
+                &quot;video_title&quot;: &quot;&quot;,
+                &quot;video_subtitle&quot;: &quot;&quot;,
+                &quot;story_id&quot;: &quot;reciw1Gq3J5A9hsM9&quot;,
+                &quot;location_formatted&quot;: &quot;Expoz&iacute;cia Sakr&aacute;lne umenie, s&aacute;la VIII, 2. podlažie, Vodn&eacute; kas&aacute;rne&quot;,
+                &quot;exhibition&quot;: {
+                    &quot;id&quot;: &quot;recCHJJNWWDgMSfd2&quot;,
+                    &quot;name&quot;: &quot;Expoz&iacute;cia Sacra&quot;
+                },
+                &quot;bucketlists&quot;: []
+            },
+            {
+                &quot;id&quot;: &quot;SVK:SNG.NL_69&quot;,
+                &quot;title&quot;: &quot;Pieta II.&quot;,
+                &quot;author&quot;: &quot;Nezn&aacute;my autor&quot;,
+                &quot;author_description&quot;: &quot;&quot;,
+                &quot;dating&quot;: &quot;1801&ndash;1900&quot;,
+                &quot;locked_bucketlist_description&quot;: &quot;&quot;,
+                &quot;dating_short&quot;: &quot;1801&ndash;1900&quot;,
+                &quot;description&quot;: &quot;&lt;p&gt;Mal&eacute; dreven&eacute; so&scaron;ky Piety vyrez&aacute;vali z dreva nielen vyučen&iacute; rezb&aacute;ri a stol&aacute;ri, ale aj samoukovia. Tvorili d&ocirc;ležit&uacute; s&uacute;časť kresťansk&yacute;ch pr&iacute;bytkov aj u t&yacute;ch najchudobnej&scaron;&iacute;ch, ktor&iacute; si nemohli na ochranu zadov&aacute;žiť kvalitnej&scaron;&iacute; obraz či so&scaron;ku sv&auml;tca alebo sv&auml;tice.&nbsp;&lt;/p&gt;\n&lt;p&gt;Piety tohto typu sa často umiestňovali v mal&yacute;ch v&yacute;klenkoch na &scaron;t&iacute;toch a priečeliach domov alebo v kultovom k&uacute;te izby. Neposv&auml;covali sa a aj po zmene majiteľa už zost&aacute;vali s&uacute;časťou domov.&lt;/p&gt;\n&lt;p&gt;So&scaron;ky Madony a Piety obľubovalo najm&auml; katol&iacute;cke obyvateľstvo z&aacute;padn&eacute;ho Slovenska, severnej Oravy a okolia bansk&yacute;ch miest. Koncom 19. storočia začali p&ocirc;vodn&eacute; dreven&eacute; so&scaron;ky postupne nahr&aacute;dzať so&scaron;ky z porcel&aacute;nu alebo zo sadry.&nbsp;&lt;/p&gt;\n&quot;,
+                &quot;authorities&quot;: [],
+                &quot;image_src&quot;: &quot;https://www.webumenia.sk/dielo/nahlad/SVK:SNG.NL_69/600&quot;,
+                &quot;image_srcset&quot;: &quot;https://www.webumenia.sk/dielo/nahlad/SVK:SNG.NL_69/220 220w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.NL_69/300 300w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.NL_69/600 600w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.NL_69/800 800w&quot;,
+                &quot;images&quot;: [
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX100%2FSNG--NL_69--1_6--2022_10_19--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX100%2FSNG--NL_69--2_6--2022_10_19--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX100%2FSNG--NL_69--3_6--2022_10_19--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX100%2FSNG--NL_69--4_6--2022_10_19--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX100%2FSNG--NL_69--5_6--2022_10_19--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX100%2FSNG--NL_69--6_6--2022_10_19--L2_WEB.jp2.dzi&quot;
+                    }
+                ],
+                &quot;image_aspect_ratio&quot;: 0.74875,
+                &quot;webumenia_url&quot;: &quot;https://www.webumenia.sk/dielo/SVK:SNG.NL_69&quot;,
+                &quot;code&quot;: &quot;110000001&quot;,
+                &quot;offset_top&quot;: -164,
+                &quot;video_thumbnail&quot;: null,
+                &quot;video_embed&quot;: null,
+                &quot;video_aspect_ratio&quot;: null,
+                &quot;video_title&quot;: &quot;&quot;,
+                &quot;video_subtitle&quot;: &quot;&quot;,
+                &quot;story_id&quot;: &quot;reciw1Gq3J5A9hsM9&quot;,
+                &quot;location_formatted&quot;: &quot;Expoz&iacute;cia Sakr&aacute;lne umenie, s&aacute;la VIII, 2. podlažie, Vodn&eacute; kas&aacute;rne&quot;,
+                &quot;exhibition&quot;: {
+                    &quot;id&quot;: &quot;recCHJJNWWDgMSfd2&quot;,
+                    &quot;name&quot;: &quot;Expoz&iacute;cia Sacra&quot;
+                },
+                &quot;bucketlists&quot;: []
+            },
+            {
+                &quot;id&quot;: &quot;SVK:SNG.NL_227&quot;,
+                &quot;title&quot;: &quot;Pieta&quot;,
+                &quot;author&quot;: &quot;Nezn&aacute;my autor&quot;,
+                &quot;author_description&quot;: &quot;&quot;,
+                &quot;dating&quot;: &quot;19. storočie, 3. tretina&quot;,
+                &quot;locked_bucketlist_description&quot;: &quot;&quot;,
+                &quot;dating_short&quot;: &quot;3. tretina&quot;,
+                &quot;description&quot;: &quot;&lt;p&gt;Mal&eacute; dreven&eacute; so&scaron;ky Piety vyrez&aacute;vali z dreva nielen vyučen&iacute; rezb&aacute;ri a stol&aacute;ri, ale aj samoukovia. Tvorili d&ocirc;ležit&uacute; s&uacute;časť kresťansk&yacute;ch pr&iacute;bytkov aj u t&yacute;ch najchudobnej&scaron;&iacute;ch, ktor&iacute; si nemohli na ochranu zadov&aacute;žiť kvalitnej&scaron;&iacute; obraz či so&scaron;ku sv&auml;tca alebo sv&auml;tice.&nbsp;&lt;/p&gt;\n&lt;p&gt;Piety tohto typu sa často umiestňovali v mal&yacute;ch v&yacute;klenkoch na &scaron;t&iacute;toch a priečeliach domov alebo v kultovom k&uacute;te izby. Neposv&auml;covali sa a aj po zmene majiteľa už zost&aacute;vali s&uacute;časťou domov.&lt;/p&gt;\n&lt;p&gt;So&scaron;ky Madony a Piety obľubovalo najm&auml; katol&iacute;cke obyvateľstvo z&aacute;padn&eacute;ho Slovenska, severnej Oravy a okolia bansk&yacute;ch miest. Koncom 19. storočia začali p&ocirc;vodn&eacute; dreven&eacute; so&scaron;ky postupne nahr&aacute;dzať so&scaron;ky z porcel&aacute;nu alebo zo sadry.&nbsp;&lt;/p&gt;\n&quot;,
+                &quot;authorities&quot;: [],
+                &quot;image_src&quot;: &quot;https://www.webumenia.sk/dielo/nahlad/SVK:SNG.NL_227/600&quot;,
+                &quot;image_srcset&quot;: &quot;https://www.webumenia.sk/dielo/nahlad/SVK:SNG.NL_227/220 220w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.NL_227/300 300w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.NL_227/600 600w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.NL_227/800 800w&quot;,
+                &quot;images&quot;: [
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX300%2FSNG--NL_227--1_6--2022_10_19--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX300%2FSNG--NL_227--2_6--2022_10_19--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX300%2FSNG--NL_227--3_6--2022_10_19--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX300%2FSNG--NL_227--4_6--2022_10_19--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX300%2FSNG--NL_227--5_6--2022_10_19--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX300%2FSNG--NL_227--6_6--2022_10_19--L2_WEB.jp2.dzi&quot;
+                    }
+                ],
+                &quot;image_aspect_ratio&quot;: 0.74875,
+                &quot;webumenia_url&quot;: &quot;https://www.webumenia.sk/dielo/SVK:SNG.NL_227&quot;,
+                &quot;code&quot;: &quot;010110001&quot;,
+                &quot;offset_top&quot;: -80,
+                &quot;video_thumbnail&quot;: null,
+                &quot;video_embed&quot;: null,
+                &quot;video_aspect_ratio&quot;: null,
+                &quot;video_title&quot;: &quot;&quot;,
+                &quot;video_subtitle&quot;: &quot;&quot;,
+                &quot;story_id&quot;: &quot;reciw1Gq3J5A9hsM9&quot;,
+                &quot;location_formatted&quot;: &quot;Expoz&iacute;cia Sakr&aacute;lne umenie, s&aacute;la VIII, 2. podlažie, Vodn&eacute; kas&aacute;rne&quot;,
+                &quot;exhibition&quot;: {
+                    &quot;id&quot;: &quot;recCHJJNWWDgMSfd2&quot;,
+                    &quot;name&quot;: &quot;Expoz&iacute;cia Sacra&quot;
+                },
+                &quot;bucketlists&quot;: []
+            },
+            {
+                &quot;id&quot;: &quot;SVK:SNG.NL_73&quot;,
+                &quot;title&quot;: &quot;Pieta I.&quot;,
+                &quot;author&quot;: &quot;Nezn&aacute;my autor&quot;,
+                &quot;author_description&quot;: &quot;&quot;,
+                &quot;dating&quot;: &quot;19. storočie, 1. polovica&quot;,
+                &quot;locked_bucketlist_description&quot;: &quot;&quot;,
+                &quot;dating_short&quot;: &quot;1. polovica&quot;,
+                &quot;description&quot;: &quot;&lt;p&gt;Mal&eacute; dreven&eacute; so&scaron;ky Piety vyrez&aacute;vali z dreva nielen vyučen&iacute; rezb&aacute;ri a stol&aacute;ri, ale aj samoukovia. Tvorili d&ocirc;ležit&uacute; s&uacute;časť kresťansk&yacute;ch pr&iacute;bytkov aj u t&yacute;ch najchudobnej&scaron;&iacute;ch, ktor&iacute; si nemohli na ochranu zadov&aacute;žiť kvalitnej&scaron;&iacute; obraz či so&scaron;ku sv&auml;tca alebo sv&auml;tice.&nbsp;&lt;/p&gt;\n&lt;p&gt;Piety tohto typu sa často umiestňovali v mal&yacute;ch v&yacute;klenkoch na &scaron;t&iacute;toch a priečeliach domov alebo v kultovom k&uacute;te izby. Neposv&auml;covali sa a aj po zmene majiteľa už zost&aacute;vali s&uacute;časťou domov.&lt;/p&gt;\n&lt;p&gt;So&scaron;ky Madony a Piety obľubovalo najm&auml; katol&iacute;cke obyvateľstvo z&aacute;padn&eacute;ho Slovenska, severnej Oravy a okolia bansk&yacute;ch miest. Koncom 19. storočia začali p&ocirc;vodn&eacute; dreven&eacute; so&scaron;ky postupne nahr&aacute;dzať so&scaron;ky z porcel&aacute;nu alebo zo sadry.&nbsp;&lt;/p&gt;\n&quot;,
+                &quot;authorities&quot;: [],
+                &quot;image_src&quot;: &quot;https://www.webumenia.sk/dielo/nahlad/SVK:SNG.NL_73/600&quot;,
+                &quot;image_srcset&quot;: &quot;https://www.webumenia.sk/dielo/nahlad/SVK:SNG.NL_73/220 220w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.NL_73/300 300w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.NL_73/600 600w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.NL_73/800 800w&quot;,
+                &quot;images&quot;: [
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX100%2FSNG--NL_73--1_6--2022_10_18--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX100%2FSNG--NL_73--2_6--2022_10_18--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX100%2FSNG--NL_73--3_6--2022_10_18--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX100%2FSNG--NL_73--4_6--2022_10_18--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX100%2FSNG--NL_73--5_6--2022_10_18--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX100%2FSNG--NL_73--6_6--2022_10_18--L2_WEB.jp2.dzi&quot;
+                    }
+                ],
+                &quot;image_aspect_ratio&quot;: 0.74875,
+                &quot;webumenia_url&quot;: &quot;https://www.webumenia.sk/dielo/SVK:SNG.NL_73&quot;,
+                &quot;code&quot;: &quot;011010110&quot;,
+                &quot;offset_top&quot;: -85,
+                &quot;video_thumbnail&quot;: null,
+                &quot;video_embed&quot;: null,
+                &quot;video_aspect_ratio&quot;: null,
+                &quot;video_title&quot;: &quot;&quot;,
+                &quot;video_subtitle&quot;: &quot;&quot;,
+                &quot;story_id&quot;: &quot;reciw1Gq3J5A9hsM9&quot;,
+                &quot;location_formatted&quot;: &quot;Expoz&iacute;cia Sakr&aacute;lne umenie, s&aacute;la VIII, 2. podlažie, Vodn&eacute; kas&aacute;rne&quot;,
+                &quot;exhibition&quot;: {
+                    &quot;id&quot;: &quot;recCHJJNWWDgMSfd2&quot;,
+                    &quot;name&quot;: &quot;Expoz&iacute;cia Sacra&quot;
+                },
+                &quot;bucketlists&quot;: []
+            },
+            {
+                &quot;id&quot;: &quot;SVK:SNG.NL_71&quot;,
+                &quot;title&quot;: &quot;Pieta III.&quot;,
+                &quot;author&quot;: &quot;Nezn&aacute;my autor&quot;,
+                &quot;author_description&quot;: &quot;&quot;,
+                &quot;dating&quot;: &quot;19. storočie, 2. polovica, 1890&ndash;1900&quot;,
+                &quot;locked_bucketlist_description&quot;: &quot;&quot;,
+                &quot;dating_short&quot;: &quot;1890&ndash;1900&quot;,
+                &quot;description&quot;: &quot;&lt;p&gt;Mal&eacute; dreven&eacute; so&scaron;ky Piety vyrez&aacute;vali z dreva nielen vyučen&iacute; rezb&aacute;ri a stol&aacute;ri, ale aj samoukovia. Tvorili d&ocirc;ležit&uacute; s&uacute;časť kresťansk&yacute;ch pr&iacute;bytkov aj u t&yacute;ch najchudobnej&scaron;&iacute;ch, ktor&iacute; si nemohli na ochranu zadov&aacute;žiť kvalitnej&scaron;&iacute; obraz či so&scaron;ku sv&auml;tca alebo sv&auml;tice.&nbsp;&lt;/p&gt;\n&lt;p&gt;Piety tohto typu sa často umiestňovali v mal&yacute;ch v&yacute;klenkoch na &scaron;t&iacute;toch a priečeliach domov alebo v kultovom k&uacute;te izby. Neposv&auml;covali sa a aj po zmene majiteľa už zost&aacute;vali s&uacute;časťou domov.&lt;/p&gt;\n&lt;p&gt;So&scaron;ky Madony a Piety obľubovalo najm&auml; katol&iacute;cke obyvateľstvo z&aacute;padn&eacute;ho Slovenska, severnej Oravy a okolia bansk&yacute;ch miest. Koncom 19. storočia začali p&ocirc;vodn&eacute; dreven&eacute; so&scaron;ky postupne nahr&aacute;dzať so&scaron;ky z porcel&aacute;nu alebo zo sadry.&nbsp;&lt;/p&gt;\n&quot;,
+                &quot;authorities&quot;: [],
+                &quot;image_src&quot;: &quot;https://www.webumenia.sk/dielo/nahlad/SVK:SNG.NL_71/600&quot;,
+                &quot;image_srcset&quot;: &quot;https://www.webumenia.sk/dielo/nahlad/SVK:SNG.NL_71/220 220w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.NL_71/300 300w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.NL_71/600 600w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.NL_71/800 800w&quot;,
+                &quot;images&quot;: [
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX100%2FSNG--NL_71--1_6--2022_10_19--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX100%2FSNG--NL_71--2_6--2022_10_19--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX100%2FSNG--NL_71--3_6--2022_10_19--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX100%2FSNG--NL_71--4_6--2022_10_19--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX100%2FSNG--NL_71--5_6--2022_10_19--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX100%2FSNG--NL_71--6_6--2022_10_19--L2_WEB.jp2.dzi&quot;
+                    }
+                ],
+                &quot;image_aspect_ratio&quot;: 0.74875,
+                &quot;webumenia_url&quot;: &quot;https://www.webumenia.sk/dielo/SVK:SNG.NL_71&quot;,
+                &quot;code&quot;: &quot;010100010&quot;,
+                &quot;offset_top&quot;: -63,
+                &quot;video_thumbnail&quot;: null,
+                &quot;video_embed&quot;: null,
+                &quot;video_aspect_ratio&quot;: null,
+                &quot;video_title&quot;: &quot;&quot;,
+                &quot;video_subtitle&quot;: &quot;&quot;,
+                &quot;story_id&quot;: &quot;reciw1Gq3J5A9hsM9&quot;,
+                &quot;location_formatted&quot;: &quot;Expoz&iacute;cia Sakr&aacute;lne umenie, s&aacute;la VIII, 2. podlažie, Vodn&eacute; kas&aacute;rne&quot;,
+                &quot;exhibition&quot;: {
+                    &quot;id&quot;: &quot;recCHJJNWWDgMSfd2&quot;,
+                    &quot;name&quot;: &quot;Expoz&iacute;cia Sacra&quot;
+                },
+                &quot;bucketlists&quot;: []
+            },
+            {
+                &quot;id&quot;: &quot;SVK:SNG.NL_68&quot;,
+                &quot;title&quot;: &quot;Pieta I.&quot;,
+                &quot;author&quot;: &quot;Nezn&aacute;my autor&quot;,
+                &quot;author_description&quot;: &quot;&quot;,
+                &quot;dating&quot;: &quot;1801&ndash;1900&quot;,
+                &quot;locked_bucketlist_description&quot;: &quot;&quot;,
+                &quot;dating_short&quot;: &quot;1801&ndash;1900&quot;,
+                &quot;description&quot;: &quot;&lt;p&gt;Mal&eacute; dreven&eacute; so&scaron;ky Piety vyrez&aacute;vali z dreva nielen vyučen&iacute; rezb&aacute;ri a stol&aacute;ri, ale aj samoukovia. Tvorili d&ocirc;ležit&uacute; s&uacute;časť kresťansk&yacute;ch pr&iacute;bytkov aj u t&yacute;ch najchudobnej&scaron;&iacute;ch, ktor&iacute; si nemohli na ochranu zadov&aacute;žiť kvalitnej&scaron;&iacute; obraz či so&scaron;ku sv&auml;tca alebo sv&auml;tice.&nbsp;&lt;/p&gt;\n&lt;p&gt;Piety tohto typu sa často umiestňovali v mal&yacute;ch v&yacute;klenkoch na &scaron;t&iacute;toch a priečeliach domov alebo v kultovom k&uacute;te izby. Neposv&auml;covali sa a aj po zmene majiteľa už zost&aacute;vali s&uacute;časťou domov.&lt;/p&gt;\n&lt;p&gt;So&scaron;ky Madony a Piety obľubovalo najm&auml; katol&iacute;cke obyvateľstvo z&aacute;padn&eacute;ho Slovenska, severnej Oravy a okolia bansk&yacute;ch miest. Koncom 19. storočia začali p&ocirc;vodn&eacute; dreven&eacute; so&scaron;ky postupne nahr&aacute;dzať so&scaron;ky z porcel&aacute;nu alebo zo sadry.&nbsp;&lt;/p&gt;\n&quot;,
+                &quot;authorities&quot;: [],
+                &quot;image_src&quot;: &quot;https://www.webumenia.sk/dielo/nahlad/SVK:SNG.NL_68/600&quot;,
+                &quot;image_srcset&quot;: &quot;https://www.webumenia.sk/dielo/nahlad/SVK:SNG.NL_68/220 220w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.NL_68/300 300w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.NL_68/600 600w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.NL_68/800 800w&quot;,
+                &quot;images&quot;: [
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX100%2FSNG--NL_68--1_6--2022_10_18--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX100%2FSNG--NL_68--2_6--2022_10_18--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX100%2FSNG--NL_68--3_6--2022_10_18--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX100%2FSNG--NL_68--4_6--2022_10_18--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX100%2FSNG--NL_68--5_6--2022_10_18--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX100%2FSNG--NL_68--6_6--2022_10_18--L2_WEB.jp2.dzi&quot;
+                    }
+                ],
+                &quot;image_aspect_ratio&quot;: 0.74875,
+                &quot;webumenia_url&quot;: &quot;https://www.webumenia.sk/dielo/SVK:SNG.NL_68&quot;,
+                &quot;code&quot;: &quot;011110100&quot;,
+                &quot;offset_top&quot;: -90,
+                &quot;video_thumbnail&quot;: null,
+                &quot;video_embed&quot;: null,
+                &quot;video_aspect_ratio&quot;: null,
+                &quot;video_title&quot;: &quot;&quot;,
+                &quot;video_subtitle&quot;: &quot;&quot;,
+                &quot;story_id&quot;: &quot;reciw1Gq3J5A9hsM9&quot;,
+                &quot;location_formatted&quot;: &quot;Expoz&iacute;cia Sakr&aacute;lne umenie, s&aacute;la VIII, 2. podlažie, Vodn&eacute; kas&aacute;rne&quot;,
+                &quot;exhibition&quot;: {
+                    &quot;id&quot;: &quot;recCHJJNWWDgMSfd2&quot;,
+                    &quot;name&quot;: &quot;Expoz&iacute;cia Sacra&quot;
+                },
+                &quot;bucketlists&quot;: []
+            }
+        ],
+        &quot;location_formatted&quot;: null
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-sections--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-sections--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-sections--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-sections--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-sections--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-sections--id-" data-method="GET"
+      data-path="api/sections/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-sections--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-sections--id-"
+                    onclick="tryItOut('GETapi-sections--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-sections--id-"
+                    onclick="cancelTryOut('GETapi-sections--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-sections--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/sections/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-sections--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-sections--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="GETapi-sections--id-"
+               value="rec8or1MegfsJY2CO"
+               data-component="url">
+    <br>
+<p>Example: <code>rec8or1MegfsJY2CO</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-POSTapi-collections">POST api/collections</h2>
+
+<p>
+</p>
+
+<p>Saves the user collection. Returns the URL to the saved collection.</p>
+
+<span id="example-requests-POSTapi-collections">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "https://atlas.sng.sk/api/collections" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"items\": [
+        \"SVK:SNG.IM_101\",
+        \"SVK:SNG.IM_304\"
+    ]
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://atlas.sng.sk/api/collections"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "items": [
+        "SVK:SNG.IM_101",
+        "SVK:SNG.IM_304"
+    ]
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-collections">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 56
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;url&quot;: &quot;https://atlas.sng.sk/eA1&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-collections" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-collections"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-collections"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-collections" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-collections">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-collections" data-method="POST"
+      data-path="api/collections"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-collections', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-collections"
+                    onclick="tryItOut('POSTapi-collections');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-collections"
+                    onclick="cancelTryOut('POSTapi-collections');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-collections"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/collections</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-collections"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-collections"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>items</code></b>&nbsp;&nbsp;
+<small>string[]</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="items[0]"                data-endpoint="POSTapi-collections"
+               data-component="body">
+        <input type="text" style="display: none"
+               name="items[1]"                data-endpoint="POSTapi-collections"
+               data-component="body">
+    <br>
+<p>The list of item IDs.</p>
+        </div>
+        </form>
+
+                    <h2 id="endpoints-GETapi-collections--hashid-">GET api/collections/{hashid}</h2>
+
+<p>
+</p>
+
+<p>Gets the saved user collection by hashid. Returns the array of item IDs.</p>
+
+<span id="example-requests-GETapi-collections--hashid-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://atlas.sng.sk/api/collections/n2m" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://atlas.sng.sk/api/collections/n2m"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-collections--hashid-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 55
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">[
+    &quot;SVK:SNG.O_4173&quot;,
+    &quot;SVK:SNG.O_3753&quot;,
+    &quot;SVK:SNG.P_2712&quot;,
+    &quot;SVK:SNG.G_13270&quot;,
+    &quot;SVK:SNG.NL_67&quot;,
+    &quot;SVK:SNG.UP-DK_4807&quot;,
+    &quot;SVK:SNG.P_2688&quot;,
+    &quot;SVK:SNG.O_3330&quot;,
+    &quot;SVK:SNG.O_6953-4&quot;,
+    &quot;SVK:SNG.P_2753&quot;,
+    &quot;SVK:SNG.G_663&quot;,
+    &quot;SVK:SNG.UP-P_3279&quot;,
+    &quot;SVK:SNG.P_2600&quot;,
+    &quot;SVK:SNG.O_7026&quot;
+]</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-collections--hashid-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-collections--hashid-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-collections--hashid-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-collections--hashid-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-collections--hashid-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-collections--hashid-" data-method="GET"
+      data-path="api/collections/{hashid}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-collections--hashid-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-collections--hashid-"
+                    onclick="tryItOut('GETapi-collections--hashid-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-collections--hashid-"
+                    onclick="cancelTryOut('GETapi-collections--hashid-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-collections--hashid-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/collections/{hashid}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-collections--hashid-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-collections--hashid-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>hashid</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="hashid"                data-endpoint="GETapi-collections--hashid-"
+               value="n2m"
+               data-component="url">
+    <br>
+<p>Example: <code>n2m</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-stories--id-">GET api/stories/{id}</h2>
+
+<p>
+</p>
+
+<p>Gets the story with the given ID. If it is, the response will contain the story's data.</p>
+
+<span id="example-requests-GETapi-stories--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://atlas.sng.sk/api/stories/rec2Cq3jSUmcpveKf" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://atlas.sng.sk/api/stories/rec2Cq3jSUmcpveKf"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-stories--id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 54
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: {
+        &quot;id&quot;: &quot;rec2Cq3jSUmcpveKf&quot;,
+        &quot;text&quot;: &quot;&lt;p&gt;Bal&oacute;ny prin&aacute;&scaron;aj&uacute; do v&yacute;stavn&eacute;ho priestoru pocity tepla a telesnosti. S&uacute; ak&yacute;msi symbolick&yacute;m modelom sveta, no z&aacute;roveň aj skupinou veľkorys&yacute;ch &lt;strong&gt;d&yacute;chaj&uacute;cich obrov&lt;/strong&gt;, ktor&iacute; nov&uacute; v&yacute;stavn&uacute; s&aacute;lu &bdquo;zab&yacute;vaj&uacute;&ldquo; pre ďal&scaron;ie diela s&uacute;časn&eacute;ho umenia.&lt;/p&gt;\n&lt;p&gt;P&ocirc;vodne mali byť bal&oacute;ny aj impulzom pre bl&iacute;zky kontakt medzi ľuďmi. T&uacute;to my&scaron;lienku rozv&iacute;ja &scaron;peci&aacute;lna &lt;strong&gt;tanečn&aacute; performancia&lt;/strong&gt; &lt;em&gt;Komplementarita&lt;/em&gt; choreografky &lt;strong&gt;Petry Fornayovej&lt;/strong&gt;.&lt;/p&gt;\n&quot;,
+        &quot;links&quot;: [
+            {
+                &quot;id&quot;: &quot;recYbC25rmRIoXUPn&quot;,
+                &quot;title&quot;: &quot;Čo symbolizuj&uacute; farby?&quot;,
+                &quot;story_id&quot;: &quot;recn2jDclSbYQeJ5a&quot;
+            },
+            {
+                &quot;id&quot;: &quot;recHQ3qSxV28gA00y&quot;,
+                &quot;title&quot;: &quot;Ako bal&oacute;ny d&yacute;chaj&uacute;?&quot;,
+                &quot;story_id&quot;: &quot;recrNWWgMga2TDy9z&quot;
+            },
+            {
+                &quot;id&quot;: &quot;recXHUFWSo2AR2Vov&quot;,
+                &quot;title&quot;: &quot;Viac o performance&quot;,
+                &quot;story_id&quot;: &quot;reclu0PbfgmSWjAfT&quot;
+            },
+            {
+                &quot;id&quot;: &quot;recrit2DllZbrufFQ&quot;,
+                &quot;title&quot;: &quot;Nasp&auml;ť&quot;,
+                &quot;story_id&quot;: &quot;rec6wsEULr2e5WyWZ&quot;
+            }
+        ],
+        &quot;images&quot;: [
+            {
+                &quot;src&quot;: &quot;https://atlas.sng.sk.test/storage/media/91/NwdyrfZ69JGFAaNNGh1fwoLVhyEtwNLiFImofgpVQqE.jpeg&quot;,
+                &quot;srcset&quot;: &quot;https://atlas.sng.sk.test/storage/media/91/responsive-images/NwdyrfZ69JGFAaNNGh1fwoLVhyEtwNLiFImofgpVQqE___media_library_original_1200_1200.jpeg 1200w, https://atlas.sng.sk.test/storage/media/91/responsive-images/NwdyrfZ69JGFAaNNGh1fwoLVhyEtwNLiFImofgpVQqE___media_library_original_1003_1003.jpeg 1003w, https://atlas.sng.sk.test/storage/media/91/responsive-images/NwdyrfZ69JGFAaNNGh1fwoLVhyEtwNLiFImofgpVQqE___media_library_original_839_839.jpeg 839w, https://atlas.sng.sk.test/storage/media/91/responsive-images/NwdyrfZ69JGFAaNNGh1fwoLVhyEtwNLiFImofgpVQqE___media_library_original_702_702.jpeg 702w, https://atlas.sng.sk.test/storage/media/91/responsive-images/NwdyrfZ69JGFAaNNGh1fwoLVhyEtwNLiFImofgpVQqE___media_library_original_588_588.jpeg 588w, https://atlas.sng.sk.test/storage/media/91/responsive-images/NwdyrfZ69JGFAaNNGh1fwoLVhyEtwNLiFImofgpVQqE___media_library_original_491_491.jpeg 491w, https://atlas.sng.sk.test/storage/media/91/responsive-images/NwdyrfZ69JGFAaNNGh1fwoLVhyEtwNLiFImofgpVQqE___media_library_original_411_411.jpeg 411w, https://atlas.sng.sk.test/storage/media/91/responsive-images/NwdyrfZ69JGFAaNNGh1fwoLVhyEtwNLiFImofgpVQqE___media_library_original_344_344.jpeg 344w, https://atlas.sng.sk.test/storage/media/91/responsive-images/NwdyrfZ69JGFAaNNGh1fwoLVhyEtwNLiFImofgpVQqE___media_library_original_288_288.jpeg 288w, https://atlas.sng.sk.test/storage/media/91/responsive-images/NwdyrfZ69JGFAaNNGh1fwoLVhyEtwNLiFImofgpVQqE___media_library_original_241_241.jpeg 241w, data:image/svg+xml;base64,PCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHg9IjAiCiB5PSIwIiB2aWV3Qm94PSIwIDAgMTIwMCAxMjAwIj4KCTxpbWFnZSB3aWR0aD0iMTIwMCIgaGVpZ2h0PSIxMjAwIiB4bGluazpocmVmPSJkYXRhOmltYWdlL2pwZWc7YmFzZTY0LC85ai80QUFRU2taSlJnQUJBUUVBWUFCZ0FBRC8vZ0E3UTFKRlFWUlBVam9nWjJRdGFuQmxaeUIyTVM0d0lDaDFjMmx1WnlCSlNrY2dTbEJGUnlCMk9EQXBMQ0J4ZFdGc2FYUjVJRDBnT1RBSy85c0FRd0FEQWdJREFnSURBd01EQkFNREJBVUlCUVVFQkFVS0J3Y0dDQXdLREF3TENnc0xEUTRTRUEwT0VRNExDeEFXRUJFVEZCVVZGUXdQRnhnV0ZCZ1NGQlVVLzlzQVF3RURCQVFGQkFVSkJRVUpGQTBMRFJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVUvOEFBRVFnQUlBQWdBd0VSQUFJUkFRTVJBZi9FQUI4QUFBRUZBUUVCQVFFQkFBQUFBQUFBQUFBQkFnTUVCUVlIQ0FrS0MvL0VBTFVRQUFJQkF3TUNCQU1GQlFRRUFBQUJmUUVDQXdBRUVRVVNJVEZCQmhOUllRY2ljUlF5Z1pHaENDTkNzY0VWVXRId0pETmljb0lKQ2hZWEdCa2FKU1luS0NrcU5EVTJOemc1T2tORVJVWkhTRWxLVTFSVlZsZFlXVnBqWkdWbVoyaHBhbk4wZFhaM2VIbDZnNFNGaG9lSWlZcVNrNVNWbHBlWW1acWlvNlNscHFlb3FhcXlzN1MxdHJlNHVickN3OFRGeHNmSXljclMwOVRWMXRmWTJkcmg0dVBrNWVibjZPbnE4Zkx6OVBYMjkvajUrdi9FQUI4QkFBTUJBUUVCQVFFQkFRRUFBQUFBQUFBQkFnTUVCUVlIQ0FrS0MvL0VBTFVSQUFJQkFnUUVBd1FIQlFRRUFBRUNkd0FCQWdNUkJBVWhNUVlTUVZFSFlYRVRJaktCQ0JSQ2thR3h3UWtqTTFMd0ZXSnkwUW9XSkRUaEpmRVhHQmthSmljb0tTbzFOamM0T1RwRFJFVkdSMGhKU2xOVVZWWlhXRmxhWTJSbFptZG9hV3B6ZEhWMmQzaDVlb0tEaElXR2g0aUppcEtUbEpXV2w1aVptcUtqcEtXbXA2aXBxckt6dExXMnQ3aTV1c0xEeE1YR3g4akp5dExUMU5YVzE5aloydUxqNU9YbTUranA2dkx6OVBYMjkvajUrdi9hQUF3REFRQUNFUU1SQUQ4QStHdEoxZGhFR3pYMEdlWTUxNjFqOHd4R0hWN0hwZmdDSzcxZG1hTG92Sk5mTXJGS2xxemtoa0ZUTVcxVFI3MzhHSlBOMWgwbFlaajROZmx2SDJadVdEVk9IVStzNE80Zmxnc2U1VkZxajZLdGZLdVk4S3dOZnkxUG1pN3Mvb3RLeVB5UTBHNU1rSVZ1RFgrZ2VZYTFMby9tekUwL2YwTys4R2ZFMCtGalBBRXp1R0srY3hOSjFJV1I5WmsxZUdDWE5KSGQvQ3Z4dnEwdmlLUzRnQjhpUnVjVjhCbnVCcDE2S2hONm4xR1cxMVZ4VG5GSDJ4OE9Mc2FocDZTczN6RWNnMS9PbWNVSlllcTROSDZCZFBZL1AvVGZoUmJXZW9xc2twS250aXY3YnExK2FKK1F3eXlFcEs1eUhpdnd1ZEk4UnZBa2JGV1B5OGRhODcycTVHNUdPTXd2c3BxTUQ2RS9aNStIRjYwVFhOMUdZYllqT1dGZmovRStjMG92a3BPOGo2SEpNRlZWWG5hMFBwYnc4a09qM0NyQlBsUjFYTmZsZU94TXNYVC9BSGtkVDlIalM1VE5Qd20wZTZRdkhDdm1qcHhYOVVWYXFwUWM1YkkrQlVkZERoTlorRDFqRHFZdjlTdDFLUkhJNDdWK2JadHhGVHEwNVVNTS9lUFZvWmVxejU2aDZWOE5JOVA4V3d6V2xnQkZGQ051RkdLOHZKK0czaTA2K0lkMnpxcjRxT0Z0Q21VOVUwcVR3NXJUeHVTUUR4WHpHZDVmOVRxdUMyUFV3K0k5ckM1Ly85az0iPgoJPC9pbWFnZT4KPC9zdmc+ 32w&quot;,
+                &quot;width&quot;: 1200,
+                &quot;height&quot;: 1200
+            }
+        ],
+        &quot;video_thumbnail&quot;: null,
+        &quot;video_duration&quot;: null,
+        &quot;video_embed&quot;: null,
+        &quot;video_aspect_ratio&quot;: null
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-stories--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-stories--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-stories--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-stories--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-stories--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-stories--id-" data-method="GET"
+      data-path="api/stories/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-stories--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-stories--id-"
+                    onclick="tryItOut('GETapi-stories--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-stories--id-"
+                    onclick="cancelTryOut('GETapi-stories--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-stories--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/stories/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-stories--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-stories--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="GETapi-stories--id-"
+               value="rec2Cq3jSUmcpveKf"
+               data-component="url">
+    <br>
+<p>Example: <code>rec2Cq3jSUmcpveKf</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-places--id-">GET api/places/{id}</h2>
+
+<p>
+</p>
+
+<p>Gets the place with the given ID. If it is, the response will contain the place's data.</p>
+
+<span id="example-requests-GETapi-places--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://atlas.sng.sk/api/places/SVK:SNG.O_1405" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://atlas.sng.sk/api/places/SVK:SNG.O_1405"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-places--id-">
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 53
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Record not found.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-places--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-places--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-places--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-places--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-places--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-places--id-" data-method="GET"
+      data-path="api/places/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-places--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-places--id-"
+                    onclick="tryItOut('GETapi-places--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-places--id-"
+                    onclick="cancelTryOut('GETapi-places--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-places--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/places/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-places--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-places--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="GETapi-places--id-"
+               value="SVK:SNG.O_1405"
+               data-component="url">
+    <br>
+<p>Example: <code>SVK:SNG.O_1405</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-bucketlists--id-">GET api/bucketlists/{id}</h2>
+
+<p>
+</p>
+
+<p>Gets the items for the bucketlist/scavenger hunt. Returns the list of items and their data.</p>
+
+<span id="example-requests-GETapi-bucketlists--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://atlas.sng.sk/api/bucketlists/recUBMv1RNstZ2lLO" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://atlas.sng.sk/api/bucketlists/recUBMv1RNstZ2lLO"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-bucketlists--id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 52
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: {
+        &quot;id&quot;: &quot;recUBMv1RNstZ2lLO&quot;,
+        &quot;title&quot;: &quot;Organizmus&quot;,
+        &quot;text&quot;: &quot;&lt;p&gt;&lt;strong&gt;Uk&aacute;ž tento text:&lt;/strong&gt;&lt;/p&gt;\n&lt;ul&gt;\n&lt;li&gt;\n&lt;strong&gt;v Kn&iacute;hkupectve Ex Libris a z&iacute;ska&scaron; 10% zľavu na svoj n&aacute;kup&lt;/strong&gt;\n&lt;/li&gt;\n&lt;li&gt;\n&lt;strong&gt;v Kaviarni SNG a z&iacute;ska&scaron; k&aacute;vu zdarma&lt;/strong&gt;\n&lt;/li&gt;\n&lt;/ul&gt;\n&lt;p&gt;Umenie in&scaron;pirovan&eacute; živ&yacute;mi bytosťami a pr&iacute;rodn&yacute;mi procesmi m&aacute; korene už v časoch starovek&yacute;ch civiliz&aacute;ci&iacute;. Od 20. storočia v&scaron;ak predstavuje aj ak&uacute;si protiv&aacute;hu k pr&iacute;snym geometrick&yacute;m form&aacute;m v modernom umen&iacute;, ktor&eacute; nadv&auml;zuj&uacute; na svet priemyselnej civiliz&aacute;cie.&lt;/p&gt;\n&lt;p&gt;Organick&eacute; alebo biomorfn&eacute; umenie často napodobňuje obl&eacute; krivky, &scaron;pir&aacute;ly a rytmick&eacute; vzory opakuj&uacute;ce sa v pr&iacute;rode, no neraz aj priamo využ&iacute;va &bdquo;živ&eacute;&ldquo; materi&aacute;ly &ndash; kamene, listy, plody, huby, semiačka, mu&scaron;le, kosti, zuby, blato či krv. Niekedy, naopak, pracuje s kontrastom a &bdquo;tepl&eacute;&ldquo;, jemn&eacute; objekty vytv&aacute;ra z chladn&eacute;ho kovu alebo z bet&oacute;nu.&lt;/p&gt;\n&lt;p&gt;Organick&eacute; umenie dok&aacute;že vyvolať pocity pokoja a harm&oacute;nie, ale i pouk&aacute;zať na večn&yacute; cyklus života a na potrebu chr&aacute;niť krehk&eacute; pr&iacute;rodn&eacute; bohatstvo. Mot&iacute;vy zrodu a rastu prenikaj&uacute; aj do samotnej tvorby diela, kde sa prejavuje n&aacute;hoda a tvoriv&yacute; chaos. Umenie vytvoren&eacute; zo živ&yacute;ch materi&aacute;lov napokon rozv&iacute;ja i t&eacute;mu vlastn&eacute;ho rozpadu a z&aacute;niku. Otv&aacute;ra tak ot&aacute;zky nest&aacute;losti, premeny a ne&uacute;prosn&eacute;ho plynutia času.&lt;/p&gt;\n&quot;,
+        &quot;image&quot;: {
+            &quot;src&quot;: &quot;https://atlas.sng.sk.test/storage/media/153/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA.jpeg&quot;,
+            &quot;srcset&quot;: &quot;https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_1201_901.jpeg 1201w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_1004_753.jpeg 1004w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_840_630.jpeg 840w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_703_527.jpeg 703w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_588_441.jpeg 588w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_492_369.jpeg 492w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_411_308.jpeg 411w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_344_258.jpeg 344w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_288_216.jpeg 288w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_241_181.jpeg 241w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_201_151.jpeg 201w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_168_126.jpeg 168w, data:image/svg+xml;base64,PCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHg9IjAiCiB5PSIwIiB2aWV3Qm94PSIwIDAgMTIwMSA5MDEiPgoJPGltYWdlIHdpZHRoPSIxMjAxIiBoZWlnaHQ9IjkwMSIgeGxpbms6aHJlZj0iZGF0YTppbWFnZS9qcGVnO2Jhc2U2NCwvOWovNEFBUVNrWkpSZ0FCQVFFQVlBQmdBQUQvL2dBN1ExSkZRVlJQVWpvZ1oyUXRhbkJsWnlCMk1TNHdJQ2gxYzJsdVp5QkpTa2NnU2xCRlJ5QjJPREFwTENCeGRXRnNhWFI1SUQwZ09UQUsvOXNBUXdBREFnSURBZ0lEQXdNREJBTURCQVVJQlFVRUJBVUtCd2NHQ0F3S0RBd0xDZ3NMRFE0U0VBME9FUTRMQ3hBV0VCRVRGQlVWRlF3UEZ4Z1dGQmdTRkJVVS85c0FRd0VEQkFRRkJBVUpCUVVKRkEwTERSUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVLzhBQUVRZ0FHQUFnQXdFUkFBSVJBUU1SQWYvRUFCOEFBQUVGQVFFQkFRRUJBQUFBQUFBQUFBQUJBZ01FQlFZSENBa0tDLy9FQUxVUUFBSUJBd01DQkFNRkJRUUVBQUFCZlFFQ0F3QUVFUVVTSVRGQkJoTlJZUWNpY1JReWdaR2hDQ05Dc2NFVlV0SHdKRE5pY29JSkNoWVhHQmthSlNZbktDa3FORFUyTnpnNU9rTkVSVVpIU0VsS1UxUlZWbGRZV1ZwalpHVm1aMmhwYW5OMGRYWjNlSGw2ZzRTRmhvZUlpWXFTazVTVmxwZVltWnFpbzZTbHBxZW9xYXF5czdTMXRyZTR1YnJDdzhURnhzZkl5Y3JTMDlUVjF0ZlkyZHJoNHVQazVlYm42T25xOGZMejlQWDI5L2o1K3YvRUFCOEJBQU1CQVFFQkFRRUJBUUVBQUFBQUFBQUJBZ01FQlFZSENBa0tDLy9FQUxVUkFBSUJBZ1FFQXdRSEJRUUVBQUVDZHdBQkFnTVJCQVVoTVFZU1FWRUhZWEVUSWpLQkNCUkNrYUd4d1Frak0xTHdGV0p5MFFvV0pEVGhKZkVYR0JrYUppY29LU28xTmpjNE9UcERSRVZHUjBoSlNsTlVWVlpYV0ZsYVkyUmxabWRvYVdwemRIVjJkM2g1ZW9LRGhJV0doNGlKaXBLVGxKV1dsNWlabXFLanBLV21wNmlwcXJLenRMVzJ0N2k1dXNMRHhNWEd4OGpKeXRMVDFOWFcxOWpaMnVMajVPWG01K2pwNnZMejlQWDI5L2o1K3YvYUFBd0RBUUFDRVFNUkFEOEE2bnhoKzJmNGUwZ2tXZUpPT09hOVNPQ2wxRWVhMy83ZU1MVGtSeC9MV3l3YVFYQmYyOFlObTB4Wk5Ed2FHZFY0VS9iVjBIVm5FZDZnanozckdXQ2t0Z1B6NHVacHJsdm1kbXIzV3lTcDlrYmQwTkNpMlRjVVdiWnpnMWZMWVpORVdnUHlrZysxSVpZUXFyQUdrbzJlb2pvdkR1bXdhbmNyRzVDZzl6WGJGYUdNbVMrSk5LdDlKdURHamJoNjFvNEpxNFJiT2Fjb0g0cmtrck94dWovLzJRPT0iPgoJPC9pbWFnZT4KPC9zdmc+ 32w&quot;,
+            &quot;width&quot;: 1201,
+            &quot;height&quot;: 901
+        },
+        &quot;items&quot;: [
+            {
+                &quot;id&quot;: &quot;SVK:SNG.UP-DM_7&quot;,
+                &quot;title&quot;: &quot;P&uacute;pavy&quot;,
+                &quot;author&quot;: &quot;Theodor Lugs&quot;,
+                &quot;author_description&quot;: &quot;&quot;,
+                &quot;dating&quot;: &quot;1962&quot;,
+                &quot;locked_bucketlist_description&quot;: &quot;&lt;p&gt;Železn&eacute; pad&aacute;čiky odkvitnut&yacute;ch p&uacute;pav n&aacute;jde&scaron; priamo &lt;strong&gt;na pokladni&lt;/strong&gt; vo vstupnej hale.&lt;/p&gt;\n&lt;p&gt;Neboj sa pohľadať aj čierny &lt;strong&gt;&scaron;t&iacute;tok s k&oacute;dom&lt;/strong&gt;.&lt;/p&gt;\n&quot;,
+                &quot;dating_short&quot;: &quot;1962&quot;,
+                &quot;description&quot;: &quot;&lt;p&gt;Semienka zv&aacute;ran&eacute; z železn&yacute;ch klincov sa pripravuj&uacute; vzlietnuť, putovať vzduchom a zasiať život na nov&yacute;ch miestach. Chladn&yacute; drsn&yacute; materi&aacute;l sa sp&aacute;ja s nežn&yacute;m n&aacute;metom krehkosti a znovuzrodenia. P&ocirc;vabn&eacute; siluety vz&aacute;jomne prepleten&yacute;ch p&uacute;pav z diaľky tak trochu pripom&iacute;naj&uacute; ant&eacute;ny.&lt;/p&gt;\n&lt;p&gt;Pokladňu gal&eacute;rie chceme skr&aacute;&scaron;ľovať kyticami kvetov kedykoľvek je to možn&eacute;. Spoločnosť či n&aacute;hradu im v&scaron;ak rob&iacute; t&aacute;to unik&aacute;tna skulpt&uacute;ra z priemyseln&eacute;ho odpadu, ktor&aacute; ukazuje, že aj neopracovan&yacute; kov m&ocirc;že p&ocirc;sobiť &bdquo;organick&yacute;m&ldquo; dojmom.&lt;/p&gt;\n&quot;,
+                &quot;authorities&quot;: [
+                    {
+                        &quot;id&quot;: &quot;6026&quot;,
+                        &quot;name&quot;: &quot;Theodor Lugs&quot;,
+                        &quot;has_image&quot;: true,
+                        &quot;biography&quot;: &quot;P&ocirc;vodom česk&yacute; keramik&aacute;r, soch&aacute;r, grafik a maliar sa in&scaron;piroval kubizmom, geometriou a abstraktn&yacute;m umen&iacute;m. Snažil sa pracovať s čo najjednoduch&scaron;&iacute;mi tvarmi a jasne čitateľn&yacute;mi kompoz&iacute;ciami. Medzi jeho obľ&uacute;ben&eacute; mot&iacute;vy patrili žensk&eacute; akty a objekty vytvoren&eacute; z r&ocirc;znych v&scaron;edn&yacute;ch kovov&yacute;ch predmetov či n&aacute;radia. Viac než 30 rokov viedol ateli&eacute;r keramiky na &Scaron;kole umeleck&eacute;ho priemyslu v Bratislave, kde vychoval tri gener&aacute;cie slovenskej keramickej tvorby.&quot;,
+                        &quot;birth_place&quot;: &quot;Praha&quot;,
+                        &quot;death_place&quot;: &quot;Bratislava&quot;,
+                        &quot;birth_date&quot;: &quot;1919&quot;,
+                        &quot;death_date&quot;: &quot;2000&quot;,
+                        &quot;image_url&quot;: &quot;https://www.webumenia.sk/images/autori//46/6026/6026.jpeg&quot;,
+                        &quot;related_items&quot;: null
+                    }
+                ],
+                &quot;image_src&quot;: &quot;https://www.webumenia.sk/dielo/nahlad/SVK:SNG.UP-DM_7/600&quot;,
+                &quot;image_srcset&quot;: &quot;https://www.webumenia.sk/dielo/nahlad/SVK:SNG.UP-DM_7/220 220w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.UP-DM_7/300 300w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.UP-DM_7/600 600w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.UP-DM_7/800 800w&quot;,
+                &quot;images&quot;: [],
+                &quot;image_aspect_ratio&quot;: 0.74875,
+                &quot;webumenia_url&quot;: &quot;https://www.webumenia.sk/dielo/SVK:SNG.UP-DM_7&quot;,
+                &quot;code&quot;: &quot;010101100&quot;,
+                &quot;offset_top&quot;: -55,
+                &quot;video_thumbnail&quot;: null,
+                &quot;video_embed&quot;: null,
+                &quot;video_aspect_ratio&quot;: null,
+                &quot;video_title&quot;: &quot;&quot;,
+                &quot;video_subtitle&quot;: &quot;&quot;,
+                &quot;story_id&quot;: null,
+                &quot;location_formatted&quot;: &quot;Vstupn&aacute; hala, 0. podlažie, Vodn&eacute; kas&aacute;rne&quot;,
+                &quot;exhibition&quot;: {
+                    &quot;id&quot;: &quot;recdYT1t6ceSEk5WR&quot;,
+                    &quot;name&quot;: &quot;V&yacute;stava Monument&aacute;lky&quot;
+                },
+                &quot;bucketlists&quot;: [
+                    {
+                        &quot;id&quot;: &quot;recUBMv1RNstZ2lLO&quot;,
+                        &quot;title&quot;: &quot;Organizmus&quot;,
+                        &quot;text&quot;: &quot;&lt;p&gt;&lt;strong&gt;Uk&aacute;ž tento text:&lt;/strong&gt;&lt;/p&gt;\n&lt;ul&gt;\n&lt;li&gt;\n&lt;strong&gt;v Kn&iacute;hkupectve Ex Libris a z&iacute;ska&scaron; 10% zľavu na svoj n&aacute;kup&lt;/strong&gt;\n&lt;/li&gt;\n&lt;li&gt;\n&lt;strong&gt;v Kaviarni SNG a z&iacute;ska&scaron; k&aacute;vu zdarma&lt;/strong&gt;\n&lt;/li&gt;\n&lt;/ul&gt;\n&lt;p&gt;Umenie in&scaron;pirovan&eacute; živ&yacute;mi bytosťami a pr&iacute;rodn&yacute;mi procesmi m&aacute; korene už v časoch starovek&yacute;ch civiliz&aacute;ci&iacute;. Od 20. storočia v&scaron;ak predstavuje aj ak&uacute;si protiv&aacute;hu k pr&iacute;snym geometrick&yacute;m form&aacute;m v modernom umen&iacute;, ktor&eacute; nadv&auml;zuj&uacute; na svet priemyselnej civiliz&aacute;cie.&lt;/p&gt;\n&lt;p&gt;Organick&eacute; alebo biomorfn&eacute; umenie často napodobňuje obl&eacute; krivky, &scaron;pir&aacute;ly a rytmick&eacute; vzory opakuj&uacute;ce sa v pr&iacute;rode, no neraz aj priamo využ&iacute;va &bdquo;živ&eacute;&ldquo; materi&aacute;ly &ndash; kamene, listy, plody, huby, semiačka, mu&scaron;le, kosti, zuby, blato či krv. Niekedy, naopak, pracuje s kontrastom a &bdquo;tepl&eacute;&ldquo;, jemn&eacute; objekty vytv&aacute;ra z chladn&eacute;ho kovu alebo z bet&oacute;nu.&lt;/p&gt;\n&lt;p&gt;Organick&eacute; umenie dok&aacute;že vyvolať pocity pokoja a harm&oacute;nie, ale i pouk&aacute;zať na večn&yacute; cyklus života a na potrebu chr&aacute;niť krehk&eacute; pr&iacute;rodn&eacute; bohatstvo. Mot&iacute;vy zrodu a rastu prenikaj&uacute; aj do samotnej tvorby diela, kde sa prejavuje n&aacute;hoda a tvoriv&yacute; chaos. Umenie vytvoren&eacute; zo živ&yacute;ch materi&aacute;lov napokon rozv&iacute;ja i t&eacute;mu vlastn&eacute;ho rozpadu a z&aacute;niku. Otv&aacute;ra tak ot&aacute;zky nest&aacute;losti, premeny a ne&uacute;prosn&eacute;ho plynutia času.&lt;/p&gt;\n&quot;,
+                        &quot;image&quot;: {
+                            &quot;src&quot;: &quot;https://atlas.sng.sk.test/storage/media/153/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA.jpeg&quot;,
+                            &quot;srcset&quot;: &quot;https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_1201_901.jpeg 1201w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_1004_753.jpeg 1004w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_840_630.jpeg 840w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_703_527.jpeg 703w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_588_441.jpeg 588w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_492_369.jpeg 492w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_411_308.jpeg 411w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_344_258.jpeg 344w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_288_216.jpeg 288w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_241_181.jpeg 241w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_201_151.jpeg 201w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_168_126.jpeg 168w, data:image/svg+xml;base64,PCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHg9IjAiCiB5PSIwIiB2aWV3Qm94PSIwIDAgMTIwMSA5MDEiPgoJPGltYWdlIHdpZHRoPSIxMjAxIiBoZWlnaHQ9IjkwMSIgeGxpbms6aHJlZj0iZGF0YTppbWFnZS9qcGVnO2Jhc2U2NCwvOWovNEFBUVNrWkpSZ0FCQVFFQVlBQmdBQUQvL2dBN1ExSkZRVlJQVWpvZ1oyUXRhbkJsWnlCMk1TNHdJQ2gxYzJsdVp5QkpTa2NnU2xCRlJ5QjJPREFwTENCeGRXRnNhWFI1SUQwZ09UQUsvOXNBUXdBREFnSURBZ0lEQXdNREJBTURCQVVJQlFVRUJBVUtCd2NHQ0F3S0RBd0xDZ3NMRFE0U0VBME9FUTRMQ3hBV0VCRVRGQlVWRlF3UEZ4Z1dGQmdTRkJVVS85c0FRd0VEQkFRRkJBVUpCUVVKRkEwTERSUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVLzhBQUVRZ0FHQUFnQXdFUkFBSVJBUU1SQWYvRUFCOEFBQUVGQVFFQkFRRUJBQUFBQUFBQUFBQUJBZ01FQlFZSENBa0tDLy9FQUxVUUFBSUJBd01DQkFNRkJRUUVBQUFCZlFFQ0F3QUVFUVVTSVRGQkJoTlJZUWNpY1JReWdaR2hDQ05Dc2NFVlV0SHdKRE5pY29JSkNoWVhHQmthSlNZbktDa3FORFUyTnpnNU9rTkVSVVpIU0VsS1UxUlZWbGRZV1ZwalpHVm1aMmhwYW5OMGRYWjNlSGw2ZzRTRmhvZUlpWXFTazVTVmxwZVltWnFpbzZTbHBxZW9xYXF5czdTMXRyZTR1YnJDdzhURnhzZkl5Y3JTMDlUVjF0ZlkyZHJoNHVQazVlYm42T25xOGZMejlQWDI5L2o1K3YvRUFCOEJBQU1CQVFFQkFRRUJBUUVBQUFBQUFBQUJBZ01FQlFZSENBa0tDLy9FQUxVUkFBSUJBZ1FFQXdRSEJRUUVBQUVDZHdBQkFnTVJCQVVoTVFZU1FWRUhZWEVUSWpLQkNCUkNrYUd4d1Frak0xTHdGV0p5MFFvV0pEVGhKZkVYR0JrYUppY29LU28xTmpjNE9UcERSRVZHUjBoSlNsTlVWVlpYV0ZsYVkyUmxabWRvYVdwemRIVjJkM2g1ZW9LRGhJV0doNGlKaXBLVGxKV1dsNWlabXFLanBLV21wNmlwcXJLenRMVzJ0N2k1dXNMRHhNWEd4OGpKeXRMVDFOWFcxOWpaMnVMajVPWG01K2pwNnZMejlQWDI5L2o1K3YvYUFBd0RBUUFDRVFNUkFEOEE2bnhoKzJmNGUwZ2tXZUpPT09hOVNPQ2wxRWVhMy83ZU1MVGtSeC9MV3l3YVFYQmYyOFlObTB4Wk5Ed2FHZFY0VS9iVjBIVm5FZDZnanozckdXQ2t0Z1B6NHVacHJsdm1kbXIzV3lTcDlrYmQwTkNpMlRjVVdiWnpnMWZMWVpORVdnUHlrZysxSVpZUXFyQUdrbzJlb2pvdkR1bXdhbmNyRzVDZzl6WGJGYUdNbVMrSk5LdDlKdURHamJoNjFvNEpxNFJiT2Fjb0g0cmtrck94dWovLzJRPT0iPgoJPC9pbWFnZT4KPC9zdmc+ 32w&quot;,
+                            &quot;width&quot;: 1201,
+                            &quot;height&quot;: 901
+                        }
+                    }
+                ]
+            },
+            {
+                &quot;id&quot;: &quot;SVK:SNG.UP-DK_5400&quot;,
+                &quot;title&quot;: &quot;Parkov&aacute; plastika&quot;,
+                &quot;author&quot;: &quot;Jozef Su&scaron;ienka&quot;,
+                &quot;author_description&quot;: &quot;&quot;,
+                &quot;dating&quot;: &quot;1970&ndash;1974&quot;,
+                &quot;locked_bucketlist_description&quot;: &quot;&lt;p&gt;&bdquo;Hubov&eacute;&ldquo; veže vyrastaj&uacute; pri kmeni jedn&eacute;ho zo &lt;strong&gt;stromov na n&aacute;dvor&iacute;&lt;/strong&gt;.&lt;/p&gt;\n&lt;p&gt;N&aacute;jde&scaron; aj čierny &lt;strong&gt;&scaron;t&iacute;tok s k&oacute;dom&lt;/strong&gt; na bet&oacute;novom podstavci? Niekedy ho m&ocirc;že zakr&yacute;vať stolička.&lt;/p&gt;\n&quot;,
+                &quot;dating_short&quot;: &quot;1970&ndash;1974&quot;,
+                &quot;description&quot;: &quot;&lt;p&gt;Dielo vzniklo pre v&yacute;stavu &lt;em&gt;Polym&uacute;zick&yacute; priestor &ndash; socha, objekt, priestor, hudba do Pie&scaron;ťan&lt;/em&gt; v roku 1970. Autor zasadil svoje keramick&eacute; objekty priamo do zeme, akoby z nej r&aacute;stli odjakživa. Človekom vytvoren&eacute; a pr&iacute;rodn&eacute; tu spl&yacute;va do jedn&eacute;ho celku.&lt;/p&gt;\n&lt;p&gt;Podnieten&yacute; hubačkou vytvoril Su&scaron;ienka klob&uacute;kovit&eacute; moduly, ktor&eacute; navrstvil do vertik&aacute;lnej priamky. S&uacute;so&scaron;ie v sebe ukr&yacute;va aj environment&aacute;lny podt&oacute;n a in&scaron;pir&aacute;ciu japonsk&yacute;mi z&aacute;hradami. Variabilita jednotliv&yacute;ch čast&iacute; umožňuje r&ocirc;zne sp&ocirc;soby in&scaron;tal&aacute;cie.&lt;/p&gt;\n&quot;,
+                &quot;authorities&quot;: [
+                    {
+                        &quot;id&quot;: &quot;10361&quot;,
+                        &quot;name&quot;: &quot;Jozef Su&scaron;ienka&quot;,
+                        &quot;has_image&quot;: true,
+                        &quot;biography&quot;: &quot;V&scaron;estrann&yacute; umelec a spoluzakladateľ Kysuckej gal&eacute;rie stiera hranice medzi soch&aacute;rstvom a keramikou. Tvor&iacute; prevažne bez pomoci hrnčiarskeho kruhu a sk&uacute;ma tak netypick&eacute; tvary in&scaron;pirovan&eacute; pr&iacute;rodou a živ&yacute;mi organizmami.\n\nSu&scaron;ienka pracuje s mot&iacute;vmi rastu, množenia či delenia a svojim plastik&aacute;m d&aacute;va často &scaron;upinat&yacute;, popraskan&yacute; alebo perforovan&yacute; povrch, ktor&yacute; reaguje na r&ocirc;zne p&ocirc;sobenie svetla. Jeho povrchov&eacute; glaz&uacute;ry podčiarkuj&uacute; zaoblenosť a m&auml;kkosť objemov harmonicky spl&yacute;vaj&uacute;cich s okolit&yacute;m prostred&iacute;m.&quot;,
+                        &quot;birth_place&quot;: &quot;Nov&aacute; Bystrica&quot;,
+                        &quot;death_place&quot;: null,
+                        &quot;birth_date&quot;: &quot;1937&quot;,
+                        &quot;death_date&quot;: &quot;&quot;,
+                        &quot;image_url&quot;: &quot;https://www.webumenia.sk/images/autori/1/31/10361/10361.jpeg&quot;,
+                        &quot;related_items&quot;: null
+                    }
+                ],
+                &quot;image_src&quot;: &quot;https://www.webumenia.sk/dielo/nahlad/SVK:SNG.UP-DK_5400/600&quot;,
+                &quot;image_srcset&quot;: &quot;https://www.webumenia.sk/dielo/nahlad/SVK:SNG.UP-DK_5400/220 220w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.UP-DK_5400/300 300w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.UP-DK_5400/600 600w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.UP-DK_5400/800 800w&quot;,
+                &quot;images&quot;: [
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX5500%2FSNG--UP-DK_5400--1_1--2023_02_21--L2_WEB.jp2.dzi&quot;
+                    }
+                ],
+                &quot;image_aspect_ratio&quot;: 1.5009380863039,
+                &quot;webumenia_url&quot;: &quot;https://www.webumenia.sk/dielo/SVK:SNG.UP-DK_5400&quot;,
+                &quot;code&quot;: &quot;011010001&quot;,
+                &quot;offset_top&quot;: 0,
+                &quot;video_thumbnail&quot;: null,
+                &quot;video_embed&quot;: null,
+                &quot;video_aspect_ratio&quot;: null,
+                &quot;video_title&quot;: &quot;&quot;,
+                &quot;video_subtitle&quot;: &quot;&quot;,
+                &quot;story_id&quot;: null,
+                &quot;location_formatted&quot;: &quot;N&aacute;dvorie, 0. podlažie, Vodn&eacute; kas&aacute;rne&quot;,
+                &quot;exhibition&quot;: {
+                    &quot;id&quot;: &quot;recdYT1t6ceSEk5WR&quot;,
+                    &quot;name&quot;: &quot;V&yacute;stava Monument&aacute;lky&quot;
+                },
+                &quot;bucketlists&quot;: [
+                    {
+                        &quot;id&quot;: &quot;recUBMv1RNstZ2lLO&quot;,
+                        &quot;title&quot;: &quot;Organizmus&quot;,
+                        &quot;text&quot;: &quot;&lt;p&gt;&lt;strong&gt;Uk&aacute;ž tento text:&lt;/strong&gt;&lt;/p&gt;\n&lt;ul&gt;\n&lt;li&gt;\n&lt;strong&gt;v Kn&iacute;hkupectve Ex Libris a z&iacute;ska&scaron; 10% zľavu na svoj n&aacute;kup&lt;/strong&gt;\n&lt;/li&gt;\n&lt;li&gt;\n&lt;strong&gt;v Kaviarni SNG a z&iacute;ska&scaron; k&aacute;vu zdarma&lt;/strong&gt;\n&lt;/li&gt;\n&lt;/ul&gt;\n&lt;p&gt;Umenie in&scaron;pirovan&eacute; živ&yacute;mi bytosťami a pr&iacute;rodn&yacute;mi procesmi m&aacute; korene už v časoch starovek&yacute;ch civiliz&aacute;ci&iacute;. Od 20. storočia v&scaron;ak predstavuje aj ak&uacute;si protiv&aacute;hu k pr&iacute;snym geometrick&yacute;m form&aacute;m v modernom umen&iacute;, ktor&eacute; nadv&auml;zuj&uacute; na svet priemyselnej civiliz&aacute;cie.&lt;/p&gt;\n&lt;p&gt;Organick&eacute; alebo biomorfn&eacute; umenie často napodobňuje obl&eacute; krivky, &scaron;pir&aacute;ly a rytmick&eacute; vzory opakuj&uacute;ce sa v pr&iacute;rode, no neraz aj priamo využ&iacute;va &bdquo;živ&eacute;&ldquo; materi&aacute;ly &ndash; kamene, listy, plody, huby, semiačka, mu&scaron;le, kosti, zuby, blato či krv. Niekedy, naopak, pracuje s kontrastom a &bdquo;tepl&eacute;&ldquo;, jemn&eacute; objekty vytv&aacute;ra z chladn&eacute;ho kovu alebo z bet&oacute;nu.&lt;/p&gt;\n&lt;p&gt;Organick&eacute; umenie dok&aacute;že vyvolať pocity pokoja a harm&oacute;nie, ale i pouk&aacute;zať na večn&yacute; cyklus života a na potrebu chr&aacute;niť krehk&eacute; pr&iacute;rodn&eacute; bohatstvo. Mot&iacute;vy zrodu a rastu prenikaj&uacute; aj do samotnej tvorby diela, kde sa prejavuje n&aacute;hoda a tvoriv&yacute; chaos. Umenie vytvoren&eacute; zo živ&yacute;ch materi&aacute;lov napokon rozv&iacute;ja i t&eacute;mu vlastn&eacute;ho rozpadu a z&aacute;niku. Otv&aacute;ra tak ot&aacute;zky nest&aacute;losti, premeny a ne&uacute;prosn&eacute;ho plynutia času.&lt;/p&gt;\n&quot;,
+                        &quot;image&quot;: {
+                            &quot;src&quot;: &quot;https://atlas.sng.sk.test/storage/media/153/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA.jpeg&quot;,
+                            &quot;srcset&quot;: &quot;https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_1201_901.jpeg 1201w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_1004_753.jpeg 1004w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_840_630.jpeg 840w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_703_527.jpeg 703w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_588_441.jpeg 588w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_492_369.jpeg 492w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_411_308.jpeg 411w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_344_258.jpeg 344w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_288_216.jpeg 288w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_241_181.jpeg 241w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_201_151.jpeg 201w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_168_126.jpeg 168w, data:image/svg+xml;base64,PCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHg9IjAiCiB5PSIwIiB2aWV3Qm94PSIwIDAgMTIwMSA5MDEiPgoJPGltYWdlIHdpZHRoPSIxMjAxIiBoZWlnaHQ9IjkwMSIgeGxpbms6aHJlZj0iZGF0YTppbWFnZS9qcGVnO2Jhc2U2NCwvOWovNEFBUVNrWkpSZ0FCQVFFQVlBQmdBQUQvL2dBN1ExSkZRVlJQVWpvZ1oyUXRhbkJsWnlCMk1TNHdJQ2gxYzJsdVp5QkpTa2NnU2xCRlJ5QjJPREFwTENCeGRXRnNhWFI1SUQwZ09UQUsvOXNBUXdBREFnSURBZ0lEQXdNREJBTURCQVVJQlFVRUJBVUtCd2NHQ0F3S0RBd0xDZ3NMRFE0U0VBME9FUTRMQ3hBV0VCRVRGQlVWRlF3UEZ4Z1dGQmdTRkJVVS85c0FRd0VEQkFRRkJBVUpCUVVKRkEwTERSUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVLzhBQUVRZ0FHQUFnQXdFUkFBSVJBUU1SQWYvRUFCOEFBQUVGQVFFQkFRRUJBQUFBQUFBQUFBQUJBZ01FQlFZSENBa0tDLy9FQUxVUUFBSUJBd01DQkFNRkJRUUVBQUFCZlFFQ0F3QUVFUVVTSVRGQkJoTlJZUWNpY1JReWdaR2hDQ05Dc2NFVlV0SHdKRE5pY29JSkNoWVhHQmthSlNZbktDa3FORFUyTnpnNU9rTkVSVVpIU0VsS1UxUlZWbGRZV1ZwalpHVm1aMmhwYW5OMGRYWjNlSGw2ZzRTRmhvZUlpWXFTazVTVmxwZVltWnFpbzZTbHBxZW9xYXF5czdTMXRyZTR1YnJDdzhURnhzZkl5Y3JTMDlUVjF0ZlkyZHJoNHVQazVlYm42T25xOGZMejlQWDI5L2o1K3YvRUFCOEJBQU1CQVFFQkFRRUJBUUVBQUFBQUFBQUJBZ01FQlFZSENBa0tDLy9FQUxVUkFBSUJBZ1FFQXdRSEJRUUVBQUVDZHdBQkFnTVJCQVVoTVFZU1FWRUhZWEVUSWpLQkNCUkNrYUd4d1Frak0xTHdGV0p5MFFvV0pEVGhKZkVYR0JrYUppY29LU28xTmpjNE9UcERSRVZHUjBoSlNsTlVWVlpYV0ZsYVkyUmxabWRvYVdwemRIVjJkM2g1ZW9LRGhJV0doNGlKaXBLVGxKV1dsNWlabXFLanBLV21wNmlwcXJLenRMVzJ0N2k1dXNMRHhNWEd4OGpKeXRMVDFOWFcxOWpaMnVMajVPWG01K2pwNnZMejlQWDI5L2o1K3YvYUFBd0RBUUFDRVFNUkFEOEE2bnhoKzJmNGUwZ2tXZUpPT09hOVNPQ2wxRWVhMy83ZU1MVGtSeC9MV3l3YVFYQmYyOFlObTB4Wk5Ed2FHZFY0VS9iVjBIVm5FZDZnanozckdXQ2t0Z1B6NHVacHJsdm1kbXIzV3lTcDlrYmQwTkNpMlRjVVdiWnpnMWZMWVpORVdnUHlrZysxSVpZUXFyQUdrbzJlb2pvdkR1bXdhbmNyRzVDZzl6WGJGYUdNbVMrSk5LdDlKdURHamJoNjFvNEpxNFJiT2Fjb0g0cmtrck94dWovLzJRPT0iPgoJPC9pbWFnZT4KPC9zdmc+ 32w&quot;,
+                            &quot;width&quot;: 1201,
+                            &quot;height&quot;: 901
+                        }
+                    }
+                ]
+            },
+            {
+                &quot;id&quot;: &quot;SVK:SNG.UP-F_1202&quot;,
+                &quot;title&quot;: &quot;Kvet&quot;,
+                &quot;author&quot;: &quot;Milo&scaron; Balgav&yacute; st.&quot;,
+                &quot;author_description&quot;: &quot;&quot;,
+                &quot;dating&quot;: &quot;1987&quot;,
+                &quot;locked_bucketlist_description&quot;: &quot;&lt;p&gt;Glazovan&yacute; kvet vis&iacute; v &lt;strong&gt;chodbe za kreat&iacute;vnym ateli&eacute;rom&lt;/strong&gt; na pr&iacute;zem&iacute;, smerom k pal&aacute;cu &lt;em&gt;Esterh&aacute;zy&lt;/em&gt;.&lt;/p&gt;\n&lt;p&gt;Od &lt;strong&gt;&scaron;atn&iacute;&lt;/strong&gt; sa vydaj ďalej k v&yacute;ťahu a odboč doľava pri WC. Vedľa &lt;em&gt;Kvetu&lt;/em&gt; vis&iacute; aj kovov&yacute; reli&eacute;f od Juraja Bartusza.&lt;/p&gt;\n&quot;,
+                &quot;dating_short&quot;: &quot;1987&quot;,
+                &quot;description&quot;: &quot;&lt;p&gt;&lt;em&gt;&bdquo;Cel&yacute; život hľad&aacute;m jednoduchosť a čistotu tvarov. (...) Nech sa to zoberie z ak&eacute;hokoľvek hľadiska, v ktoromkoľvek umeleckom ž&aacute;nri, vždy to jednoduch&eacute; b&yacute;va geni&aacute;lne.&ldquo;&lt;/em&gt;&lt;/p&gt;\n&lt;p&gt;Autor v 80. rokoch 20. storočia rozpracoval t&eacute;mu z&aacute;vesn&yacute;ch tanierov, ktor&eacute; bežne dekorovali domovy v mest&aacute;ch aj na vidieku. Minulosť konfrontoval so s&uacute;časnosťou v zauj&iacute;mavo prepletanom reli&eacute;fe. Pri jeho modelovan&iacute; sa in&scaron;piroval pr&iacute;rodou a povrch potiahol &scaron;ťavnatou modrou glaz&uacute;rou.&lt;/p&gt;\n&quot;,
+                &quot;authorities&quot;: [
+                    {
+                        &quot;id&quot;: &quot;395&quot;,
+                        &quot;name&quot;: &quot;Milo&scaron; Balgav&yacute; st.&quot;,
+                        &quot;has_image&quot;: true,
+                        &quot;biography&quot;: &quot;Milo&scaron; Balgav&yacute; nechal remeseln&uacute; hist&oacute;riu hliny prer&aacute;sť svoj&iacute;m osobn&yacute;m v&yacute;tvarn&yacute;m pr&iacute;behom. K dielam pristupoval často priam soch&aacute;rsky, no v jeho tvorbe n&aacute;jdeme r&ocirc;zne sp&ocirc;soby pr&aacute;ce s hlinou. Cez v&auml;č&scaron;ie exteri&eacute;rov&eacute; a interi&eacute;rov&eacute; objekty, komornej&scaron;ie plastiky až po s&eacute;rie men&scaron;&iacute;ch &uacute;žitkov&yacute;ch predmetov.&quot;,
+                        &quot;birth_place&quot;: &quot;Mal&eacute; Lev&aacute;re&quot;,
+                        &quot;death_place&quot;: &quot;Trnava&quot;,
+                        &quot;birth_date&quot;: &quot;1925&quot;,
+                        &quot;death_date&quot;: &quot;1999&quot;,
+                        &quot;image_url&quot;: &quot;https://www.webumenia.sk/images/autori//31/395/395.jpeg&quot;,
+                        &quot;related_items&quot;: null
+                    }
+                ],
+                &quot;image_src&quot;: &quot;https://www.webumenia.sk/dielo/nahlad/SVK:SNG.UP-F_1202/600&quot;,
+                &quot;image_srcset&quot;: &quot;https://www.webumenia.sk/dielo/nahlad/SVK:SNG.UP-F_1202/220 220w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.UP-F_1202/300 300w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.UP-F_1202/600 600w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.UP-F_1202/800 800w&quot;,
+                &quot;images&quot;: [
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX1300%2FSNG--UP-F_1202--1_4--2020_04_07--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX1300%2FSNG--UP-F_1202--2_4--2020_04_07--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX1300%2FSNG--UP-F_1202--3_4--2020_04_07--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX1300%2FSNG--UP-F_1202--4_4--2020_04_07--L2_WEB.jp2.dzi&quot;
+                    }
+                ],
+                &quot;image_aspect_ratio&quot;: 1.335559265442404,
+                &quot;webumenia_url&quot;: &quot;https://www.webumenia.sk/dielo/SVK:SNG.UP-F_1202&quot;,
+                &quot;code&quot;: &quot;100100100&quot;,
+                &quot;offset_top&quot;: 0,
+                &quot;video_thumbnail&quot;: null,
+                &quot;video_embed&quot;: null,
+                &quot;video_aspect_ratio&quot;: null,
+                &quot;video_title&quot;: &quot;&quot;,
+                &quot;video_subtitle&quot;: &quot;&quot;,
+                &quot;story_id&quot;: null,
+                &quot;location_formatted&quot;: &quot;V&yacute;chodn&aacute; chodba, 0. podlažie, Vodn&eacute; kas&aacute;rne&quot;,
+                &quot;exhibition&quot;: {
+                    &quot;id&quot;: &quot;recdYT1t6ceSEk5WR&quot;,
+                    &quot;name&quot;: &quot;V&yacute;stava Monument&aacute;lky&quot;
+                },
+                &quot;bucketlists&quot;: [
+                    {
+                        &quot;id&quot;: &quot;recUBMv1RNstZ2lLO&quot;,
+                        &quot;title&quot;: &quot;Organizmus&quot;,
+                        &quot;text&quot;: &quot;&lt;p&gt;&lt;strong&gt;Uk&aacute;ž tento text:&lt;/strong&gt;&lt;/p&gt;\n&lt;ul&gt;\n&lt;li&gt;\n&lt;strong&gt;v Kn&iacute;hkupectve Ex Libris a z&iacute;ska&scaron; 10% zľavu na svoj n&aacute;kup&lt;/strong&gt;\n&lt;/li&gt;\n&lt;li&gt;\n&lt;strong&gt;v Kaviarni SNG a z&iacute;ska&scaron; k&aacute;vu zdarma&lt;/strong&gt;\n&lt;/li&gt;\n&lt;/ul&gt;\n&lt;p&gt;Umenie in&scaron;pirovan&eacute; živ&yacute;mi bytosťami a pr&iacute;rodn&yacute;mi procesmi m&aacute; korene už v časoch starovek&yacute;ch civiliz&aacute;ci&iacute;. Od 20. storočia v&scaron;ak predstavuje aj ak&uacute;si protiv&aacute;hu k pr&iacute;snym geometrick&yacute;m form&aacute;m v modernom umen&iacute;, ktor&eacute; nadv&auml;zuj&uacute; na svet priemyselnej civiliz&aacute;cie.&lt;/p&gt;\n&lt;p&gt;Organick&eacute; alebo biomorfn&eacute; umenie často napodobňuje obl&eacute; krivky, &scaron;pir&aacute;ly a rytmick&eacute; vzory opakuj&uacute;ce sa v pr&iacute;rode, no neraz aj priamo využ&iacute;va &bdquo;živ&eacute;&ldquo; materi&aacute;ly &ndash; kamene, listy, plody, huby, semiačka, mu&scaron;le, kosti, zuby, blato či krv. Niekedy, naopak, pracuje s kontrastom a &bdquo;tepl&eacute;&ldquo;, jemn&eacute; objekty vytv&aacute;ra z chladn&eacute;ho kovu alebo z bet&oacute;nu.&lt;/p&gt;\n&lt;p&gt;Organick&eacute; umenie dok&aacute;že vyvolať pocity pokoja a harm&oacute;nie, ale i pouk&aacute;zať na večn&yacute; cyklus života a na potrebu chr&aacute;niť krehk&eacute; pr&iacute;rodn&eacute; bohatstvo. Mot&iacute;vy zrodu a rastu prenikaj&uacute; aj do samotnej tvorby diela, kde sa prejavuje n&aacute;hoda a tvoriv&yacute; chaos. Umenie vytvoren&eacute; zo živ&yacute;ch materi&aacute;lov napokon rozv&iacute;ja i t&eacute;mu vlastn&eacute;ho rozpadu a z&aacute;niku. Otv&aacute;ra tak ot&aacute;zky nest&aacute;losti, premeny a ne&uacute;prosn&eacute;ho plynutia času.&lt;/p&gt;\n&quot;,
+                        &quot;image&quot;: {
+                            &quot;src&quot;: &quot;https://atlas.sng.sk.test/storage/media/153/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA.jpeg&quot;,
+                            &quot;srcset&quot;: &quot;https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_1201_901.jpeg 1201w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_1004_753.jpeg 1004w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_840_630.jpeg 840w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_703_527.jpeg 703w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_588_441.jpeg 588w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_492_369.jpeg 492w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_411_308.jpeg 411w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_344_258.jpeg 344w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_288_216.jpeg 288w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_241_181.jpeg 241w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_201_151.jpeg 201w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_168_126.jpeg 168w, data:image/svg+xml;base64,PCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHg9IjAiCiB5PSIwIiB2aWV3Qm94PSIwIDAgMTIwMSA5MDEiPgoJPGltYWdlIHdpZHRoPSIxMjAxIiBoZWlnaHQ9IjkwMSIgeGxpbms6aHJlZj0iZGF0YTppbWFnZS9qcGVnO2Jhc2U2NCwvOWovNEFBUVNrWkpSZ0FCQVFFQVlBQmdBQUQvL2dBN1ExSkZRVlJQVWpvZ1oyUXRhbkJsWnlCMk1TNHdJQ2gxYzJsdVp5QkpTa2NnU2xCRlJ5QjJPREFwTENCeGRXRnNhWFI1SUQwZ09UQUsvOXNBUXdBREFnSURBZ0lEQXdNREJBTURCQVVJQlFVRUJBVUtCd2NHQ0F3S0RBd0xDZ3NMRFE0U0VBME9FUTRMQ3hBV0VCRVRGQlVWRlF3UEZ4Z1dGQmdTRkJVVS85c0FRd0VEQkFRRkJBVUpCUVVKRkEwTERSUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVLzhBQUVRZ0FHQUFnQXdFUkFBSVJBUU1SQWYvRUFCOEFBQUVGQVFFQkFRRUJBQUFBQUFBQUFBQUJBZ01FQlFZSENBa0tDLy9FQUxVUUFBSUJBd01DQkFNRkJRUUVBQUFCZlFFQ0F3QUVFUVVTSVRGQkJoTlJZUWNpY1JReWdaR2hDQ05Dc2NFVlV0SHdKRE5pY29JSkNoWVhHQmthSlNZbktDa3FORFUyTnpnNU9rTkVSVVpIU0VsS1UxUlZWbGRZV1ZwalpHVm1aMmhwYW5OMGRYWjNlSGw2ZzRTRmhvZUlpWXFTazVTVmxwZVltWnFpbzZTbHBxZW9xYXF5czdTMXRyZTR1YnJDdzhURnhzZkl5Y3JTMDlUVjF0ZlkyZHJoNHVQazVlYm42T25xOGZMejlQWDI5L2o1K3YvRUFCOEJBQU1CQVFFQkFRRUJBUUVBQUFBQUFBQUJBZ01FQlFZSENBa0tDLy9FQUxVUkFBSUJBZ1FFQXdRSEJRUUVBQUVDZHdBQkFnTVJCQVVoTVFZU1FWRUhZWEVUSWpLQkNCUkNrYUd4d1Frak0xTHdGV0p5MFFvV0pEVGhKZkVYR0JrYUppY29LU28xTmpjNE9UcERSRVZHUjBoSlNsTlVWVlpYV0ZsYVkyUmxabWRvYVdwemRIVjJkM2g1ZW9LRGhJV0doNGlKaXBLVGxKV1dsNWlabXFLanBLV21wNmlwcXJLenRMVzJ0N2k1dXNMRHhNWEd4OGpKeXRMVDFOWFcxOWpaMnVMajVPWG01K2pwNnZMejlQWDI5L2o1K3YvYUFBd0RBUUFDRVFNUkFEOEE2bnhoKzJmNGUwZ2tXZUpPT09hOVNPQ2wxRWVhMy83ZU1MVGtSeC9MV3l3YVFYQmYyOFlObTB4Wk5Ed2FHZFY0VS9iVjBIVm5FZDZnanozckdXQ2t0Z1B6NHVacHJsdm1kbXIzV3lTcDlrYmQwTkNpMlRjVVdiWnpnMWZMWVpORVdnUHlrZysxSVpZUXFyQUdrbzJlb2pvdkR1bXdhbmNyRzVDZzl6WGJGYUdNbVMrSk5LdDlKdURHamJoNjFvNEpxNFJiT2Fjb0g0cmtrck94dWovLzJRPT0iPgoJPC9pbWFnZT4KPC9zdmc+ 32w&quot;,
+                            &quot;width&quot;: 1201,
+                            &quot;height&quot;: 901
+                        }
+                    }
+                ]
+            },
+            {
+                &quot;id&quot;: &quot;SVK:SNG.IM_101&quot;,
+                &quot;title&quot;: &quot;Med&uacute;za&quot;,
+                &quot;author&quot;: &quot;Emőke Vargov&aacute;, Em&ouml;ke Vargov&aacute;&quot;,
+                &quot;author_description&quot;: &quot;&quot;,
+                &quot;dating&quot;: &quot;2000&quot;,
+                &quot;locked_bucketlist_description&quot;: &quot;&lt;p&gt;Morsk&yacute; tvor zo&scaron;it&yacute; z podprseniek m&aacute; &lt;strong&gt;vlastn&uacute; s&aacute;lu&lt;/strong&gt; ponoren&uacute; do modr&eacute;ho oce&aacute;nskeho svetla.&lt;/p&gt;\n&lt;p&gt;Miestnosť V. s n&aacute;zvom &lt;strong&gt;&lt;em&gt;Spoločenstvo žien&lt;/em&gt;&lt;/strong&gt; n&aacute;jde&scaron; na &lt;strong&gt;2. podlaž&iacute;&lt;/strong&gt;, medzi expoz&iacute;ciou &lt;em&gt;Moderna&lt;/em&gt; a vstupom do &lt;em&gt;Premostenia&lt;/em&gt;.&lt;/p&gt;\n&quot;,
+                &quot;dating_short&quot;: &quot;2000&quot;,
+                &quot;description&quot;: &quot;&lt;p&gt;Autorku k vytvoreniu &lt;em&gt;Med&uacute;zy&lt;/em&gt; in&scaron;piroval z&aacute;žitok z akv&aacute;ria v kalifornskom Monterey. Dielo p&ocirc;vodne viselo na hornom poschod&iacute; &scaron;amor&iacute;nskej synag&oacute;gy, kde sa kedysi zdržovali ženy, ktor&eacute; mali do hlavn&yacute;ch priestorov &ndash; vyhraden&yacute;ch mužom &ndash; obmedzen&yacute; vstup.&lt;/p&gt;\n&lt;p&gt;&lt;em&gt;Med&uacute;zu&lt;/em&gt; označila autorka za prototyp v&scaron;etk&yacute;ch žien, vzn&aacute;&scaron;aj&uacute;ci sa ako oranžov&aacute; huspenina v modrom prostred&iacute; a jemne reaguj&uacute;ci na dych a pohyb obecenstva. Objekt symbolicky zbavuje int&iacute;mne žensk&eacute; oblečenie stereotypn&yacute;ch erotick&yacute;ch kontextov.&lt;/p&gt;\n&lt;p&gt;V &lt;em&gt;Med&uacute;ze&lt;/em&gt; sa sp&aacute;ja viacero kult&uacute;rnych archetypov a dielo tak m&ocirc;že odkazovať na marginaliz&aacute;ciu, krehkosť aj potrebu jednoty a vz&aacute;jomnej solidarity.&lt;/p&gt;\n&quot;,
+                &quot;authorities&quot;: [
+                    {
+                        &quot;id&quot;: &quot;11222&quot;,
+                        &quot;name&quot;: &quot;Em&ouml;ke Vargov&aacute;&quot;,
+                        &quot;has_image&quot;: true,
+                        &quot;biography&quot;: &quot;&bdquo;Materi&aacute;ly, s ktor&yacute;mi pracujem, nes&uacute; v sebe určit&uacute; atraktivitu krehkosti, jemnosti, ktor&aacute; by ozaj mala pripom&iacute;nať ženskosť. Ale nemus&iacute; to tak byť, my to už tak m&aacute;me, že si to o tom mysl&iacute;me&hellip; V tomto procese ma zauj&iacute;ma, ako ich dek&oacute;dovať, ako ich spoznať &uacute;plne až na z&aacute;kladn&yacute; at&oacute;m, a potom ich využiť na to, aby som ich zmenila.&rdquo;&quot;,
+                        &quot;birth_place&quot;: &quot;Dunajsk&aacute; Streda&quot;,
+                        &quot;death_place&quot;: null,
+                        &quot;birth_date&quot;: &quot;1965&quot;,
+                        &quot;death_date&quot;: &quot;&quot;,
+                        &quot;image_url&quot;: &quot;https://www.webumenia.sk/images/autori/2/38/11222/11222.jpeg&quot;,
+                        &quot;related_items&quot;: null
+                    }
+                ],
+                &quot;image_src&quot;: &quot;https://www.webumenia.sk/dielo/nahlad/SVK:SNG.IM_101/600&quot;,
+                &quot;image_srcset&quot;: &quot;https://www.webumenia.sk/dielo/nahlad/SVK:SNG.IM_101/220 220w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.IM_101/300 300w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.IM_101/600 600w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.IM_101/800 800w&quot;,
+                &quot;images&quot;: [
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX200%2FSNG--IM_101--1_7--2015_09_24--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX200%2FSNG--IM_101--2_7--2015_09_24--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX200%2FSNG--IM_101--3_7--2015_09_24--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX200%2FSNG--IM_101--4_7--2015_09_24--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX200%2FSNG--IM_101--5_7--2015_09_24--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX200%2FSNG--IM_101--6_7--2015_09_24--L2_WEB.jp2.dzi&quot;
+                    },
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX200%2FSNG--IM_101--7_7--2015_09_24--L2_WEB.jp2.dzi&quot;
+                    }
+                ],
+                &quot;image_aspect_ratio&quot;: 0.74875,
+                &quot;webumenia_url&quot;: &quot;https://www.webumenia.sk/dielo/SVK:SNG.IM_101&quot;,
+                &quot;code&quot;: &quot;100000101&quot;,
+                &quot;offset_top&quot;: -150,
+                &quot;video_thumbnail&quot;: {
+                    &quot;src&quot;: &quot;https://i.vimeocdn.com/video/1567920085-e25ab1099e882ea4f70bf84a01e7881cdfe0ff0725d71dd45204c0b915dd87b9-d_1920x1080&quot;,
+                    &quot;srcset&quot;: &quot;https://i.vimeocdn.com/video/1567920085-e25ab1099e882ea4f70bf84a01e7881cdfe0ff0725d71dd45204c0b915dd87b9-d_100x75 100w, https://i.vimeocdn.com/video/1567920085-e25ab1099e882ea4f70bf84a01e7881cdfe0ff0725d71dd45204c0b915dd87b9-d_200x150 200w, https://i.vimeocdn.com/video/1567920085-e25ab1099e882ea4f70bf84a01e7881cdfe0ff0725d71dd45204c0b915dd87b9-d_295x166 295w, https://i.vimeocdn.com/video/1567920085-e25ab1099e882ea4f70bf84a01e7881cdfe0ff0725d71dd45204c0b915dd87b9-d_640x360 640w, https://i.vimeocdn.com/video/1567920085-e25ab1099e882ea4f70bf84a01e7881cdfe0ff0725d71dd45204c0b915dd87b9-d_960x540 960w, https://i.vimeocdn.com/video/1567920085-e25ab1099e882ea4f70bf84a01e7881cdfe0ff0725d71dd45204c0b915dd87b9-d_1280x720 1280w, https://i.vimeocdn.com/video/1567920085-e25ab1099e882ea4f70bf84a01e7881cdfe0ff0725d71dd45204c0b915dd87b9-d_1920x1080 1920w&quot;,
+                    &quot;width&quot;: 1920,
+                    &quot;height&quot;: 1080
+                },
+                &quot;video_embed&quot;: &quot;https://player.vimeo.com/video/781114773?h=fe372395d6&quot;,
+                &quot;video_aspect_ratio&quot;: {
+                    &quot;width&quot;: 9,
+                    &quot;height&quot;: 16
+                },
+                &quot;video_title&quot;: &quot;Autorsk&yacute; vstup&quot;,
+                &quot;video_subtitle&quot;: &quot;Em&ouml;ke Vargov&aacute; o Med&uacute;ze&quot;,
+                &quot;story_id&quot;: &quot;rec0EynktJy9zcICY&quot;,
+                &quot;location_formatted&quot;: &quot;Spoločenstvo žien, s&aacute;la V, 2. podlažie, Vodn&eacute; kas&aacute;rne&quot;,
+                &quot;exhibition&quot;: {
+                    &quot;id&quot;: &quot;recKd1Y0FnQmmFbwW&quot;,
+                    &quot;name&quot;: &quot;V&yacute;stava Prol&oacute;g: 12 farieb reality&quot;
+                },
+                &quot;bucketlists&quot;: [
+                    {
+                        &quot;id&quot;: &quot;recUBMv1RNstZ2lLO&quot;,
+                        &quot;title&quot;: &quot;Organizmus&quot;,
+                        &quot;text&quot;: &quot;&lt;p&gt;&lt;strong&gt;Uk&aacute;ž tento text:&lt;/strong&gt;&lt;/p&gt;\n&lt;ul&gt;\n&lt;li&gt;\n&lt;strong&gt;v Kn&iacute;hkupectve Ex Libris a z&iacute;ska&scaron; 10% zľavu na svoj n&aacute;kup&lt;/strong&gt;\n&lt;/li&gt;\n&lt;li&gt;\n&lt;strong&gt;v Kaviarni SNG a z&iacute;ska&scaron; k&aacute;vu zdarma&lt;/strong&gt;\n&lt;/li&gt;\n&lt;/ul&gt;\n&lt;p&gt;Umenie in&scaron;pirovan&eacute; živ&yacute;mi bytosťami a pr&iacute;rodn&yacute;mi procesmi m&aacute; korene už v časoch starovek&yacute;ch civiliz&aacute;ci&iacute;. Od 20. storočia v&scaron;ak predstavuje aj ak&uacute;si protiv&aacute;hu k pr&iacute;snym geometrick&yacute;m form&aacute;m v modernom umen&iacute;, ktor&eacute; nadv&auml;zuj&uacute; na svet priemyselnej civiliz&aacute;cie.&lt;/p&gt;\n&lt;p&gt;Organick&eacute; alebo biomorfn&eacute; umenie často napodobňuje obl&eacute; krivky, &scaron;pir&aacute;ly a rytmick&eacute; vzory opakuj&uacute;ce sa v pr&iacute;rode, no neraz aj priamo využ&iacute;va &bdquo;živ&eacute;&ldquo; materi&aacute;ly &ndash; kamene, listy, plody, huby, semiačka, mu&scaron;le, kosti, zuby, blato či krv. Niekedy, naopak, pracuje s kontrastom a &bdquo;tepl&eacute;&ldquo;, jemn&eacute; objekty vytv&aacute;ra z chladn&eacute;ho kovu alebo z bet&oacute;nu.&lt;/p&gt;\n&lt;p&gt;Organick&eacute; umenie dok&aacute;že vyvolať pocity pokoja a harm&oacute;nie, ale i pouk&aacute;zať na večn&yacute; cyklus života a na potrebu chr&aacute;niť krehk&eacute; pr&iacute;rodn&eacute; bohatstvo. Mot&iacute;vy zrodu a rastu prenikaj&uacute; aj do samotnej tvorby diela, kde sa prejavuje n&aacute;hoda a tvoriv&yacute; chaos. Umenie vytvoren&eacute; zo živ&yacute;ch materi&aacute;lov napokon rozv&iacute;ja i t&eacute;mu vlastn&eacute;ho rozpadu a z&aacute;niku. Otv&aacute;ra tak ot&aacute;zky nest&aacute;losti, premeny a ne&uacute;prosn&eacute;ho plynutia času.&lt;/p&gt;\n&quot;,
+                        &quot;image&quot;: {
+                            &quot;src&quot;: &quot;https://atlas.sng.sk.test/storage/media/153/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA.jpeg&quot;,
+                            &quot;srcset&quot;: &quot;https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_1201_901.jpeg 1201w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_1004_753.jpeg 1004w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_840_630.jpeg 840w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_703_527.jpeg 703w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_588_441.jpeg 588w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_492_369.jpeg 492w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_411_308.jpeg 411w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_344_258.jpeg 344w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_288_216.jpeg 288w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_241_181.jpeg 241w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_201_151.jpeg 201w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_168_126.jpeg 168w, data:image/svg+xml;base64,PCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHg9IjAiCiB5PSIwIiB2aWV3Qm94PSIwIDAgMTIwMSA5MDEiPgoJPGltYWdlIHdpZHRoPSIxMjAxIiBoZWlnaHQ9IjkwMSIgeGxpbms6aHJlZj0iZGF0YTppbWFnZS9qcGVnO2Jhc2U2NCwvOWovNEFBUVNrWkpSZ0FCQVFFQVlBQmdBQUQvL2dBN1ExSkZRVlJQVWpvZ1oyUXRhbkJsWnlCMk1TNHdJQ2gxYzJsdVp5QkpTa2NnU2xCRlJ5QjJPREFwTENCeGRXRnNhWFI1SUQwZ09UQUsvOXNBUXdBREFnSURBZ0lEQXdNREJBTURCQVVJQlFVRUJBVUtCd2NHQ0F3S0RBd0xDZ3NMRFE0U0VBME9FUTRMQ3hBV0VCRVRGQlVWRlF3UEZ4Z1dGQmdTRkJVVS85c0FRd0VEQkFRRkJBVUpCUVVKRkEwTERSUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVLzhBQUVRZ0FHQUFnQXdFUkFBSVJBUU1SQWYvRUFCOEFBQUVGQVFFQkFRRUJBQUFBQUFBQUFBQUJBZ01FQlFZSENBa0tDLy9FQUxVUUFBSUJBd01DQkFNRkJRUUVBQUFCZlFFQ0F3QUVFUVVTSVRGQkJoTlJZUWNpY1JReWdaR2hDQ05Dc2NFVlV0SHdKRE5pY29JSkNoWVhHQmthSlNZbktDa3FORFUyTnpnNU9rTkVSVVpIU0VsS1UxUlZWbGRZV1ZwalpHVm1aMmhwYW5OMGRYWjNlSGw2ZzRTRmhvZUlpWXFTazVTVmxwZVltWnFpbzZTbHBxZW9xYXF5czdTMXRyZTR1YnJDdzhURnhzZkl5Y3JTMDlUVjF0ZlkyZHJoNHVQazVlYm42T25xOGZMejlQWDI5L2o1K3YvRUFCOEJBQU1CQVFFQkFRRUJBUUVBQUFBQUFBQUJBZ01FQlFZSENBa0tDLy9FQUxVUkFBSUJBZ1FFQXdRSEJRUUVBQUVDZHdBQkFnTVJCQVVoTVFZU1FWRUhZWEVUSWpLQkNCUkNrYUd4d1Frak0xTHdGV0p5MFFvV0pEVGhKZkVYR0JrYUppY29LU28xTmpjNE9UcERSRVZHUjBoSlNsTlVWVlpYV0ZsYVkyUmxabWRvYVdwemRIVjJkM2g1ZW9LRGhJV0doNGlKaXBLVGxKV1dsNWlabXFLanBLV21wNmlwcXJLenRMVzJ0N2k1dXNMRHhNWEd4OGpKeXRMVDFOWFcxOWpaMnVMajVPWG01K2pwNnZMejlQWDI5L2o1K3YvYUFBd0RBUUFDRVFNUkFEOEE2bnhoKzJmNGUwZ2tXZUpPT09hOVNPQ2wxRWVhMy83ZU1MVGtSeC9MV3l3YVFYQmYyOFlObTB4Wk5Ed2FHZFY0VS9iVjBIVm5FZDZnanozckdXQ2t0Z1B6NHVacHJsdm1kbXIzV3lTcDlrYmQwTkNpMlRjVVdiWnpnMWZMWVpORVdnUHlrZysxSVpZUXFyQUdrbzJlb2pvdkR1bXdhbmNyRzVDZzl6WGJGYUdNbVMrSk5LdDlKdURHamJoNjFvNEpxNFJiT2Fjb0g0cmtrck94dWovLzJRPT0iPgoJPC9pbWFnZT4KPC9zdmc+ 32w&quot;,
+                            &quot;width&quot;: 1201,
+                            &quot;height&quot;: 901
+                        }
+                    }
+                ]
+            },
+            {
+                &quot;id&quot;: &quot;SVK:SNG.O_6208&quot;,
+                &quot;title&quot;: &quot;Jazern&aacute; z&aacute;hrada&quot;,
+                &quot;author&quot;: &quot;Toyen&quot;,
+                &quot;author_description&quot;: &quot;&quot;,
+                &quot;dating&quot;: &quot;20. storočie, 1. polovica, 1932&quot;,
+                &quot;locked_bucketlist_description&quot;: &quot;&lt;p&gt;Z&aacute;hadn&uacute; olejomaľbu od Toyen n&aacute;jde&scaron; v &lt;strong&gt;&lt;em&gt;Expoz&iacute;cii Moderna&lt;/em&gt;&lt;/strong&gt; na &lt;strong&gt;2. podlaž&iacute;&lt;/strong&gt;. Je s&uacute;časťou sekcie &lt;em&gt;Sen&lt;/em&gt; naľavo od vstupu.&lt;/p&gt;\n&quot;,
+                &quot;dating_short&quot;: &quot;1932&quot;,
+                &quot;description&quot;: &quot;&lt;p&gt;V tienistom, zvl&aacute;&scaron;tne hypnotickom svete fl&oacute;ry, vody a koralov&yacute;ch &uacute;tvarov akoby vznikali nov&eacute; formy života. Bubliny a okat&eacute; ikry n&aacute;s vťahuj&uacute; do svojho biotopu, jestvuj&uacute;ceho niekde na pomedz&iacute; hlbok&eacute;ho pralesa, morsk&eacute;ho &uacute;tesu a jaskynnej siene. Z&aacute;dumčiv&aacute; harm&oacute;nia modr&yacute;ch, zelen&yacute;ch a hned&yacute;ch t&oacute;nov vytv&aacute;ra dojem, že upad&aacute;me do sp&aacute;nku a zač&iacute;naj&uacute; k n&aacute;m prehov&aacute;rať podvedom&eacute; predstavy.&lt;/p&gt;\n&lt;p&gt;Maliarka vd&yacute;chla z&aacute;hadn&eacute;mu obrazu živ&yacute; organick&yacute; charakter aj t&yacute;m, ako odl&iacute;&scaron;ila jednotliv&eacute; pr&iacute;rodn&eacute; povrchy. Hladinu vody a leskl&eacute; membr&aacute;ny bubl&iacute;n tvoria hladk&eacute; farebn&eacute; prechody, na tr&aacute;vnatom brehu vidno kr&aacute;tke vrstven&eacute; ťahy &scaron;tetca a &bdquo;tvrd&eacute;&ldquo; objekty v hornej časti pokr&yacute;va zvr&aacute;snen&aacute;, past&oacute;zna, takmer piesčito p&ocirc;sobiaca text&uacute;ra.&lt;/p&gt;\n&lt;p&gt;Maľba vznikla v obdob&iacute;, keď Toyen rozv&iacute;jala vlastn&yacute; umeleck&yacute; smer artificializmus, pohybuj&uacute;ci sa niekde medzi poetizmom a surrealizmom. Maľovala imagin&aacute;rne pr&iacute;rodn&eacute; krajiny so sopečn&yacute;mi skalami, s kry&scaron;t&aacute;lmi, last&uacute;rami či exotick&yacute;mi rastlinami, ktor&eacute; na pl&aacute;tno voľne rozkladala podľa ak&eacute;hosi vn&uacute;torn&eacute;ho rytmu. N&aacute;mety často vznikali priamo počas pr&aacute;ce, bez predo&scaron;lej pr&iacute;pravy.&lt;/p&gt;\n&lt;p&gt;Nečakan&eacute; spojenia neživ&yacute;ch predmetov s prvkami pripom&iacute;naj&uacute;cimi živoč&iacute;chy či ľudsk&eacute; org&aacute;ny navodzuj&uacute; občas podivn&yacute; nepokoj, ako keby v nehybn&yacute;ch obrazoch čosi č&iacute;halo.&lt;/p&gt;\n&quot;,
+                &quot;authorities&quot;: [
+                    {
+                        &quot;id&quot;: &quot;10982&quot;,
+                        &quot;name&quot;: &quot;Toyen&quot;,
+                        &quot;has_image&quot;: true,
+                        &quot;biography&quot;: &quot;&quot;,
+                        &quot;birth_place&quot;: &quot;Praha&quot;,
+                        &quot;death_place&quot;: &quot;Par&iacute;ž&quot;,
+                        &quot;birth_date&quot;: &quot;1902&quot;,
+                        &quot;death_date&quot;: &quot;1980&quot;,
+                        &quot;image_url&quot;: &quot;https://www.webumenia.sk/images/autori/2/60/10982/10982.jpeg&quot;,
+                        &quot;related_items&quot;: null
+                    }
+                ],
+                &quot;image_src&quot;: &quot;https://www.webumenia.sk/dielo/nahlad/SVK:SNG.O_6208/600&quot;,
+                &quot;image_srcset&quot;: &quot;https://www.webumenia.sk/dielo/nahlad/SVK:SNG.O_6208/220 220w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.O_6208/300 300w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.O_6208/600 600w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.O_6208/800 800w&quot;,
+                &quot;images&quot;: [
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGZV%2FX6300%2FSNG--O_6208--1_1--_2014_07_31_--L2_WEB.jp2.dzi&quot;
+                    }
+                ],
+                &quot;image_aspect_ratio&quot;: 1.25,
+                &quot;webumenia_url&quot;: &quot;https://www.webumenia.sk/dielo/SVK:SNG.O_6208&quot;,
+                &quot;code&quot;: &quot;110011010&quot;,
+                &quot;offset_top&quot;: 0,
+                &quot;video_thumbnail&quot;: null,
+                &quot;video_embed&quot;: null,
+                &quot;video_aspect_ratio&quot;: null,
+                &quot;video_title&quot;: &quot;&quot;,
+                &quot;video_subtitle&quot;: &quot;&quot;,
+                &quot;story_id&quot;: null,
+                &quot;location_formatted&quot;: &quot;Expoz&iacute;cia Moderna, s&aacute;la VII, 2. podlažie, Vodn&eacute; kas&aacute;rne&quot;,
+                &quot;exhibition&quot;: {
+                    &quot;id&quot;: &quot;recTy3DYzxcyGZvNk&quot;,
+                    &quot;name&quot;: &quot;Expoz&iacute;cia Moderna&quot;
+                },
+                &quot;bucketlists&quot;: [
+                    {
+                        &quot;id&quot;: &quot;recUBMv1RNstZ2lLO&quot;,
+                        &quot;title&quot;: &quot;Organizmus&quot;,
+                        &quot;text&quot;: &quot;&lt;p&gt;&lt;strong&gt;Uk&aacute;ž tento text:&lt;/strong&gt;&lt;/p&gt;\n&lt;ul&gt;\n&lt;li&gt;\n&lt;strong&gt;v Kn&iacute;hkupectve Ex Libris a z&iacute;ska&scaron; 10% zľavu na svoj n&aacute;kup&lt;/strong&gt;\n&lt;/li&gt;\n&lt;li&gt;\n&lt;strong&gt;v Kaviarni SNG a z&iacute;ska&scaron; k&aacute;vu zdarma&lt;/strong&gt;\n&lt;/li&gt;\n&lt;/ul&gt;\n&lt;p&gt;Umenie in&scaron;pirovan&eacute; živ&yacute;mi bytosťami a pr&iacute;rodn&yacute;mi procesmi m&aacute; korene už v časoch starovek&yacute;ch civiliz&aacute;ci&iacute;. Od 20. storočia v&scaron;ak predstavuje aj ak&uacute;si protiv&aacute;hu k pr&iacute;snym geometrick&yacute;m form&aacute;m v modernom umen&iacute;, ktor&eacute; nadv&auml;zuj&uacute; na svet priemyselnej civiliz&aacute;cie.&lt;/p&gt;\n&lt;p&gt;Organick&eacute; alebo biomorfn&eacute; umenie často napodobňuje obl&eacute; krivky, &scaron;pir&aacute;ly a rytmick&eacute; vzory opakuj&uacute;ce sa v pr&iacute;rode, no neraz aj priamo využ&iacute;va &bdquo;živ&eacute;&ldquo; materi&aacute;ly &ndash; kamene, listy, plody, huby, semiačka, mu&scaron;le, kosti, zuby, blato či krv. Niekedy, naopak, pracuje s kontrastom a &bdquo;tepl&eacute;&ldquo;, jemn&eacute; objekty vytv&aacute;ra z chladn&eacute;ho kovu alebo z bet&oacute;nu.&lt;/p&gt;\n&lt;p&gt;Organick&eacute; umenie dok&aacute;že vyvolať pocity pokoja a harm&oacute;nie, ale i pouk&aacute;zať na večn&yacute; cyklus života a na potrebu chr&aacute;niť krehk&eacute; pr&iacute;rodn&eacute; bohatstvo. Mot&iacute;vy zrodu a rastu prenikaj&uacute; aj do samotnej tvorby diela, kde sa prejavuje n&aacute;hoda a tvoriv&yacute; chaos. Umenie vytvoren&eacute; zo živ&yacute;ch materi&aacute;lov napokon rozv&iacute;ja i t&eacute;mu vlastn&eacute;ho rozpadu a z&aacute;niku. Otv&aacute;ra tak ot&aacute;zky nest&aacute;losti, premeny a ne&uacute;prosn&eacute;ho plynutia času.&lt;/p&gt;\n&quot;,
+                        &quot;image&quot;: {
+                            &quot;src&quot;: &quot;https://atlas.sng.sk.test/storage/media/153/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA.jpeg&quot;,
+                            &quot;srcset&quot;: &quot;https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_1201_901.jpeg 1201w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_1004_753.jpeg 1004w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_840_630.jpeg 840w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_703_527.jpeg 703w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_588_441.jpeg 588w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_492_369.jpeg 492w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_411_308.jpeg 411w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_344_258.jpeg 344w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_288_216.jpeg 288w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_241_181.jpeg 241w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_201_151.jpeg 201w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_168_126.jpeg 168w, data:image/svg+xml;base64,PCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHg9IjAiCiB5PSIwIiB2aWV3Qm94PSIwIDAgMTIwMSA5MDEiPgoJPGltYWdlIHdpZHRoPSIxMjAxIiBoZWlnaHQ9IjkwMSIgeGxpbms6aHJlZj0iZGF0YTppbWFnZS9qcGVnO2Jhc2U2NCwvOWovNEFBUVNrWkpSZ0FCQVFFQVlBQmdBQUQvL2dBN1ExSkZRVlJQVWpvZ1oyUXRhbkJsWnlCMk1TNHdJQ2gxYzJsdVp5QkpTa2NnU2xCRlJ5QjJPREFwTENCeGRXRnNhWFI1SUQwZ09UQUsvOXNBUXdBREFnSURBZ0lEQXdNREJBTURCQVVJQlFVRUJBVUtCd2NHQ0F3S0RBd0xDZ3NMRFE0U0VBME9FUTRMQ3hBV0VCRVRGQlVWRlF3UEZ4Z1dGQmdTRkJVVS85c0FRd0VEQkFRRkJBVUpCUVVKRkEwTERSUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVLzhBQUVRZ0FHQUFnQXdFUkFBSVJBUU1SQWYvRUFCOEFBQUVGQVFFQkFRRUJBQUFBQUFBQUFBQUJBZ01FQlFZSENBa0tDLy9FQUxVUUFBSUJBd01DQkFNRkJRUUVBQUFCZlFFQ0F3QUVFUVVTSVRGQkJoTlJZUWNpY1JReWdaR2hDQ05Dc2NFVlV0SHdKRE5pY29JSkNoWVhHQmthSlNZbktDa3FORFUyTnpnNU9rTkVSVVpIU0VsS1UxUlZWbGRZV1ZwalpHVm1aMmhwYW5OMGRYWjNlSGw2ZzRTRmhvZUlpWXFTazVTVmxwZVltWnFpbzZTbHBxZW9xYXF5czdTMXRyZTR1YnJDdzhURnhzZkl5Y3JTMDlUVjF0ZlkyZHJoNHVQazVlYm42T25xOGZMejlQWDI5L2o1K3YvRUFCOEJBQU1CQVFFQkFRRUJBUUVBQUFBQUFBQUJBZ01FQlFZSENBa0tDLy9FQUxVUkFBSUJBZ1FFQXdRSEJRUUVBQUVDZHdBQkFnTVJCQVVoTVFZU1FWRUhZWEVUSWpLQkNCUkNrYUd4d1Frak0xTHdGV0p5MFFvV0pEVGhKZkVYR0JrYUppY29LU28xTmpjNE9UcERSRVZHUjBoSlNsTlVWVlpYV0ZsYVkyUmxabWRvYVdwemRIVjJkM2g1ZW9LRGhJV0doNGlKaXBLVGxKV1dsNWlabXFLanBLV21wNmlwcXJLenRMVzJ0N2k1dXNMRHhNWEd4OGpKeXRMVDFOWFcxOWpaMnVMajVPWG01K2pwNnZMejlQWDI5L2o1K3YvYUFBd0RBUUFDRVFNUkFEOEE2bnhoKzJmNGUwZ2tXZUpPT09hOVNPQ2wxRWVhMy83ZU1MVGtSeC9MV3l3YVFYQmYyOFlObTB4Wk5Ed2FHZFY0VS9iVjBIVm5FZDZnanozckdXQ2t0Z1B6NHVacHJsdm1kbXIzV3lTcDlrYmQwTkNpMlRjVVdiWnpnMWZMWVpORVdnUHlrZysxSVpZUXFyQUdrbzJlb2pvdkR1bXdhbmNyRzVDZzl6WGJGYUdNbVMrSk5LdDlKdURHamJoNjFvNEpxNFJiT2Fjb0g0cmtrck94dWovLzJRPT0iPgoJPC9pbWFnZT4KPC9zdmc+ 32w&quot;,
+                            &quot;width&quot;: 1201,
+                            &quot;height&quot;: 901
+                        }
+                    }
+                ]
+            },
+            {
+                &quot;id&quot;: &quot;SVK:SNG.O_7025&quot;,
+                &quot;title&quot;: &quot;The Very Exciting Mysterious Aquarium&quot;,
+                &quot;author&quot;: &quot;Andrej D&uacute;bravsk&yacute;&quot;,
+                &quot;author_description&quot;: &quot;&quot;,
+                &quot;dating&quot;: &quot;21. storočie, 1. polovica, 2013&quot;,
+                &quot;locked_bucketlist_description&quot;: &quot;&lt;p&gt;Obrovsk&eacute; akrylov&eacute; &bdquo;akv&aacute;rium&ldquo; n&aacute;jde&scaron; na &lt;strong&gt;najvy&scaron;&scaron;om mieste gal&eacute;rie&lt;/strong&gt;, v s&aacute;le XI. s n&aacute;zvom &lt;strong&gt;Človek v krajine&lt;/strong&gt;.&lt;/p&gt;\n&lt;p&gt;S&aacute;la XI. sa nach&aacute;dza v &lt;strong&gt;&lt;em&gt;Premosten&iacute;&lt;/em&gt;&lt;/strong&gt;, do ktor&eacute;ho sa dostane&scaron; z obidvoch bočn&yacute;ch kr&iacute;del gal&eacute;rie. Ak p&ocirc;jde&scaron; v&yacute;ťahom, vyber si najvy&scaron;&scaron;ie 4. poschodie.&lt;/p&gt;\n&quot;,
+                &quot;dating_short&quot;: &quot;2013&quot;,
+                &quot;description&quot;: &quot;&lt;p&gt;Veľk&eacute; pl&aacute;tno vzniklo ako s&uacute;časť autorovej diplomovej pr&aacute;ce, ktor&uacute; verejnosti predstavil v zatopenom depe nedostavan&eacute;ho metra na kraji Petržalky. Publikum si obulo gum&aacute;ky a brodilo sa pomedzi reflektormi nasvieten&eacute; maľby kraj&iacute;n a nah&yacute;ch mužsk&yacute;ch post&aacute;v.&nbsp;&lt;/p&gt;\n&lt;p&gt;Obraz je in&scaron;pirovan&yacute; internetov&yacute;mi obr&aacute;zkami prec&iacute;zne &scaron;tylizovan&yacute;ch akv&aacute;ri&iacute; zn&aacute;zorňuj&uacute;cich krajiny v miniat&uacute;re. V tejto veľkej mierke a strohej farebnosti v&scaron;ak pripom&iacute;na aj ak&uacute;si dramatick&uacute; v&iacute;ziu biotopu na konci času, kde sa v&scaron;etko živ&eacute; a neživ&eacute; zlieva v jednu veľk&uacute; anonymn&uacute; vlnu hmoty, prelievaj&uacute;cu sa pustatinou.&lt;/p&gt;\n&quot;,
+                &quot;authorities&quot;: [
+                    {
+                        &quot;id&quot;: &quot;1010802&quot;,
+                        &quot;name&quot;: &quot;Andrej D&uacute;bravsk&yacute;&quot;,
+                        &quot;has_image&quot;: true,
+                        &quot;biography&quot;: &quot;Jeho maľby exploduj&uacute; farbami a tvarmi, naliehavo vibruj&uacute;, pohlcuj&uacute; pohľad a okupuj&uacute; okolit&yacute; priestor. Svoje diela často stavia na autobiografickom až denn&iacute;kovom z&aacute;klade, z ktor&eacute;ho systematicky buduje vlastn&uacute; osobn&uacute; ikonografiu.\n\nTienist&eacute; z&aacute;toky a lužn&eacute; lesy, pl&aacute;že s dymiacimi kom&iacute;nmi na pozad&iacute; či divoko rast&uacute;ce mestsk&eacute; z&aacute;hrady akoby predv&iacute;dali dlh&uacute; &scaron;ed&uacute; jeseň života na plan&eacute;te Zem. Vstupuj&uacute; do nich nah&eacute; postavy, mileneck&eacute; p&aacute;ry a skupiny, tak nejak mimochodom prež&iacute;vaj&uacute;ce v tomto spoločensky rozpoltenom a priemyselne zdevastovanom svete.&quot;,
+                        &quot;birth_place&quot;: &quot;Nov&eacute; Z&aacute;mky&quot;,
+                        &quot;death_place&quot;: null,
+                        &quot;birth_date&quot;: &quot;1987&quot;,
+                        &quot;death_date&quot;: &quot;&quot;,
+                        &quot;image_url&quot;: &quot;https://www.webumenia.sk/images/autori/802/8/1010802/1010802.jpeg&quot;,
+                        &quot;related_items&quot;: null
+                    }
+                ],
+                &quot;image_src&quot;: &quot;https://www.webumenia.sk/dielo/nahlad/SVK:SNG.O_7025/600&quot;,
+                &quot;image_srcset&quot;: &quot;https://www.webumenia.sk/dielo/nahlad/SVK:SNG.O_7025/220 220w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.O_7025/300 300w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.O_7025/600 600w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.O_7025/800 800w&quot;,
+                &quot;images&quot;: [
+                    {
+                        &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTO%2FX7100%2FSNG--O_7025--1_1--2023_02_21--L2_WEB.jp2.dzi&quot;
+                    }
+                ],
+                &quot;image_aspect_ratio&quot;: 1.5009380863039,
+                &quot;webumenia_url&quot;: &quot;https://www.webumenia.sk/dielo/SVK:SNG.O_7025&quot;,
+                &quot;code&quot;: &quot;101100000&quot;,
+                &quot;offset_top&quot;: 0,
+                &quot;video_thumbnail&quot;: {
+                    &quot;src&quot;: &quot;https://i.vimeocdn.com/video/1563379435-50f1e61d1eb02e9cb9ad8b80cab9105a9b9db073cfacb89514021118bc8112e5-d_1920x1080&quot;,
+                    &quot;srcset&quot;: &quot;https://i.vimeocdn.com/video/1563379435-50f1e61d1eb02e9cb9ad8b80cab9105a9b9db073cfacb89514021118bc8112e5-d_100x75 100w, https://i.vimeocdn.com/video/1563379435-50f1e61d1eb02e9cb9ad8b80cab9105a9b9db073cfacb89514021118bc8112e5-d_200x150 200w, https://i.vimeocdn.com/video/1563379435-50f1e61d1eb02e9cb9ad8b80cab9105a9b9db073cfacb89514021118bc8112e5-d_295x166 295w, https://i.vimeocdn.com/video/1563379435-50f1e61d1eb02e9cb9ad8b80cab9105a9b9db073cfacb89514021118bc8112e5-d_640x360 640w, https://i.vimeocdn.com/video/1563379435-50f1e61d1eb02e9cb9ad8b80cab9105a9b9db073cfacb89514021118bc8112e5-d_960x540 960w, https://i.vimeocdn.com/video/1563379435-50f1e61d1eb02e9cb9ad8b80cab9105a9b9db073cfacb89514021118bc8112e5-d_1280x720 1280w, https://i.vimeocdn.com/video/1563379435-50f1e61d1eb02e9cb9ad8b80cab9105a9b9db073cfacb89514021118bc8112e5-d_1920x1080 1920w&quot;,
+                    &quot;width&quot;: 1920,
+                    &quot;height&quot;: 1080
+                },
+                &quot;video_embed&quot;: &quot;https://player.vimeo.com/video/778995778?h=8070e987a1&quot;,
+                &quot;video_aspect_ratio&quot;: {
+                    &quot;width&quot;: 9,
+                    &quot;height&quot;: 16
+                },
+                &quot;video_title&quot;: &quot;Autorsk&yacute; vhľad&quot;,
+                &quot;video_subtitle&quot;: &quot;O farebnosti a n&aacute;lade obrazu&quot;,
+                &quot;story_id&quot;: &quot;recYHtdTKmuuWX0cN&quot;,
+                &quot;location_formatted&quot;: &quot;Človek v krajine, s&aacute;la XI, 3. podlažie, Premostenie&quot;,
+                &quot;exhibition&quot;: {
+                    &quot;id&quot;: &quot;recKd1Y0FnQmmFbwW&quot;,
+                    &quot;name&quot;: &quot;V&yacute;stava Prol&oacute;g: 12 farieb reality&quot;
+                },
+                &quot;bucketlists&quot;: [
+                    {
+                        &quot;id&quot;: &quot;recUBMv1RNstZ2lLO&quot;,
+                        &quot;title&quot;: &quot;Organizmus&quot;,
+                        &quot;text&quot;: &quot;&lt;p&gt;&lt;strong&gt;Uk&aacute;ž tento text:&lt;/strong&gt;&lt;/p&gt;\n&lt;ul&gt;\n&lt;li&gt;\n&lt;strong&gt;v Kn&iacute;hkupectve Ex Libris a z&iacute;ska&scaron; 10% zľavu na svoj n&aacute;kup&lt;/strong&gt;\n&lt;/li&gt;\n&lt;li&gt;\n&lt;strong&gt;v Kaviarni SNG a z&iacute;ska&scaron; k&aacute;vu zdarma&lt;/strong&gt;\n&lt;/li&gt;\n&lt;/ul&gt;\n&lt;p&gt;Umenie in&scaron;pirovan&eacute; živ&yacute;mi bytosťami a pr&iacute;rodn&yacute;mi procesmi m&aacute; korene už v časoch starovek&yacute;ch civiliz&aacute;ci&iacute;. Od 20. storočia v&scaron;ak predstavuje aj ak&uacute;si protiv&aacute;hu k pr&iacute;snym geometrick&yacute;m form&aacute;m v modernom umen&iacute;, ktor&eacute; nadv&auml;zuj&uacute; na svet priemyselnej civiliz&aacute;cie.&lt;/p&gt;\n&lt;p&gt;Organick&eacute; alebo biomorfn&eacute; umenie často napodobňuje obl&eacute; krivky, &scaron;pir&aacute;ly a rytmick&eacute; vzory opakuj&uacute;ce sa v pr&iacute;rode, no neraz aj priamo využ&iacute;va &bdquo;živ&eacute;&ldquo; materi&aacute;ly &ndash; kamene, listy, plody, huby, semiačka, mu&scaron;le, kosti, zuby, blato či krv. Niekedy, naopak, pracuje s kontrastom a &bdquo;tepl&eacute;&ldquo;, jemn&eacute; objekty vytv&aacute;ra z chladn&eacute;ho kovu alebo z bet&oacute;nu.&lt;/p&gt;\n&lt;p&gt;Organick&eacute; umenie dok&aacute;že vyvolať pocity pokoja a harm&oacute;nie, ale i pouk&aacute;zať na večn&yacute; cyklus života a na potrebu chr&aacute;niť krehk&eacute; pr&iacute;rodn&eacute; bohatstvo. Mot&iacute;vy zrodu a rastu prenikaj&uacute; aj do samotnej tvorby diela, kde sa prejavuje n&aacute;hoda a tvoriv&yacute; chaos. Umenie vytvoren&eacute; zo živ&yacute;ch materi&aacute;lov napokon rozv&iacute;ja i t&eacute;mu vlastn&eacute;ho rozpadu a z&aacute;niku. Otv&aacute;ra tak ot&aacute;zky nest&aacute;losti, premeny a ne&uacute;prosn&eacute;ho plynutia času.&lt;/p&gt;\n&quot;,
+                        &quot;image&quot;: {
+                            &quot;src&quot;: &quot;https://atlas.sng.sk.test/storage/media/153/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA.jpeg&quot;,
+                            &quot;srcset&quot;: &quot;https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_1201_901.jpeg 1201w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_1004_753.jpeg 1004w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_840_630.jpeg 840w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_703_527.jpeg 703w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_588_441.jpeg 588w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_492_369.jpeg 492w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_411_308.jpeg 411w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_344_258.jpeg 344w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_288_216.jpeg 288w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_241_181.jpeg 241w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_201_151.jpeg 201w, https://atlas.sng.sk.test/storage/media/153/responsive-images/sWv-oBMK9ij7QrVH83g56eeR7AbKNM3RC9uwzw6_ZjA___media_library_original_168_126.jpeg 168w, data:image/svg+xml;base64,PCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHg9IjAiCiB5PSIwIiB2aWV3Qm94PSIwIDAgMTIwMSA5MDEiPgoJPGltYWdlIHdpZHRoPSIxMjAxIiBoZWlnaHQ9IjkwMSIgeGxpbms6aHJlZj0iZGF0YTppbWFnZS9qcGVnO2Jhc2U2NCwvOWovNEFBUVNrWkpSZ0FCQVFFQVlBQmdBQUQvL2dBN1ExSkZRVlJQVWpvZ1oyUXRhbkJsWnlCMk1TNHdJQ2gxYzJsdVp5QkpTa2NnU2xCRlJ5QjJPREFwTENCeGRXRnNhWFI1SUQwZ09UQUsvOXNBUXdBREFnSURBZ0lEQXdNREJBTURCQVVJQlFVRUJBVUtCd2NHQ0F3S0RBd0xDZ3NMRFE0U0VBME9FUTRMQ3hBV0VCRVRGQlVWRlF3UEZ4Z1dGQmdTRkJVVS85c0FRd0VEQkFRRkJBVUpCUVVKRkEwTERSUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVLzhBQUVRZ0FHQUFnQXdFUkFBSVJBUU1SQWYvRUFCOEFBQUVGQVFFQkFRRUJBQUFBQUFBQUFBQUJBZ01FQlFZSENBa0tDLy9FQUxVUUFBSUJBd01DQkFNRkJRUUVBQUFCZlFFQ0F3QUVFUVVTSVRGQkJoTlJZUWNpY1JReWdaR2hDQ05Dc2NFVlV0SHdKRE5pY29JSkNoWVhHQmthSlNZbktDa3FORFUyTnpnNU9rTkVSVVpIU0VsS1UxUlZWbGRZV1ZwalpHVm1aMmhwYW5OMGRYWjNlSGw2ZzRTRmhvZUlpWXFTazVTVmxwZVltWnFpbzZTbHBxZW9xYXF5czdTMXRyZTR1YnJDdzhURnhzZkl5Y3JTMDlUVjF0ZlkyZHJoNHVQazVlYm42T25xOGZMejlQWDI5L2o1K3YvRUFCOEJBQU1CQVFFQkFRRUJBUUVBQUFBQUFBQUJBZ01FQlFZSENBa0tDLy9FQUxVUkFBSUJBZ1FFQXdRSEJRUUVBQUVDZHdBQkFnTVJCQVVoTVFZU1FWRUhZWEVUSWpLQkNCUkNrYUd4d1Frak0xTHdGV0p5MFFvV0pEVGhKZkVYR0JrYUppY29LU28xTmpjNE9UcERSRVZHUjBoSlNsTlVWVlpYV0ZsYVkyUmxabWRvYVdwemRIVjJkM2g1ZW9LRGhJV0doNGlKaXBLVGxKV1dsNWlabXFLanBLV21wNmlwcXJLenRMVzJ0N2k1dXNMRHhNWEd4OGpKeXRMVDFOWFcxOWpaMnVMajVPWG01K2pwNnZMejlQWDI5L2o1K3YvYUFBd0RBUUFDRVFNUkFEOEE2bnhoKzJmNGUwZ2tXZUpPT09hOVNPQ2wxRWVhMy83ZU1MVGtSeC9MV3l3YVFYQmYyOFlObTB4Wk5Ed2FHZFY0VS9iVjBIVm5FZDZnanozckdXQ2t0Z1B6NHVacHJsdm1kbXIzV3lTcDlrYmQwTkNpMlRjVVdiWnpnMWZMWVpORVdnUHlrZysxSVpZUXFyQUdrbzJlb2pvdkR1bXdhbmNyRzVDZzl6WGJGYUdNbVMrSk5LdDlKdURHamJoNjFvNEpxNFJiT2Fjb0g0cmtrck94dWovLzJRPT0iPgoJPC9pbWFnZT4KPC9zdmc+ 32w&quot;,
+                            &quot;width&quot;: 1201,
+                            &quot;height&quot;: 901
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-bucketlists--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-bucketlists--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-bucketlists--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-bucketlists--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-bucketlists--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-bucketlists--id-" data-method="GET"
+      data-path="api/bucketlists/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-bucketlists--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-bucketlists--id-"
+                    onclick="tryItOut('GETapi-bucketlists--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-bucketlists--id-"
+                    onclick="cancelTryOut('GETapi-bucketlists--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-bucketlists--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/bucketlists/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-bucketlists--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-bucketlists--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="GETapi-bucketlists--id-"
+               value="recUBMv1RNstZ2lLO"
+               data-component="url">
+    <br>
+<p>Example: <code>recUBMv1RNstZ2lLO</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-related_items--ids-">GET api/related_items/{ids}</h2>
+
+<p>
+</p>
+
+<p>Gets the data for the related items. Returns the list of items and their data.</p>
+
+<span id="example-requests-GETapi-related_items--ids-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://atlas.sng.sk/api/related_items/SVK:SNG.O_6833,SVK:SNG.O_2807" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://atlas.sng.sk/api/related_items/SVK:SNG.O_6833,SVK:SNG.O_2807"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-related_items--ids-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 51
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: &quot;SVK:SNG.O_6833&quot;,
+            &quot;title&quot;: &quot;Sv. Peter z Alcantary&quot;,
+            &quot;author&quot;: &quot;Anton Schmidt, &quot;,
+            &quot;author_description&quot;: null,
+            &quot;dating&quot;: &quot;18. storočie, 2. polovica, 1763 pred&quot;,
+            &quot;locked_bucketlist_description&quot;: &quot;&quot;,
+            &quot;dating_short&quot;: &quot;1763 pred&quot;,
+            &quot;description&quot;: &quot;&lt;p&gt;Olt&amp;aacute;rny obraz Sv. Petra z Alkantary bol ned&amp;aacute;vno z&amp;iacute;skan&amp;yacute; do zbierok SNG ako s&amp;uacute;časť dvojice n&amp;aacute;kupov značne po&amp;scaron;koden&amp;yacute;ch diel 18. storočia z Kremnice. Autorom maľby je jedna z kľ&amp;uacute;čov&amp;yacute;ch barokov&amp;yacute;ch post&amp;aacute;v stredoslovensk&amp;yacute;ch bansk&amp;yacute;ch miest &amp;ndash; viedensk&amp;yacute; rod&amp;aacute;k Anton Schmidt, ktor&amp;eacute;ho tvorba je dnes na na&amp;scaron;om &amp;uacute;zem&amp;iacute; už relat&amp;iacute;vne zn&amp;aacute;ma. Tento v&amp;scaron;estrann&amp;yacute; umelec &amp;scaron;tuduj&amp;uacute;ci počiatkom 30. rokov 18. storočia na viedenskej Akad&amp;eacute;mii v&amp;yacute;tvarn&amp;yacute;ch umen&amp;iacute;, sa nesk&amp;ocirc;r usadil v Banskej &amp;Scaron;tiavnici, kde sa jeho charakteristick&amp;yacute; &amp;scaron;t&amp;yacute;l, v mnohom z&amp;aacute;visl&amp;yacute; od grafick&amp;yacute;ch predl&amp;ocirc;h, už ďalej nevyv&amp;iacute;jal.&lt;/p&gt;\r\n\r\n&lt;p&gt;Neznačen&amp;eacute; olt&amp;aacute;rne pl&amp;aacute;tno je uk&amp;aacute;žkov&amp;yacute;m pr&amp;iacute;kladom tradičnej Schmidtovej maliarskej produkcie. Bolo p&amp;ocirc;vodne identifikovan&amp;eacute; ako &amp;uacute;stredn&amp;aacute; maľba jedn&amp;eacute;ho z dvoch men&amp;scaron;&amp;iacute;ch bočn&amp;yacute;ch olt&amp;aacute;rov b&amp;yacute;val&amp;eacute;ho farsk&amp;eacute;ho kostola v Kremnici zobrazuj&amp;uacute;ca sv. Antona Padu&amp;aacute;nskeho. Arch&amp;iacute;vnymi prameňmi zmieňovan&amp;uacute; maľbu s t&amp;yacute;mto n&amp;aacute;metom dodal Schmidt spolu s ostatn&amp;yacute;mi &amp;scaron;tyrmi olt&amp;aacute;rnymi pl&amp;aacute;tnami pre kremnick&amp;yacute; farsk&amp;yacute; kostol do roku 1763. V s&amp;uacute;vislosti s jeho zb&amp;uacute;ran&amp;iacute;m zo statick&amp;yacute;ch d&amp;ocirc;vodov v 19. storoč&amp;iacute; boli tieto spolu s ďal&amp;scaron;&amp;iacute;mi s&amp;uacute;časťami zariadenia prenesen&amp;eacute; ku kremnick&amp;yacute;m franti&amp;scaron;k&amp;aacute;nom.&lt;/p&gt;\r\n\r\n&lt;p&gt;SNG sa okrem star&amp;scaron;&amp;iacute;ch akviz&amp;iacute;cii trojice zl&amp;aacute;ten&amp;yacute;ch Stanetiho s&amp;ocirc;ch (por. kat. 38) z p&amp;ocirc;vodnej v&amp;yacute;bavy tohto interi&amp;eacute;ru podarilo do svojich fondov z&amp;iacute;skať aj dva rozmern&amp;eacute; olt&amp;aacute;rne obrazy Ukrižovania Krista a Smrti sv. Jozefa. Aktu&amp;aacute;lne umeleckohistorick&amp;eacute; zistenia v&amp;scaron;ak predsa len hovoria v prospech už predt&amp;yacute;m diskutovanej identifik&amp;aacute;cie sv&amp;auml;tca ako bos&amp;eacute;ho franti&amp;scaron;k&amp;aacute;na sv. Petra z Alkantary. Poukazuj&amp;uacute; na to nielen grafick&amp;eacute; predlohy sv&amp;auml;tca s identick&amp;yacute;mi atrib&amp;uacute;tmi knihy a palice s mrežovanou stuhou, ale najm&amp;auml; historick&amp;aacute; Divaldova fotografia, ktor&amp;aacute; maľbu doklad&amp;aacute; ako obraz bočn&amp;eacute;ho olt&amp;aacute;ra Loret&amp;aacute;nskej kaplnky kremnick&amp;yacute;ch franti&amp;scaron;k&amp;aacute;nov (upozornenie Jozefa Medveck&amp;eacute;ho 2007). Pokiaľ ide o datovanie, možno predpokladať, že maľba vznikla v Schmidtovej dielni e&amp;scaron;te pred realiz&amp;aacute;ciou rozsiahlej maliarskej v&amp;yacute;bavy b&amp;yacute;val&amp;eacute;ho farsk&amp;eacute;ho kostola v Kremnici.&lt;br /&gt;\r\n&amp;nbsp;&lt;/p&gt;&quot;,
+            &quot;authorities&quot;: [
+                {
+                    &quot;id&quot;: &quot;9152&quot;,
+                    &quot;name&quot;: &quot;Anton Schmidt&quot;,
+                    &quot;has_image&quot;: false,
+                    &quot;biography&quot;: &quot;Viedensk&yacute; rod&aacute;k Anton Schmidt bol &uacute;strednou postavou barokov&eacute;ho umenia v stredoslovensk&yacute;ch bansk&yacute;ch mest&aacute;ch. Bansk&uacute; &Scaron;tiavnicu, ktor&aacute; patrila medzi najbohat&scaron;ie mest&aacute; v Uhorsku, si zvolil za svoj nov&yacute; domov pravdepodobne pre niž&scaron;iu konkurenciu, ako bola na cis&aacute;rskom dvore.&quot;,
+                    &quot;birth_place&quot;: &quot;Viedeň&quot;,
+                    &quot;death_place&quot;: &quot;Bansk&aacute; &Scaron;tiavnica&quot;,
+                    &quot;birth_date&quot;: &quot;1713&quot;,
+                    &quot;death_date&quot;: &quot;1773&quot;,
+                    &quot;image_url&quot;: &quot;https://www.webumenia.sk/images/no-image/autori/no-image-male-dead.svg&quot;,
+                    &quot;related_items&quot;: [
+                        &quot;SVK:SNG.O_6833&quot;,
+                        &quot;SVK:SNG.O_2807&quot;
+                    ]
+                }
+            ],
+            &quot;image_src&quot;: &quot;https://www.webumenia.sk/dielo/nahlad/SVK:SNG.O_6833/600&quot;,
+            &quot;image_srcset&quot;: &quot;https://www.webumenia.sk/dielo/nahlad/SVK:SNG.O_6833/220 220w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.O_6833/300 300w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.O_6833/600 600w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.O_6833/800 800w&quot;,
+            &quot;images&quot;: [
+                {
+                    &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGFOTOFRESHFILM%2FX6900%2FSNG--O_6833--1_1--2015_07_31--L2_WEB.jp2.dzi&quot;
+                }
+            ],
+            &quot;image_aspect_ratio&quot;: 0.74875,
+            &quot;webumenia_url&quot;: &quot;https://www.webumenia.sk/dielo/SVK:SNG.O_6833&quot;,
+            &quot;code&quot;: null,
+            &quot;offset_top&quot;: 0,
+            &quot;video_thumbnail&quot;: null,
+            &quot;video_embed&quot;: null,
+            &quot;video_aspect_ratio&quot;: null,
+            &quot;video_title&quot;: null,
+            &quot;video_subtitle&quot;: null,
+            &quot;story_id&quot;: null,
+            &quot;location_formatted&quot;: null,
+            &quot;exhibition&quot;: null,
+            &quot;bucketlists&quot;: []
+        },
+        {
+            &quot;id&quot;: &quot;SVK:SNG.O_2807&quot;,
+            &quot;title&quot;: &quot;Sv&auml;t&aacute; Helena&quot;,
+            &quot;author&quot;: &quot;Anton Schmidt, &quot;,
+            &quot;author_description&quot;: null,
+            &quot;dating&quot;: &quot;1740&ndash;1760&quot;,
+            &quot;locked_bucketlist_description&quot;: &quot;&quot;,
+            &quot;dating_short&quot;: &quot;1740&ndash;1760&quot;,
+            &quot;description&quot;: null,
+            &quot;authorities&quot;: [
+                {
+                    &quot;id&quot;: &quot;9152&quot;,
+                    &quot;name&quot;: &quot;Anton Schmidt&quot;,
+                    &quot;has_image&quot;: false,
+                    &quot;biography&quot;: &quot;Viedensk&yacute; rod&aacute;k Anton Schmidt bol &uacute;strednou postavou barokov&eacute;ho umenia v stredoslovensk&yacute;ch bansk&yacute;ch mest&aacute;ch. Bansk&uacute; &Scaron;tiavnicu, ktor&aacute; patrila medzi najbohat&scaron;ie mest&aacute; v Uhorsku, si zvolil za svoj nov&yacute; domov pravdepodobne pre niž&scaron;iu konkurenciu, ako bola na cis&aacute;rskom dvore.&quot;,
+                    &quot;birth_place&quot;: &quot;Viedeň&quot;,
+                    &quot;death_place&quot;: &quot;Bansk&aacute; &Scaron;tiavnica&quot;,
+                    &quot;birth_date&quot;: &quot;1713&quot;,
+                    &quot;death_date&quot;: &quot;1773&quot;,
+                    &quot;image_url&quot;: &quot;https://www.webumenia.sk/images/no-image/autori/no-image-male-dead.svg&quot;,
+                    &quot;related_items&quot;: [
+                        &quot;SVK:SNG.O_6833&quot;,
+                        &quot;SVK:SNG.O_2807&quot;
+                    ]
+                }
+            ],
+            &quot;image_src&quot;: &quot;https://www.webumenia.sk/dielo/nahlad/SVK:SNG.O_2807/600&quot;,
+            &quot;image_srcset&quot;: &quot;https://www.webumenia.sk/dielo/nahlad/SVK:SNG.O_2807/220 220w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.O_2807/300 300w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.O_2807/600 600w, https://www.webumenia.sk/dielo/nahlad/SVK:SNG.O_2807/800 800w&quot;,
+            &quot;images&quot;: [
+                {
+                    &quot;deep_zoom_url&quot;: &quot;https://img.webumenia.sk/zoom/?path=%2FSNGZV%2FX2900%2FSNG--O_2807--1_1--_2015_08_20_--L2_WEB.jp2.dzi&quot;
+                }
+            ],
+            &quot;image_aspect_ratio&quot;: 0.7725,
+            &quot;webumenia_url&quot;: &quot;https://www.webumenia.sk/dielo/SVK:SNG.O_2807&quot;,
+            &quot;code&quot;: null,
+            &quot;offset_top&quot;: 0,
+            &quot;video_thumbnail&quot;: null,
+            &quot;video_embed&quot;: null,
+            &quot;video_aspect_ratio&quot;: null,
+            &quot;video_title&quot;: null,
+            &quot;video_subtitle&quot;: null,
+            &quot;story_id&quot;: null,
+            &quot;location_formatted&quot;: null,
+            &quot;exhibition&quot;: null,
+            &quot;bucketlists&quot;: []
+        }
+    ]
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-related_items--ids-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-related_items--ids-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-related_items--ids-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-related_items--ids-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-related_items--ids-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-related_items--ids-" data-method="GET"
+      data-path="api/related_items/{ids}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-related_items--ids-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-related_items--ids-"
+                    onclick="tryItOut('GETapi-related_items--ids-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-related_items--ids-"
+                    onclick="cancelTryOut('GETapi-related_items--ids-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-related_items--ids-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/related_items/{ids}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-related_items--ids-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-related_items--ids-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>ids</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="ids"                data-endpoint="GETapi-related_items--ids-"
+               value="SVK:SNG.O_6833,SVK:SNG.O_2807"
+               data-component="url">
+    <br>
+<p>comma separated string required Example: <code>SVK:SNG.O_6833,SVK:SNG.O_2807</code></p>
+            </div>
+                    </form>
+
+            
+
+        
+    </div>
+    <div class="dark-box">
+                    <div class="lang-selector">
+                                                        <button type="button" class="lang-button" data-language-name="bash">bash</button>
+                                                        <button type="button" class="lang-button" data-language-name="javascript">javascript</button>
+                            </div>
+            </div>
+</div>
+</body>
+</html>
