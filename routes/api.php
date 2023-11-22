@@ -116,7 +116,7 @@ Route::post('/collections', function (Request $request) {
         'success' => true,
         'url' => url('/', $collection->hashid()),
     ]);
-});
+})->middleware('doNotCacheResponse');
 
 /**
  * GET api/collections/{hashid}
@@ -128,7 +128,7 @@ Route::post('/collections', function (Request $request) {
 Route::get('/collections/{hashid}', function ($hashid) {
     $collection = Collection::findByHashidOrFail($hashid);
     return $collection->items;
-});
+})->middleware('doNotCacheResponse');
 
 /**
  * GET api/stories/{id}
