@@ -34,7 +34,7 @@ class ImportSectionsJob implements ShouldQueue
             $section->save();
 
             $airtableIds = $record['items'];
-            $itemsLookup = Item::whereIn('airtable_id', $airtableIds)->pluck('id', 'airtable_id');
+            $itemsLookup = $airtableIds ? Item::whereIn('airtable_id', $airtableIds)->pluck('id', 'airtable_id') : collect();
             $section->items()->sync(
                 collect($airtableIds)
                 ->filter(fn($airtableId) => $itemsLookup->has($airtableId))                
