@@ -51,11 +51,12 @@ class ImportJob implements ShouldQueue
             $end = $start->diffInMilliseconds(now()) / 1000;
             $message = sprintf('Import of %s took %.1f seconds', $this->type, $end);
             Log::channel('import')->info($message);
-            // clear API response cache after import
-            ResponseCache::clear();
         } catch (\Exception $e) {
             Log::channel('import')->error($e);
             throw $e;
+        } finally {
+            // clear API response cache after import
+            ResponseCache::clear();
         }
     }
 
