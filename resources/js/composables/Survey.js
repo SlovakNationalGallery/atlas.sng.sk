@@ -8,12 +8,12 @@ import { useInteractionStore } from '../stores/InteractionStore'
 
 export function useSurvey() {
     const interactionStore = useInteractionStore()
-    const { viewedItemsCount, stories } = storeToRefs(interactionStore)
+    const { viewedItemsCount } = storeToRefs(interactionStore)
     const isDone = ref(useStorage('isSurveyDone', false))
     const wasExited = ref(useStorage('wasSurveyExited', false))
     const SURVEY_ID = getActiveLanguage() === 'sk' ? import.meta.env.VITE_SURVEY_SK : import.meta.env.VITE_SURVEY_EN
 
-    const shouldLaunch = computed(() => (viewedItemsCount.value > 1 || stories.value.length > 4) && !wasExited.value)
+    const shouldLaunch = computed(() => viewedItemsCount.value > 1 && !wasExited.value)
     function done() {
         isDone.value = true
     }
