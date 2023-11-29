@@ -37,9 +37,9 @@ Route::middleware(['cacheResponse'])->group(function () {
     /**
      * GET /api/verify/{code}
      *
-     * Checks if the typed code is valid. If it is valid, the response will contain the code's data (related object type + ID)
+     * Return the code's data (related object type + ID)
      *
-     * Otherwise, the request will fail with a 404.
+     * If code is not found, fail with a 404.
      *
      * @urlParam code integer required Example: 17
      * 
@@ -52,7 +52,7 @@ Route::middleware(['cacheResponse'])->group(function () {
     /**
      * GET api/items/{id}
      *
-     * Gets the item with the given ID. If it is found, the response will contain the item's data.
+     * Get the item with the given ID.
      *
      * @urlParam id string required Example: SVK:SNG.O_1405
      */
@@ -74,7 +74,7 @@ Route::middleware(['cacheResponse'])->group(function () {
     /**
      * GET api/sections/{id}s
      *
-     * Gets the section for the given ID. If it is, the response will contain the section's data.
+     * Get the section for the given ID. Returns the section and the list of items.
      *
      * @urlParam id string required Example: rec8or1MegfsJY2CO
      */
@@ -99,7 +99,7 @@ Route::middleware(['cacheResponse'])->group(function () {
     /**
      * GET api/stories/{id}
      *
-     * Gets the story with the given ID. If it is, the response will contain the story's data.
+     * Get the story with the given ID. 
      *
      * @urlParam id string required Example: rec2Cq3jSUmcpveKf
      */
@@ -111,7 +111,7 @@ Route::middleware(['cacheResponse'])->group(function () {
     /**
      * GET api/places/{id}
      *
-     * Gets the place with the given ID. If it is, the response will contain the place's data.
+     * Get the place with the given ID.
      *
      * @urlParam id string required Example: SVK:SNG.O_1405
      */
@@ -123,7 +123,7 @@ Route::middleware(['cacheResponse'])->group(function () {
     /**
      * GET api/bucketlists/{id}
      *
-     * Gets the items for the bucketlist/scavenger hunt. Returns the list of items and their data.
+     * Get the items for the bucketlist/scavenger hunt. Returns the bucketlist and list of items.
      *
      * @urlParam id string required Example: recUBMv1RNstZ2lLO
      */
@@ -148,7 +148,7 @@ Route::middleware(['cacheResponse'])->group(function () {
     /**
      * GET api/related_items/{ids}
      *
-     * Gets the data for the related items. Returns the list of items and their data.
+     * Get the data for the related items
      *
      * @urlParam ids comma separated string required Example: SVK:SNG.O_6833,SVK:SNG.O_2807
      */
@@ -170,7 +170,7 @@ Route::middleware(['cacheResponse'])->group(function () {
 /**
  * POST api/collections
  *
- * Saves the user collection. Returns the URL to the saved collection.
+ * Save the user collection. Return the URL to the saved collection.
  * 
  * @bodyParam items string[] The list of item IDs. Example: ["SVK:SNG.IM_101","SVK:SNG.IM_304"]
  */
@@ -194,7 +194,7 @@ Route::post('/collections', function (Request $request) {
 /**
  * GET api/collections/{hashid}
  *
- * Gets the saved user collection by hashid. Returns the array of item IDs.
+ * Get the saved user collection by hashid. Returns the array of item IDs.
  *
  * @urlParam hashid string required Example: n2m
  */
