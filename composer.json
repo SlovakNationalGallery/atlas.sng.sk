@@ -9,6 +9,7 @@
         "deployer/deployer": "^7.3",
         "doctrine/dbal": "^3.2",
         "guzzlehttp/guzzle": "^7.4",
+        "knuckleswtf/scribe": "^4.26",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
@@ -21,7 +22,6 @@
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
-        "knuckleswtf/scribe": "^4.25",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.18",
         "mockery/mockery": "^1.4.4",
