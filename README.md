@@ -32,6 +32,15 @@ It requires
 
 1. `php artisan test --env=testing`
 
+## API Documentation
+
+The API documentation is generated using [Scribe](https://scribe.knuckles.wtf) using the command
+
+1. `php artisan scribe:generate`
+
+For more details, read the [Scribe documentation](https://scribe.knuckles.wtf/laravel)
+
+
 ## Maintainer
 
 This project is maintained by [lab.SNG](http://lab.sng.sk). If you have any questions please don't hesitate to ask them by creating an issue or email us at [lab@sng.sk](mailto:lab@sng.sk).
