@@ -3,11 +3,12 @@
 namespace App\Jobs;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Log;
+use Spatie\ResponseCache\Facades\ResponseCache;
 
 class ImportJob implements ShouldQueue
 {
@@ -53,6 +54,9 @@ class ImportJob implements ShouldQueue
         } catch (\Exception $e) {
             Log::channel('import')->error($e);
             throw $e;
+        } finally {
+            // clear API response cache after import
+            ResponseCache::clear();
         }
     }
 
