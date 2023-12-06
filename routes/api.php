@@ -18,6 +18,7 @@ use App\Http\Resources\StoryResource;
 use Illuminate\Support\Facades\Route;
 use App\Http\Resources\SectionResource;
 use App\Models\Bucketlist;
+use App\Models\DiscountCode;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -201,4 +202,31 @@ Route::post('/collections', function (Request $request) {
 Route::get('/collections/{hashid}', function ($hashid) {
     $collection = Collection::findByHashidOrFail($hashid);
     return $collection->items;
+});
+
+/**
+ * POST api/discount-codes/generate
+ * 
+ * Generate a discount code for the given bucketlist ID.
+ * 
+ * @bodyParam bucketlist_id string required The ID of the bucketlist. Example: recUBMv1RNstZ2lLO
+ */
+Route::post('discount-codes/generate', function (Request $request) {
+    $validator = Validator::make($request->all(), [
+        'bucketlist_id' => ['required', 'exists:bucketlists,id'],
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json(['success' => false, 'error_message' => $validator->errors()->first()], 422);
+    }
+
+    $discountCode = new DiscountCode();
+    $discountCode->bucketlist_id = $validator->validated()['bucketlist_id'];
+    $discountCode->code = DiscountCode::generateCode();
+    $discountCode->save();
+
+    return response()->json([
+        'success' => true,
+        'code' => $discountCode->code,
+    ]);
 });
