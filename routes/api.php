@@ -204,6 +204,13 @@ Route::get('/collections/{hashid}', function ($hashid) {
     return $collection->items;
 });
 
+/**
+ * POST api/discount-codes/generate
+ * 
+ * Generate a discount code for the given bucketlist ID.
+ * 
+ * @bodyParam bucketlist_id string required The ID of the bucketlist. Example: recUBMv1RNstZ2lLO
+ */
 Route::post('discount-codes/generate', function (Request $request) {
     $validator = Validator::make($request->all(), [
         'bucketlist_id' => ['required', 'exists:bucketlists,id'],
