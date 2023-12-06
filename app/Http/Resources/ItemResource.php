@@ -51,6 +51,10 @@ class ItemResource extends JsonResource
             'webumenia_url' => config('services.webumenia.url') . '/dielo/' . $this['webumenia_item']->id,
             'code' => $this['item']->code ? $this['item']->code->code : null,
             'offset_top' => $this['item']->offset_top,
+            'offset_top_percentage' => $this->calculateOffsetTopPercentage(
+                $this['item']->offset_top,
+                $this['webumenia_item']->image_ratio
+            ),
             'video_thumbnail' => $this['item']->video_thumbnail,
             'video_embed' => $this['item']->video_embed,
             'video_aspect_ratio' => $this['item']->video_aspect_ratio,
@@ -123,5 +127,15 @@ class ItemResource extends JsonResource
         );
 
         return $webumeniaAuthoritiesRoles->concat($filteredLocalAuthoritiesNames)->join(', ');
+    }
+
+    function calculateOffsetTopPercentage($offset_top, $aspect_ratio)
+    {
+        if (!$offset_top || !$aspect_ratio) {
+            return 0;
+        }
+        $height = 512 / $aspect_ratio;
+        $percentage = -1 * $offset_top / $height * 100; // because of we need positive number for percentage
+        return round($percentage, 2);
     }
 }
