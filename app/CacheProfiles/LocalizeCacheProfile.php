@@ -1,4 +1,5 @@
 <?php
+
 namespace App\CacheProfiles;
 
 use Spatie\ResponseCache\CacheProfiles\CacheAllSuccessfulGetRequests;
@@ -8,6 +9,6 @@ class LocalizeCacheProfile extends CacheAllSuccessfulGetRequests
 {
     public function useCacheNameSuffix(Request $request): string
     {
-        return $request->header('X-locale', app()->getLocale());        
+        return $request->header('X-locale', app()->getLocale());
     }
 }
