@@ -117,7 +117,7 @@ class ItemResource extends JsonResource
 
         $filteredLocalAuthoritiesNames = collect($localAuthoritiesNames)->reject(
             fn($name) => $webumeniaAuthoritiesNames->contains(formatName($name))
-        );
+        )->filter();
 
         $webumeniaAuthoritiesRoles = $webumeniaAuthorities->map(
             fn(object $authority) => formatName($authority->name) .
