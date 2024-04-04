@@ -134,8 +134,12 @@ class ItemResource extends JsonResource
         if (!$offset_top || !$aspect_ratio) {
             return 0;
         }
-        $height = 512 / $aspect_ratio;
-        $percentage = -1 * $offset_top / $height * 100; // because of we need positive number for percentage
-        return round($percentage, 2);
+        $image_height = 512 / $aspect_ratio;
+        $container_height = 384;
+        $height_difference = $image_height - $container_height;
+        $relative_offset_top = (1 - (($height_difference + $offset_top) / $height_difference)) * 100;
+        // contrain to 0-100
+        $relative_offset_top = min(100, max(0, $relative_offset_top));
+        return round($relative_offset_top, 2);
     }
 }
