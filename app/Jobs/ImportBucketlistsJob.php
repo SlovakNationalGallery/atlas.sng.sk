@@ -12,6 +12,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\DB;
 use App\Traits\SyncsMedia;
+
 class ImportBucketlistsJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, SyncsMedia;
@@ -38,24 +39,26 @@ class ImportBucketlistsJob implements ShouldQueue
                 ->pluck('items')
                 ->collapse()
                 ->unique();
+
             $itemsLookup = Item::whereIn('airtable_id', $airtableIds)->pluck('id', 'airtable_id');
 
             $records->each(
                 fn($record) => Bucketlist::find($record['id'])
                     ->items()
                     ->sync(
-                        collect($record['items'])->mapWithKeys(
-                            fn($airtableId, $index) => [
-                                $itemsLookup[$airtableId] => [
-                                    'ord' => $index,
-                                ],
-                            ]
-                        )
+                        collect($record['items'])
+                            ->filter(fn($airtableId) => $itemsLookup->has($airtableId))
+                            ->mapWithKeys(
+                                fn($airtableId, $index) => [
+                                    $itemsLookup[$airtableId] => [
+                                        'ord' => $index,
+                                    ],
+                                ]
+                            )
                     )
             );
         });
 
         $records->each(fn($record) => self::syncMedia(Bucketlist::find($record['id']), $record));
     }
-
 }
