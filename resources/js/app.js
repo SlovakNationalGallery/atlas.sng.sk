@@ -8,6 +8,7 @@ import * as Sentry from '@sentry/vue'
 
 import App from './App.vue'
 import Collection from './views/Collection.vue'
+import SharedCollection from './views/SharedCollection.vue'
 import Interaction from './views/Interaction.vue'
 import ItemDetail from './views/ItemDetail.vue'
 import SectionDetail from './views/SectionDetail.vue'
@@ -38,6 +39,9 @@ const routes = [
         name: 'item_detail',
         path: '/detail/:id',
         component: ItemDetail,
+        props: {
+            isGuest: true,
+        },
         meta: {
             title: 'Artwork detail',
         },
@@ -77,7 +81,7 @@ const routes = [
     {
         name: 'collection_detail',
         path: '/:id?',
-        component: Collection,
+        component: SharedCollection,
         meta: {
             title: 'My timeline',
         },
