@@ -34,20 +34,33 @@ class Code extends Model
     {
         $code = str_repeat('0', self::ROWS * self::COLS);
         $dots_count = rand(config('atlas.min_dots'), config('atlas.max_dots'));
-        for ($i = 0; $i < $dots_count; $i++) {
+
+        $positions = [];
+
+        while (count($positions) < $dots_count) {
             $randomPos = rand(0, self::ROWS * self::COLS - 1);
-            $code[$randomPos] = '1';
+
+            // Ensure the position hasn't been selected before
+            if (!in_array($randomPos, $positions)) {
+                $code[$randomPos] = '1';
+                $positions[] = $randomPos;
+            }
         }
+
         return $code;
     }
 
-    public static function randomUniqueCode()
+    public static function randomUniqueCode($attempts = 1000)
     {
-        $code = self::randomCode();
-        if (self::where('code', bindec($code))->exists()) {
-            return self::randomUniqueCode();
+        while ($attempts > 0) {
+            $code = self::randomCode();
+            if (!self::where('code', bindec($code))->exists()) {
+                return $code;
+            }
+            $attempts--;
         }
-        return $code;
+
+        throw new \Exception('Failed to generate a unique code within the allowed attempts.');
     }
 
     protected static function booted()
@@ -55,5 +68,13 @@ class Code extends Model
         static::creating(function (self $code) {
             $code->code = Code::randomUniqueCode();
         });
+    }
+
+    public static function calculateTotalPossibleCodes()
+    {
+        $totalPositions = self::ROWS * self::COLS;
+
+        return collect(range(config('atlas.min_dots'), config('atlas.max_dots')))
+            ->sum(fn($dots) => gmp_intval(gmp_binomial($totalPositions, $dots)));
     }
 }
